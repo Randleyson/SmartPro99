@@ -1,0 +1,5 @@
+inherited FrmPrincipal_iPhone55in: TFrmPrincipal_iPhone55in
+  ClientHeight = 716
+  ClientWidth = 414
+  DesignerMasterStyle = 0
+end

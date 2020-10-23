@@ -1,0 +1,672 @@
+object FrameCadProduto: TFrameCadProduto
+  Align = Client
+  Size.Width = 1063.000000000000000000
+  Size.Height = 657.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 1063.000000000000000000
+    Size.Height = 657.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object lytTitulo: TLayout
+      Align = Top
+      Size.Width = 1063.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Rectangle2: TRectangle
+        Align = Client
+        Fill.Color = xFF006EBB
+        Size.Width = 1063.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label1: TLabel
+          Align = Client
+          StyledSettings = []
+          Margins.Left = 15.000000000000000000
+          Size.Width = 987.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 20.000000000000000000
+          TextSettings.FontColor = claWhite
+          Text = 'Cadastro de Produtos'
+          TabOrder = 0
+        end
+        object btnFechar: TSpeedButton
+          Align = Right
+          Position.X = 1002.000000000000000000
+          Size.Width = 61.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'stoptoolbutton'
+          Text = 'btnFechar'
+          OnClick = btnFecharClick
+          object FillRGBEffect1: TFillRGBEffect
+            Color = claWhite
+          end
+        end
+      end
+      object Line1: TLine
+        Align = Bottom
+        LineType = Diagonal
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 49.000000000000000000
+        Size.Width = 1043.000000000000000000
+        Size.Height = 1.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFABABAB
+        Stroke.Thickness = 5.000000000000000000
+      end
+    end
+    object lytRodaPe: TLayout
+      Align = Bottom
+      Position.Y = 624.000000000000000000
+      Size.Width = 1063.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object lytClient: TLayout
+      Align = Client
+      Margins.Left = 15.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 15.000000000000000000
+      Size.Width = 1033.000000000000000000
+      Size.Height = 564.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object lytDetalheProd: TLayout
+        Align = Left
+        Margins.Left = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 448.000000000000000000
+        Size.Width = 448.000000000000000000
+        Size.Height = 564.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object lytBotao: TLayout
+          Align = Top
+          Margins.Top = 15.000000000000000000
+          Position.Y = 196.000000000000000000
+          Size.Width = 448.000000000000000000
+          Size.Height = 47.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object BtnGrava: TCornerButton
+            Align = Left
+            StyledSettings = [Size, Style]
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 8.000000000000000000
+            Sides = [Top, Left, Bottom, Right]
+            Size.Width = 80.000000000000000000
+            Size.Height = 31.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'Salvar'
+            TextSettings.Font.Family = 'Yu Gothic UI'
+            TextSettings.FontColor = xFF1F1F1F
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnGravaClick
+          end
+        end
+        object Label5: TLabel
+          Align = Top
+          StyledSettings = []
+          Size.Width = 448.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF006EBB
+          Text = 'Produto'
+          TabOrder = 0
+        end
+        object Line2: TLine
+          Align = Top
+          LineType = Diagonal
+          Margins.Top = 5.000000000000000000
+          Position.Y = 22.000000000000000000
+          Size.Width = 448.000000000000000000
+          Size.Height = 1.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFFD6D6D6
+        end
+        object Rectangle4: TRectangle
+          Align = Top
+          Fill.Kind = None
+          Margins.Top = 5.000000000000000000
+          Position.Y = 28.000000000000000000
+          Size.Width = 448.000000000000000000
+          Size.Height = 153.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFF8A8A8A
+          XRadius = 5.000000000000000000
+          YRadius = 5.000000000000000000
+          object Layout1: TLayout
+            Align = Top
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 18.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 59.000000000000000000
+            Size.Width = 438.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Label2: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Size.Width = 81.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Codigo Barra'
+              TabOrder = 0
+            end
+            object edtDetCod: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              TabOrder = 1
+              Position.X = 81.000000000000000000
+              Enabled = False
+              Size.Width = 100.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Label4: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Margins.Left = 60.000000000000000000
+              Position.X = 241.000000000000000000
+              Size.Width = 84.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Tipo Unidade'
+              TabOrder = 2
+            end
+            object edtDetUnidade: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              TabOrder = 3
+              Position.X = 325.000000000000000000
+              Enabled = False
+              Size.Width = 56.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+          object Layout2: TLayout
+            Align = Top
+            Margins.Left = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 129.000000000000000000
+            Size.Width = 438.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object Label7: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Size.Width = 97.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Descri'#231#227'o na Tv'
+              TabOrder = 0
+            end
+            object edtDescriAlterada: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              TabOrder = 1
+              Position.X = 97.000000000000000000
+              Size.Width = 328.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              OnKeyDown = edtDescriAlteradaKeyDown
+            end
+          end
+          object Layout3: TLayout
+            Align = Top
+            Margins.Left = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 5.000000000000000000
+            Position.Y = 94.000000000000000000
+            Size.Width = 438.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object Label6: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Margins.Left = 40.000000000000000000
+              Position.X = 237.000000000000000000
+              Size.Width = 108.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Valor de Promo'#231#227'o'
+              TabOrder = 0
+            end
+            object edtDetVrPromo: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              TabOrder = 1
+              Position.X = 345.000000000000000000
+              Enabled = False
+              Size.Width = 88.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Label3: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Size.Width = 97.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Valor de venda'
+              TabOrder = 2
+            end
+            object edtDetVrVenda: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              TabOrder = 3
+              Position.X = 97.000000000000000000
+              Enabled = False
+              Size.Width = 100.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+          object Layout4: TLayout
+            Align = Top
+            Margins.Left = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Position.X = 5.000000000000000000
+            Size.Width = 438.000000000000000000
+            Size.Height = 41.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            object Label9: TLabel
+              Align = Top
+              StyledSettings = [Size]
+              Size.Width = 438.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'Descricao do produto no arquivo'
+              TabOrder = 0
+            end
+            object lblDescricaoCadstro: TLabel
+              Align = Bottom
+              StyledSettings = []
+              Position.Y = 16.000000000000000000
+              Size.Width = 438.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF454545
+              Text = 'lblDescricaoCadstro'
+              TabOrder = 1
+            end
+          end
+        end
+        object Layout5: TLayout
+          Align = Bottom
+          Position.Y = 544.000000000000000000
+          Size.Width = 448.000000000000000000
+          Size.Height = 20.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object imgPendencia: TImage
+            MultiResBitmap.Height = 168
+            MultiResBitmap.Width = 192
+            MultiResBitmap = <
+              item
+                Width = 192
+                Height = 168
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000C0000000A80806000000B67BE1
+                  30000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0CD649444154785EED9DCF6E1CC71187C9995DCE4AA416CEC5880F01A418704E
+                  B40F21909B0D18B906CE434439877901BE8193736C80B72437C7405E20BE1912
+                  0258D225066CEBE64039585871991D7267992DA936D98C7B7767A6AB7BAABB7F
+                  1F5C608D4CF6F6CC76755557FF993D007CF2F0E1C3DBACAA20E39F0024090C00
+                  240D0C00240D0C0024CD3EFF041EB83E3CFCA8CAF3B75E5E94E5AB9F4BF6ABEA
+                  0EABFFE526CF5FD0CFC570F82CCBB2E7CB9EEABBE5EFFD6B389DDE7FF90B8142
+                  83E09393934BBE04B1418DFCF2E8E88B59517C7BB36CC7AE853E67361EFFAD1A
+                  8D7EC755508DB62C10B0841A9FAFC6DE54A83E57E3F15FB88A00C8413DBCB606
+                  BF4BC823497A88D3D3D35BAC8214A0465F0E0617A6C6159A90F1DA1A43D730E6
+                  FCFC93D7580521105A4FDF56C833F0ADB6E6ECEC6CCC2A88098A9D4D8D256621
+                  EF465E8E1F4163100A4504F586A6C6919AD0A09E1F4923768535E7E7E7AAC39E
+                  E4E701A8E1DFBAB8789B2F01538EC79F8D2693F7F87227342E78FCF8F1C1D3A7
+                  4F1777EFDECD8E8F8FAF90EF570C7AFC66D2D62300E5D0176AFAA221DBA5CB18
+                  210492098128F597CD66BFE14BD081ABC1605ACCE7477C1905491800A5338BB2
+                  FC215F024BFE7D74F4E8F6C5C53B7C1934511B00B9EDC174FA2BBE04C22C1B4F
+                  F0ED275A03A0DCF6C17C7EC897C011A17B83E8F60350AC4F8336347E3F500A99
+                  9E375F0647541E80323CC564F22E5FAAA12C8A7FD2BAFE41967D9397E5D74BF9
+                  2DFFAFC65445F1E1527E3C5F2CEEE5B3D99B1A0D7C7E78F871E8FB158245CB62
+                  35DF4B91C930C8F0B5DCBFCDFA22D011D317E14BA8E1699B2CEA7B928F9E0957
+                  05B8C6F405F89050369CF4690C5C05E0024A71D61FB86B09D9BDBF0C957A58DE
+                  CD1F0F24F1BD6439B6ED85BEBD027F2C90C0E75A9ED81A7E1D9FCF32944DFBAA
+                  F1F585C5DEF0EBF8F20830020B7C34FE90637C097C8C1160041D701DF3236DF7
+                  3F68B06C7A4692C21F059AE03ADB935AB8D314D761117F0CD845FDC149097AFD
+                  DDB8F606FC316013F50726259A627DD3D8868C539367A2FAD4EB2821E884B660
+                  7A601242BD1A7F44AF2C43BB3F98EA5717FEF5DE711512D1C09B3F02AC70958D
+                  E0E27BA7EDA09EFFAC779A1A6D5BC1386C0D17E94E6DAED654C75DC27FAA827A
+                  DD24848B06F507632BDA1A7FD7789A3A062E4205A63ADA0A17ED15551B62A41F
+                  026D441995E51B7CA9029B7BD4B6073786EF4BCD9648E9C110ED55D5D6F82986
+                  66350AA40D924EEEA0791FBE4C87D53E5E29D19A59B09DD1E662D451AFA7AD70
+                  B15E50E101240FACA2C39BB4F5FCB123ED097C7660BD1B80F4A4546C27978582
+                  A411F80C857A3700C99399A57B22D08E455188ADF4F475A059AF062099A244E3
+                  EF1F3AEEE57A3CFE942FADF1B164A5370320172775B6CD3CC5CC81520E26935F
+                  523A932FAD88FABD0DF5917F5709692D49AC592013F5BA7715D7DF6F2F1E4072
+                  5613191F9D4885A4AE4FF5EEC500A48E2F44DCAF1B7ACD12AB56B8F402DE0D40
+                  6AE51FCDF4B20A9442EF18A37919BEEC4C54EF7630C5795D848B0B8A94C600EB
+                  D4EFA38BB8F2025E3D8054EF8FD0272C24BCB52B2FE0D5008693C907AC76462A
+                  C506FC21F5020D17F302BD0C826D40D6274C24E66A5CCC0B78330089180E03DF
+                  70194EA7BF66D50A6D1B831A631AD8B4152E2A58521D04AF90DA53CCC589E0C5
+                  0348582D7AFFF091F20292C72B7A31008989AF58DE4B9B3A1263817230789F55
+                  6B82180423F3130F125E407230ECDC0024C21F647EE24262C97430A74CD70730
+                  6D45DBB12636A43E085EA77E6F6D456A4E407D089415C51F590511611BD64A85
+                  414E0D4062E98354E600E8424B58EBD4006E2E2F7FCE6A2730F805DB90185F3A
+                  3500DB2D8FC3BDBD3FB10A22C4766E67FFF2F2A7ACEAC4347869235C4C346010
+                  FC7DEAF7D856B898CE38F300B6EE09E10FF081BB10A82CDF62AD1359517CCE2A
+                  8818DB8ECEB6A3756600B61B18E8780D5641C4587774B61D2DFF04A0176C3B3A
+                  DB8E56A50120FE07BE706200B6136088FFD3A2CF0ECF8901CC178B7BAC7602F1
+                  7F6214C597AC75C2E62469270690CF666FB20AC04EF2AAFA07AB9DA8F2BCF340
+                  D88901481D7A0BD2C07ABD97452648DD2058E224319016FB557587D5D6A83380
+                  9B3C7FC12A008DB08938D41980ED80088036A833806585BE631524445FA95071
+                  03B0DDAB9997E5D7AC02E01C710358E439DED2085AB3180E9FB1EA157103C8AA
+                  CA6A133BBD688D55901059963D67D52BF221D0C181D52C30003E910F81F6F67E
+                  C02A00EA11370000420206009246DC00F2AAC24416080678009034EA0CA02A8A
+                  0F590509B1582C5E63D52BE206309C4EEFB3DA89C5608089B404C9AEAF5F67D5
+                  2BFA3C409EFF84559010364B9A6DD03706B03CE60284495F9BA8D419405F3D01
+                  08179B4D54EA0C00DB29415B6C36513931006C6B046DA0D7A7B2DA099B95A44E
+                  0C00DB1A411B6C131F832CFB86D5D6B809812CB7354ABC5906048465E2C3E61C
+                  29270630BCBAFA3BAB9D5894E5CF580509607BBEA70D4E0C209FCD4E59ED449F
+                  0F04A4859B100818C17EE7EF633B00567B9032BDDFB7FE3A9B3662FB60B462BA
+                  D72612D3FB92D79915C5B7A6FB6D2A6A5F90518D465FB1DA896A3EFF05AB51D1
+                  F5C570B1BE2FD936DCB51D6F3A838E4731596C1BE1A2A2A37E9FBB24D6DE9F30
+                  DD6F1BE1627452AF6C5BE162A2A47EAFDB84FF243A2E8F8EBEA8DF6B1B91E818
+                  9C0E826D6784E901B11A1DFBCBFF763D1F1AE0D1EFF16574DCBAB8789BD54ED8
+                  86D9CEA1018AC972DB0817153564E8D49BADC47660170AF5EFBAADD89E42E805
+                  53C5DB087688C5896DF843C245E9A65EE9B64269322E0A4484E9BB6E2352EDC2
+                  F94458D7B4DF0ACC0AC787C41C4F3E18FC9555DD48A443631E0CA7088D734CDF
+                  731BE1A2ACF1926190A870CCD990D4B06D0F941D1B95E51B7C698597B540B661
+                  10914A6624762472F7C3FDFD3FB36A8DB75E155E0010DADA81B7D5A012DB2463
+                  F6023430248939ED2BD1FB97E3F167AC86C5F2CBFD88ACDF56B8B828A0065FBF
+                  BF954834164D90619BEEB3AD70716152BF992E124B46A8E932E058BC9EE9DEDA
+                  4AF07342124B2348B8B86069BB063E7423A03DDEA6FB6A2B5C5CD8D46FAA8B84
+                  1C1E6C0B7BB609FF7990D4EFA5AB70716123B1068424D493234CF7D2444275FF
+                  6DBDDD260962E15B534C37D845B8B8A0A8DF431BE12282A1ABB7AB4B6C090131
+                  2F10DA83B16D105C4C30D4EBDF55A2EAFD57986EB48B843440B41D0C72314140
+                  9D53BDFE5DC47527E76D22ACCEF578FC29AB561493C9BBAC022550A72475C871
+                  319F3B7D614A6F0660739C5D1DEA2958053D43135E529D928F337F7A33006231
+                  1AFD9E556B60043AC8CAD2EA54C075A4567C6EA35703A0231425AD3CF899C2C0
+                  91EC84A442E45DF46A0084A495D3EE316C9EE907690F2C19226FA3770320E687
+                  871FB36A0D1DB5A1D508F6ABAAF38B1C34239DA94972D9BBD48CE14AB41A81A9
+                  AE4D858B5085F4F7E63BADBD7F7EFE89D317141F1FFFE8EAE4E4E4922FB7420F
+                  8055116827DAED8B8B77F85205D45B764911D23AF8D164F21E5FAA801ABFE4A1
+                  05B467C475DAB337CECECEC6AC6E446ACFC0BA68F404A67AEE12FE5335484D74
+                  AD0B171D374F9E3C3960D588D4328975D1961D6A3B23CC7FA6867AFD24843A3F
+                  2E1EB8E85D5C4FA9B7A5E9BA20FE7535D4EB2721C965EE4E4F4F6FB1BA11D383
+                  92102E5E0D34E8AB1B3C5D6B5BEE2DB5B2B32EDA3A266FEC0A8508D303939050
+                  F712F4858BB07425FC11BDD1DB3CC083070F6EB3BA11C9A512EB0C27930F306B
+                  DC0C6AA4B6C7986F4243BEBF370378F4E851C9EA4668A984AB29714ADFD1978B
+                  D3A7CDAC06EA7C298E96C92E1533C1DBA029718993E536418BB7E00DFE1F8ACB
+                  C94BF2A5389233FFB6A837008226B35C1AC1CA1BD0408FFF294956B1BED45A7E
+                  13E4D187D3E97DBE4C972E33D0D2D3EE26A1DE2FB5B0C876A75A5341F241001F
+                  464092427ACE556AD32468FC6B9C9F9F5BAD3F729996AB4B8C1EC1578FBF12CC
+                  F2AED16412AC093481647AD82E25F45ECC67C7B11234FE359A2C886B83EF9E6C
+                  25148685E215E819911733DD876BE12A00EAF59BCCFC7641E2154C36A2D118A8
+                  D1FB1A2B6D12AE0AF045FD0BE843A8A7A5D0CCB741D060B68FF0C62464785C2D
+                  E09BBE7B3D93509D248D62D5D8FB0A6BB689EFDD5C1244B7F792DCBFCB594C69
+                  36BD39C7E564940B68DD162D5DE1CB6088CE0056508FC42A7088E41B1BFB2088
+                  A5105DA0C5562E974F8057CB1A426EFC44B41E601D78035942EFF5D789D603AC
+                  43DEC0D74963B143B17E2C8D9F48C203AC435919C9A33C5241E3B12C12246700
+                  2B288D185AA6A50F620A774C24110299A003985C6DB98C016AF8143AC6DCF889
+                  643D401D788457683C4DCF25C97A803AE411A8C74B35754A313EDD7F4A8D1F6C
+                  A1AF95A63E85BC1E962B839D685968262521AED9014A08D118A8A7278FC6B700
+                  800C1AD6DD6F1232D428DFAF0BF4420D8EC20BDF46B15A72CDD5002D401AD403
+                  6418D5C1C1BDF962712FBBBE7E9DFE6DBFAAEE3449BBD272E99B3C7FB1180E9F
+                  6559F63CAFAA2F71AE0E0000000000000000005AB2B7F71FB826DE6532617B77
+                  0000000049454E44AE426082}
+                FileName = 'D:\Projetos\SamartPro99\Imagens\Sem T'#237'tulo-2.png'
+              end>
+            Align = Left
+            Size.Width = 25.000000000000000000
+            Size.Height = 20.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object Label8: TLabel
+            Align = Client
+            StyledSettings = [Size, FontColor]
+            Margins.Left = 5.000000000000000000
+            Size.Width = 418.000000000000000000
+            Size.Height = 20.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Yu Gothic UI'
+            TextSettings.Font.StyleExt = {00030000000000000004000000}
+            Text = 'Descri'#231#227'o maior que o permitido '
+            TabOrder = 1
+          end
+        end
+      end
+      object lytListaProd: TLayout
+        Align = Left
+        Margins.Left = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Size.Width = 433.000000000000000000
+        Size.Height = 564.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Label10: TLabel
+          Align = Top
+          StyledSettings = []
+          Size.Width = 433.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF006EBB
+          Text = 'Lista de Produtos'
+          TabOrder = 0
+        end
+        object Line3: TLine
+          Align = Top
+          LineType = Diagonal
+          Margins.Top = 5.000000000000000000
+          Position.Y = 22.000000000000000000
+          Size.Width = 433.000000000000000000
+          Size.Height = 1.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFFD6D6D6
+        end
+        object lytPesqProduto: TLayout
+          Align = Top
+          Margins.Top = 10.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 433.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object Rectangle6: TRectangle
+            Align = Client
+            Fill.Color = xFFF8F8F8
+            Size.Width = 433.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Color = xFF006EBB
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            object Label11: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Margins.Left = 5.000000000000000000
+              Position.X = 5.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 33.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF2C2C2C
+              Text = 'Codigo'
+              TabOrder = 0
+            end
+            object Label12: TLabel
+              Align = Left
+              StyledSettings = [Size]
+              Margins.Left = 5.000000000000000000
+              Position.X = 134.000000000000000000
+              Size.Width = 59.000000000000000000
+              Size.Height = 33.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF2C2C2C
+              Text = 'Descri'#231#227'o'
+              TabOrder = 1
+            end
+            object edtPesqDescricao: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              StyleLookup = 'editstyle'
+              TabOrder = 2
+              Position.X = 193.000000000000000000
+              Position.Y = 5.000000000000000000
+              Margins.Top = 5.000000000000000000
+              Margins.Bottom = 5.000000000000000000
+              Size.Width = 195.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object edtPesqCodBarra: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Left
+              StyleLookup = 'editstyle'
+              TabOrder = 3
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF3B3B3B
+              Position.X = 53.000000000000000000
+              Position.Y = 5.000000000000000000
+              Margins.Top = 5.000000000000000000
+              Margins.Bottom = 5.000000000000000000
+              Size.Width = 76.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Size]
+            end
+            object Rectangle7: TRectangle
+              Align = Right
+              Fill.Color = xFF006EBB
+              HitTest = False
+              Margins.Left = 3.000000000000000000
+              Margins.Top = 3.000000000000000000
+              Margins.Right = 3.000000000000000000
+              Margins.Bottom = 3.000000000000000000
+              Position.X = 380.000000000000000000
+              Position.Y = 3.000000000000000000
+              Size.Width = 50.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              XRadius = 5.000000000000000000
+              YRadius = 5.000000000000000000
+              object btnPesqProdNaoTv: TButton
+                Align = Right
+                Position.X = 1.000000000000000000
+                Size.Width = 49.000000000000000000
+                Size.Height = 27.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'searcheditbutton'
+                TabOrder = 0
+                Text = 'btnPesqProdNaoTv'
+                OnClick = btnPesqProdNaoTvClick
+                object FillRGBEffect2: TFillRGBEffect
+                  Color = claWhite
+                end
+              end
+            end
+          end
+        end
+        object Rectangle3: TRectangle
+          Align = Client
+          Fill.Kind = None
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 433.000000000000000000
+          Size.Height = 488.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFF9B9B9B
+          XRadius = 5.000000000000000000
+          YRadius = 5.000000000000000000
+          object lstBoxProd: TListBox
+            Align = Client
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Size.Width = 423.000000000000000000
+            Size.Height = 478.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'transparentlistboxstyle'
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            OnItemClick = lstBoxProdItemClick
+            Viewport.Width = 423.000000000000000000
+            Viewport.Height = 478.000000000000000000
+            object lblSemRegestProd: TLabel
+              Align = Top
+              StyledSettings = [Family, Size, Style]
+              Margins.Top = 10.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 423.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.FontColor = xFFB6B6B6
+              TextSettings.HorzAlign = Center
+              Text = '< Sem Registro  >'
+              TabOrder = 0
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,67 @@
+object FrameMensagemInfor: TFrameMensagemInfor
+  Align = Client
+  Size.Width = 700.000000000000000000
+  Size.Height = 489.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = x967D7D7D
+    Size.Width = 700.000000000000000000
+    Size.Height = 489.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object Layout1: TLayout
+      Align = Center
+      Size.Width = 425.000000000000000000
+      Size.Height = 147.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Rectangle2: TRectangle
+        Align = Top
+        Fill.Color = xFF006EBB
+        Size.Width = 425.000000000000000000
+        Size.Height = 105.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object lblMensagem: TLabel
+          Align = Client
+          StyledSettings = []
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 415.000000000000000000
+          Size.Height = 95.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Center
+          Text = 
+            'teset teste teste tsetse teste teste teste teste teste teste tes' +
+            'te'
+          TabOrder = 0
+        end
+      end
+      object Layout2: TLayout
+        Align = Bottom
+        Position.Y = 117.000000000000000000
+        Size.Width = 425.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btnOk: TSpeedButton
+          Align = Right
+          Position.X = 320.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'segmentedbuttonright'
+          Text = 'OK'
+          OnClick = btnOkClick
+        end
+      end
+    end
+  end
+end

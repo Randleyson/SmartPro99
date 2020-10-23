@@ -1,0 +1,31 @@
+BANCO DE DADOS
+firebord 2.5
+° Definar com  vai ser salvo o video e foto (O Armazenamento de foto e video vai ser local)
+
+SOFTWARE GERENCIADOR
+- Login
+- Configuracao
+	Paramentros de integração software de gestao do cliente
+
+- Cadastro
+	- Cadastro de Tv
+	- Cadastro de produto
+	- Cadastro de Usuario
+
+- Gerenciar Tv
+	- Selecionar a Tv
+	- Definar os produtos que vai para grade de preçõ 
+	- Definir o video (formato do video)
+	- Definir a imagem (formato das Imagem) 
+
+WS SERVER
+fazer a comunicão entre o banco e as tv 
+
+
+SOFTWARE TV
+- Grade de preço
+	Exibir descricao e preco de venda
+- Video 
+	Exibir Video 
+- Imagem
+	Exibir Imagem de um programada

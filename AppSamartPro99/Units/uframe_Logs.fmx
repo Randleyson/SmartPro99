@@ -1,0 +1,62 @@
+object FrameLogs: TFrameLogs
+  Size.Width = 614.000000000000000000
+  Size.Height = 400.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 614.000000000000000000
+    Size.Height = 400.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object Rectangle2: TRectangle
+      Align = Top
+      Fill.Color = xFF006EBB
+      Size.Width = 614.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Logs: TLabel
+        Align = Client
+        StyledSettings = [Style]
+        Size.Width = 576.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Yu Gothic UI'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Logs'
+        TabOrder = 0
+      end
+      object SpeedButton1: TSpeedButton
+        Align = Right
+        Position.X = 576.000000000000000000
+        Size.Width = 38.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'stoptoolbutton'
+        Text = 'SpeedButton1'
+        OnClick = SpeedButton1Click
+        object FillRGBEffect1: TFillRGBEffect
+          Color = claWhite
+        end
+      end
+    end
+    object MemoLogs: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Align = Client
+      Margins.Left = 15.000000000000000000
+      Margins.Top = 15.000000000000000000
+      Margins.Right = 15.000000000000000000
+      Margins.Bottom = 15.000000000000000000
+      Size.Width = 584.000000000000000000
+      Size.Height = 337.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Viewport.Width = 584.000000000000000000
+      Viewport.Height = 337.000000000000000000
+    end
+  end
+end
