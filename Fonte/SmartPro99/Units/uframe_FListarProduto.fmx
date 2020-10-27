@@ -1,0 +1,72 @@
+object FrameFListarProduto: TFrameFListarProduto
+  Align = Client
+  HitTest = False
+  Size.Width = 497.000000000000000000
+  Size.Height = 27.000000000000000000
+  Size.PlatformDefault = False
+  object Layout1: TLayout
+    Align = Client
+    Margins.Left = 3.000000000000000000
+    Margins.Top = 3.000000000000000000
+    Margins.Right = 3.000000000000000000
+    Margins.Bottom = 3.000000000000000000
+    Size.Width = 491.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblCodBarra: TLabel
+      Align = Left
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 81.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'lblCodBarra'
+      TabOrder = 0
+    end
+    object Rectangle1: TRectangle
+      Align = Left
+      Fill.Color = xFFF0F0F0
+      Position.X = 81.000000000000000000
+      Size.Width = 3.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object lblDescricao: TLabel
+      Align = Left
+      StyledSettings = [Style, FontColor]
+      Margins.Left = 5.000000000000000000
+      Position.X = 89.000000000000000000
+      Size.Width = 266.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Yu Gothic UI'
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'lblDescricao'
+      TabOrder = 2
+    end
+    object Rectangle2: TRectangle
+      Align = Left
+      Fill.Color = xFFF0F0F0
+      Position.X = 355.000000000000000000
+      Size.Width = 3.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object lblVrvenda: TLabel
+      Align = Left
+      StyledSettings = [Style, FontColor]
+      Margins.Left = 5.000000000000000000
+      Position.X = 363.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Yu Gothic UI'
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = 'lblVrvenda'
+      TabOrder = 4
+    end
+  end
+end
