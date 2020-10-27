@@ -1,5 +1,0 @@
-inherited FrmPrincipal_LgXhdpiPh: TFrmPrincipal_LgXhdpiPh
-  ClientHeight = 695
-  ClientWidth = 450
-  DesignerMasterStyle = 0
-end
