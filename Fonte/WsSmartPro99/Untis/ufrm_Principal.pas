@@ -20,12 +20,14 @@ type
     Label2: TLabel;
     Panel1: TPanel;
     Label3: TLabel;
+    btnSincronizarProd: TButton;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure btnStartClick(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
     procedure ButtonOpenBrowserClick(Sender: TObject);
     procedure tmSincronizaTxtTimer(Sender: TObject);
+    procedure btnSincronizarProdClick(Sender: TObject);
   private
     { Private declarations }
     FServer: TIdHTTPWebBrokerBridge;
@@ -120,6 +122,19 @@ begin
 
   end;
 
+end;
+
+procedure TfrmPrincipal.btnSincronizarProdClick(Sender: TObject);
+begin
+
+  try
+
+    SicronizaProduto;
+
+  except
+    menoLogs.Lines.Add(frmPrincipal.fMensagemErro);
+
+  end;
 end;
 
 procedure TfrmPrincipal.btnStartClick(Sender: TObject);

@@ -25,10 +25,6 @@ object frmPrincipal: TfrmPrincipal
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
-    ExplicitLeft = -40
-    ExplicitTop = -8
-    ExplicitWidth = 552
-    ExplicitHeight = 480
     object Label2: TLabel
       Left = 151
       Top = 8
@@ -104,9 +100,9 @@ object frmPrincipal: TfrmPrincipal
       Text = '8080'
     end
     object ButtonOpenBrowser: TButton
-      Left = 310
+      Left = 391
       Top = 343
-      Width = 107
+      Width = 74
       Height = 25
       Caption = 'Open Browser'
       TabOrder = 2
@@ -129,6 +125,15 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Ativar WS'
       TabOrder = 4
       OnClick = btnStartClick
+    end
+    object btnSincronizarProd: TButton
+      Left = 310
+      Top = 343
+      Width = 75
+      Height = 25
+      Caption = 'Sincronizar'
+      TabOrder = 5
+      OnClick = btnSincronizarProdClick
     end
   end
   object ApplicationEvents1: TApplicationEvents
