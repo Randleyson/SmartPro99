@@ -43,18 +43,14 @@ begin
     FDC_Freeboard.Connected                   := False;
     FDC_Freeboard.LoginPrompt                 := False;
     FDC_Freeboard.Params.Clear;
-    FDC_Freeboard.Params.Values['DriverID']   := 'FB';
-    FDC_Freeboard.Params.Values['User_Name']  := 'sysdba';
-    FDC_Freeboard.Params.Values['Password']   := 'masterkey';
-    FDC_Freeboard.Params.Values['Database']   := ExtractFileDir(Application.ExeName)+'\..\DbPro99\DB.FDB';
+    FDC_Freeboard.Params.LoadFromFile(ExtractFileDir(application.ExeName) + '\Config.ini');
     FDC_Freeboard.Connected                   := True;
     FDC_Freeboard.Connected                   := False;
     fConexaoFreeboard                         := True;
 
     except
-      FrmPrincipal.fMensagemErro := 'Erro ao conectar ao base de dados freeboard.'+
-                                    ' verifique o caminho do banco existe : '+
-                                    ExtractFileDir(Application.ExeName)+'\..\DbPro99\DB.FDB';
+      FrmPrincipal.fMensagemErro := 'Erro ao conectar ao base de dados freeboard. '+
+                                    ' verifique o arquivo de configuração';
       fConexaoFreeboard := False;
   end;
 
