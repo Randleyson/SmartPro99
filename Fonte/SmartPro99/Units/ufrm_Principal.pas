@@ -10,6 +10,7 @@ uses
 type
   TfrmPrincipal = class(TForm)
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,10 +31,34 @@ implementation
 uses uframe_Home, udm_Conexao, uframe_CadTvs, udm_Principal, ufrm_MensagemInfor;
 
 
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+
+  try
+
+    if not assigned(DmConexao) then
+    DmConexao := TDmConexao.Create(nil);
+
+    if not assigned(DmPrincipal) then
+    DmPrincipal := TDmPrincipal.Create(nil);
+
+  except
+
+  end;
+end;
+
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
 
   try
+
+    if frmPrincipal.fComErro then
+    begin
+
+      FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro);
+      exit
+
+    end;
 
     FrameHome.CreateFremeHome;
 

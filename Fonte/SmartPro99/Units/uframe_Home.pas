@@ -106,18 +106,6 @@ begin
 
   try
 
-    if not assigned(DmConexao) then
-    DmConexao := TDmConexao.Create(nil);
-
-    if not assigned(DmPrincipal) then
-    DmPrincipal := TDmPrincipal.Create(nil);
-
-    if frmPrincipal.fComErro then
-    begin
-      FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro);
-      exit
-    end;
-
     if not assigned(FrameHome) then
     FrameHome := TFrameHome.Create(frmPrincipal);
     with FrameHome do

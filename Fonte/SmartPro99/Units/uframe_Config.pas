@@ -36,6 +36,7 @@ type
     Line2: TLine;
     Rectangle3: TRectangle;
     btnBuscarPasta: TCornerButton;
+    Layout1: TLayout;
     procedure btnFecharClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
@@ -64,7 +65,7 @@ implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, udm_Conexao, udm_Principal;
+uses ufrm_Principal, udm_Conexao, udm_Principal, ufrm_MensagemInfor;
 
 { TFrameConfiguracao }
 
@@ -78,28 +79,47 @@ end;
 procedure TFrameConfiguracao.RefreshConfiguracao;
 begin
 
-  CarregaParamentros;
+  try
 
-  {Tipo de Arquivo}
-  case fTipoArquivo of
-    1: rdTipoTxtItens.IsChecked := True;
+    CarregaParamentros;
+
+    {Tipo de Arquivo}
+    case fTipoArquivo of
+      1: rdTipoTxtItens.IsChecked := True;
+    end;
+
+    {Caminho do arquivo de integração}
+    edtArquivoTxt.Text          := fCaminhoArquivo;
+    imgPastaInexistente.Visible := not ValidaCaminho(edtArquivoTxt.Text);
+
+  except
+    on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
+    end;
+
   end;
-
-  edtArquivoTxt.Text := fCaminhoArquivo;
-  imgPastaInexistente.Visible := not ValidaCaminho(edtArquivoTxt.Text);
 
 end;
 
 procedure TFrameConfiguracao.SalvarAltercao;
 begin
 
-  if imgPastaInexistente.Visible then
-  begin
-   ShowMessage('Caminho do arquivo txt esta invalido');
-   exit
-  end;
+  try
 
-  DmPrincipal.GravarConfiguracao(IntToStr(TipoArquivoSelcionado),edtArquivoTxt.Text);
+    if imgPastaInexistente.Visible then
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Caminho do arquivo de integração não e valido');
+      exit
+    end;
+
+    DmPrincipal.GravarConfiguracao(IntToStr(TipoArquivoSelcionado),edtArquivoTxt.Text);
+    FrameMsgInfor.CreateFrameMsgInfor('Configuração salva.');
+    FechaFrameConfig;
+
+  except
+    raise
+  end;
 
 end;
 
@@ -140,8 +160,7 @@ function TFrameConfiguracao.ValidaCaminho(pCaminho: String): Boolean;
 begin
 
   Result := False;
-  
-  if DirectoryExists(pCaminho)then 
+  if FileExists(pCaminho)then
   Result := True;
       
 end;
@@ -149,8 +168,20 @@ end;
 procedure TFrameConfiguracao.btnBuscarPastaClick(Sender: TObject);
 begin
 
+  try
+
     if not (frmPrincipal.OpenDialogDir = '') then
-    edtArquivoTxt.Text := frmPrincipal.OpenDialogDir;
+    edtArquivoTxt.Text          := frmPrincipal.OpenDialogDir;
+    imgPastaInexistente.Visible := not ValidaCaminho(edtArquivoTxt.Text);
+
+
+  except
+  on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
+    end;
+
+  end;
 
 end;
 
@@ -174,10 +205,12 @@ begin
   try
 
     SalvarAltercao;
-    FechaFrameConfig;
 
   except
-    ShowMessage('Erro : '+ frmPrincipal.fMensagemErro);
+    on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
+    end;
 
   end;
 
@@ -192,8 +225,8 @@ begin
 
       DmConexao.AbreConexaoDb;
 
-      DmPrincipal.FQryConfig.Active := False;
-      DmPrincipal.FQryConfig.Active := True;
+      DmPrincipal.FQryConfig.Close;
+      DmPrincipal.FQryConfig.Open;
 
       if DmPrincipal.FQryConfig.RecordCount = 0 then
       DmPrincipal.InseriPrimeiroConfig;

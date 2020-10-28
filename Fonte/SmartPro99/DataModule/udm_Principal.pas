@@ -135,7 +135,7 @@ procedure TDmPrincipal.InseriPrimeiroConfig;
 var
   vSQL: String;
 begin
-  vSQL := 'Insert into configuracao (idconfig) values (1)';
+  vSQL := 'Insert into configuracao (idconfig,TIPOARQUIVOTXT) values (1,1)';
 
   try
 
