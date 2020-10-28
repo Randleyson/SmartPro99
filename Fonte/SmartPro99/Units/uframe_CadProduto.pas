@@ -194,6 +194,9 @@ begin
 
   try
 
+    if lstBoxProd.ItemIndex = -1 then
+    exit;
+
     fCodProd := lstBoxProd.ListItems[lstBoxProd.ItemIndex].TagString;
 
     dmCadProduto.FMentProduto.Filter   := 'Codbarra = ' + fCodProd;
@@ -207,8 +210,6 @@ begin
     edtDescriAlterada.Text     := copy(dmCadProduto.FMentProdutoDESCRICAO.AsString,0,20)
     else
     edtDescriAlterada.Text     := copy(dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString,0,20);
-
-
 
   except
     frmPrincipal.FMensagemErro := 'Erro ao executar DetalharProduto';
@@ -365,7 +366,8 @@ begin
 
     end;
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro);
+  on E: Exception do
+    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro + ' : '+E.Message);
 
   end;
 
