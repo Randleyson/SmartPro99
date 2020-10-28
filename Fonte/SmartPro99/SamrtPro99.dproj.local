@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <ActiveMobileDevice>   <NoProfile iOSSimulator="iPhone5" Android="AVD_for_10_1_WXGA_Tablet"/>
-  </ActiveMobileDevice>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_10_1_WXGA_Tablet"/>
+	</ActiveMobileDevice>
 </BorlandProject>

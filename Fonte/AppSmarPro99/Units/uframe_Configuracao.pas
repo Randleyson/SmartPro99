@@ -28,7 +28,6 @@ type
     Label4: TLabel;
     edtDescricao: TEdit;
     Label5: TLabel;
-    edtIP: TEdit;
     lytETv: TLayout;
     lytDTv: TLayout;
     lytListaTv: TLayout;
@@ -61,6 +60,12 @@ type
     cboxResolucao: TComboBox;
     Label10: TLabel;
     lblSemRegistro: TLabel;
+    Layout6: TLayout;
+    lytConfLocal: TLayout;
+    Label11: TLabel;
+    Line4: TLine;
+    lblIpLocal: TLabel;
+    Rectangle2: TRectangle;
     procedure btnEditarTvClick(Sender: TObject);
     procedure BtnGravarTvClick(Sender: TObject);
     procedure BtnCancelarTvClick(Sender: TObject);
@@ -79,6 +84,7 @@ type
     procedure AddItemsListBoxTv(pIdTv,pDescricao: String);
     procedure DetalharTvAtual;
     procedure DetalharConfgWs;
+    procedure ConfiguracaoLocal;
     procedure ListarResolucao(pResolucao:Integer);
     function ResolucaoSelecionada: string;
     procedure ControleBtnTv(pBtnAlter,pBtnGravar,pBtnCancelar: Boolean);
@@ -340,12 +346,21 @@ begin
 
     edtCodTv.Text     := pIdTv;
     edtDescricao.Text := DmPrincipal.FMentTv.FieldByName('DescricaoTv').AsString;
-    edtIP.Text        := DmPrincipal.FMentTv.FieldByName('IpTv').AsString;
 
   except
     FrmPrincipal.fMensagemErro := 'Erro ao executar ClickListTv';
 
   end;
+
+end;
+
+procedure TFrameConfig.ConfiguracaoLocal;
+begin
+
+  lblDimencao.Text  := 'Dimenção atual da Tela : '+ IntToStr(Screen.Height) +
+                       ' X '+ IntToStr(Screen.Width);
+
+  lblIpLocal.Text   := FrmPrincipal.fIPlocal;
 
 end;
 
@@ -398,7 +413,6 @@ begin
 
     edtCodTv.Text     := FrmPrincipal.fIdTvAtual;
     edtDescricao.Text := DmPrincipal.FMentTv.FieldByName('DescricaoTv').AsString;
-    edtIP.Text        := DmPrincipal.FMentTv.FieldByName('IpTv').AsString;
     ListarResolucao(FrmPrincipal.fResolucaoAtual);
 
   except
@@ -479,16 +493,21 @@ procedure TFrameConfig.IniciaFrame;
 begin
 
   try
-  
-    lblDimencao.Text      := 'Dimenção da Tela '+ IntToStr(Screen.Height) +
-                             ' X '+ IntToStr(Screen.Width);
+
+    ListarTvDisponivel;
+    DetalharConfgWs;
+    DetalharTvAtual;
+    ConfiguracaoLocal;
+
+
+
+
+
+
+
     lstBoxTvs.Enabled     := False;
     rectDetalheTv.Enabled := False;
     lytDetalheWs.Enabled  := False;
-    ListarTvDisponivel;
-    DetalharTvAtual;
-
-    DetalharConfgWs;
     ControleBtnTv(True,False,False);
     ControleBtnWs(True,False,False);
 

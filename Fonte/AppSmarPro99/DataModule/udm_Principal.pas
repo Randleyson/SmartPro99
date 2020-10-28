@@ -9,9 +9,10 @@ uses
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, Data.DB,
   FireDAC.Comp.Client,Data.FireDACJSONReflect, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Stan.StorageJSON, FireDAC.Stan.StorageBin,System.IOUtils
+  FireDAC.Stan.StorageJSON, FireDAC.Stan.StorageBin,System.IOUtils,Winapi.WinSock,
+  Soap.SOAPHTTPTrans
   {$IFDEF MSWINDOWS}
-  ,vcl.Forms
+  ,vcl.Forms, IdBaseComponent, IdComponent, IdRawBase, IdRawClient, IdIcmpClient
   {$ENDIF};
 
 type
@@ -31,6 +32,7 @@ type
     FQryTabConfigHOSTWS: TStringField;
     FQryTabConfigPORTAWS: TIntegerField;
     FQryTabConfigIDRESOLUCAO: TIntegerField;
+    Pingador: TIdIcmpClient;
   private
     { Private declarations }
     FJsonDataSet: TFDJSONDataSets;
@@ -42,6 +44,8 @@ type
     function SQL_UpdateIDRTv : String;
     function SQL_DeletaIDRTv : String;
     function SQL_InsertTabConfigInicial: String;
+    function IpLocal: String;
+
 
   public
     { Public declarations }
@@ -56,6 +60,7 @@ type
 
     procedure GravarConfigWs(pHost,pPorta: string);
     procedure QryToFMent(pQry: TFDQuery; pFMent: TFDMemTable);
+    function Ping(IP: String): boolean;
 
   end;
 
@@ -72,22 +77,51 @@ uses uClientModule, ufrm_Principal, udm_conectSQLlite, uframe_Logs;
 
 { TDmPrincipal }
 
+function TDmPrincipal.IpLocal: String;
+var
+  wsaData : TWSAData;
+begin
+  WSAStartup(257, wsaData);
+  Result := Trim(inet_ntoa( PInAddr( GetHostByName( nil )^.h_addr_list^ )^ ));
+end;
+
+function TDmPrincipal.Ping(IP: String): boolean;
+begin
+
+  try
+    with pingador do begin
+      Host := IP;
+      ReceiveTimeout := 500;
+      Ping;
+      if ReplyStatus.BytesReceived > 0 then
+      result := true
+      else
+      result := false;
+    end;
+  except
+
+  end;
+
+end;
+
 function TDmPrincipal.TestaConexaoWS: Boolean;
 begin
 
   try
 
-    ClientModule.DSRestConnection.host := FrmPrincipal.fHostWs;
-    ClientModule.DSRestConnection.Port := StrToInt(FrmPrincipal.fPortaWs);
-    ClientModule.DSRestConnection.TestConnection();
-    Result                             := True;
-    FrmPrincipal.fStatusConexaoWs      := 0;
+    Result                               := False;
+    FrmPrincipal.fStatusConexaoWs        := 1;
+    if DmPrincipal.Ping(FrmPrincipal.fHostWs) then
+    begin
+      ClientModule.DSRestConnection.host := FrmPrincipal.fHostWs;
+      ClientModule.DSRestConnection.Port := StrToInt(FrmPrincipal.fPortaWs);
+      ClientModule.DSRestConnection.TestConnection();
+      Result                             := True;
+      FrmPrincipal.fStatusConexaoWs      := 0;
+    end;
 
   Except
-
-    Result                             := False;
-    FrmPrincipal.fStatusConexaoWs      := 1;
-
+    raise
   end;
 
 end;
@@ -115,25 +149,26 @@ end;
 procedure TDmPrincipal.CarregaParamentros;
 begin
 
- try
+  try
 
-   QryToFMent(FQryTabConfig,FMentConfig);
+    QryToFMent(FQryTabConfig,FMentConfig);
 
-   if FMentConfig.RecordCount = 0 then
-   begin
-     ExectSQL(SQL_InsertTabConfigInicial);
-     QryToFMent(FQryTabConfig,FMentConfig);
-   end;
+    if FMentConfig.RecordCount = 0 then
+    begin
+      ExectSQL(SQL_InsertTabConfigInicial);
+      QryToFMent(FQryTabConfig,FMentConfig);
+    end;
 
-   FrmPrincipal.fIdTvAtual      := FMentConfig.FieldByName('idtv').AsString;
-   FrmPrincipal.fHostWs         := FMentConfig.FieldByName('hostWs').AsString;
-   FrmPrincipal.fPortaWs        := FMentConfig.FieldByName('PortaWs').AsString;
-   FrmPrincipal.fResolucaoAtual := FMentConfig.FieldByName('idResolucao').AsInteger;
+    FrmPrincipal.fIdTvAtual      := FMentConfig.FieldByName('idtv').AsString;
+    FrmPrincipal.fHostWs         := FMentConfig.FieldByName('hostWs').AsString;
+    FrmPrincipal.fPortaWs        := FMentConfig.FieldByName('PortaWs').AsString;
+    FrmPrincipal.fResolucaoAtual := FMentConfig.FieldByName('idResolucao').AsInteger;
+    FrmPrincipal.fIPlocal        := IpLocal;
 
- except
-   FrmPrincipal.fMensagemErro := 'Não foi possivel Carregar os paramentros de configuracao ';
-   raise;
- end;
+  except
+    FrmPrincipal.fMensagemErro := 'Não foi possivel Carregar os paramentros de configuracao ';
+    raise;
+  end;
 
 end;
 

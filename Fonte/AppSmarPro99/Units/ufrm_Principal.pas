@@ -26,6 +26,7 @@ type
     fHostWs: String;
     fPortaWs: String;
     fResolucaoAtual: integer;
+    fIPlocal: string;
     fComErro: Boolean;
     fMensagemErro: String;
     fStatusConexaoWs: Integer;
@@ -66,7 +67,7 @@ begin
 
   try
 
-    tmSplash.Interval := 5000;
+    tmSplash.Interval := 3000;
 
   except
     FrameMsgInfor.CreateFrameMsgInfor(FrmPrincipal.fMensagemErro);
@@ -119,46 +120,52 @@ procedure TFrmPrincipal.tmSplashTimer(Sender: TObject);
 begin
 
   try
+    try
 
-    if not Assigned(dmConectSQLlite) then
-    dmConectSQLlite := TdmConectSQLlite.Create(self);
+      if not Assigned(dmConectSQLlite) then
+      dmConectSQLlite := TdmConectSQLlite.Create(self);
 
-    if not Assigned(DmPrincipal) then
-    DmPrincipal  := TDmPrincipal.Create(self);
+      if not Assigned(DmPrincipal) then
+      DmPrincipal  := TDmPrincipal.Create(self);
 
-    if not Assigned(ClientModule) then
-    ClientModule := TClientModule.Create(self);
+      if not Assigned(ClientModule) then
+      ClientModule := TClientModule.Create(self);
 
 
-    DmPrincipal.CarregaParamentros;
-    Width        := TResolucao.LfrmPrinc; //Screen.Width;
-    Height       := TResolucao.AfrmPrinc; //Screen.Height;
+      DmPrincipal.CarregaParamentros;
+      Width        := TResolucao.LfrmPrinc; //Screen.Width;
+      Height       := TResolucao.AfrmPrinc; //Screen.Height;
 
-    if DmPrincipal.TestaConexaoWS then
-    begin
+      if DmPrincipal.TestaConexaoWS then
+      begin
 
-      dmPrincipal.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
-      FrameTabelaPreco.CreateFrameTabelaPreco;
+        dmPrincipal.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
+        FrameTabelaPreco.CreateFrameTabelaPreco;
 
-    end
-    else
-    begin
+      end
+      else
+      begin
 
-      FrameTabelaPreco.CreateFrameTabelaPreco;
-      FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel conectar ao servidor. Favor verificar as configuração de conexão')
+        FrameTabelaPreco.CreateFrameTabelaPreco;
+        FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel conectar ao servidor. Favor verificar as configuração de conexão')
+
+      end
+
+
+    except
+    on E: Exception do
+      begin
+        FrmPrincipal.fComErro := True;
+        FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel iniciar o aplicativo Erro : '+E.Message);
+
+      end;
 
     end;
 
-  except
-  on E: Exception do
-    begin
-      FrmPrincipal.fComErro := True;
-      FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel iniciar o aplicativo Erro : '+E.Message);
-
-    end;
+  finally
+    tmSplash.Enabled := False;
 
   end;
-
 end;
 
 end.

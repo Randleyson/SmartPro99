@@ -45,6 +45,13 @@ begin
 
   try
 
+    if not FileExists(ExtractFileDir(application.ExeName+'\Config.ini')) then
+    begin
+      frmPrincipal.fComErro      := True;
+      FrmPrincipal.fMensagemErro := 'Não foi encontrado o arquivo de configuração';
+      exit;
+    end;
+
     FDC_Freeboard.Connected                   := False;
     FDC_Freeboard.LoginPrompt                 := False;
     FDC_Freeboard.Params.Clear;
@@ -54,9 +61,12 @@ begin
     frmPrincipal.fComErro                     := False;
 
   except
-    FrmPrincipal.fMensagemErro := ' Erro ao tentar se conectar a base da dados freeboard '+
-                                  ' Verifique o arquivo de configuracão';
-    frmPrincipal.fComErro      := True;
+    on e: Exception do
+    begin
+      FrmPrincipal.fMensagemErro := ' Erro ao tentar se conectar a base da dados freeboard '+ e.Message;
+      frmPrincipal.fComErro      := True;
+      raise
+    end;
 
   end;
 

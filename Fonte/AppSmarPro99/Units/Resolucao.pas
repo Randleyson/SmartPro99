@@ -58,7 +58,7 @@ begin
 
   case FrmPrincipal.fResolucaoAtual of
     1 : result := 6;
-    2 : result := 10;
+    2 : result := 11;
   end;
 
 end;
@@ -68,7 +68,7 @@ begin
 
   case FrmPrincipal.fResolucaoAtual of
     1 : result := 380;
-    2 : result := 1200;
+    2 : result := 850;
   end;
 
 end;
@@ -78,7 +78,7 @@ begin
 
   case FrmPrincipal.fResolucaoAtual of
     1 : result := 120;
-    2 : result := 390;
+    2 : result := 300;
   end;
 
 end;

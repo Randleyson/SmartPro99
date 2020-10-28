@@ -109,7 +109,7 @@ begin
   try
 
     FrmPrincipal.RecebeAtualizaWs;
-    FrameLogs.AddLogs('Carga de produto realizada com exito ');
+    //FrameLogs.AddLogs('Carga de produto realizada com exito ');
 
   except
     FrameLogs.AddLogs('Erro :'+ FrmPrincipal.fMensagemErro);
@@ -136,13 +136,14 @@ begin
 
       try
 
+        tmProxPagina.Enabled       := False;
+        tmAtualizaProdutos.Enabled := False;
+
         DmPrincipal.CarregaParamentros;
         if DmPrincipal.TestaConexaoWS then
         DmPrincipal.RecebeTvsWs;
 
         FrameConfig.CreateFrameConfig;
-        tmProxPagina.Enabled                    := False;
-        tmAtualizaProdutos.Enabled := False;
 
       except
         raise
@@ -191,15 +192,16 @@ begin
       if FrmPrincipal.fIdTvAtual = '0' then
       exit;
 
-      DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,DmPrincipal.FMentProd);
+      DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,
+                             DmPrincipal.FMentProd);
       lstBoxTabelaPreco.Clear;
 
       if DmPrincipal.FMentProd.RecordCount <> 0 then
       begin
         DmPrincipal.FMentProd.First;
-        lstBoxTabelaPreco.BeginUpdate;
+        //lstBoxTabelaPreco.BeginUpdate;
         ListarProduto;
-        lstBoxTabelaPreco.EndUpdate;
+        //lstBoxTabelaPreco.EndUpdate;
       end;
 
       tmProxPagina.Enabled       := True;
@@ -208,6 +210,7 @@ begin
 
     except
       raise;
+
     end;
 
 
@@ -259,10 +262,19 @@ end;
 procedure TFrameTabelaPreco.ProximaPag;
 begin
 
+  try
 
+    lstBoxTabelaPreco.Clear;
+    //lstBoxTabelaPreco.BeginUpdate;
 
-  lstBoxTabelaPreco.Clear;
-  lstBoxTabelaPreco.BeginUpdate;
+    if FrmPrincipal.fNovaCarga then
+    begin
+      DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,DmPrincipal.FMentProd);
+      DmPrincipal.FMentProd.First;
+      FrmPrincipal.fNovaCarga := False;
+    end;
+  except
+  end;
 
   TThread.CreateAnonymousThread(procedure
   begin
@@ -270,12 +282,6 @@ begin
 
       try
 
-        if FrmPrincipal.fNovaCarga then
-        begin
-          DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,DmPrincipal.FMentProd);
-          DmPrincipal.FMentProd.First;
-          FrmPrincipal.fNovaCarga := False;
-        end;
         ListarProduto;
 
       except
@@ -287,10 +293,11 @@ begin
       TThread.Synchronize(nil,procedure
       begin
 
-        lstBoxTabelaPreco.EndUpdate;
+        //lstBoxTabelaPreco.EndUpdate;
 
       end);
     end;
+
 
   end).Start;
 

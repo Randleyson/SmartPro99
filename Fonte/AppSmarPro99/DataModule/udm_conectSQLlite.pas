@@ -100,7 +100,7 @@ begin
       FDC_SQLlite.params.Values['LockingMode']  := 'Normal';
 
       {$IFDEF MSWINDOWS}
-      FDC_SQLlite.Params.Values['Database']     := ExtractFileDir(Application.ExeName)+'\db\db.db';
+      FDC_SQLlite.Params.Values['Database']     := 'D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\db\db.db';
       {$ENDIF}
       {$IFDEF ANDROID}
       FDC_SQLlite.Params.Values['Database']     := TPath.Combine(TPath.GetDocumentsPath, 'db.db');

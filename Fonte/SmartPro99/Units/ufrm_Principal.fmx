@@ -2,12 +2,15 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   BorderIcons = []
-  Caption = 'FrmPrincipal'
+  BorderStyle = Single
+  Caption = 'SmartPro99'
   ClientHeight = 745
   ClientWidth = 1025
+  Quality = HighPerformance
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  ShowFullScreenIcon = True
   OnCreate = FormCreate
   OnShow = FormShow
   DesignerMasterStyle = 0
