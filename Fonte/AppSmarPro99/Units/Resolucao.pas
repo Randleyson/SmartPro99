@@ -19,21 +19,21 @@ type
   TResolucao = class
   public
     class function AlstTabPreco: integer;
-    class function QProdutoListado: integer;
-    class function LlstTabPreco: integer;
-    class function LimgLogo: integer;
-    class function TlstTabPreco: integer;
-    class function AfrmPrinc: integer;
-    class function LfrmPrinc: integer;
-    class function MarTopLstTabPreco: integer;
+    //class function QProdutoListado: integer;
+    //class function LlstTabPreco: integer;
+    //class function LimgLogo: integer;
+    //class function TlstTabPreco: integer;
+    //class function AfrmPrinc: integer;
+    //class function LfrmPrinc: integer;
+    //class function MarTopGridPreco: integer;
 
 end;
 
 implementation
 
 { TResolucao }
-
-class function TResolucao.MarTopLstTabPreco: integer;
+{
+class function TResolucao.MarTopGridPreco: integer;
 begin
 
   case FrmPrincipal.fResolucaoAtual of
@@ -41,8 +41,8 @@ begin
     2 : result := 100;
   end;
 
-end;
-
+end;}
+{
 class function TResolucao.AlstTabPreco: integer;
 begin
 
@@ -62,7 +62,7 @@ begin
   end;
 
 end;
-
+{
 class function TResolucao.LlstTabPreco: integer;
 begin
 
@@ -73,7 +73,7 @@ begin
 
 end;
 
-class function TResolucao.LimgLogo: integer;
+{class function TResolucao.LimgLogo: integer;
 begin
 
   case FrmPrincipal.fResolucaoAtual of
@@ -81,8 +81,8 @@ begin
     2 : result := 300;
   end;
 
-end;
-
+end; }
+{
 class function TResolucao.TlstTabPreco: integer;
 begin
 
@@ -91,8 +91,9 @@ begin
     2 : result := 24;
   end;
 
-end;
+end;  }
 
+{
 class function TResolucao.AfrmPrinc: integer;
 begin
 
@@ -101,8 +102,8 @@ begin
     2 : result := 700;
   end;
 
-end;
-
+end;}
+{
 class function TResolucao.LfrmPrinc: integer;
 begin
 
@@ -111,6 +112,6 @@ begin
     2 : result := 1700;
   end;
 
-end;
+end;}
 
 end.

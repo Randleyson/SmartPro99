@@ -290,8 +290,8 @@ object FrameConfig: TFrameConfig
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
             OnItemClick = lstBoxTvsItemClick
-            Viewport.Width = 283.000000000000000000
-            Viewport.Height = 119.000000000000000000
+            Viewport.Width = 287.000000000000000000
+            Viewport.Height = 123.000000000000000000
             object lblSemRegistro: TLabel
               Align = Top
               StyledSettings = [Size]
@@ -566,15 +566,15 @@ object FrameConfig: TFrameConfig
             Margins.Bottom = 5.000000000000000000
             Position.X = 5.000000000000000000
             Position.Y = 30.000000000000000000
-            Size.Width = 116.000000000000000000
+            Size.Width = 132.000000000000000000
             Size.Height = 101.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
             object lblDimencao: TLabel
               Align = Top
               StyledSettings = [Size]
-              Position.Y = 39.000000000000000000
-              Size.Width = 116.000000000000000000
+              Position.Y = 17.000000000000000000
+              Size.Width = 132.000000000000000000
               Size.Height = 34.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Family = 'Yu Gothic UI'
@@ -584,18 +584,10 @@ object FrameConfig: TFrameConfig
               Text = 'Dimen'#231#227'o da Tela 700x650'
               TabOrder = 1
             end
-            object cboxResolucao: TComboBox
-              Align = Top
-              Position.Y = 17.000000000000000000
-              Size.Width = 116.000000000000000000
-              Size.Height = 22.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 2
-            end
             object Label10: TLabel
               Align = Top
               StyledSettings = [Size]
-              Size.Width = 116.000000000000000000
+              Size.Width = 132.000000000000000000
               Size.Height = 17.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Family = 'Yu Gothic UI'
@@ -605,10 +597,32 @@ object FrameConfig: TFrameConfig
               Text = 'Resolu'#231#227'o'
               TabOrder = 0
             end
+            object Layout7: TLayout
+              Align = Bottom
+              Position.Y = 72.000000000000000000
+              Size.Width = 132.000000000000000000
+              Size.Height = 29.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              object btnPersonilizarResol: TCornerButton
+                Align = Center
+                StyledSettings = [Size, FontColor]
+                Sides = [Top, Left, Bottom, Right]
+                Size.Width = 132.000000000000000000
+                Size.Height = 22.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                Text = 'Configurar Resolu'#231#227'o'
+                TextSettings.Font.Family = 'Yu Gothic UI'
+                XRadius = 3.000000000000000000
+                YRadius = 3.000000000000000000
+                OnClick = btnPersonilizarResolClick
+              end
+            end
           end
           object Layout5: TLayout
             Align = Left
-            Position.X = 126.000000000000000000
+            Position.X = 142.000000000000000000
             Position.Y = 25.000000000000000000
             Size.Width = 99.000000000000000000
             Size.Height = 111.000000000000000000

@@ -28,6 +28,7 @@ type
   private
     { Private declarations }
     fNroPag: integer;
+    fUltimoRegistro: integer;
     procedure IniciarFrame;
     procedure FechaFrameTabelaPreco;
     procedure AddFrameListBox(pDescricao,pValorVenda: string);
@@ -52,7 +53,7 @@ implementation
 {$R *.fmx}
 
 uses ufrm_Principal, udm_Principal, uframe_Configuracao, Loading,
-  udm_conectSQLlite, uframe_Logs, Resolucao;
+  udm_conectSQLlite, uframe_Logs, uframe_MensagemInfor;
 
 { TFrameTabelaPreco }
 
@@ -65,18 +66,18 @@ begin
 
   try
 
-    vItem                         := TListBoxItem.Create(lstBoxTabelaPreco);
-    vItem.Text                    := '';
-    vItem.Selectable              := False;
-    vItem.Height                  := TResolucao.AlstTabPreco;
+    vItem                             := TListBoxItem.Create(lstBoxTabelaPreco);
+    vItem.Text                        := '';
+    vItem.Selectable                  := False;
+    vItem.Height                      := FrmPrincipal.fAltBarraGridProd;
 
     vFrame                            := TFrameFPreco.Create(vItem);
     vFrame.Parent                     := vItem;
     vFrame.Align                      := TAlignLayout.Client;
     vFrame.lblDescricaoProd.text      := pDescricao;
-    vFrame.lblDescricaoProd.Font.Size := TResolucao.TlstTabPreco;
+    vFrame.lblDescricaoProd.Font.Size := FrmPrincipal.fTanFontGridPreco;
     vFrame.lblValorVenda.text         := formatfloat('R$ ##,###,##0.00',StrToFloat(pValorVenda));
-    vFrame.lblValorVenda.Font.Size    := TResolucao.TlstTabPreco;
+    vFrame.lblValorVenda.Font.Size    := FrmPrincipal.fTanFontGridPreco;
     vFrame.Margins.Bottom             := 8;
 
     lstBoxTabelaPreco.AddObject(vItem);
@@ -109,10 +110,8 @@ begin
   try
 
     FrmPrincipal.RecebeAtualizaWs;
-    //FrameLogs.AddLogs('Carga de produto realizada com exito ');
 
   except
-    FrameLogs.AddLogs('Erro :'+ FrmPrincipal.fMensagemErro);
     raise
 
   end;
@@ -121,7 +120,14 @@ end;
 procedure TFrameTabelaPreco.tmProxPaginaTimer(Sender: TObject);
 begin
 
-  ProximaPag;
+  try
+    ProximaPag;
+  except
+    on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor(e.message);
+    end;
+  end;
 
 end;
 
@@ -199,9 +205,7 @@ begin
       if DmPrincipal.FMentProd.RecordCount <> 0 then
       begin
         DmPrincipal.FMentProd.First;
-        //lstBoxTabelaPreco.BeginUpdate;
         ListarProduto;
-        //lstBoxTabelaPreco.EndUpdate;
       end;
 
       tmProxPagina.Enabled       := True;
@@ -212,8 +216,6 @@ begin
       raise;
 
     end;
-
-
 
 end;
 
@@ -233,21 +235,18 @@ begin
     while not DmPrincipal.FMentProd.Eof do
     begin
 
-      if vI < TResolucao.QProdutoListado then
+      if vI < FrmPrincipal.fQuantProdGrid then
       begin
 
         AddFrameListBox(DmPrincipal.FMentProd.FieldByName('Descricao').AsString,
                         DmPrincipal.FMentProd.FieldByName('vrvenda').AsString);
         DmPrincipal.FMentProd.Next;
+        fUltimoRegistro := DmPrincipal.FMentProd.RecNo;
         vI := vI + 1;
 
       end
       else
-      begin
-
-        exit;
-
-      end;
+      exit
 
     end;
 
@@ -265,41 +264,22 @@ begin
   try
 
     lstBoxTabelaPreco.Clear;
-    //lstBoxTabelaPreco.BeginUpdate;
 
     if FrmPrincipal.fNovaCarga then
     begin
       DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,DmPrincipal.FMentProd);
-      DmPrincipal.FMentProd.First;
+      DmPrincipal.FMentProd.RecNo := fUltimoRegistro;
       FrmPrincipal.fNovaCarga := False;
     end;
+    ListarProduto;
+
   except
-  end;
-
-  TThread.CreateAnonymousThread(procedure
-  begin
-    try
-
-      try
-
-        ListarProduto;
-
-      except
-
-      end;
-
-    finally
-
-      TThread.Synchronize(nil,procedure
-      begin
-
-        //lstBoxTabelaPreco.EndUpdate;
-
-      end);
+    on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Erro ProximaPag:'+ e.Message);
     end;
 
-
-  end).Start;
+  end;
 
 end;
 
@@ -308,9 +288,9 @@ begin
 
   try
 
-    lstBoxTabelaPreco.Width       := TResolucao.LlstTabPreco;
-    lstBoxTabelaPreco.Margins.Top := TResolucao.MarTopLstTabPreco;
-    imgLogo.Width                 := TResolucao.LimgLogo;
+    lstBoxTabelaPreco.Width       := FrmPrincipal.fLargGridPreco;
+    lstBoxTabelaPreco.Margins.Top := FrmPrincipal.fMarTopGridPreco;
+    imgLogo.Width                 := FrmPrincipal.fLargLogo;
 
   except
 

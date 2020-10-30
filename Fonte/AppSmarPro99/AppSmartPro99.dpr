@@ -15,7 +15,7 @@ uses
   uframe_Logs in 'Units\uframe_Logs.pas' {FrameLogs: TFrame},
   uframa_Edit in 'Units\uframa_Edit.pas' {FrameEdit: TFrame},
   udm_conectSQLlite in 'DataModule\udm_conectSQLlite.pas' {dmConectSQLlite: TDataModule},
-  Resolucao in 'Units\Resolucao.pas';
+  uframe_ConfLayout in 'Units\uframe_ConfLayout.pas' {FrameConfLayout: TFrame};
 
 {$R *.res}
 

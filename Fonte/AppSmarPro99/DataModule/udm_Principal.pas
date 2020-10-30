@@ -3,16 +3,41 @@ unit udm_Principal;
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
-  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, Data.DB,
-  FireDAC.Comp.Client,Data.FireDACJSONReflect, FireDAC.Stan.Param, FireDAC.DatS,
-  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Stan.StorageJSON, FireDAC.Stan.StorageBin,System.IOUtils,Winapi.WinSock,
-  Soap.SOAPHTTPTrans
+  System.SysUtils,
+  System.Classes,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.Phys,
+  FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef,
+  FireDAC.Stan.ExprFuncs,
+  FireDAC.FMXUI.Wait,
+  Data.DB,
+  FireDAC.Comp.Client,
+  Data.FireDACJSONReflect,
+  FireDAC.Stan.Param,
+  FireDAC.DatS,
+  FireDAC.DApt.Intf,
+  FireDAC.DApt,
+  FireDAC.Comp.DataSet,
+  FireDAC.Stan.StorageJSON,
+  FireDAC.Stan.StorageBin,
+  System.IOUtils,
+  Soap.SOAPHTTPTrans,
+  IdBaseComponent,
+  IdComponent,
+  IdRawBase,
+  IdRawClient,
+  {Winapi.WinSock,}
+  IdIcmpClient
   {$IFDEF MSWINDOWS}
-  ,vcl.Forms, IdBaseComponent, IdComponent, IdRawBase, IdRawClient, IdIcmpClient
+  ,vcl.Forms
   {$ENDIF};
 
 type
@@ -44,8 +69,6 @@ type
     function SQL_UpdateIDRTv : String;
     function SQL_DeletaIDRTv : String;
     function SQL_InsertTabConfigInicial: String;
-    function IpLocal: String;
-
 
   public
     { Public declarations }
@@ -61,6 +84,12 @@ type
     procedure GravarConfigWs(pHost,pPorta: string);
     procedure QryToFMent(pQry: TFDQuery; pFMent: TFDMemTable);
     function Ping(IP: String): boolean;
+    Procedure CarregaResolucaoAtual;
+    procedure ListarResolucao;
+
+    procedure AlteraResolucao(pId: integer; pMarTopGridPreco, pLargFrmPrinc,
+                        pAltFrmPrinc, pTanFontGridPreco, pLargLogo,
+                        pLargGridPreco, pQuantProdGrid, pAltBarraGridProd: string);
 
   end;
 
@@ -71,19 +100,20 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses uClientModule, ufrm_Principal, udm_conectSQLlite, uframe_Logs;
+uses uClientModule, ufrm_Principal, udm_conectSQLlite, uframe_Logs,
+  uframe_ConfLayout;
 
 {$R *.dfm}
 
 { TDmPrincipal }
 
-function TDmPrincipal.IpLocal: String;
+{function TDmPrincipal.IpLocal: String;
 var
   wsaData : TWSAData;
 begin
   WSAStartup(257, wsaData);
   Result := Trim(inet_ntoa( PInAddr( GetHostByName( nil )^.h_addr_list^ )^ ));
-end;
+end;}
 
 function TDmPrincipal.Ping(IP: String): boolean;
 begin
@@ -93,7 +123,7 @@ begin
       Host := IP;
       ReceiveTimeout := 500;
       Ping;
-      if ReplyStatus.BytesReceived > 0 then
+      if ReplyStatus.ReplyStatusType = rsEcho then
       result := true
       else
       result := false;
@@ -121,7 +151,6 @@ begin
     end;
 
   Except
-    raise
   end;
 
 end;
@@ -146,6 +175,41 @@ begin
 
 end;
 
+procedure TDmPrincipal.AlteraResolucao(pId: integer; pMarTopGridPreco, pLargFrmPrinc,
+  pAltFrmPrinc, pTanFontGridPreco, pLargLogo, pLargGridPreco, pQuantProdGrid,
+  pAltBarraGridProd: string);
+var
+  vSQl: String;
+begin
+
+  try
+
+    if pId = 1 then
+    begin
+
+      vSQl := 'update TAB_RESOLUCAO set   MARTOPGRIDPRECO   = ' + pMarTopGridPreco +
+                                        ' ,LAGFRMPRINC      = ' + pLargFrmPrinc +
+                                        ' ,ALTFRMPRINC      = ' + pAltFrmPrinc +
+                                        ' ,TANFONTELSTPRECO = ' + pTanFontGridPreco +
+                                        ' ,LARGLOGO         = ' + pLargLogo +
+                                        ' ,LARGGRIDPRECO    = ' + pLargGridPreco +
+                                        ' ,QUANTPRODGRID    = ' + pQuantProdGrid +
+                                        ' ,ALTBARRAGRIDPROD = ' + pAltBarraGridProd +
+            ' where idresolucao = 1';
+
+      ExectSQL(vSQl);
+    end;
+
+    vSQl := 'Update TAB_CONFIG set idresolucao = ' + IntToStr(pId);
+    ExectSQL(vSQl);
+
+  except
+    raise;
+
+  end;
+
+end;
+
 procedure TDmPrincipal.CarregaParamentros;
 begin
 
@@ -163,11 +227,48 @@ begin
     FrmPrincipal.fHostWs         := FMentConfig.FieldByName('hostWs').AsString;
     FrmPrincipal.fPortaWs        := FMentConfig.FieldByName('PortaWs').AsString;
     FrmPrincipal.fResolucaoAtual := FMentConfig.FieldByName('idResolucao').AsInteger;
-    FrmPrincipal.fIPlocal        := IpLocal;
+    //FrmPrincipal.fIPlocal        := IpLocal;
+
+    CarregaResolucaoAtual;
 
   except
     FrmPrincipal.fMensagemErro := 'Não foi possivel Carregar os paramentros de configuracao ';
     raise;
+  end;
+
+end;
+
+procedure TDmPrincipal.CarregaResolucaoAtual;
+var
+  vSQL: string;
+  vFQryTemp: TFDQuery;
+begin
+
+  vSQL := 'select * from tab_Resolucao where idresolucao = '+IntToStr(FrmPrincipal.fResolucaoAtual);
+
+  try
+
+    dmConectSQLlite.AbreConexaoSQLlite;
+    vFQryTemp :=  TFDQuery.Create(self);
+    vFQryTemp.Close;
+    vFQryTemp.Connection := dmConectSQLlite.FDC_SQLlite;
+    vFQryTemp.SQL.Text := vSQL;
+    vFQryTemp.Open;
+    vFQryTemp.First;
+
+    FrmPrincipal.fMarTopGridPreco   := vFQryTemp.FieldByName('MARTOPGRIDPRECO').AsInteger;
+    FrmPrincipal.fLargFrmPrinc      := vFQryTemp.FieldByName('LAGFRMPRINC').AsInteger;
+    FrmPrincipal.fAltFrmPrinc       := vFQryTemp.FieldByName('ALTFRMPRINC').AsInteger;
+    FrmPrincipal.fTanFontGridPreco  := vFQryTemp.FieldByName('TANFONTELSTPRECO').AsInteger;
+    FrmPrincipal.fLargLogo          := vFQryTemp.FieldByName('LARGLOGO').AsInteger;
+    FrmPrincipal.fLargGridPreco     := vFQryTemp.FieldByName('LARGGRIDPRECO').AsInteger;
+    FrmPrincipal.fQuantProdGrid     := vFQryTemp.FieldByName('QUANTPRODGRID').AsInteger;
+    FrmPrincipal.fAltBarraGridProd  := vFQryTemp.FieldByName('ALTBARRAGRIDPROD').AsInteger;
+
+  finally
+    vFQryTemp.Free;
+    dmConectSQLlite.FechaSQLlite;
+
   end;
 
 end;
@@ -212,6 +313,55 @@ begin
     raise
 
   end;
+
+
+
+end;
+
+procedure TDmPrincipal.ListarResolucao;
+begin
+
+  try
+
+    dmConectSQLlite.AbreConexaoSQLlite;
+    with FQryResolucao do
+    begin
+      Close;
+      Open;
+      First;
+
+    while not Eof do
+    begin
+
+      FrameConfLayout.Resolucao(FieldByName('idresolucao').AsString,
+                                FieldByName('nome').AsString,
+                                FieldByName('MARTOPGRIDPRECO').AsString,
+                                FieldByName('LAGFRMPRINC').AsString,
+                                FieldByName('ALTFRMPRINC').AsString,
+                                FieldByName('TANFONTELSTPRECO').AsString,
+                                FieldByName('LARGLOGO').AsString,
+                                FieldByName('LARGGRIDPRECO').AsString,
+                                FieldByName('QUANTPRODGRID').AsString,
+                                FieldByName('ALTBARRAGRIDPROD').AsString,
+                                RecNo);
+      FQryResolucao.Next;
+    end;
+    end;
+
+
+
+
+
+
+
+
+  finally
+    dmConectSQLlite.FechaSQLlite;
+
+  end;
+
+
+
 
 
 

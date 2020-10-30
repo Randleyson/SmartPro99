@@ -1,0 +1,632 @@
+object FrameConfLayout: TFrameConfLayout
+  Align = Client
+  Size.Width = 581.000000000000000000
+  Size.Height = 438.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle2: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 581.000000000000000000
+    Size.Height = 438.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object lytTitulo: TLayout
+      Align = Top
+      Size.Width = 581.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Rectangle1: TRectangle
+        Align = Client
+        Fill.Color = xFF006EBB
+        Size.Width = 581.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label1: TLabel
+          Align = Client
+          StyledSettings = []
+          Size.Width = 541.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00030000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Center
+          Text = 'Layout Personalizado'
+          TabOrder = 0
+        end
+        object btnFechar: TSpeedButton
+          Align = Right
+          Position.X = 541.000000000000000000
+          Size.Width = 40.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'stoptoolbutton'
+          Text = 'btnFechar'
+          OnClick = btnFecharClick
+          object FillRGBEffect1: TFillRGBEffect
+            Color = claWhite
+          end
+        end
+      end
+    end
+    object Rectangle3: TRectangle
+      Align = Client
+      Fill.Color = claWhite
+      Margins.Left = 15.000000000000000000
+      Margins.Top = 15.000000000000000000
+      Margins.Right = 15.000000000000000000
+      Margins.Bottom = 15.000000000000000000
+      Size.Width = 551.000000000000000000
+      Size.Height = 375.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFF9D9D9D
+      XRadius = 5.000000000000000000
+      YRadius = 5.000000000000000000
+      object Layout4: TLayout
+        Align = Bottom
+        Margins.Bottom = 8.000000000000000000
+        Position.Y = 337.000000000000000000
+        Size.Width = 551.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Layout5: TLayout
+          Align = Center
+          Size.Width = 174.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object btnSalvar: TCornerButton
+            Align = Left
+            Sides = [Top, Left, Bottom, Right]
+            Size.Width = 80.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'Salvar'
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = btnSalvarClick
+          end
+          object btnCancelar: TCornerButton
+            Align = Right
+            Position.X = 94.000000000000000000
+            Sides = [Top, Left, Bottom, Right]
+            Size.Width = 80.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'Cancelar'
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+          end
+        end
+      end
+      object Layout6: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object rdNome1: TRadioButton
+          Align = Left
+          StyledSettings = [Size, Style]
+          Position.X = 153.000000000000000000
+          Size.Width = 128.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'radiobuttonstyle'
+          TabOrder = 0
+          Text = 'rdNome1'
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF006EBB
+          TextSettings.Trimming = Character
+        end
+        object rdNome2: TRadioButton
+          Align = Left
+          StyledSettings = [Size, Style]
+          Position.X = 281.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'rdNome2'
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF006EBB
+        end
+        object rdNome3: TRadioButton
+          Align = Left
+          StyledSettings = [Size, Style]
+          Position.X = 381.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'rdNome3'
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF006EBB
+        end
+        object Layout10: TLayout
+          Align = Left
+          Size.Width = 153.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+      end
+      object lytMargTopGrid: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label14: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Margen top grid Pre'#231'o'
+          TabOrder = 0
+        end
+        object edtMarTopGrid1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblMarTopGrid2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblMarTopGrid3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytLargFrm: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 83.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object Label2: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Largura do formulario'
+          TabOrder = 0
+        end
+        object edtLargFrm1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblLargFrm2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblLargFrm3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytAltFrm: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 118.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object Label3: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Altura do formulario'
+          TabOrder = 0
+        end
+        object edtAltFrm1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblAltFrm2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblAltFrm3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytFontGridPreco: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 153.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        object Label4: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Tanho da fonte dois produto'
+          TabOrder = 0
+        end
+        object edtFontGridPreco1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblFontGridPreco2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblFontGridPreco3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytLargLogo: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        object Label5: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Largura do logo'
+          TabOrder = 0
+        end
+        object edtLargLogo1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblLargLogo2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblLargLogo3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object ltyLargGridPreco: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 223.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        object Label8: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Largura da Grid Pre'#231'o'
+          TabOrder = 0
+        end
+        object edtLargGrid1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblLargGrid2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblLargGrid3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytQuantProd: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 258.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        object Label11: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Quntidade de produto na grid'
+          TabOrder = 0
+        end
+        object edtQuantProd1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblQuantProd2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblQuantProd3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+      object lytAltBarraProd: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 293.000000000000000000
+        Size.Width = 541.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        object Label15: TLabel
+          Align = Left
+          StyledSettings = [Size]
+          Size.Width = 161.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.FontColor = xFF454545
+          Text = 'Altura da barra do produtos'
+          TabOrder = 0
+        end
+        object edtAltBarraProd1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 1
+          Position.X = 161.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblAltBarraProd2: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 241.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '80'
+          TabOrder = 4
+        end
+        object lblAltBarraProd3: TLabel
+          Align = Left
+          StyledSettings = [Size, Style, FontColor]
+          Position.X = 341.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.HorzAlign = Center
+          Text = '60'
+          TabOrder = 3
+        end
+      end
+    end
+  end
+end

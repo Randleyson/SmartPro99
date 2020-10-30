@@ -57,7 +57,6 @@ type
     Layout2: TLayout;
     Layout4: TLayout;
     Layout5: TLayout;
-    cboxResolucao: TComboBox;
     Label10: TLabel;
     lblSemRegistro: TLabel;
     Layout6: TLayout;
@@ -66,6 +65,8 @@ type
     Line4: TLine;
     lblIpLocal: TLabel;
     Rectangle2: TRectangle;
+    btnPersonilizarResol: TCornerButton;
+    Layout7: TLayout;
     procedure btnEditarTvClick(Sender: TObject);
     procedure BtnGravarTvClick(Sender: TObject);
     procedure BtnCancelarTvClick(Sender: TObject);
@@ -77,6 +78,7 @@ type
     procedure edtPortaWsClick(Sender: TObject);
     procedure lstBoxTvsItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
+    procedure btnPersonilizarResolClick(Sender: TObject);
   private
     { Private declarations }
     procedure IniciaFrame;
@@ -85,8 +87,6 @@ type
     procedure DetalharTvAtual;
     procedure DetalharConfgWs;
     procedure ConfiguracaoLocal;
-    procedure ListarResolucao(pResolucao:Integer);
-    function ResolucaoSelecionada: string;
     procedure ControleBtnTv(pBtnAlter,pBtnGravar,pBtnCancelar: Boolean);
     procedure ControleBtnWs(pBtnEditar,pBtnGravar,pBtnCancelar: Boolean);
 
@@ -113,7 +113,7 @@ implementation
 {$R *.fmx}
 
 uses ufrm_Principal, udm_Principal, uframe_TabelaPreco, Loading,
-  uframe_MensagemInfor, uframa_Edit, udm_conectSQLlite;
+  uframe_MensagemInfor, uframa_Edit, udm_conectSQLlite, uframe_ConfLayout;
 
 { TFrameConfiguracao }
 
@@ -292,6 +292,24 @@ begin
 
 end;
 
+procedure TFrameConfig.btnPersonilizarResolClick(Sender: TObject);
+begin
+
+  try
+
+    FrameConfLayout.CreateFrameConfigResolucao;
+
+  except
+  on e: exception do
+    begin
+      FrameMsgInfor.CreateFrameMsgInfor('Erro ao criar a tela config de resolcucao '+ e.message);
+    end;
+
+  end;
+
+
+end;
+
 procedure TFrameConfig.ClickBtnAlterTv;
 begin
 
@@ -320,7 +338,7 @@ begin
     end;
     
     FrmPrincipal.fIdTvAtual := lstBoxTvs.ListItems[lstBoxTvs.ItemIndex].TagString;
-    DmPrincipal.AlteraConfiguracaoTv(FrmPrincipal.fIdTvAtual,ResolucaoSelecionada);
+    //DmPrincipal.AlteraConfiguracaoTv(FrmPrincipal.fIdTvAtual,ResolucaoSelecionada);
     lstBoxTvs.Enabled       := False;
     rectDetalheTv.Enabled   := False;
     DmPrincipal.CarregaParamentros;
@@ -413,7 +431,7 @@ begin
 
     edtCodTv.Text     := FrmPrincipal.fIdTvAtual;
     edtDescricao.Text := DmPrincipal.FMentTv.FieldByName('DescricaoTv').AsString;
-    ListarResolucao(FrmPrincipal.fResolucaoAtual);
+    //ListarResolucao(FrmPrincipal.fResolucaoAtual);
 
   except
     FrmPrincipal.fMensagemErro := 'Não e possivel detalhar a Tv atual';
@@ -498,13 +516,6 @@ begin
     DetalharConfgWs;
     DetalharTvAtual;
     ConfiguracaoLocal;
-
-
-
-
-
-
-
     lstBoxTvs.Enabled     := False;
     rectDetalheTv.Enabled := False;
     lytDetalheWs.Enabled  := False;
@@ -515,52 +526,6 @@ begin
     raise;
   end;
 end;
-
-procedure TFrameConfig.ListarResolucao(pResolucao: Integer);
-var
-  vPosicao: Integer;
-begin
-
-  try
-
-    try
-
-      vPosicao := -1;
-      cboxResolucao.Clear;
-      dmConectSQLlite.AbreConexaoSQLlite;
-      DmPrincipal.FQryResolucao.Close;
-      DmPrincipal.FQryResolucao.Open;
-      DmPrincipal.FQryResolucao.First;
-      cboxResolucao.BeginUpdate;
-      while not DmPrincipal.FQryResolucao.Eof do
-      begin
-
-        cboxResolucao.Items.Add(DmPrincipal.FQryResolucao.FieldByName('idresolucao').AsString + ' - '+
-                                DmPrincipal.FQryResolucao.FieldByName('NOME').AsString);
-
-        vPosicao := vPosicao + 1;
-        if DmPrincipal.FQryResolucao.FieldByName('idresolucao').AsInteger = FrmPrincipal.fResolucaoAtual then
-        cboxResolucao.ItemIndex := vPosicao;
-
-        DmPrincipal.FQryResolucao.Next;
-
-      end;
-
-      cboxResolucao.EndUpdate;
-
-    except
-      raise
-    end;
-
-  finally
-    DmPrincipal.FQryResolucao.Close;
-    dmConectSQLlite.FechaSQLlite;
-
-  end;
-
-
-end;
-
 
 procedure TFrameConfig.ListarTvDisponivel;
 begin
@@ -615,29 +580,12 @@ begin
 
 end;
 
-function TFrameConfig.ResolucaoSelecionada: string;
-var
-  vTex: string;
-begin
-
-  try
-
-    vTex := cboxResolucao.Items[cboxResolucao.ItemIndex];
-    result := copy(vTex,0,Pos(' ',vTex))
-
-  except
-    FrmPrincipal.fMensagemErro := 'Erro ao executar ResolucaoSelecionada' ;
-    raise
-  end;
-
-end;
-
 procedure TFrameConfig.btnFecharClick(Sender: TObject);
 begin
 
   try
   
-    FechaFrameConfig;  
+    FechaFrameConfig;
     
   except
     FrameMsgInfor.CreateFrameMsgInfor('Erro ao fechar a tela de config');

@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <ActiveMobileDevice>   <NoProfile iOSSimulator="iPhone5" Android="AVD_for_10_1_WXGA_Tablet"/>
-  </ActiveMobileDevice>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_10_1_WXGA_Tablet"/>
+	</ActiveMobileDevice>
+	<Transactions>
+    <Transaction>2020/10/29 13:15:43.000.581,D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\Units\uframa_ConfLayout.fmx</Transaction>
+    <Transaction>2020/10/29 13:15:56.000.330,D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\Units\uframa_ConfLayout.fmx=D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\Units\uframe_ConfLayout.fmx</Transaction>
+  </Transactions>
 </BorlandProject>
