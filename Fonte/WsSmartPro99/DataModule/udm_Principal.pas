@@ -22,8 +22,8 @@ type
   public
     { Public declarations }
     procedure ParamentroConfiguracao;
-    procedure InserieProduto(pCodBarra,pDescricao,pVrvenda: string);
-    procedure UpdateProduto(pCodbarra,pDescricao,pVrVenda: String);
+    procedure InserieProduto(pCodBarra,pDescricao,pVrvenda,pUnidade: string);
+    procedure UpdateProduto(pCodbarra,pDescricao,pVrVenda,pUnidade: String);
 
     procedure MarcaProdExisteNoArqNao;
     procedure DeletaProdNaoNoArq;
@@ -94,13 +94,13 @@ end;
 
 
 
-procedure TdmPrincipal.InserieProduto(pCodBarra, pDescricao, pVrvenda: string);
+procedure TdmPrincipal.InserieProduto(pCodBarra, pDescricao, pVrvenda,pUnidade: string);
 var
   vSQL: String;
 begin
 
-   vSQL := 'Insert into produtos (CODBARRA,DESCRICAO,VRVENDA,EXISTENOARQ)'+
-            ' values(:Codbarra,:Descricao,:Vrvenda,''S'')';
+   vSQL := 'Insert into produtos (CODBARRA,DESCRICAO,VRVENDA,EXISTENOARQ,UNIDADE)'+
+            ' values(:Codbarra,:Descricao,:Vrvenda,''S'',:Unidade)';
 
   try
 
@@ -115,6 +115,7 @@ begin
         ParamByName('Codbarra').Value  := pCodBarra;
         ParamByName('Descricao').Value := pDescricao;
         ParamByName('Vrvenda').Value   := pVrvenda;
+        ParamByName('Unidade').Value  := pUnidade;
 
         ExecSQL;
       end;
@@ -166,15 +167,16 @@ begin
   end;
 end;
 
-procedure TdmPrincipal.UpdateProduto(pCodbarra, pDescricao, pVrVenda: String);
+procedure TdmPrincipal.UpdateProduto(pCodbarra, pDescricao, pVrVenda,pUnidade: String);
 var
   vSQL: String;
 begin
 
-   vSQL := 'Update produtos set Descricao = :Descricao,'+
-                              ' Vrvenda = :Vrvenda,'+
-                              ' existenoarq = ''S'''+
-           ' where Codbarra = :Codbarra';
+   vSQL := 'UPDATE produtos SET descricao     = :descricao'+
+                               ' ,vrvenda     = :vrvenda'  +
+                               ' ,existenoarq = ''S'''     +
+                               ' ,unidade     = :unidade ' +
+           ' where Codbarra = :codbarra';
 
   try
 
@@ -187,9 +189,10 @@ begin
         SQL.Text := '';
         SQL.Text := vSQl;
 
-        ParamByName('Descricao').Value  := pDescricao;
-        ParamByName('Vrvenda').Value    := pVrVenda;
-        ParamByName('Codbarra').Value   := pCodbarra;
+        ParamByName('descricao').Value  := pDescricao;
+        ParamByName('vrvenda').Value    := pVrVenda;
+        ParamByName('codbarra').Value   := pCodbarra;
+        ParamByName('unidade').Value    := pUnidade;
 
         ExecSQL;
       end;

@@ -207,7 +207,7 @@ end;
 
 procedure TfrmPrincipal.LerLinhaArquivo;
 var
-  vCodbarra,vDescricao,vVrvenda: string;
+  vCodbarra,vDescricao,vVrvenda,vUnidade: string;
 begin
 
   try
@@ -220,11 +220,12 @@ begin
     vCodbarra  := ExtraiCodBarra(fLinha);
     vDescricao := ExtraiDescricao(fLinha);
     vVrVenda   := ExtraiVrvenda(fLinha);
+    vUnidade   := 'KG';
 
     if CodBarraExite(vCodbarra) then
-    dmPrincipal.UpdateProduto(vCodbarra,vDescricao,vVrVenda)
+    dmPrincipal.UpdateProduto(vCodbarra,vDescricao,vVrVenda,vUnidade)
     else
-    dmPrincipal.InserieProduto(vCodbarra,vDescricao,vVrVenda);
+    dmPrincipal.InserieProduto(vCodbarra,vDescricao,vVrVenda,vUnidade);
 
   except
     raise
@@ -304,13 +305,13 @@ begin
 
     if not fileexists(fCaminhoArquivo) then
     begin
-      menoLogs.Lines.Add(fCaminhoArquivo + ' - O caminho do arquivo nao existe.');
+      menoLogs.Lines.Add('Não foi possivel localizer o arquivo '+fCaminhoArquivo);
       exit
     end;
 
   except
   on E: Exception do
-        menoLogs.Lines.Add(frmPrincipal.fMensagemErro+ E.message);
+        menoLogs.Lines.Add(frmPrincipal.fMensagemErro +' '+ E.message);
   end;
 
   menoLogs.Lines.Add('Processo de Sicronizar Produto Inciado - ' + DateTimeToStr(now));
