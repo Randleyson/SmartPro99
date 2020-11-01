@@ -20,6 +20,7 @@ type
 
     procedure SincronizaTxtToFreeboard;
     function Get(const pSQL : String): TFDJSONDataSets;
+    function GetString(const pSQL : String): String;
   end;
 
 implementation
@@ -66,6 +67,16 @@ begin
   end;
 end;
 
+
+function TServerMethods1.GetString(const pSQL: String): String;
+begin
+
+  dmConexao.AbreConexaoDB;
+  result := dmConexao.FDC_Freeboard.ExecSQLScalar('select vrvenda from produtos');
+  dmConexao.FechaConexaoDB;
+
+
+end;
 
 function TServerMethods1.ReverseString(Value: string): string;
 begin

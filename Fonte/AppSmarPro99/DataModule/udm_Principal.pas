@@ -58,6 +58,13 @@ type
     FQryTabConfigPORTAWS: TIntegerField;
     FQryTabConfigIDRESOLUCAO: TIntegerField;
     Pingador: TIdIcmpClient;
+    FQryOferta: TFDQuery;
+    FDMenOferta: TFDMemTable;
+    FDMenOfertaCODBARRA: TStringField;
+    FDMenOfertaDESCRICAO: TStringField;
+    FDMenOfertaVRVENDA: TFloatField;
+    FDMenOfertaUNIDADE: TStringField;
+    FDMenOfertaPROMOCAO: TStringField;
   private
     { Private declarations }
     FJsonDataSet: TFDJSONDataSets;
@@ -348,13 +355,6 @@ begin
     end;
     end;
 
-
-
-
-
-
-
-
   finally
     dmConectSQLlite.FechaSQLlite;
 
@@ -385,8 +385,6 @@ begin
       pQry.RecordCount;
       pFMent.RecordCount;
 
-
-
     except
       FrameLogs.AddLogs('Erro ao QryProdToFMentProd');
 
@@ -402,10 +400,10 @@ end;
 
 procedure TDmPrincipal.ReceberProdutosWs(pIdTv: String);
 var
-  vSQL: String;
+  vSQL,resultado: String;
 begin
 
-  vSQL := ' select p.codbarra,descricao,vrvenda from produtos p'+
+  vSQL := ' select p.codbarra,descricao, vrvenda,unidade,promocao from produtos p'+
           ' left join tv_prod tp on (tp.codbarra = p.codbarra)'+
           ' where idtv = '+ pIdTv ;
 

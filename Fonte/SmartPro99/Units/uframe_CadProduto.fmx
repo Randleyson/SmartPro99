@@ -127,7 +127,7 @@ object FrameCadProduto: TFrameCadProduto
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Yu Gothic UI'
-          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.Size = 20.000000000000000000
           TextSettings.FontColor = xFF006EBB
           Text = 'Produto'
           TabOrder = 0
@@ -141,6 +141,7 @@ object FrameCadProduto: TFrameCadProduto
           Size.Height = 1.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFD6D6D6
+          Stroke.Thickness = 3.000000000000000000
         end
         object Rectangle4: TRectangle
           Align = Top
@@ -880,7 +881,7 @@ object FrameCadProduto: TFrameCadProduto
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Yu Gothic UI'
-          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.Size = 18.000000000000000000
           TextSettings.FontColor = xFF006EBB
           Text = 'Lista de Produtos'
           TabOrder = 0
@@ -894,6 +895,7 @@ object FrameCadProduto: TFrameCadProduto
           Size.Height = 1.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFD6D6D6
+          Stroke.Thickness = 3.000000000000000000
         end
         object lytPesqProduto: TLayout
           Align = Top

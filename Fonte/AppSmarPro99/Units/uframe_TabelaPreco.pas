@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Layouts, FMX.ListBox, FMX.Objects, uframe_FTabelaPreco, System.ImageList,
-  FMX.ImgList, FMX.Controls.Presentation;
+  FMX.ImgList, FMX.Controls.Presentation, uframe_Oferta;
 
 type
   TFrameTabelaPreco = class(TFrame)
@@ -18,17 +18,25 @@ type
     imgConexao: TGlyph;
     tmProxPagina: TTimer;
     imgLogs: TImage;
-    imgLogo: TImage;
     tmAtualizaProdutos: TTimer;
+    Image1: TImage;
+    Image2: TImage;
+    lytOferta: TLayout;
+    FrameOferta1: TFrameOferta;
+    Label1: TLabel;
+    tmProxOferta: TTimer;
     procedure imgConfiguracaoClick(Sender: TObject);
     procedure tmProxPaginaTimer(Sender: TObject);
     procedure imgLogsClick(Sender: TObject);
     procedure tmAtualizaProdutosTimer(Sender: TObject);
+    procedure tmProxOfertaTimer(Sender: TObject);
 
   private
     { Private declarations }
     fNroPag: integer;
     fUltimoRegistro: integer;
+    fQtdeOfertas : integer;
+    fUltimaOferta: integer;
     procedure IniciarFrame;
     procedure FechaFrameTabelaPreco;
     procedure AddFrameListBox(pDescricao,pValorVenda: string);
@@ -36,6 +44,9 @@ type
     procedure ProximaPag;
     procedure IconeConexao;
     procedure AjustaResolucao;
+
+    procedure Oferta;
+    procedure ListaOferta(pDecricao,pVrvenda,pUnidade:string);
 
   public
     { Public declarations }
@@ -115,6 +126,40 @@ begin
     raise
 
   end;
+end;
+
+procedure TFrameTabelaPreco.tmProxOfertaTimer(Sender: TObject);
+begin
+
+  try
+
+    if (fUltimaOferta <= fQtdeOfertas) then
+    begin
+    
+      DmPrincipal.FDMenOferta.RecNo := fUltimaOferta;
+      ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
+                  DmPrincipal.FDMenOfertaVRVENDA.AsString,
+                  DmPrincipal.FDMenOfertaUNIDADE.AsString);
+
+      DmPrincipal.FDMenOferta.Next;
+      fUltimaOferta := DmPrincipal.FDMenOferta.RecNo;        
+      
+      if DmPrincipal.FDMenOferta.Eof then
+      fUltimaOferta := fUltimaOferta+ 1;
+
+    end
+    else
+    Oferta; 
+
+  except
+  on e: Exception do
+    begin
+		  FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
+  end;
+
+
 end;
 
 procedure TFrameTabelaPreco.tmProxPaginaTimer(Sender: TObject);
@@ -200,6 +245,7 @@ begin
 
       DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,
                              DmPrincipal.FMentProd);
+
       lstBoxTabelaPreco.Clear;
 
       if DmPrincipal.FMentProd.RecordCount <> 0 then
@@ -208,14 +254,67 @@ begin
         ListarProduto;
       end;
 
+      Oferta;
+
       tmProxPagina.Enabled       := True;
       tmAtualizaProdutos.Enabled := True;
+      tmProxOferta.Enabled       := True;
       AjustaResolucao;
 
     except
       raise;
 
     end;
+
+end;
+
+procedure TFrameTabelaPreco.Oferta;
+begin
+
+  try
+
+    DmPrincipal.QryToFMent(DmPrincipal.FQryOferta,
+                           DmPrincipal.FDMenOferta);
+
+    DmPrincipal.FDMenOferta.First;
+    fQtdeOfertas := DmPrincipal.FDMenOferta.RecordCount;
+    fUltimaOferta:= 1;
+
+    ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
+                DmPrincipal.FDMenOfertaVRVENDA.AsString,
+                DmPrincipal.FDMenOfertaUNIDADE.AsString);
+
+  except
+  on e: Exception do
+    begin
+		  FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
+
+  end;
+
+end;
+
+procedure TFrameTabelaPreco.ListaOferta(pDecricao,pVrvenda,pUnidade:string);
+begin
+
+  try
+
+    FrameOferta1.lblNomeProduto.Text := pDecricao;
+    FrameOferta1.lblUnidade.Text     := pUnidade;
+    
+    FrameOferta1.lblVrvendaReal.Text := copy(pVrvenda,1,pos(',',pVrvenda));
+    FrameOferta1.lblVrvendaCentavos.Text := copy(pVrvenda,pos(',',pVrvenda)+1,2);
+
+
+
+  except
+  on e: Exception do
+    begin
+  		FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
+  end;
 
 end;
 
@@ -290,7 +389,6 @@ begin
 
     lstBoxTabelaPreco.Width       := FrmPrincipal.fLargGridPreco;
     lstBoxTabelaPreco.Margins.Top := FrmPrincipal.fMarTopGridPreco;
-    imgLogo.Width                 := FrmPrincipal.fLargLogo;
 
   except
 

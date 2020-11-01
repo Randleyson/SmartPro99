@@ -10,8 +10,9 @@ uses
 
 type
   TFrmPrincipal = class(TForm)
-    Image1: TImage;
     tmSplash: TTimer;
+    Image1: TImage;
+    Rectangle1: TRectangle;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);

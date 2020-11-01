@@ -5,8 +5,11 @@ object dmConectSQLlite: TdmConectSQLlite
   Width = 319
   object FDC_SQLlite: TFDConnection
     Params.Strings = (
-      'Database=D:\Projetos\SamartPro99\AppSamartPro99\db\db.db'
+      
+        'Database=D:\Projetos\SmartPro99\trunk\Fonte\AppSmarPro99\db\db.d' +
+        'b'
       'DriverID=SQLite')
+    LoginPrompt = False
     Left = 80
     Top = 32
   end

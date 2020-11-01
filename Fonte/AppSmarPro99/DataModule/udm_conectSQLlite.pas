@@ -43,11 +43,11 @@ begin
   try
 
     if FDC_SqlLite.Connected then
-    Sleep(15000);
+    Sleep(8000);
     if FDC_SqlLite.Connected then
-    Sleep(15000);
+    Sleep(8000);
     if FDC_SqlLite.Connected then
-    Sleep(15000);
+    Sleep(8000);
     if not FDC_SqlLite.Connected then
     FDC_SqlLite.Connected := True;
 
@@ -107,6 +107,7 @@ begin
       {$ENDIF}
 
       AbreConexaoSQLlite;
+      FechaSQLlite;
       FrmPrincipal.fComErro := False;
 
     except

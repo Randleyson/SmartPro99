@@ -67,6 +67,7 @@ type
     Rectangle2: TRectangle;
     btnPersonilizarResol: TCornerButton;
     Layout7: TLayout;
+    Image1: TImage;
     procedure btnEditarTvClick(Sender: TObject);
     procedure BtnGravarTvClick(Sender: TObject);
     procedure BtnCancelarTvClick(Sender: TObject);

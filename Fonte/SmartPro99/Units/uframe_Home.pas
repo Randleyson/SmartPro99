@@ -12,7 +12,6 @@ type
   TFrameHome = class(TFrame)
     Rectangle1: TRectangle;
     LayoutTitulo: TLayout;
-    Label1: TLabel;
     Line1: TLine;
     LayoutRodaPe: TLayout;
     LayoutMenu: TLayout;
@@ -32,6 +31,8 @@ type
     Rectangle3: TRectangle;
     imgPendencia: TImage;
     Layout2: TLayout;
+    Image2: TImage;
+    Label1: TLabel;
     procedure btnConfiguracaoClick(Sender: TObject);
     procedure btnCadTvClick(Sender: TObject);
     procedure btnFecharAplicacaoClick(Sender: TObject);
