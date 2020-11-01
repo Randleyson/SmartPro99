@@ -52,14 +52,14 @@ implementation
 {$R *.fmx}
 
 uses ufrm_Principal, uframe_Config, uframe_CadTvs, uframe_CadProduto,
-  udm_Conexao, udm_Principal, ufrm_MensagemInfor, udm_CadProduto;
+  udm_Conexao, udm_Principal, udm_CadProduto, Loading, u_Message;
 
 { TFrameHome }
 
 procedure TFrameHome.btnCadProdutoClick(Sender: TObject);
 begin
 
-   FrameCadProduto.CreateFrameCadProduto;
+  FrameCadProduto.CreateFrameCadProduto;
 
 end;
 
@@ -73,13 +73,14 @@ end;
 procedure TFrameHome.btnConfiguracaoClick(Sender: TObject);
 begin
 
-  FrameConfiguracao.ShowFrameConfig;
+  FrameConfiguracao.CreateFrameConfig;
 
 end;
 
 procedure TFrameHome.btnFecharAplicacaoClick(Sender: TObject);
 begin
 
+  if TMessage.MessagemDlg(frmPrincipal,'Deseja fechar o sistema ?') then
   Application.Terminate;
 
 end;

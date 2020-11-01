@@ -18,6 +18,8 @@ type
     fComErro: Boolean;
     fMensagemErro : String;
     fMensagemAguarde: string;
+    fResultDlg: Boolean;
+
     function OpenDialogDir: String;
   end;
 
@@ -28,7 +30,7 @@ implementation
 
 {$R *.fmx}
 
-uses uframe_Home, udm_Conexao, uframe_CadTvs, udm_Principal, ufrm_MensagemInfor;
+uses uframe_Home, udm_Conexao, uframe_CadTvs, udm_Principal;
 
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -55,7 +57,7 @@ begin
     if frmPrincipal.fComErro then
     begin
 
-      FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro);
+      //FrameMsgPopUp.CreateFrameMsgPopUp(frmPrincipal.FMensagemErro);
       exit
 
     end;
@@ -63,7 +65,7 @@ begin
     FrameHome.CreateFremeHome;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro);
+    //FrameMsgPopUp.CreateFrameMsgPopUp(frmPrincipal.FMensagemErro);
 
   end;
 

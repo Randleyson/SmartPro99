@@ -160,7 +160,7 @@ implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, Loading, udm_CadTv, ufrm_MensagemInfor, udm_Principal;
+uses ufrm_Principal, Loading, udm_CadTv, udm_Principal, u_Message;
 
 { TFrame1 }
 
@@ -222,8 +222,10 @@ begin
     ClickBtnAdicionarTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
-
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
   end;
 
 
@@ -237,7 +239,10 @@ begin
     ClickCancelarCadTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -246,15 +251,22 @@ end;
 procedure TFrameCadTv.btnEditarClick(Sender: TObject);
 begin
 
+  if lstBoxTvs.ItemIndex = -1 then
+  begin
+    TMessage.MessagemPopUp(frmPrincipal,'Selciona a Tv a ser editar');
+    exit
+  end;
+
   try
 
     ClickBtnEditarTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
-
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
   end;
-
 
 end;
 
@@ -263,11 +275,21 @@ begin
 
   try
 
-     ClickBtnExcluirTv;
+    if lstBoxTvs.Index = -1 then
+    begin
 
-   except
-      FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+      TMessage.MessagemPopUp(frmPrincipal,'Selecione a Tv a ser excluida');
+      exit
+    end;
 
+    if TMessage.MessagemDlg(frmPrincipal,'Deseja excluir a TV ?') then
+    ClickBtnExcluirTv;
+
+  except
+  on e: Exception do
+    begin
+		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
   end;
 
 end;
@@ -275,7 +297,17 @@ end;
 procedure TFrameCadTv.btnFecharClick(Sender: TObject);
 begin
 
-  DestroyFrameCadTv;
+  try
+
+    DestroyFrameCadTv;
+
+  except
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+  end;
+
 
 end;
 
@@ -284,11 +316,9 @@ begin
 
   if edtDescricaoTv.Text = '' then
   begin
-
-    FrameMsgInfor.CreateFrameMsgInfor('É nesecario informar o no da TV');
+    TMessage.MessagemPopUp(frmPrincipal,'É nesecario informar o no da TV');
     edtDescricaoTv.SetFocus;
     exit
-
   end;
 
   try
@@ -296,7 +326,10 @@ begin
     ClickBtnGravaTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -307,10 +340,25 @@ begin
 
   try
 
+    if edtDescricaoTv.Text = '' then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      exit
+    end;
+
+    if lstBoxProdNaoTV.ItemIndex = -1 then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Selecione o produto a ser adicionado na Tv');
+      exit;
+    end;
+
     ClickBtnAdicionarProdTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -321,11 +369,19 @@ procedure TFrameCadTv.btnInserirTodoNaTvClick(Sender: TObject);
 begin
 
   try
+    if edtDescricaoTv.Text = '' then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      exit
+    end;
 
     ClickBtnInserTodosProdNaTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -340,8 +396,10 @@ begin
     ClickBtnPesqProdNaoTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
-
+  on e: Exception do
+    begin
+		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
   end;
 
 end;
@@ -354,7 +412,11 @@ begin
     ClickBtnPesqProdNaTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
 
   end;
 
@@ -365,10 +427,25 @@ begin
 
   try
 
+    if edtDescricaoTv.Text = '' then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      exit
+    end;
+
+    if lstBoxProdNaTv.ItemIndex = -1 then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Selecione o produto a ser removido da Tv');
+      exit
+    end;
+
     ClickBtnRemoverProdTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -379,10 +456,19 @@ begin
 
   try
 
+    if edtDescricaoTv.Text = '' then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      exit
+    end;
+
     ClickBtnExcluirTodosProdDaTv;
 
   except
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -395,24 +481,8 @@ begin
 
   try
 
-    if edtDescricaoTv.Text = '' then
-    begin
-    
-      FrameMsgInfor.CreateFrameMsgInfor('Informe o nome da TV');
-      exit
-      
-    end;
-
-    if lstBoxProdNaoTV.ItemIndex = -1 then
-    begin
-
-      FrameMsgInfor.CreateFrameMsgInfor('Selecione o produto a ser adicionado na Tv');
-      exit;
-
-    end;
-
     if fStatusTela = 'Adicionar' then
-    AdicionaTv;  
+    AdicionaTv;
     
     vCodBarra := lstBoxProdNaoTV.ListItems[lstBoxProdNaoTV.ItemIndex].TagString;
 
@@ -466,14 +536,6 @@ end;
 procedure TFrameCadTv.ClickBtnEditarTv;
 begin
 
-  if lstBoxTvs.ItemIndex = -1 then
-  begin
-
-    FrameMsgInfor.CreateFrameMsgInfor('Selciona a Tv a ser editar');
-    exit
-
-  end;
-
   try
 
     fStatusTela := 'Editar';
@@ -492,14 +554,6 @@ begin
 
   try
 
-    if edtDescricaoTv.Text = '' then
-    begin
-    
-      FrameMsgInfor.CreateFrameMsgInfor('Informe o nome da TV');
-      exit
-      
-    end;
-    
     if fStatusTela = 'Adicionar' then
     AdicionaTv; 
     
@@ -546,25 +600,31 @@ end;
 procedure TFrameCadTv.ClickBtnExcluirTv;
 begin
 
-  try
+    frmPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
+    TLoading.Show(frmPrincipal,frmPrincipal.FMensagemAguarde);
 
-    if lstBoxTvs.Index = -1 then
+    TThread.CreateAnonymousThread(procedure
     begin
+      try
+        try
 
-      FrameMsgInfor.CreateFrameMsgInfor('Selecione a Tv a ser excluida');
-      exit
+          fIdTv := StrToInt(lstBoxTvs.ListItems[lstBoxTvs.ItemIndex].TagString);
+          dmCadTv.DeleteTV(fIdTv);
+          ShowTabListarTv;
 
-    end;
+        except
+          raise
+        end;
 
-    fIdTv := StrToInt(lstBoxTvs.ListItems[lstBoxTvs.ItemIndex].TagString);
-    dmCadTv.DeleteTV(fIdTv);
-    FrameMsgInfor.CreateFrameMsgInfor('Tv excuida com exito.');
-    ShowTabListarTv;
+      finally
+      TThread.Synchronize(nil,procedure
+        begin
+          TLoading.Hide;
+          TMessage.MessagemPopUp(frmPrincipal,'Tv excuida com Exito');
+        end);
+      end;
 
-  except
-    raise;
-
-  end;
+    end).Start;
 
 end;
 
@@ -590,7 +650,7 @@ begin
       AdicionaTv;
     end;
 
-    FrameMsgInfor.CreateFrameMsgInfor('Alteracao salvada com exito.');
+    TMessage.MessagemPopUp(frmPrincipal,'Alteração salva com Exito');
 
   except
     raise;
@@ -602,14 +662,6 @@ procedure TFrameCadTv.ClickBtnInserTodosProdNaTv;
 begin
 
   try
-
-    if edtDescricaoTv.Text = '' then
-    begin
-    
-      FrameMsgInfor.CreateFrameMsgInfor('Informe o nome da TV');
-      exit
-      
-    end;
 
     if fStatusTela = 'Adicionar' then
     AdicionaTv; 
@@ -709,22 +761,6 @@ begin
 
   try
 
-    if edtDescricaoTv.Text = '' then
-    begin
-    
-      FrameMsgInfor.CreateFrameMsgInfor('Informe o nome da TV');
-      exit
-      
-    end;
-
-    if lstBoxProdNaTv.ItemIndex = -1 then
-    begin
-
-      FrameMsgInfor.CreateFrameMsgInfor('Selecione o produto a ser removido da Tv');
-      exit
-
-    end;
-
     if fStatusTela = 'Adicionar' then
     AdicionaTv;  
 
@@ -813,8 +849,13 @@ begin
     end;
 
   except
-    DestroyFrameCadTv;
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro);
+  on e: Exception do
+    begin
+
+      DestroyFrameCadTv;
+      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+
+    end;
 
   end;
 

@@ -415,11 +415,6 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="Units\Loading.pas"/>
-        <DCCReference Include="Units\ufrm_MensagemInfor.pas">
-            <Form>FrameMensagemInfor</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="DataModule\udm_CadTv.pas">
             <Form>dmCadTv</Form>
             <FormType>dfm</FormType>
@@ -430,6 +425,15 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="Units\Frm_MessageDlg.pas">
+            <Form>frmMessageDlg</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="Units\Frm_MessagePopUp.pas">
+            <Form>FrmMessagePopUp</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="Units\u_Message.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -468,14 +472,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="SamrtPro99.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>SamrtPro99.exe</RemoteName>
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
-                    <Platform Name="iOSSimulator">
+                <DeployFile LocalName="..\..\Versao\SmartPro99\SamrtPro99.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SamrtPro99.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -55,7 +55,7 @@ type
     function TipoArquivoSelcionado: Integer;
   public
     { Public declarations }
-    procedure ShowFrameConfig;
+    procedure CreateFrameConfig;
     procedure FechaFrameConfig;
   end;
 
@@ -65,15 +65,26 @@ implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, udm_Conexao, udm_Principal, ufrm_MensagemInfor;
+uses ufrm_Principal, udm_Conexao, udm_Principal, u_Message;
 
 { TFrameConfiguracao }
 
 procedure TFrameConfiguracao.FechaFrameConfig;
 begin
 
-  FrameConfiguracao.Visible := False;
-  FrameConfiguracao := nil;
+  try
+
+    FrameConfiguracao.Visible := False;
+    FrameConfiguracao         := nil;
+
+  except
+  on e: Exception do
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
+  end;
+
 end;
 
 procedure TFrameConfiguracao.RefreshConfiguracao;
@@ -93,10 +104,7 @@ begin
     imgPastaInexistente.Visible := not ValidaCaminho(edtArquivoTxt.Text);
 
   except
-    on e: exception do
-    begin
-      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
-    end;
+    raise
 
   end;
 
@@ -106,15 +114,9 @@ procedure TFrameConfiguracao.SalvarAltercao;
 begin
 
   try
-
-    if imgPastaInexistente.Visible then
-    begin
-      FrameMsgInfor.CreateFrameMsgInfor('Caminho do arquivo de integração não e valido');
-      exit
-    end;
-
+  
     DmPrincipal.GravarConfiguracao(IntToStr(TipoArquivoSelcionado),edtArquivoTxt.Text);
-    FrameMsgInfor.CreateFrameMsgInfor('Configuração salva.');
+    TMessage.MessagemPopUp(frmPrincipal,'Configuração salva com exito');
     FechaFrameConfig;
 
   except
@@ -123,8 +125,9 @@ begin
 
 end;
 
-procedure TFrameConfiguracao.ShowFrameConfig;
+procedure TFrameConfiguracao.CreateFrameConfig;
 begin
+
   try
 
     if not assigned(FrameConfiguracao) then
@@ -141,8 +144,9 @@ begin
     end;
 
   except
+
     FechaFrameConfig;
-    ShowMessage('Erro : '+ frmPrincipal.fMensagemErro);
+    TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro);
 
   end;
 
@@ -178,7 +182,7 @@ begin
   except
   on e: exception do
     begin
-      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
+      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
@@ -195,7 +199,17 @@ end;
 procedure TFrameConfiguracao.btnSairClick(Sender: TObject);
 begin
 
-  FechaFrameConfig;
+  try
+  
+    FechaFrameConfig;
+    
+  except
+  on e: Exception do
+    begin 
+      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);  
+    end;
+
+  end;
 
 end;
 
@@ -204,12 +218,18 @@ begin
 
   try
 
+    if imgPastaInexistente.Visible then
+    begin
+      TMessage.MessagemPopUp(frmPrincipal,'Caminho do arquivo de integração não e valido');
+      exit
+    end;
+
     SalvarAltercao;
 
   except
     on e: exception do
     begin
-      FrameMsgInfor.CreateFrameMsgInfor('Erro : ' + e.Message);
+      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
     end;
 
   end;

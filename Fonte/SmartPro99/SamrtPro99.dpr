@@ -12,14 +12,18 @@ uses
   uframe_CadProduto in 'Units\uframe_CadProduto.pas' {FrameCadProduto: TFrame},
   uframe_FListarProduto in 'Units\uframe_FListarProduto.pas' {FrameFListarProduto: TFrame},
   Loading in 'Units\Loading.pas',
-  ufrm_MensagemInfor in 'Units\ufrm_MensagemInfor.pas' {FrameMensagemInfor: TFrame},
   udm_CadTv in 'DataModule\udm_CadTv.pas' {dmCadTv: TDataModule},
-  udm_CadProduto in 'DataModule\udm_CadProduto.pas' {dmCadProduto: TDataModule};
+  udm_CadProduto in 'DataModule\udm_CadProduto.pas' {dmCadProduto: TDataModule},
+  Frm_MessageDlg in 'Units\Frm_MessageDlg.pas' {frmMessageDlg},
+  Frm_MessagePopUp in 'Units\Frm_MessagePopUp.pas' {FrmMessagePopUp},
+  u_Message in 'Units\u_Message.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmMessageDlg, frmMessageDlg);
+  Application.CreateForm(TFrmMessagePopUp, FrmMessagePopUp);
   Application.Run;
 end.

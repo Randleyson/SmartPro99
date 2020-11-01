@@ -60,8 +60,13 @@ type
     Line2: TLine;
     Rectangle4: TRectangle;
     imgPendencia: TImage;
-    Layout5: TLayout;
+    lytLegenda: TLayout;
     Label8: TLabel;
+    Legenda: TLabel;
+    lytPendecia: TLayout;
+    Layout5: TLayout;
+    Label14: TLabel;
+    imgPromo: TImage;
     procedure btnFecharClick(Sender: TObject);
     procedure lstBoxProdItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
@@ -75,13 +80,14 @@ type
     fCodProd: String;
     procedure IniciarFrameCadProduto;
     procedure ListarProdutos;
-    procedure AddItemListBox(pCodbarra,pDescricao,pVrVenda: String;
+    procedure AddItemListBox(pCodbarra,pDescricao,pVrVenda,pPromo: String;
               pLenght: integer; pListBox: TListBox; pLableSemGerg: TLabel);
     procedure DetalharProduto;
+    procedure LayoutInformativo(pListBoxItem:TListBoxItem;
+                                pPendecia : Boolean = False; pPromo: Boolean = False);
+
     procedure ClickBtnSalvar;
     procedure ClickBtnPesqProd;
-    procedure CriaimgPendencia(pListBoxItem:TListBoxItem);
-
 
   public
     { Public declarations }
@@ -96,13 +102,14 @@ implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, udm_Conexao, udm_Principal, ufrm_MensagemInfor,
-  udm_CadProduto, uframe_Home;
+uses ufrm_Principal, udm_Conexao, udm_Principal,
+  udm_CadProduto, uframe_Home, Loading, u_Message;
 
 { TFrameCadProduto }
 
 procedure TFrameCadProduto.AddItemListBox(pCodbarra, pDescricao,
-          pVrVenda: String; pLenght: integer; pListBox: TListBox; pLableSemGerg: TLabel);
+          pVrVenda, pPromo: String; pLenght: integer; pListBox: TListBox;
+          pLableSemGerg: TLabel);
 var
   vItem: TListBoxItem;
   vImg: TImage;
@@ -120,9 +127,8 @@ begin
     vItem.ItemData.Text   := pDescricao;
     vItem.ItemData.Detail := 'Cod '+pCodBarra + ' ........... R$ '+ pVrVenda;
 
-    if pLenght > 20 then
-    CriaimgPendencia(vItem); 
-    
+    LayoutInformativo(vItem, pLenght > 20 ,pPromo = 'S');
+
     pListBox.AddObject(vItem);
 
     if pListBox.Count = -1 then
@@ -163,7 +169,17 @@ end;
 procedure TFrameCadProduto.btnFecharClick(Sender: TObject);
 begin
 
-  FechaFrameCadProduto;
+  try
+
+    FechaFrameCadProduto;
+
+  except
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+
+  end;
 
 end;
 
@@ -175,8 +191,10 @@ begin
     ClickBtnSalvar;
 
   except
-  on E: exception do
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.fMensagemErro+E.message);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 
@@ -185,7 +203,16 @@ end;
 procedure TFrameCadProduto.btnPesqProdNaoTvClick(Sender: TObject);
 begin
 
-  ClickBtnPesqProd;
+  try
+
+    ClickBtnPesqProd;
+
+  except
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
+  end;
 
 end;
 
@@ -207,9 +234,11 @@ begin
     edtDetVrVenda.Text       := dmCadProduto.FMentProdutoVRVENDA.AsString;
 
     if dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString = '' then
-    edtDescriAlterada.Text     := copy(dmCadProduto.FMentProdutoDESCRICAO.AsString,0,20)
+    edtDescriAlterada.Text   := copy(dmCadProduto.FMentProdutoDESCRICAO.AsString,0,20)
     else
-    edtDescriAlterada.Text     := copy(dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString,0,20);
+    edtDescriAlterada.Text   := copy(dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString,0,20);
+
+    edtDetUnidade.Text       := dmCadProduto.FMentProdutoUNIDADE.AsString;
 
   except
     frmPrincipal.FMensagemErro := 'Erro ao executar DetalharProduto';
@@ -228,7 +257,7 @@ begin
   
   if Length(edtDescriAlterada.Text) > 20 then
   begin
-    FrameMsgInfor.CreateFrameMsgInfor('Descrição maior que o permtido (20)');
+    TMessage.MessagemPopUp(frmPrincipal,'Descrição maior que o permtido (20)');
     KeyChar := #0;
   end;
 
@@ -240,27 +269,6 @@ begin
   FrameHome.CreateFremeHome;
   FrameCadProduto.Visible := False;
   FrameCadProduto := nil;
-
-end;
-
-procedure TFrameCadProduto.CriaimgPendencia(pListBoxItem: TListBoxItem);
-var 
-  vImg : TImage; 
-begin
-
-  try
-  
-    vImg := TImage.Create(pListBoxItem);
-    vImg.Parent := pListBoxItem;
-    vImg.Align := TAlignLayout(3);
-    vImg.Margins.Top := 12;
-    vImg.Margins.Bottom := 12;
-    vImg.Bitmap := imgPendencia.Bitmap;
-  
-  except
-   raise
-
-  end;
 
 end;
 
@@ -284,11 +292,76 @@ end;
 procedure TFrameCadProduto.IniciarFrameCadProduto;
 begin
 
+    frmPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
+    TLoading.Show(frmPrincipal,frmPrincipal.FMensagemAguarde);
+
+    TThread.CreateAnonymousThread(procedure
+    begin
+    try
+
+      try
+
+        sleep(1000);
+        dmCadProduto.BdToFMentProduto;
+        ListarProdutos;
+        DetalharProduto;
+
+      except
+        raise
+      end;
+
+    finally
+
+
+
+      TThread.Synchronize(nil,procedure
+      begin
+        TLoading.Hide;
+        BringToFront;
+      end);
+    end;
+
+  end).Start;
+
+end;
+
+procedure TFrameCadProduto.LayoutInformativo(pListBoxItem:TListBoxItem;
+          pPendecia : Boolean = False; pPromo: Boolean = False);
+var
+  vLayout : TLayout;
+  vImgPend,vImgPromo : TImage;
+begin
+
   try
-  
-    dmCadProduto.BdToFMentProduto;
-    ListarProdutos;
-    DetalharProduto;
+
+    vLayout                 := TLayout.Create(pListBoxItem);
+    vLayout.Parent          := pListBoxItem;
+    vLayout.Align           := TAlignLayout(3);
+    vLayout.Width           := 50;
+    vLayout.Margins.Top     := 12;
+    vLayout.Margins.Bottom  := 12;
+
+    if pPromo then
+    begin
+      vImgPromo                := TImage.Create(vLayout);
+      vImgPromo.Parent         := pListBoxItem;
+      vImgPromo.Align          := TAlignLayout(3);
+      vImgPromo.Width          := 25;
+      vImgPromo.Margins.Top    := 12;
+      vImgPromo.Margins.Bottom := 12;
+      vImgPromo.Bitmap         := imgPromo.Bitmap;
+    end;
+
+    if pPendecia then
+    begin
+      vImgPend                := TImage.Create(vLayout);
+      vImgPend.Parent         := pListBoxItem;
+      vImgPend.Align          := TAlignLayout(3);
+      vImgPend.Width          := 25;
+      vImgPend.Margins.Top    := 12;
+      vImgPend.Margins.Bottom := 12;
+      vImgPend.Bitmap         := imgPendencia.Bitmap;
+    end;
 
   except
     raise
@@ -315,10 +388,11 @@ begin
 
       while not dmCadProduto.FMentProduto.Eof do
       begin
-        dmCadProduto.FMentProduto.FieldByName('LENGHT').AsString;
+
         AddItemListBox(dmCadProduto.FMentProdutoCODBARRA.AsString,
                        dmCadProduto.FMentProdutoDESCRICAO.AsString,
                        dmCadProduto.FMentProdutoVRVENDA.AsString,
+                       dmCadProduto.FMentProdutoPROMOCAO.AsString,
                        dmCadProduto.FMentProdutoLENGHT.AsInteger,
                        lstBoxProd,
                        lblSemRegestProd);
@@ -362,12 +436,15 @@ begin
       dmCadProduto := TdmCadProduto.Create(self);
 
       IniciarFrameCadProduto;
-      BringToFront;
+
 
     end;
+
   except
-  on E: Exception do
-    FrameMsgInfor.CreateFrameMsgInfor(frmPrincipal.FMensagemErro + ' : '+E.Message);
+  on e: Exception do
+    begin
+		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+    end;
 
   end;
 

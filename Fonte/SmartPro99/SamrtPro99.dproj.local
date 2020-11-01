@@ -3,4 +3,17 @@
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="AVD_for_10_1_WXGA_Tablet"/>
 	</ActiveMobileDevice>
+	<Transactions>
+    <Transaction>2020/10/31 21:16:03.000.719,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgSimNao.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Unit1.fmx</Transaction>
+    <Transaction>2020/10/31 21:19:26.000.930,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgDlg.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgSimNao.fmx</Transaction>
+    <Transaction>2020/10/31 21:22:02.000.924,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_Me.pas=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemInfor.pas</Transaction>
+    <Transaction>2020/10/31 21:22:02.000.924,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_Me.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemInfor.fmx</Transaction>
+    <Transaction>2020/10/31 21:22:14.000.550,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemDlg.pas=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgDlg.pas</Transaction>
+    <Transaction>2020/10/31 21:22:14.000.550,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemDlg.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgDlg.fmx</Transaction>
+    <Transaction>2020/10/31 21:22:37.000.582,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemPoup.pas=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_Me.pas</Transaction>
+    <Transaction>2020/10/31 21:22:37.000.582,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemPoup.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_Me.fmx</Transaction>
+    <Transaction>2020/10/31 21:22:52.000.454,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgPoup.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemPoup.fmx</Transaction>
+    <Transaction>2020/10/31 21:23:01.000.141,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgDlg.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MensagemDlg.fmx</Transaction>
+    <Transaction>2020/10/31 21:24:14.000.044,D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgPopUp.fmx=D:\Projetos\SmartPro99\trunk\Fonte\SmartPro99\Units\ufrm_MsgPoup.fmx</Transaction>
+  </Transactions>
 </BorlandProject>

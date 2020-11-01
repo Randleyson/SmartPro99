@@ -18,6 +18,8 @@ type
     FMentProdutoVRVENDA: TFMTBCDField;
     FMentProdutoDESCRICAOALTERADA: TStringField;
     FMentProdutoEXISTENOARQ: TStringField;
+    FMentProdutoUNIDADE: TStringField;
+    FMentProdutoPROMOCAO: TStringField;
   private
     { Private declarations }
   public
@@ -55,6 +57,7 @@ begin
       FMentProduto.EmptyDataSet;
       DmPrincipal.CopyDataSet(FQryProduto,FMentProduto);
       FMentProduto.Filtered := False;
+
     except
       frmPrincipal.FMensagemErro := 'Erro ao excutar DbToFMentProduto';
       raise;
@@ -70,9 +73,14 @@ end;
 procedure TdmCadProduto.UpdateProduto(pCodProd, pDescricao: String);
 var
   vSQL : String;
+
 begin
 
-  vSQL := 'update produtos set descricaoalterada = '+ QuotedStr(UpperCase(pDescricao))+
+  if pDescricao =  '' then
+  vSQL := 'update produtos set descricaoalterada = null' +
+          ' where codbarra = '+ QuotedStr(pCodProd)
+  else
+  vSQL := 'update produtos set descricaoalterada = ' +  QuotedStr(UpperCase(pDescricao))+
           ' where codbarra = '+ QuotedStr(pCodProd);
 
   try

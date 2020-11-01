@@ -69,7 +69,7 @@ object FrameCadTv: TFrameCadTv
       Size.Width = 1096.000000000000000000
       Size.Height = 617.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 2
       TabPosition = None
       Sizes = (
@@ -81,7 +81,7 @@ object FrameCadTv: TFrameCadTv
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 8.000000000000000000
         Size.Height = 8.000000000000000000
         Size.PlatformDefault = False
@@ -255,7 +255,7 @@ object FrameCadTv: TFrameCadTv
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 8.000000000000000000
         Size.Height = 8.000000000000000000
         Size.PlatformDefault = False
