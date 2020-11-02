@@ -23,20 +23,15 @@ type
     Image2: TImage;
     lytOferta: TLayout;
     Label1: TLabel;
-    tmProxOferta: TTimer;
-    FrameOferta1: TFrameOferta;
     procedure imgConfiguracaoClick(Sender: TObject);
     procedure tmProxPaginaTimer(Sender: TObject);
     procedure imgLogsClick(Sender: TObject);
     procedure tmAtualizaProdutosTimer(Sender: TObject);
-    procedure tmProxOfertaTimer(Sender: TObject);
 
   private
     { Private declarations }
     fNroPag: integer;
     fUltimoRegistro: integer;
-    fQtdeOfertas : integer;
-    fUltimaOferta: integer;
     procedure IniciarFrame;
     procedure FechaFrameTabelaPreco;
     procedure AddFrameListBox(pDescricao,pValorVenda: string);
@@ -44,9 +39,6 @@ type
     procedure ProximaPag;
     procedure IconeConexao;
     procedure AjustaResolucao;
-
-    procedure Oferta;
-    procedure ListaOferta(pDecricao,pVrvenda,pUnidade:string);
 
   public
     { Public declarations }
@@ -126,40 +118,6 @@ begin
     raise
 
   end;
-end;
-
-procedure TFrameTabelaPreco.tmProxOfertaTimer(Sender: TObject);
-begin
-
-  try
-
-    if (fUltimaOferta <= fQtdeOfertas) then
-    begin
-    
-      DmPrincipal.FDMenOferta.RecNo := fUltimaOferta;
-      ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
-                  DmPrincipal.FDMenOfertaVRVENDA.AsString,
-                  DmPrincipal.FDMenOfertaUNIDADE.AsString);
-
-      DmPrincipal.FDMenOferta.Next;
-      fUltimaOferta := DmPrincipal.FDMenOferta.RecNo;        
-      
-      if DmPrincipal.FDMenOferta.Eof then
-      fUltimaOferta := fUltimaOferta+ 1;
-
-    end
-    else
-    Oferta; 
-
-  except
-  on e: Exception do
-    begin
-		  FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
-    end;
-
-  end;
-
-
 end;
 
 procedure TFrameTabelaPreco.tmProxPaginaTimer(Sender: TObject);
@@ -254,11 +212,9 @@ begin
         ListarProduto;
       end;
 
-      Oferta;
-
-      tmProxPagina.Enabled       := True;
-      tmAtualizaProdutos.Enabled := True;
-      tmProxOferta.Enabled       := True;
+      FrameOferta.CreateFrameOferta;
+      tmProxPagina.Enabled              := True;
+      tmAtualizaProdutos.Enabled        := True;
       AjustaResolucao;
 
     except
@@ -268,55 +224,6 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.Oferta;
-begin
-
-  try
-
-    DmPrincipal.QryToFMent(DmPrincipal.FQryOferta,
-                           DmPrincipal.FDMenOferta);
-
-    DmPrincipal.FDMenOferta.First;
-    fQtdeOfertas := DmPrincipal.FDMenOferta.RecordCount;
-    fUltimaOferta:= 1;
-
-    ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
-                DmPrincipal.FDMenOfertaVRVENDA.AsString,
-                DmPrincipal.FDMenOfertaUNIDADE.AsString);
-
-  except
-  on e: Exception do
-    begin
-		  FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
-    end;
-
-
-  end;
-
-end;
-
-procedure TFrameTabelaPreco.ListaOferta(pDecricao,pVrvenda,pUnidade:string);
-begin
-
-  try
-
-    FrameOferta1.lblNomeProduto.Text := pDecricao;
-    FrameOferta1.lblUnidade.Text     := pUnidade;
-    
-    FrameOferta1.lblVrvendaReal.Text := copy(pVrvenda,1,pos(',',pVrvenda));
-    FrameOferta1.lblVrvendaCentavos.Text := copy(pVrvenda,pos(',',pVrvenda)+1,2);
-
-
-
-  except
-  on e: Exception do
-    begin
-  		FrameMsgInfor.CreateFrameMsgInfor('Erro : '+ frmPrincipal.fMensagemErro + e.Message);
-    end;
-
-  end;
-
-end;
 
 procedure TFrameTabelaPreco.ListarProduto;
 var
@@ -395,11 +302,6 @@ begin
     lytOferta.Width                   := TResolucao.fLargLytOferta;
     lytOferta.Margins.Top             := TResolucao.fMargTopLytOferta;
 
-    FrameOferta1.lytImag.Height       := TResolucao.fAlturaLytImgOferta;
-
-    FrameOferta1.imgProdOferta.Height := TResolucao.fLargImgOferta;
-    FrameOferta1.imgProdOferta.Width  := TResolucao.fAlturaImgOferta;
-
   except
     raise
 
@@ -424,6 +326,7 @@ begin
 
       IniciarFrame;
       BringToFront;
+
 
     end;
 
