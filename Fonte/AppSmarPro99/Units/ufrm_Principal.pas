@@ -3,9 +3,21 @@ unit ufrm_Principal;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
-  FMX.ListBox, FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls,
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
+  System.Variants,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs,
+  FMX.Layouts,
+  FMX.ListBox,
+  FMX.TabControl,
+  FMX.Controls.Presentation,
+  FMX.StdCtrls,
   FMX.Objects;
 
 type
@@ -33,16 +45,6 @@ type
     fStatusConexaoWs: Integer;
     fNovaCarga: Boolean;
 
-    {Resolução}
-    fMarTopGridPreco: integer;
-    fLargFrmPrinc: integer;
-    fAltFrmPrinc: integer;
-    fTanFontGridPreco: integer;
-    fLargLogo: integer;
-    fLargGridPreco: integer;
-    fQuantProdGrid: integer;
-    fAltBarraGridProd: integer;
-
     procedure RecebeAtualizaWs;
 
     function ifVasiu(pCampo,pRetorno: string): String;
@@ -60,7 +62,7 @@ implementation
 {$R *.iPhone.fmx IOS}
 
 uses udm_Principal, uClientModule, uframe_TabelaPreco, uframe_Configuracao,
-  Loading, uframe_MensagemInfor, udm_conectSQLlite, uframe_Logs;
+  Loading, uframe_MensagemInfor, udm_conectSQLlite, uframe_Logs, Resolucao;
 
 procedure TFrmPrincipal.Button1Click(Sender: TObject);
 begin
@@ -115,6 +117,7 @@ begin
     begin
 
       DmPrincipal.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
+      DmPrincipal.RecebeResolucao;
       fNovaCarga := True;
 
     end;
@@ -142,15 +145,11 @@ begin
       if not Assigned(ClientModule) then
       ClientModule := TClientModule.Create(self);
 
-
       DmPrincipal.CarregaParamentros;
-      Width        := FrmPrincipal.fLargFrmPrinc; //Screen.Width;
-      Height       := FrmPrincipal.fAltFrmPrinc; //Screen.Height;
 
       if DmPrincipal.TestaConexaoWS then
       begin
-
-        dmPrincipal.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
+        RecebeAtualizaWs;
         FrameTabelaPreco.CreateFrameTabelaPreco;
 
       end
@@ -160,8 +159,10 @@ begin
         FrameTabelaPreco.CreateFrameTabelaPreco;
         FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel conectar ao servidor. Favor verificar as configuração de conexão')
 
-      end
+      end;
 
+      Width        := TResolucao.fLargFrmPrinc;  //Screen.Width;
+      Height       := TResolucao.fAlturaFrmPrinc; //Screen.Height;
 
     except
     on E: Exception do
@@ -178,5 +179,4 @@ begin
 
   end;
 end;
-
 end.

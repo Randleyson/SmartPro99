@@ -65,6 +65,7 @@ type
     FDMenOfertaVRVENDA: TFloatField;
     FDMenOfertaUNIDADE: TStringField;
     FDMenOfertaPROMOCAO: TStringField;
+    FMentResolucaoWs: TFDMemTable;
   private
     { Private declarations }
     FJsonDataSet: TFDJSONDataSets;
@@ -76,13 +77,17 @@ type
     function SQL_UpdateIDRTv : String;
     function SQL_DeletaIDRTv : String;
     function SQL_InsertTabConfigInicial: String;
+    function SQL_DeleteResolucao: string;
 
   public
     { Public declarations }
     function TestaConexaoWS: Boolean;
     Procedure ReceberProdutosWs(pIdTv: String);
+    procedure RecebeResolucao;
     procedure RecebeTvsWs;
     procedure CarregaParamentros;
+    procedure CarregaParamResolucao;
+    procedure CarregaParamConfig;
     procedure AlteraConfiguracaoTv(pIdTv,pResolucao: String);
 
     procedure SalvaConfigWs(pHost,pPorta: String);
@@ -90,8 +95,8 @@ type
 
     procedure GravarConfigWs(pHost,pPorta: string);
     procedure QryToFMent(pQry: TFDQuery; pFMent: TFDMemTable);
+    procedure FMentToQry(pFMent: TFDMemTable;pQry: TFDQuery);
     function Ping(IP: String): boolean;
-    Procedure CarregaResolucaoAtual;
     procedure ListarResolucao;
 
     procedure AlteraResolucao(pId: integer; pMarTopGridPreco, pLargFrmPrinc,
@@ -108,7 +113,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 uses uClientModule, ufrm_Principal, udm_conectSQLlite, uframe_Logs,
-  uframe_ConfLayout;
+  uframe_ConfLayout, Resolucao;
 
 {$R *.dfm}
 
@@ -217,13 +222,11 @@ begin
 
 end;
 
-procedure TDmPrincipal.CarregaParamentros;
+procedure TDmPrincipal.CarregaParamConfig;
 begin
 
   try
-
     QryToFMent(FQryTabConfig,FMentConfig);
-
     if FMentConfig.RecordCount = 0 then
     begin
       ExectSQL(SQL_InsertTabConfigInicial);
@@ -234,9 +237,22 @@ begin
     FrmPrincipal.fHostWs         := FMentConfig.FieldByName('hostWs').AsString;
     FrmPrincipal.fPortaWs        := FMentConfig.FieldByName('PortaWs').AsString;
     FrmPrincipal.fResolucaoAtual := FMentConfig.FieldByName('idResolucao').AsInteger;
-    //FrmPrincipal.fIPlocal        := IpLocal;
 
-    CarregaResolucaoAtual;
+  except
+    raise
+
+  end;
+
+
+end;
+
+procedure TDmPrincipal.CarregaParamentros;
+begin
+
+  try
+
+    CarregaParamConfig;
+    CarregaParamResolucao;
 
   except
     FrmPrincipal.fMensagemErro := 'Não foi possivel Carregar os paramentros de configuracao ';
@@ -245,36 +261,51 @@ begin
 
 end;
 
-procedure TDmPrincipal.CarregaResolucaoAtual;
+procedure TDmPrincipal.CarregaParamResolucao;
 var
   vSQL: string;
   vFQryTemp: TFDQuery;
 begin
 
-  vSQL := 'select * from tab_Resolucao where idresolucao = '+IntToStr(FrmPrincipal.fResolucaoAtual);
-
   try
 
-    dmConectSQLlite.AbreConexaoSQLlite;
-    vFQryTemp :=  TFDQuery.Create(self);
-    vFQryTemp.Close;
-    vFQryTemp.Connection := dmConectSQLlite.FDC_SQLlite;
-    vFQryTemp.SQL.Text := vSQL;
-    vFQryTemp.Open;
-    vFQryTemp.First;
+    vSQL := 'select * from tab_Resolucao where idresolucao = '+IntToStr(FrmPrincipal.fResolucaoAtual);
 
-    FrmPrincipal.fMarTopGridPreco   := vFQryTemp.FieldByName('MARTOPGRIDPRECO').AsInteger;
-    FrmPrincipal.fLargFrmPrinc      := vFQryTemp.FieldByName('LAGFRMPRINC').AsInteger;
-    FrmPrincipal.fAltFrmPrinc       := vFQryTemp.FieldByName('ALTFRMPRINC').AsInteger;
-    FrmPrincipal.fTanFontGridPreco  := vFQryTemp.FieldByName('TANFONTELSTPRECO').AsInteger;
-    FrmPrincipal.fLargLogo          := vFQryTemp.FieldByName('LARGLOGO').AsInteger;
-    FrmPrincipal.fLargGridPreco     := vFQryTemp.FieldByName('LARGGRIDPRECO').AsInteger;
-    FrmPrincipal.fQuantProdGrid     := vFQryTemp.FieldByName('QUANTPRODGRID').AsInteger;
-    FrmPrincipal.fAltBarraGridProd  := vFQryTemp.FieldByName('ALTBARRAGRIDPROD').AsInteger;
+    try
 
-  finally
-    vFQryTemp.Free;
-    dmConectSQLlite.FechaSQLlite;
+      dmConectSQLlite.AbreConexaoSQLlite;
+      vFQryTemp            :=  TFDQuery.Create(self);
+      vFQryTemp.Close;
+      vFQryTemp.Connection := dmConectSQLlite.FDC_SQLlite;
+      vFQryTemp.SQL.Text   := vSQL;
+      vFQryTemp.Open;
+      vFQryTemp.First;
+
+      {GERAL}
+      TResolucao.fLargFrmPrinc      := vFQryTemp.FieldByName('LARGFRMPRINC').AsInteger;
+      TResolucao.fAlturaFrmPrinc    := vFQryTemp.FieldByName('ALTFRMPRINC').AsInteger;
+
+      {GRID PRECO}
+      TResolucao.fQtdeProdGrid      := vFQryTemp.FieldByName('QTDEPRODGRID').AsInteger;
+      TResolucao.fSizeFonteGrid     := vFQryTemp.FieldByName('SIZERFONTEGRID').AsInteger;
+      TResolucao.fLargGrid          := vFQryTemp.FieldByName('LARGGRIDPRECO').AsInteger;
+      TResolucao.fMarTopGrid        := vFQryTemp.FieldByName('MARGTOPGRIDPRECO').AsInteger;
+
+      {OFERTA}
+      TResolucao.fLargLytOferta      := vFQryTemp.FieldByName('LARGLYTOFERTA').AsInteger;
+      TResolucao.fMargTopLytOferta   := vFQryTemp.FieldByName('MARGTOPLYTOFERTA').AsInteger;
+      TResolucao.fAlturaLytImgOferta := vFQryTemp.FieldByName('ALTLYIMGTOFERTA').AsInteger;
+      TResolucao.fAlturaImgOferta    := vFQryTemp.FieldByName('ALTIMGOFERTA').AsInteger;
+      TResolucao.fLargImgOferta      := vFQryTemp.FieldByName('LARGIMGOFERTA').AsInteger;
+
+    finally
+      vFQryTemp.Free;
+      dmConectSQLlite.FechaSQLlite;
+
+    end;
+
+  except
+    raise
 
   end;
 
@@ -304,6 +335,33 @@ begin
 
 end;
 
+procedure TDmPrincipal.FMentToQry(pFMent: TFDMemTable; pQry: TFDQuery);
+begin
+
+  try
+
+    try
+
+      dmConectSQLlite.AbreConexaoSQLlite;
+      pQry.Close;
+      pQry.Open;
+      pQry.EmptyDataSet;
+      pQry.CopyDataSet(pFMent);
+
+
+    except
+      FrameLogs.AddLogs('Erro ao QryProdToFMentProd');
+
+    end;
+  finally
+
+    pFMent.Close;
+    dmConectSQLlite.FechaSQLlite;
+
+  end;
+
+end;
+
 procedure TDmPrincipal.GravarConfigWs(pHost, pPorta: string);
 var
   vSQL: String;
@@ -327,20 +385,20 @@ end;
 
 procedure TDmPrincipal.ListarResolucao;
 begin
-
   try
+    try
 
-    dmConectSQLlite.AbreConexaoSQLlite;
-    with FQryResolucao do
-    begin
-      Close;
-      Open;
-      First;
+      dmConectSQLlite.AbreConexaoSQLlite;
+      with FQryResolucao do
+      begin
+        Close;
+        Open;
+        First;
 
-    while not Eof do
-    begin
+        while not Eof do
+        begin
 
-      FrameConfLayout.Resolucao(FieldByName('idresolucao').AsString,
+          FrameConfLayout.Resolucao(FieldByName('idresolucao').AsString,
                                 FieldByName('nome').AsString,
                                 FieldByName('MARTOPGRIDPRECO').AsString,
                                 FieldByName('LAGFRMPRINC').AsString,
@@ -351,19 +409,19 @@ begin
                                 FieldByName('QUANTPRODGRID').AsString,
                                 FieldByName('ALTBARRAGRIDPROD').AsString,
                                 RecNo);
-      FQryResolucao.Next;
-    end;
+          FQryResolucao.Next;
+        end;
+      end;
+
+    finally
+      FQryResolucao.Close;
+      dmConectSQLlite.FechaSQLlite;
     end;
 
-  finally
-    dmConectSQLlite.FechaSQLlite;
+  except
+    raise
 
   end;
-
-
-
-
-
 
 end;
 
@@ -398,6 +456,33 @@ begin
 
 end;
 
+procedure TDmPrincipal.RecebeResolucao;
+var
+  vSQL: String;
+begin
+
+  vSQL := 'select * from resolucao';
+
+  try
+
+    {RECEBER RESOLUCAO DO WS}
+    FJsonDataSet          := ClientModule.ServerMethods1Client.Get(vSQL);
+    FMentResolucaoWs.Close;
+    FMentResolucaoWs.AppendData(TFDJSONDataSetsReader.GetListValue(FJsonDataSet,0));
+    FMentResolucaoWs.Open;
+
+    {GRAVA NO BANCO SQLLITE}
+    ExectSQL(SQL_DeleteResolucao);
+    FMentToQry(FMentResolucaoWs,FQryResolucao);
+
+  except
+    FrmPrincipal.fMensagemErro := 'Não foi executar RecebeResolucao';
+    raise
+
+  end;
+
+end;
+
 procedure TDmPrincipal.ReceberProdutosWs(pIdTv: String);
 var
   vSQL,resultado: String;
@@ -412,22 +497,15 @@ begin
 
     try
 
-      {Receber Produtos do Ws}
-
+      {RECEBE PRODUTOS DO WS}
       FJsonDataSet          := ClientModule.ServerMethods1Client.Get(vSQL);
       FMentProdWs.Close;
       FMentProdWs.AppendData(TFDJSONDataSetsReader.GetListValue(FJsonDataSet,0));
       FMentProdWs.Open;
 
-      {Inserir No SQLite}
       ExectSQL(SQL_UpdateIDRProd);
-
-      dmConectSQLlite.AbreConexaoSQLlite;
-      FQryProdutos.Close;
-      FQryProdutos.Open;
-      FQryProdutos.EmptyDataSet;
-      FQryProdutos.CopyDataSet(FMentProdWs);
-
+      {INSERIE NO BANCO SQLLITE}
+      FMentToQry(FMentProdWs,FQryProdutos);
       ExectSQL(SQL_DeletaIDRProd);
 
     except
@@ -455,22 +533,18 @@ begin
   try
 
     try
-      {Receber TV do Ws}
+
+      {RECEBE TV DO WS}
       FJsonDataSet := ClientModule.ServerMethods1Client.Get(vSQL);
 
       FMentTvWs := TFDMemTable.Create(self);
       FMentTvWs.Close;
       FMentTvWs.AppendData(TFDJSONDataSetsReader.GetListValue(FJsonDataSet,0));
       FMentTvWs.Open;
-
-      {Inserio os dados no SQLlite}
       ExectSQL(SQL_UpdateIDRTv);
 
-      FQryTv.Close;
-      FQryTv.Open;
-      FQryTv.EmptyDataSet;
-      FQryTv.CopyDataSet(FMentTvWs);
-
+      {INSERI TV NO SQLLITE}
+      FMentToQry(FMentTvWs,FQryTv);
       ExectSQL(SQL_DeletaIDRTv);
 
     except
@@ -536,10 +610,17 @@ begin
 
 end;
 
+function TDmPrincipal.SQL_DeleteResolucao: string;
+begin
+
+  Result := 'delete from tab_resolucao where idresolucao <> 1';
+
+end;
+
 function TDmPrincipal.SQL_InsertTabConfigInicial: String;
 begin
 
-  Result := 'Insert into tab_config (idtv) values (0)';
+  Result := 'Insert into tab_config (idtv,idresolucao) values (0,2)';
 
 end;
 

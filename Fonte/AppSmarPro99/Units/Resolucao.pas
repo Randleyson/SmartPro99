@@ -1,11 +1,18 @@
-{ Tabela de resulucao
-  1 - CELULAR
-  2 - TV 32
+{
 
-A = Altura
-Q = Quantidade
-L = Largura
-T = Tanho fonte
+Largura do form                 : LARGFRMPRINC
+Altura do form                  : ALTFRMPRINC
+
+Quanitde de produtos na Grid    : QTDEPRODGRID
+Tananho da fonte da Grid 	      : SIZERFONTEGRID
+Largura da Grid 			          : LARGGRIDPRECO
+Marege da Grid 				          : MARGTOPGRIDPRECO
+
+Largura do layout oferta		    : LARGLYTOFERTA
+Marge do top layout oferta		  : MARGTOPLYTOFERTA
+Altura do layout imagem oferta 	: ALTLYIMGTOFERTA
+Altura da imagem oferta			    : ALTIMGOFERTA
+Largura da imagem oferta		    : LARGIMGOFERTA
 
 }
 
@@ -18,100 +25,31 @@ uses ufrm_Principal;
 type
   TResolucao = class
   public
-    class function AlstTabPreco: integer;
-    //class function QProdutoListado: integer;
-    //class function LlstTabPreco: integer;
-    //class function LimgLogo: integer;
-    //class function TlstTabPreco: integer;
-    //class function AfrmPrinc: integer;
-    //class function LfrmPrinc: integer;
-    //class function MarTopGridPreco: integer;
+  class var
+  {GERAL}
+  fLargFrmPrinc,
+  fAlturaFrmPrinc : integer;
+
+  {GRID PRECO}
+  fQtdeProdGrid,
+  fSizeFonteGrid,
+  fLargGrid,
+  fMarTopGrid: integer;
+
+  {LAYOUT OFERTA}
+  fLargLytOferta,
+  fMargTopLytOferta,
+  fAlturaLytImgOferta,
+  fAlturaImgOferta,
+  fLargImgOferta : integer;
 
 end;
 
 implementation
 
 { TResolucao }
-{
-class function TResolucao.MarTopGridPreco: integer;
-begin
 
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 60;
-    2 : result := 100;
-  end;
+{ TResolucao }
 
-end;}
-{
-class function TResolucao.AlstTabPreco: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 35;
-    2 : result := 50;
-  end;
-
-end;
-
-class function TResolucao.QProdutoListado: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 6;
-    2 : result := 11;
-  end;
-
-end;
-{
-class function TResolucao.LlstTabPreco: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 380;
-    2 : result := 850;
-  end;
-
-end;
-
-{class function TResolucao.LimgLogo: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 120;
-    2 : result := 300;
-  end;
-
-end; }
-{
-class function TResolucao.TlstTabPreco: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 16;
-    2 : result := 24;
-  end;
-
-end;  }
-
-{
-class function TResolucao.AfrmPrinc: integer;
-begin
-
-    case FrmPrincipal.fResolucaoAtual of
-    1 : result := 360;
-    2 : result := 700;
-  end;
-
-end;}
-{
-class function TResolucao.LfrmPrinc: integer;
-begin
-
-  case FrmPrincipal.fResolucaoAtual of
-    1 : result := 600;
-    2 : result := 1700;
-  end;
-
-end;}
 
 end.

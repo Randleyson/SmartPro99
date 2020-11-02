@@ -11,8 +11,8 @@ type
   TFrameOferta = class(TFrame)
     Image1: TImage;
     lblNomeProduto: TLabel;
-    Image2: TImage;
-    Layout1: TLayout;
+    imgProdOferta: TImage;
+    lytImag: TLayout;
     Image3: TImage;
     Layout2: TLayout;
     lblVrvendaReal: TLabel;

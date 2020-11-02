@@ -22,9 +22,9 @@ type
     Image1: TImage;
     Image2: TImage;
     lytOferta: TLayout;
-    FrameOferta1: TFrameOferta;
     Label1: TLabel;
     tmProxOferta: TTimer;
+    FrameOferta1: TFrameOferta;
     procedure imgConfiguracaoClick(Sender: TObject);
     procedure tmProxPaginaTimer(Sender: TObject);
     procedure imgLogsClick(Sender: TObject);
@@ -64,7 +64,7 @@ implementation
 {$R *.fmx}
 
 uses ufrm_Principal, udm_Principal, uframe_Configuracao, Loading,
-  udm_conectSQLlite, uframe_Logs, uframe_MensagemInfor;
+  udm_conectSQLlite, uframe_Logs, uframe_MensagemInfor, Resolucao;
 
 { TFrameTabelaPreco }
 
@@ -80,15 +80,15 @@ begin
     vItem                             := TListBoxItem.Create(lstBoxTabelaPreco);
     vItem.Text                        := '';
     vItem.Selectable                  := False;
-    vItem.Height                      := FrmPrincipal.fAltBarraGridProd;
+    vItem.Height                      := 50;
 
     vFrame                            := TFrameFPreco.Create(vItem);
     vFrame.Parent                     := vItem;
     vFrame.Align                      := TAlignLayout.Client;
     vFrame.lblDescricaoProd.text      := pDescricao;
-    vFrame.lblDescricaoProd.Font.Size := FrmPrincipal.fTanFontGridPreco;
+    vFrame.lblDescricaoProd.Font.Size := TResolucao.fSizeFonteGrid;
     vFrame.lblValorVenda.text         := formatfloat('R$ ##,###,##0.00',StrToFloat(pValorVenda));
-    vFrame.lblValorVenda.Font.Size    := FrmPrincipal.fTanFontGridPreco;
+    vFrame.lblValorVenda.Font.Size    := TResolucao.fSizeFonteGrid;
     vFrame.Margins.Bottom             := 8;
 
     lstBoxTabelaPreco.AddObject(vItem);
@@ -334,7 +334,7 @@ begin
     while not DmPrincipal.FMentProd.Eof do
     begin
 
-      if vI < FrmPrincipal.fQuantProdGrid then
+      if vI < TResolucao.fQtdeProdGrid then
       begin
 
         AddFrameListBox(DmPrincipal.FMentProd.FieldByName('Descricao').AsString,
@@ -387,10 +387,21 @@ begin
 
   try
 
-    lstBoxTabelaPreco.Width       := FrmPrincipal.fLargGridPreco;
-    lstBoxTabelaPreco.Margins.Top := FrmPrincipal.fMarTopGridPreco;
+    {GRID TABELA DE PRECO}
+    lstBoxTabelaPreco.Width           := TResolucao.fLargGrid;
+    lstBoxTabelaPreco.Margins.Top     := TResolucao.fMarTopGrid;
+
+    {LAYOUT OFERTA}
+    lytOferta.Width                   := TResolucao.fLargLytOferta;
+    lytOferta.Margins.Top             := TResolucao.fMargTopLytOferta;
+
+    FrameOferta1.lytImag.Height       := TResolucao.fAlturaLytImgOferta;
+
+    FrameOferta1.imgProdOferta.Height := TResolucao.fLargImgOferta;
+    FrameOferta1.imgProdOferta.Width  := TResolucao.fAlturaImgOferta;
 
   except
+    raise
 
   end;
 

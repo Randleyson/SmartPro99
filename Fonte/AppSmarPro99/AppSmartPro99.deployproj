@@ -4,7 +4,7 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'">AVD_for_10_1_WXGA_Tablet</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android'">0036911910</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone5</DeviceId>
@@ -13,7 +13,7 @@
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice32'"/>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
-        <DeployFile Include="AppSmartPro99.exe" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="..\..\Versao\AppSmarPro99\AppSmartPro99.exe" Condition="'$(Config)'=='Debug'">
             <RemoteDir>AppSmartPro99\</RemoteDir>
             <RemoteName>AppSmartPro99.exe</RemoteName>
             <DeployClass>ProjectOutput</DeployClass>
@@ -104,6 +104,15 @@
             <RemoteDir>AppSmartPro99\library\lib\mips\</RemoteDir>
             <RemoteName>libAppSmartPro99.so</RemoteName>
             <DeployClass>AndroidLibnativeMipsFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\Versao\AppSmarPro99\classes.dex" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AppSmartPro99\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -245,7 +254,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico48x48.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon48</DeployClass>
@@ -272,7 +281,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico 36x36.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon36</DeployClass>
@@ -335,7 +344,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\libAppSmartPro99.so" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\..\Versao\AppSmarPro99\libAppSmartPro99.so" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libAppSmartPro99.so</RemoteName>
             <DeployClass>ProjectOutput</DeployClass>
@@ -345,7 +354,7 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico72x72.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
@@ -390,7 +399,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico144x144.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
@@ -399,7 +408,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\Imagens\ico96x96.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
@@ -426,7 +435,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\strings.xml" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\..\Versao\AppSmarPro99\strings.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\values\</RemoteDir>
             <RemoteName>strings.xml</RemoteName>
             <DeployClass>Android_Strings</DeployClass>
@@ -444,7 +453,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\colors.xml" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\..\Versao\AppSmarPro99\colors.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\res\values\</RemoteDir>
             <RemoteName>colors.xml</RemoteName>
             <DeployClass>Android_Colors</DeployClass>
@@ -462,7 +471,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\..\Versao\AppSmarPro99\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>AppSmartPro99\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <DeployClass>ProjectAndroidManifest</DeployClass>
