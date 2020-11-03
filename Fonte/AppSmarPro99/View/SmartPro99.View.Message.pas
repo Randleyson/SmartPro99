@@ -1,9 +1,10 @@
-unit uframe_MensagemInfor;
+unit SmartPro99.View.Message;
 
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Layouts, FMX.Controls.Presentation, FMX.Objects;
 
@@ -31,7 +32,7 @@ implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal;
+uses SmartPro99.View.FrmPrincipal;
 
 { TFrame1 }
 
@@ -41,15 +42,15 @@ begin
   try
 
     if FrmPrincipal.fComErro then
-    Application.Terminate
+      Application.Terminate
     else
-    FechaFrame;
-    
+      FechaFrame;
+
   except
+    raise
 
   end;
 
-   
 end;
 
 procedure TFrameMensagemInfor.CreateFrameMsgInfor(pMensagem: string);
@@ -58,13 +59,13 @@ begin
   try
 
     if not assigned(FrameMsgInfor) then
-    FrameMsgInfor := TFrameMensagemInfor.Create(self);
+      FrameMsgInfor := TFrameMensagemInfor.Create(self);
 
     with FrameMsgInfor do
     begin
 
-      Name      := 'FrameMsgInfor';
-      Parent    := frmPrincipal;
+      Name := 'FrameMsgInfor';
+      Parent := FrmPrincipal;
 
       lblMensagem.Text := pMensagem;
       btnOk.SetFocus;
@@ -82,7 +83,7 @@ procedure TFrameMensagemInfor.FechaFrame;
 begin
 
   try
-  
+
     FrameMsgInfor.Visible := False;
     FrameMsgInfor := nil;
 
@@ -90,7 +91,7 @@ begin
 
     lblMensagem.Text := 'Erro ao fechar a tela'
 
-  end;     
+  end;
 
 end;
 

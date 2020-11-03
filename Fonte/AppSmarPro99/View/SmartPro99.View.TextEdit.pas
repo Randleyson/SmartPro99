@@ -1,4 +1,4 @@
-unit uframa_Edit;
+unit SmartPro99.View.TextEdit;
 
 interface
 
@@ -34,9 +34,11 @@ var
 
 implementation
 
+uses
+  SmartPro99.View.Message, SmartPro99.View.FrmPrincipal;
+
 {$R *.fmx}
 
-uses uframe_MensagemInfor, ufrm_Principal;
 
 { TFrameTextoEdit }
 

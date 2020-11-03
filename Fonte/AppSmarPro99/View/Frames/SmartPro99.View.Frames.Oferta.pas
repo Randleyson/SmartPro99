@@ -1,4 +1,4 @@
-unit uframe_Oferta;
+unit SmartPro99.View.Frames.Oferta;
 
 interface
 
@@ -44,10 +44,12 @@ var
 
 implementation
 
-{$R *.fmx}
+uses
+  SmartPro99.Classe.Resolucao, SmartPro99.View.Message,
+  SmartPro99.View.FrmPrincipal, SmarPro99.Model.Dados,
+  SmartPro99.View.TabelaDePreco;
 
-uses ufrm_Principal, uframe_MensagemInfor, udm_Principal, uframe_TabelaPreco,
-  Resolucao;
+{$R *.fmx}
 
 { TFrameOferta }
 
@@ -102,15 +104,15 @@ begin
     if (fUltimaOferta <= fQtdeOfertas) then
     begin
 
-      DmPrincipal.FDMenOferta.RecNo := fUltimaOferta;
-      ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
-                  DmPrincipal.FDMenOfertaVRVENDA.AsString,
-                  DmPrincipal.FDMenOfertaUNIDADE.AsString);
+      ModelDados.FDMenOferta.RecNo := fUltimaOferta;
+      ListaOferta(ModelDados.FDMenOfertaDESCRICAO.AsString,
+                  ModelDados.FDMenOfertaVRVENDA.AsString,
+                  ModelDados.FDMenOfertaUNIDADE.AsString);
 
-      DmPrincipal.FDMenOferta.Next;
-      fUltimaOferta := DmPrincipal.FDMenOferta.RecNo;
+      ModelDados.FDMenOferta.Next;
+      fUltimaOferta := ModelDados.FDMenOferta.RecNo;
 
-      if DmPrincipal.FDMenOferta.Eof then
+      if ModelDados.FDMenOferta.Eof then
       fUltimaOferta := fUltimaOferta+ 1;
 
     end
@@ -138,7 +140,7 @@ begin
     begin
 
       Name                  := 'FrameOferta';
-      Parent                := FrameTabelaPreco.lytOferta;
+      Parent                := VeiwTabelaDePreco.lytOferta;
 
       rectOferta.Visible    := False;
       rectEmp.Visible       := False;
@@ -164,16 +166,16 @@ begin
 
   try
 
-    DmPrincipal.QryToFMent(DmPrincipal.FQryOferta,
-                           DmPrincipal.FDMenOferta);
-    DmPrincipal.FDMenOferta.First;
-    fQtdeOfertas    := DmPrincipal.FDMenOferta.RecordCount;
+    ModelDados.QryToFMent(ModelDados.FQryOferta,
+                           ModelDados.FDMenOferta);
+    ModelDados.FDMenOferta.First;
+    fQtdeOfertas    := ModelDados.FDMenOferta.RecordCount;
     fUltimaOferta   := 1;
 
     if fQtdeOfertas > 0 then
-    FrameOferta.ListaOferta(DmPrincipal.FDMenOfertaDESCRICAO.AsString,
-                            DmPrincipal.FDMenOfertaVRVENDA.AsString,
-                            DmPrincipal.FDMenOfertaUNIDADE.AsString)
+    FrameOferta.ListaOferta(ModelDados.FDMenOfertaDESCRICAO.AsString,
+                            ModelDados.FDMenOfertaVRVENDA.AsString,
+                            ModelDados.FDMenOfertaUNIDADE.AsString)
     else
     FrameOferta.LogoEmpresa;
 

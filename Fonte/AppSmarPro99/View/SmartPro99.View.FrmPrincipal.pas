@@ -1,4 +1,4 @@
-unit ufrm_Principal;
+unit SmartPro99.View.FrmPrincipal;
 
 interface
 
@@ -27,11 +27,9 @@ type
     Rectangle1: TRectangle;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure tmSplashTimer(Sender: TObject);
   private
     { Private declarations }
-
 
   public
     { Public declarations }
@@ -42,12 +40,12 @@ type
     fIPlocal: string;
     fComErro: Boolean;
     fMensagemErro: String;
-    fStatusConexaoWs: Integer;
+    fStatusConexaoWs: integer;
     fNovaCarga: Boolean;
 
     procedure RecebeAtualizaWs;
 
-    function ifVasiu(pCampo,pRetorno: string): String;
+    function ifVasiu(pCampo, pRetorno: string): String;
   end;
 
 var
@@ -61,19 +59,9 @@ implementation
 {$R *.iPhone55in.fmx IOS}
 {$R *.iPhone.fmx IOS}
 
-uses udm_Principal, uClientModule, uframe_TabelaPreco, uframe_Configuracao,
-  Loading, uframe_MensagemInfor, udm_conectSQLlite, uframe_Logs, Resolucao;
-
-procedure TFrmPrincipal.Button1Click(Sender: TObject);
-begin
-
-    try
-        ClientModule.DSRestConnection.TestConnection();
-      Except
-      On E:Exception do showmessage(E.Message);
-      end;
-
-end;
+uses uClientModule, SmartPro99.View.Message, SmarPro99.Model.Dados,
+  SmarPro99.Model.Conexao, SmartPro99.View.TabelaDePreco,
+  SmartPro99.Classe.Resolucao;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
 begin
@@ -96,14 +84,13 @@ begin
 
 end;
 
-function TFrmPrincipal.ifVasiu(pCampo,pRetorno: string): String;
+function TFrmPrincipal.ifVasiu(pCampo, pRetorno: string): String;
 begin
 
   if pCampo = '' then
-  Result := pRetorno
+    Result := pRetorno
   else
-  result := pCampo
-
+    Result := pCampo
 
 end;
 
@@ -112,12 +99,12 @@ begin
 
   try
 
-    DmPrincipal.CarregaParamentros;
-    if DmPrincipal.TestaConexaoWS then
+    ModelDados.CarregaParamentros;
+    if ModelDados.TestaConexaoWS then
     begin
 
-      DmPrincipal.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
-      DmPrincipal.RecebeResolucao;
+      ModelDados.ReceberProdutosWs(FrmPrincipal.fIdTvAtual);
+      ModelDados.RecebeResolucao;
       fNovaCarga := True;
 
     end;
@@ -129,46 +116,48 @@ begin
 
 end;
 
-
 procedure TFrmPrincipal.tmSplashTimer(Sender: TObject);
 begin
 
   try
     try
 
-      if not Assigned(dmConectSQLlite) then
-      dmConectSQLlite := TdmConectSQLlite.Create(self);
+      if not Assigned(ModelConexao) then
+        ModelConexao := TModelConexao.Create(self);
 
-      if not Assigned(DmPrincipal) then
-      DmPrincipal  := TDmPrincipal.Create(self);
+      if not Assigned(ModelDados) then
+        ModelDados := TModelDados.Create(self);
 
       if not Assigned(ClientModule) then
-      ClientModule := TClientModule.Create(self);
+        ClientModule := TClientModule.Create(self);
 
-      DmPrincipal.CarregaParamentros;
+      ModelDados.CarregaParamentros;
 
-      if DmPrincipal.TestaConexaoWS then
+      if ModelDados.TestaConexaoWS then
       begin
+
         RecebeAtualizaWs;
-        FrameTabelaPreco.CreateFrameTabelaPreco;
+        VeiwTabelaDePreco.CreateFrameTabelaPreco;
 
       end
       else
       begin
 
-        FrameTabelaPreco.CreateFrameTabelaPreco;
-        FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel conectar ao servidor. Favor verificar as configuração de conexão')
+        VeiwTabelaDePreco.CreateFrameTabelaPreco;
+        FrameMsgInfor.CreateFrameMsgInfor
+          ('Não foi possivel conectar ao servidor. Favor verificar as configuração de conexão')
 
       end;
 
-      Width        := TResolucao.fLargFrmPrinc;  //Screen.Width;
-      Height       := TResolucao.fAlturaFrmPrinc; //Screen.Height;
+      Width := TResolucao.fLargFrmPrinc; // Screen.Width;
+      Height := TResolucao.fAlturaFrmPrinc; // Screen.Height;
 
     except
-    on E: Exception do
+      on E: Exception do
       begin
         FrmPrincipal.fComErro := True;
-        FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel iniciar o aplicativo Erro : '+E.Message);
+        FrameMsgInfor.CreateFrameMsgInfor
+          ('Não foi possivel iniciar o aplicativo Erro : ' + E.Message);
 
       end;
 
@@ -179,4 +168,5 @@ begin
 
   end;
 end;
+
 end.

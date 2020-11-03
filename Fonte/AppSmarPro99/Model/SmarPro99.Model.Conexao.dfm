@@ -1,4 +1,4 @@
-object dmConectSQLlite: TdmConectSQLlite
+object ModelConexao: TModelConexao
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 209

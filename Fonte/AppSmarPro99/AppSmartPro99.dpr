@@ -3,21 +3,21 @@ program AppSmartPro99;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  ufrm_Principal in 'Units\ufrm_Principal.pas' {FrmPrincipal},
-  udm_Principal in 'DataModule\udm_Principal.pas' {DmPrincipal: TDataModule},
+  SmartPro99.View.FrmPrincipal in 'View\SmartPro99.View.FrmPrincipal.pas' {FrmPrincipal},
+  SmarPro99.Model.Dados in 'Model\SmarPro99.Model.Dados.pas' {ModelDados: TDataModule},
   uClientClasses in 'ClientModule\uClientClasses.pas',
   uClientModule in 'ClientModule\uClientModule.pas' {ClientModule: TDataModule},
-  uframe_Configuracao in 'Units\uframe_Configuracao.pas' {FrameConfig: TFrame},
-  uframe_TabelaPreco in 'Units\uframe_TabelaPreco.pas' {FrameTabelaPreco: TFrame},
-  uframe_FTabelaPreco in 'Units\uframe_FTabelaPreco.pas' {FrameFPreco: TFrame},
-  Loading in 'Units\Loading.pas',
-  uframe_MensagemInfor in 'Units\uframe_MensagemInfor.pas' {FrameMensagemInfor: TFrame},
-  uframe_Logs in 'Units\uframe_Logs.pas' {FrameLogs: TFrame},
-  uframa_Edit in 'Units\uframa_Edit.pas' {FrameEdit: TFrame},
-  udm_conectSQLlite in 'DataModule\udm_conectSQLlite.pas' {dmConectSQLlite: TDataModule},
-  uframe_ConfLayout in 'Units\uframe_ConfLayout.pas' {FrameConfLayout: TFrame},
-  uframe_Oferta in 'Units\uframe_Oferta.pas' {FrameOferta: TFrame},
-  Resolucao in 'Units\Resolucao.pas';
+  SmartPro99.View.Configuracao in 'View\SmartPro99.View.Configuracao.pas' {FrameConfig: TFrame},
+  SmartPro99.View.TabelaDePreco in 'View\SmartPro99.View.TabelaDePreco.pas' {VeiwTabelaDePreco: TFrame},
+  SmartPro99.View.Frames.Produto in 'View\Frames\SmartPro99.View.Frames.Produto.pas' {FrameFPreco: TFrame},
+  SmartPro99.Classe.Loading in 'Classe\SmartPro99.Classe.Loading.pas',
+  SmartPro99.View.Message in 'View\SmartPro99.View.Message.pas' {FrameMensagemInfor: TFrame},
+  SmartPro99.View.Logs in 'View\SmartPro99.View.Logs.pas' {FrameLogs: TFrame},
+  SmartPro99.View.TextEdit in 'View\SmartPro99.View.TextEdit.pas' {FrameEdit: TFrame},
+  SmarPro99.Model.Conexao in 'Model\SmarPro99.Model.Conexao.pas' {ModelConexao: TDataModule},
+  SmartPro99.View.ConfiguracaoDoLayout in 'View\SmartPro99.View.ConfiguracaoDoLayout.pas' {FrameConfLayout: TFrame},
+  SmartPro99.View.Frames.Oferta in 'View\Frames\SmartPro99.View.Frames.Oferta.pas' {FrameOferta: TFrame},
+  SmartPro99.Classe.Resolucao in 'Classe\SmartPro99.Classe.Resolucao.pas';
 
 {$R *.res}
 

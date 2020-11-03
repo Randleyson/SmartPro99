@@ -1,4 +1,4 @@
-unit uframe_ConfLayout;
+unit SmartPro99.View.ConfiguracaoDoLayout;
 
 interface
 
@@ -101,9 +101,11 @@ type
 
 implementation
 
+uses
+  SmartPro99.View.Message, SmartPro99.View.FrmPrincipal, SmarPro99.Model.Dados;
+
 {$R *.fmx}
 
-uses ufrm_Principal, uframe_MensagemInfor, udm_Principal;
 
 { TFrameConfLayout }
 
@@ -197,7 +199,7 @@ begin
     if rdNome3.IsChecked then
     vR := 3;
 
-    DmPrincipal.AlteraResolucao(vR,
+    ModelDados.AlteraResolucao(vR,
                                 edtMarTopGrid1.Text,
                                 edtLargFrm1.Text,
                                 edtAltFrm1.Text,
@@ -222,8 +224,8 @@ begin
 
   try
 
-    DmPrincipal.CarregaParamentros;
-    DmPrincipal.ListarResolucao;
+    ModelDados.CarregaParamentros;
+    ModelDados.ListarResolucao;
 
   finally
 

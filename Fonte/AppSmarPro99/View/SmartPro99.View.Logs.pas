@@ -1,4 +1,4 @@
-unit uframe_Logs;
+unit SmartPro99.View.Logs;
 
 interface
 
@@ -31,9 +31,10 @@ var
 
 implementation
 
-{$R *.fmx}
+uses
+  SmartPro99.View.Message;
 
-uses uframe_MensagemInfor;
+{$R *.fmx}
 
 { TFrameLogs }
 

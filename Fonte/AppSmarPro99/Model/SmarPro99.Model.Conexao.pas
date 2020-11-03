@@ -1,4 +1,4 @@
-unit udm_conectSQLlite;
+unit SmarPro99.Model.Conexao;
 
 interface
 
@@ -9,11 +9,11 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client
   {$IFDEF MSWINDOWS}
-  ,vcl.Forms
+  ,vcl.Forms, FireDAC.VCLUI.Wait
   {$ENDIF};
 
 type
-  TdmConectSQLlite = class(TDataModule)
+  TModelConexao = class(TDataModule)
     FDC_SQLlite: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     procedure DataModuleCreate(Sender: TObject);
@@ -27,17 +27,19 @@ type
   end;
 
 var
-  dmConectSQLlite: TdmConectSQLlite;
+  ModelConexao: TModelConexao;
 
 implementation
 
+uses
+  SmartPro99.View.FrmPrincipal;
+
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses ufrm_Principal;
 
 {$R *.dfm}
 
-procedure TdmConectSQLlite.AbreConexaoSQLlite;
+procedure TModelConexao.AbreConexaoSQLlite;
 begin
 
   try
@@ -59,7 +61,7 @@ begin
 
 end;
 
-procedure TdmConectSQLlite.DataModuleCreate(Sender: TObject);
+procedure TModelConexao.DataModuleCreate(Sender: TObject);
 begin
 
   try
@@ -72,7 +74,7 @@ begin
 
 end;
 
-procedure TdmConectSQLlite.FechaSQLlite;
+procedure TModelConexao.FechaSQLlite;
 begin
 
   try
@@ -86,7 +88,7 @@ begin
 
 end;
 
-procedure TdmConectSQLlite.ConectarSQLlite;
+procedure TModelConexao.ConectarSQLlite;
 begin
 
   try

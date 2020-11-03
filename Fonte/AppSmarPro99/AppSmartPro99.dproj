@@ -5,8 +5,8 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>AppSmartPro99.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Android</Platform>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>5215</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -402,12 +402,12 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Units\ufrm_Principal.pas">
+        <DCCReference Include="View\SmartPro99.View.FrmPrincipal.pas">
             <Form>FrmPrincipal</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="DataModule\udm_Principal.pas">
-            <Form>DmPrincipal</Form>
+        <DCCReference Include="Model\SmarPro99.Model.Dados.pas">
+            <Form>ModelDados</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -417,53 +417,53 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_Configuracao.pas">
+        <DCCReference Include="View\SmartPro99.View.Configuracao.pas">
             <Form>FrameConfig</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_TabelaPreco.pas">
-            <Form>FrameTabelaPreco</Form>
+        <DCCReference Include="View\SmartPro99.View.TabelaDePreco.pas">
+            <Form>VeiwTabelaDePreco</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_FTabelaPreco.pas">
+        <DCCReference Include="View\Frames\SmartPro99.View.Frames.Produto.pas">
             <Form>FrameFPreco</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\Loading.pas"/>
-        <DCCReference Include="Units\uframe_MensagemInfor.pas">
+        <DCCReference Include="Classe\SmartPro99.Classe.Loading.pas"/>
+        <DCCReference Include="View\SmartPro99.View.Message.pas">
             <Form>FrameMensagemInfor</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_Logs.pas">
+        <DCCReference Include="View\SmartPro99.View.Logs.pas">
             <Form>FrameLogs</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframa_Edit.pas">
+        <DCCReference Include="View\SmartPro99.View.TextEdit.pas">
             <Form>FrameEdit</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="DataModule\udm_conectSQLlite.pas">
-            <Form>dmConectSQLlite</Form>
+        <DCCReference Include="Model\SmarPro99.Model.Conexao.pas">
+            <Form>ModelConexao</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_ConfLayout.pas">
+        <DCCReference Include="View\SmartPro99.View.ConfiguracaoDoLayout.pas">
             <Form>FrameConfLayout</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_Oferta.pas">
+        <DCCReference Include="View\Frames\SmartPro99.View.Frames.Oferta.pas">
             <Form>FrameOferta</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\Resolucao.pas"/>
+        <DCCReference Include="Classe\SmartPro99.Classe.Resolucao.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -1524,5 +1524,6 @@
     <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <ProjectExtensions/>
     <ProjectExtensions/>
 </Project>

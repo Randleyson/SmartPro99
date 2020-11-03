@@ -1,15 +1,15 @@
-unit uframe_TabelaPreco;
+unit SmartPro99.View.TabelaDePreco;
 
 interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Layouts, FMX.ListBox, FMX.Objects, uframe_FTabelaPreco, System.ImageList,
-  FMX.ImgList, FMX.Controls.Presentation, uframe_Oferta;
+  FMX.Layouts, FMX.ListBox, FMX.Objects, System.ImageList,
+  FMX.ImgList, FMX.Controls.Presentation;
 
 type
-  TFrameTabelaPreco = class(TFrame)
+  TVeiwTabelaDePreco = class(TFrame)
     Rectangle1: TRectangle;
     lstBoxTabelaPreco: TListBox;
     lytRodaPe: TLayout;
@@ -48,19 +48,24 @@ type
   end;
 
 var
-  FrameTabelaPreco:TFrameTabelaPreco;
+  VeiwTabelaDePreco: TVeiwTabelaDePreco;
 
 
 implementation
 
+uses
+  SmartPro99.View.Frames.Produto, SmartPro99.Classe.Resolucao,
+  SmartPro99.View.FrmPrincipal, SmartPro99.View.Message,
+  SmartPro99.Classe.Loading, SmarPro99.Model.Dados,
+  SmartPro99.View.Configuracao, SmartPro99.View.Logs,
+  SmartPro99.View.Frames.Oferta;
+
 {$R *.fmx}
 
-uses ufrm_Principal, udm_Principal, uframe_Configuracao, Loading,
-  udm_conectSQLlite, uframe_Logs, uframe_MensagemInfor, Resolucao;
 
 { TFrameTabelaPreco }
 
-procedure TFrameTabelaPreco.AddFrameListBox(pDescricao, pValorVenda: string);
+procedure TVeiwTabelaDePreco.AddFrameListBox(pDescricao, pValorVenda: string);
 var
   vFrame : TFrameFPreco;
   vItem : TListBoxItem;
@@ -92,22 +97,22 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.FechaFrameTabelaPreco;
+procedure TVeiwTabelaDePreco.FechaFrameTabelaPreco;
 begin
 
-  FrameTabelaPreco.Visible := False;
-  FrameTabelaPreco := nil;
+  VeiwTabelaDePreco.Visible := False;
+  VeiwTabelaDePreco := nil;
 
 end;
 
-procedure TFrameTabelaPreco.StatusConexao(pIndex: integer);
+procedure TVeiwTabelaDePreco.StatusConexao(pIndex: integer);
 begin
 
   imgConexao.ImageIndex := pIndex;
 
 end;
 
-procedure TFrameTabelaPreco.tmAtualizaProdutosTimer(Sender: TObject);
+procedure TVeiwTabelaDePreco.tmAtualizaProdutosTimer(Sender: TObject);
 begin
 
   try
@@ -120,7 +125,7 @@ begin
   end;
 end;
 
-procedure TFrameTabelaPreco.tmProxPaginaTimer(Sender: TObject);
+procedure TVeiwTabelaDePreco.tmProxPaginaTimer(Sender: TObject);
 begin
 
   try
@@ -134,7 +139,7 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.imgConfiguracaoClick(Sender: TObject);
+procedure TVeiwTabelaDePreco.imgConfiguracaoClick(Sender: TObject);
 begin
 
   TLoading.Show(frmPrincipal,'Aguarde... Conectando ao servidor');
@@ -148,9 +153,9 @@ begin
         tmProxPagina.Enabled       := False;
         tmAtualizaProdutos.Enabled := False;
 
-        DmPrincipal.CarregaParamentros;
-        if DmPrincipal.TestaConexaoWS then
-        DmPrincipal.RecebeTvsWs;
+        ModelDados.CarregaParamentros;
+        if ModelDados.TestaConexaoWS then
+        ModelDados.RecebeTvsWs;
 
         FrameConfig.CreateFrameConfig;
 
@@ -171,7 +176,7 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.imgLogsClick(Sender: TObject);
+procedure TVeiwTabelaDePreco.imgLogsClick(Sender: TObject);
 begin
 
   try
@@ -179,36 +184,37 @@ begin
     FrameLogs.VisualizaLogs;
 
   except
+    raise
 
   end;
 
 end;
 
-procedure TFrameTabelaPreco.IconeConexao;
+procedure TVeiwTabelaDePreco.IconeConexao;
 begin
 
   imgConexao.ImageIndex := FrmPrincipal.fStatusConexaoWs;
 
 end;
 
-procedure TFrameTabelaPreco.IniciarFrame;
+procedure TVeiwTabelaDePreco.IniciarFrame;
 begin
 
     try
 
-      DmPrincipal.CarregaParamentros;
+      ModelDados.CarregaParamentros;
 
       if FrmPrincipal.fIdTvAtual = '0' then
       exit;
 
-      DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,
-                             DmPrincipal.FMentProd);
+      ModelDados.QryToFMent(ModelDados.FQryProdutos,
+                             ModelDados.FMentProd);
 
       lstBoxTabelaPreco.Clear;
 
-      if DmPrincipal.FMentProd.RecordCount <> 0 then
+      if ModelDados.FMentProd.RecordCount <> 0 then
       begin
-        DmPrincipal.FMentProd.First;
+        ModelDados.FMentProd.First;
         ListarProduto;
       end;
 
@@ -225,7 +231,7 @@ begin
 end;
 
 
-procedure TFrameTabelaPreco.ListarProduto;
+procedure TVeiwTabelaDePreco.ListarProduto;
 var
   vI: integer;
 begin
@@ -235,19 +241,19 @@ begin
     vI := 0;
     IconeConexao;
 
-    if DmPrincipal.FMentProd.Eof then
-    DmPrincipal.FMentProd.First;
+    if ModelDados.FMentProd.Eof then
+    ModelDados.FMentProd.First;
 
-    while not DmPrincipal.FMentProd.Eof do
+    while not ModelDados.FMentProd.Eof do
     begin
 
       if vI < TResolucao.fQtdeProdGrid then
       begin
 
-        AddFrameListBox(DmPrincipal.FMentProd.FieldByName('Descricao').AsString,
-                        DmPrincipal.FMentProd.FieldByName('vrvenda').AsString);
-        DmPrincipal.FMentProd.Next;
-        fUltimoRegistro := DmPrincipal.FMentProd.RecNo;
+        AddFrameListBox(ModelDados.FMentProd.FieldByName('Descricao').AsString,
+                        ModelDados.FMentProd.FieldByName('vrvenda').AsString);
+        ModelDados.FMentProd.Next;
+        fUltimoRegistro := ModelDados.FMentProd.RecNo;
         vI := vI + 1;
 
       end
@@ -264,7 +270,7 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.ProximaPag;
+procedure TVeiwTabelaDePreco.ProximaPag;
 begin
 
   try
@@ -273,8 +279,8 @@ begin
 
     if FrmPrincipal.fNovaCarga then
     begin
-      DmPrincipal.QryToFMent(DmPrincipal.FQryProdutos,DmPrincipal.FMentProd);
-      DmPrincipal.FMentProd.RecNo := fUltimoRegistro;
+      ModelDados.QryToFMent(ModelDados.FQryProdutos,ModelDados.FMentProd);
+      ModelDados.FMentProd.RecNo := fUltimoRegistro;
       FrmPrincipal.fNovaCarga := False;
     end;
     ListarProduto;
@@ -289,7 +295,7 @@ begin
 
 end;
 
-procedure TFrameTabelaPreco.AjustaResolucao;
+procedure TVeiwTabelaDePreco.AjustaResolucao;
 begin
 
   try
@@ -310,15 +316,15 @@ begin
 end;
 
 
-procedure TFrameTabelaPreco.CreateFrameTabelaPreco;
+procedure TVeiwTabelaDePreco.CreateFrameTabelaPreco;
 begin
 
   try
 
-    if not assigned(FrameTabelaPreco) then
-    FrameTabelaPreco := TFrameTabelaPreco.Create(self);
+    if not assigned(VeiwTabelaDePreco) then
+    VeiwTabelaDePreco := TVeiwTabelaDePreco.Create(self);
 
-    with FrameTabelaPreco do
+    with VeiwTabelaDePreco do
     begin
 
       Name      := 'FrameConfig';

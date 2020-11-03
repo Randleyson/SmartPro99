@@ -1,4 +1,4 @@
-object DmPrincipal: TDmPrincipal
+object ModelDados: TModelDados
   OldCreateOrder = False
   Height = 367
   Width = 579
@@ -11,14 +11,14 @@ object DmPrincipal: TDmPrincipal
     Top = 152
   end
   object FQryTv: TFDQuery
-    Connection = dmConectSQLlite.FDC_SQLlite
+    Connection = ModelConexao.FDC_SQLlite
     SQL.Strings = (
       'select * from tab_tv')
     Left = 112
     Top = 24
   end
   object FQryTabConfig: TFDQuery
-    Connection = dmConectSQLlite.FDC_SQLlite
+    Connection = ModelConexao.FDC_SQLlite
     SQL.Strings = (
       'select *'
       'from tab_config')
@@ -43,7 +43,7 @@ object DmPrincipal: TDmPrincipal
     end
   end
   object FQryProdutos: TFDQuery
-    Connection = dmConectSQLlite.FDC_SQLlite
+    Connection = ModelConexao.FDC_SQLlite
     SQL.Strings = (
       'select * from tab_produtos'
       'order by codbarra')
@@ -207,7 +207,7 @@ object DmPrincipal: TDmPrincipal
     Left = 176
     Top = 88
     Content = {
-      414442530F0003286C020000FF00010001FF02FF0304001600000046004D0065
+      414442530F000D2E6C020000FF00010001FF02FF0304001600000046004D0065
       006E00740043006F006E0066006900670005000A0000005400610062006C0065
       00060000000000070000080032000000090000FF0AFF0B040008000000490044
       005400560005000800000049004400540056000C00010000000E000D000F0001
@@ -251,7 +251,7 @@ object DmPrincipal: TDmPrincipal
       6E00670065007300}
   end
   object FQryResolucao: TFDQuery
-    Connection = dmConectSQLlite.FDC_SQLlite
+    Connection = ModelConexao.FDC_SQLlite
     SQL.Strings = (
       'select * from tab_Resolucao')
     Left = 264
@@ -266,7 +266,7 @@ object DmPrincipal: TDmPrincipal
     Top = 24
   end
   object FQryOferta: TFDQuery
-    Connection = dmConectSQLlite.FDC_SQLlite
+    Connection = ModelConexao.FDC_SQLlite
     SQL.Strings = (
       'select codbarra,descricao,vrvenda,unidade,promocao'
       'from tab_produtos'
@@ -322,7 +322,7 @@ object DmPrincipal: TDmPrincipal
     Left = 352
     Top = 88
     Content = {
-      414442530F0003281E030000FF00010001FF02FF03040016000000460044004D
+      414442530F000D2E1E030000FF00010001FF02FF03040016000000460044004D
       0065006E004F006600650072007400610005000A0000005400610062006C0065
       00060000000000070000080032000000090000FF0AFF0B04001000000043004F
       0044004200410052005200410005001000000043004F00440042004100520052

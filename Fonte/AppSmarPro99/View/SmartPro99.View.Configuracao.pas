@@ -1,9 +1,10 @@
-unit uframe_Configuracao;
+unit SmartPro99.View.Configuracao;
 
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Edit, FMX.Controls.Presentation, FMX.Layouts, FMX.Objects, FMX.ListBox,
   FMX.Effects, FMX.Filter.Effects;
@@ -84,12 +85,12 @@ type
     { Private declarations }
     procedure IniciaFrame;
     procedure ListarTvDisponivel;
-    procedure AddItemsListBoxTv(pIdTv,pDescricao: String);
+    procedure AddItemsListBoxTv(pIdTv, pDescricao: String);
     procedure DetalharTvAtual;
     procedure DetalharConfgWs;
     procedure ConfiguracaoLocal;
-    procedure ControleBtnTv(pBtnAlter,pBtnGravar,pBtnCancelar: Boolean);
-    procedure ControleBtnWs(pBtnEditar,pBtnGravar,pBtnCancelar: Boolean);
+    procedure ControleBtnTv(pBtnAlter, pBtnGravar, pBtnCancelar: Boolean);
+    procedure ControleBtnWs(pBtnEditar, pBtnGravar, pBtnCancelar: Boolean);
 
     procedure ClickBtnAlterTv;
     procedure ClickBtnSalvarTv;
@@ -98,7 +99,6 @@ type
     procedure ClickBtnGravarWs;
     procedure ClickBtnCancelarWs;
     procedure ClickListTv(pIdTv: string);
-
 
   public
     { Public declarations }
@@ -111,34 +111,31 @@ var
 
 implementation
 
+uses
+  SmartPro99.View.FrmPrincipal, SmarPro99.Model.Dados, SmartPro99.View.Message,
+  SmartPro99.View.ConfiguracaoDoLayout, SmartPro99.View.TextEdit,
+  SmartPro99.Classe.Loading, SmartPro99.View.TabelaDePreco;
+
 {$R *.fmx}
-
-uses ufrm_Principal, udm_Principal, uframe_TabelaPreco, Loading,
-  uframe_MensagemInfor, uframa_Edit, udm_conectSQLlite, uframe_ConfLayout;
-
 { TFrameConfiguracao }
-
- 
 
 procedure TFrameConfig.AddItemsListBoxTv(pIdTv, pDescricao: String);
 var
-  vLstBoxItems : TListBoxItem;
+  vLstBoxItems: TListBoxItem;
 begin
 
   try
-    vLstBoxItems                := TListBoxItem.Create(lstBoxTvs);
-    vLstBoxItems.Height         := 30;
-    vLstBoxItems.Font.Size      := 11;
-    vLstBoxItems.StyledSettings :=[TStyledSetting.Family,
-                                   TStyledSetting.Style,
-                                   TStyledSetting.FontColor,
-                                   TStyledSetting.Other];
-    vLstBoxItems.TagString      := pIdTv;
-    vLstBoxItems.Text           := pIdTv +' - '+ pDescricao;
-    vLstBoxItems.Parent         := lstBoxTvs;
+    vLstBoxItems := TListBoxItem.Create(lstBoxTvs);
+    vLstBoxItems.Height := 30;
+    vLstBoxItems.Font.Size := 11;
+    vLstBoxItems.StyledSettings := [TStyledSetting.Family, TStyledSetting.Style,
+      TStyledSetting.FontColor, TStyledSetting.Other];
+    vLstBoxItems.TagString := pIdTv;
+    vLstBoxItems.Text := pIdTv + ' - ' + pDescricao;
+    vLstBoxItems.Parent := lstBoxTvs;
 
     if pIdTv = FrmPrincipal.fIdTvAtual then
-    vLstBoxItems.IsSelected := True;
+      vLstBoxItems.IsSelected := True;
 
   except
     FrmPrincipal.fMensagemErro := 'Erro ao executar AddItemsListBoxTv';
@@ -147,14 +144,14 @@ begin
 
 end;
 
-procedure  TFrameConfig.ClickBtnCancelarTv;
+procedure TFrameConfig.ClickBtnCancelarTv;
 begin
   try
 
-    lstBoxTvs.Enabled       := False;
-    rectDetalheTv.Enabled   := False;
+    lstBoxTvs.Enabled := False;
+    rectDetalheTv.Enabled := False;
     DetalharTvAtual;
-    ControleBtnTv(True,False,False);
+    ControleBtnTv(True, False, False);
 
   except
     FrmPrincipal.fMensagemErro := 'Erro ao ClickBtnCancelar';
@@ -170,7 +167,7 @@ begin
 
     DetalharConfgWs;
     lytDetalheWs.Enabled := False;
-    ControleBtnWs(True,False,False);
+    ControleBtnWs(True, False, False);
 
   except
     raise
@@ -184,8 +181,8 @@ begin
 
   try
 
-    lytDetalheWs.Enabled  := True;
-    ControleBtnWs(False,True,True);
+    lytDetalheWs.Enabled := True;
+    ControleBtnWs(False, True, True);
 
   except
     raise
@@ -198,15 +195,14 @@ begin
 
   try
 
-    DmPrincipal.GravarConfigWs(edtHostWs.Text,edtPortaWs.Text);
+    ModelDados.GravarConfigWs(edtHostWs.Text, edtPortaWs.Text);
     lytDetalheWs.Enabled := False;
-    ControleBtnWs(True,False,False);
+    ControleBtnWs(True, False, False);
 
   except
     raise
 
   end;
-
 
 end;
 
@@ -263,7 +259,6 @@ begin
 
   end;
 
-
 end;
 
 procedure TFrameConfig.BtnGravarTvClick(Sender: TObject);
@@ -301,13 +296,13 @@ begin
     FrameConfLayout.CreateFrameConfigResolucao;
 
   except
-  on e: exception do
+    on e: exception do
     begin
-      FrameMsgInfor.CreateFrameMsgInfor('Erro ao criar a tela config de resolcucao '+ e.message);
+      FrameMsgInfor.CreateFrameMsgInfor
+        ('Erro ao criar a tela config de resolcucao ' + e.Message);
     end;
 
   end;
-
 
 end;
 
@@ -316,9 +311,9 @@ begin
 
   try
 
-    lstBoxTvs.Enabled     := True;
+    lstBoxTvs.Enabled := True;
     rectDetalheTv.Enabled := True;
-    ControleBtnTv(False,True,True);
+    ControleBtnTv(False, True, True);
 
   except
     FrmPrincipal.fMensagemErro := 'Erro ao ClickBtnAlter';
@@ -337,14 +332,15 @@ begin
       FrameMsgInfor.CreateFrameMsgInfor('Selcione um a TV na lista');
       exit;
     end;
-    
-    FrmPrincipal.fIdTvAtual := lstBoxTvs.ListItems[lstBoxTvs.ItemIndex].TagString;
-    //DmPrincipal.AlteraConfiguracaoTv(FrmPrincipal.fIdTvAtual,ResolucaoSelecionada);
-    lstBoxTvs.Enabled       := False;
-    rectDetalheTv.Enabled   := False;
-    DmPrincipal.CarregaParamentros;
+
+    FrmPrincipal.fIdTvAtual := lstBoxTvs.ListItems[lstBoxTvs.ItemIndex]
+      .TagString;
+    // ModelDados.AlteraConfiguracaoTv(FrmPrincipal.fIdTvAtual,ResolucaoSelecionada);
+    lstBoxTvs.Enabled := False;
+    rectDetalheTv.Enabled := False;
+    ModelDados.CarregaParamentros;
     DetalharTvAtual;
-    ControleBtnTv(True,False,False);
+    ControleBtnTv(True, False, False);
     FrameMsgInfor.CreateFrameMsgInfor('Alterção salva com exito');
 
   except
@@ -359,12 +355,12 @@ begin
 
   try
 
-    DmPrincipal.FMentTv.Filter   := ' idtv = ' + FrmPrincipal.ifVasiu(pIdTv,'0');
-    DmPrincipal.FMentTv.Filtered := True;
-    DmPrincipal.FMentTv.First;
+    ModelDados.FMentTv.Filter := ' idtv = ' + FrmPrincipal.ifVasiu(pIdTv, '0');
+    ModelDados.FMentTv.Filtered := True;
+    ModelDados.FMentTv.First;
 
-    edtCodTv.Text     := pIdTv;
-    edtDescricao.Text := DmPrincipal.FMentTv.FieldByName('DescricaoTv').AsString;
+    edtCodTv.Text := pIdTv;
+    edtDescricao.Text := ModelDados.FMentTv.FieldByName('DescricaoTv').AsString;
 
   except
     FrmPrincipal.fMensagemErro := 'Erro ao executar ClickListTv';
@@ -376,10 +372,10 @@ end;
 procedure TFrameConfig.ConfiguracaoLocal;
 begin
 
-  lblDimencao.Text  := 'Dimenção atual da Tela : '+ IntToStr(Screen.Height) +
-                       ' X '+ IntToStr(Screen.Width);
+  lblDimencao.Text := 'Dimenção atual da Tela : ' + IntToStr(Screen.Height) +
+    ' X ' + IntToStr(Screen.Width);
 
-  lblIpLocal.Text   := FrmPrincipal.fIPlocal;
+  lblIpLocal.Text := FrmPrincipal.fIPlocal;
 
 end;
 
@@ -387,8 +383,8 @@ procedure TFrameConfig.ControleBtnTv(pBtnAlter, pBtnGravar,
   pBtnCancelar: Boolean);
 begin
 
-  btnEditarTv.Enabled   := pBtnAlter;
-  BtnGravarTv.Enabled   := pBtnGravar;
+  btnEditarTv.Enabled := pBtnAlter;
+  BtnGravarTv.Enabled := pBtnGravar;
   BtnCancelarTv.Enabled := pBtnCancelar;
 
 end;
@@ -397,27 +393,26 @@ procedure TFrameConfig.ControleBtnWs(pBtnEditar, pBtnGravar,
   pBtnCancelar: Boolean);
 begin
 
-  btnEditarWs.Enabled   := pBtnEditar;
-  btnGravarWs.Enabled   := pBtnGravar;
+  btnEditarWs.Enabled := pBtnEditar;
+  btnGravarWs.Enabled := pBtnGravar;
   btnCancelarWs.Enabled := pBtnCancelar;
 
 end;
 
-
 procedure TFrameConfig.DetalharConfgWs;
 begin
 
-   try
-     DmPrincipal.QryToFMent(DmPrincipal.FQryTabConfig,DmPrincipal.FMentConfig);
+  try
+    ModelDados.QryToFMent(ModelDados.FQryTabConfig, ModelDados.FMentConfig);
 
-     edtHostWs.Text  := DmPrincipal.FMentConfig.FieldByName('HOSTWS').AsString;
-     edtPortaWs.Text := DmPrincipal.FMentConfig.FieldByName('PORTAWS').AsString;
+    edtHostWs.Text := ModelDados.FMentConfig.FieldByName('HOSTWS').AsString;
+    edtPortaWs.Text := ModelDados.FMentConfig.FieldByName('PORTAWS').AsString;
 
-   except
-     FrmPrincipal.fMensagemErro := 'Erro ao DetalharConfgWs';
-     raise
+  except
+    FrmPrincipal.fMensagemErro := 'Erro ao DetalharConfgWs';
+    raise
 
-   end;
+  end;
 
 end;
 
@@ -426,13 +421,14 @@ begin
 
   try
 
-    DmPrincipal.FMentTv.Filter   := ' idtv = ' + FrmPrincipal.ifVasiu(FrmPrincipal.fIdTvAtual,'0');
-    DmPrincipal.FMentTv.Filtered := True;
-    DmPrincipal.FMentTv.First;
+    ModelDados.FMentTv.Filter := ' idtv = ' + FrmPrincipal.ifVasiu
+      (FrmPrincipal.fIdTvAtual, '0');
+    ModelDados.FMentTv.Filtered := True;
+    ModelDados.FMentTv.First;
 
-    edtCodTv.Text     := FrmPrincipal.fIdTvAtual;
-    edtDescricao.Text := DmPrincipal.FMentTv.FieldByName('DescricaoTv').AsString;
-    //ListarResolucao(FrmPrincipal.fResolucaoAtual);
+    edtCodTv.Text := FrmPrincipal.fIdTvAtual;
+    edtDescricao.Text := ModelDados.FMentTv.FieldByName('DescricaoTv').AsString;
+    // ListarResolucao(FrmPrincipal.fResolucaoAtual);
 
   except
     FrmPrincipal.fMensagemErro := 'Não e possivel detalhar a Tv atual';
@@ -447,7 +443,7 @@ begin
 
   try
 
-    FrameEdit.CreateFrameTextoEdit(edtHostWs.Text,edtHostWs);
+    FrameEdit.CreateFrameTextoEdit(edtHostWs.Text, edtHostWs);
 
   except
     FrameMsgInfor.CreateFrameMsgInfor(FrmPrincipal.fMensagemErro);
@@ -461,7 +457,7 @@ begin
 
   try
 
-    FrameEdit.CreateFrameTextoEdit(edtPortaWs.Text,edtPortaWs);
+    FrameEdit.CreateFrameTextoEdit(edtPortaWs.Text, edtPortaWs);
 
   except
     FrameMsgInfor.CreateFrameMsgInfor(FrmPrincipal.fMensagemErro);
@@ -473,38 +469,41 @@ end;
 procedure TFrameConfig.FechaFrameConfig;
 begin
 
-  TLoading.Show(frmPrincipal,'Aguarde... Conectando ao servidor');
+  TLoading.Show(FrmPrincipal, 'Aguarde... Conectando ao servidor');
 
-  TThread.CreateAnonymousThread(procedure
-  begin
-    try
-
+  TThread.CreateAnonymousThread(
+    procedure
+    begin
       try
 
-        FrmPrincipal.RecebeAtualizaWs;;
+        try
 
-      except
-        raise
+          FrmPrincipal.RecebeAtualizaWs;;
 
+        except
+          raise
+
+        end;
+
+      finally
+
+        TThread.Synchronize(nil,
+          procedure
+          begin
+
+            VeiwTabelaDePreco.CreateFrameTabelaPreco;
+
+            if FrmPrincipal.fStatusConexaoWs = 1 then
+              FrameMsgInfor.CreateFrameMsgInfor
+                ('Não foi possivel conectar ao servidor, verifica as configuração');
+            FrameConfig.Visible := False;
+            TLoading.Hide;
+            FrameConfig := nil;
+
+          end);
       end;
 
-    finally
-    
-      TThread.Synchronize(nil,procedure
-      begin
-
-        FrameTabelaPreco.CreateFrameTabelaPreco;
-
-        if FrmPrincipal.fStatusConexaoWs = 1 then
-        FrameMsgInfor.CreateFrameMsgInfor('Não foi possivel conectar ao servidor, verifica as configuração');
-        FrameConfig.Visible := False;
-        TLoading.Hide;
-        FrameConfig         := nil;
-
-      end);
-    end;
-
-  end).Start;
+    end).Start;
 
 end;
 
@@ -517,11 +516,11 @@ begin
     DetalharConfgWs;
     DetalharTvAtual;
     ConfiguracaoLocal;
-    lstBoxTvs.Enabled     := False;
+    lstBoxTvs.Enabled := False;
     rectDetalheTv.Enabled := False;
-    lytDetalheWs.Enabled  := False;
-    ControleBtnTv(True,False,False);
-    ControleBtnWs(True,False,False);
+    lytDetalheWs.Enabled := False;
+    ControleBtnTv(True, False, False);
+    ControleBtnWs(True, False, False);
 
   except
     raise;
@@ -533,24 +532,24 @@ begin
 
   try
 
-    DmPrincipal.QryToFMent(DmPrincipal.FQryTv,DmPrincipal.FMentTv);
-    DmPrincipal.FMentTv.Filtered := False;
+    ModelDados.QryToFMent(ModelDados.FQryTv, ModelDados.FMentTv);
+    ModelDados.FMentTv.Filtered := False;
 
     lblSemRegistro.Visible := True;
-    if DmPrincipal.FMentTv.RecordCount > 0 then
+    if ModelDados.FMentTv.RecordCount > 0 then
     begin
 
       lblSemRegistro.Visible := False;
-      DmPrincipal.FMentTv.First;
+      ModelDados.FMentTv.First;
       lstBoxTvs.Items.Clear;
       lstBoxTvs.BeginUpdate;
-      while not DmPrincipal.FMentTv.Eof do
+      while not ModelDados.FMentTv.Eof do
       begin
 
-        AddItemsListBoxTv(DmPrincipal.FMentTv.FieldByName('IDTV').AsString,
-                          DmPrincipal.FMentTv.FieldByName('DESCRICAOTV').AsString);
+        AddItemsListBoxTv(ModelDados.FMentTv.FieldByName('IDTV').AsString,
+          ModelDados.FMentTv.FieldByName('DESCRICAOTV').AsString);
 
-        DmPrincipal.FMentTv.Next;
+        ModelDados.FMentTv.Next;
 
       end;
 
@@ -565,9 +564,8 @@ begin
 
 end;
 
-
 procedure TFrameConfig.lstBoxTvsItemClick(const Sender: TCustomListBox;
-  const Item: TListBoxItem);
+const Item: TListBoxItem);
 begin
 
   try
@@ -585,13 +583,13 @@ procedure TFrameConfig.btnFecharClick(Sender: TObject);
 begin
 
   try
-  
+
     FechaFrameConfig;
-    
+
   except
     FrameMsgInfor.CreateFrameMsgInfor('Erro ao fechar a tela de config');
   end;
-  
+
 end;
 
 procedure TFrameConfig.CreateFrameConfig;
@@ -600,25 +598,24 @@ begin
   try
 
     if not assigned(FrameConfig) then
-    FrameConfig := TFrameConfig.Create(self);
+      FrameConfig := TFrameConfig.Create(self);
 
     with FrameConfig do
     begin
 
-      Name      := 'FrameConfig';
-      Parent    := frmPrincipal;
+      Name := 'FrameConfig';
+      Parent := FrmPrincipal;
 
-      Width     := Screen.Width;
-      Height    := Screen.Height;
+      Width := Screen.Width;
+      Height := Screen.Height;
       IniciaFrame;
       BringToFront;
-
 
     end;
 
   except
     FechaFrameConfig;
-    ShowMessage('Erro : '+ FrmPrincipal.fMensagemErro);
+    ShowMessage('Erro : ' + FrmPrincipal.fMensagemErro);
 
   end;
 

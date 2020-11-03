@@ -16,11 +16,9 @@ Largura da imagem oferta		    : LARGIMGOFERTA
 
 }
 
-unit Resolucao;
+unit SmartPro99.Classe.Resolucao;
 
 interface
-
-uses ufrm_Principal;
 
 type
   TResolucao = class
