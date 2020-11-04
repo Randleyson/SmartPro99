@@ -1,4 +1,4 @@
-unit u_Message;
+unit SmartPro99.Controlle.Message;
 
 interface
 
@@ -19,17 +19,18 @@ uses
 
 implementation
 
-uses  Frm_MessagePopUp, Frm_MessageDlg;
+uses
+  SmartPro99.View.MessageDlg, SmartPro99.View.MessagePopUp;
 
 class function TMessage.MessagemDlg(pFrmPrinipal: TForm;
   pMenssagem: string): Boolean;
 begin
 
-  frmMessageDlg := TfrmMessageDlg.Create(pFrmPrinipal);
-  frmMessageDlg.lblMensagem. Text := pMenssagem;
-  frmMessageDlg.ShowModal;
+  ViewMessageDlg := TViewMessageDlg.Create(pFrmPrinipal);
+  ViewMessageDlg.lblMensagem. Text := pMenssagem;
+  ViewMessageDlg.ShowModal;
   result := fResult;
-  FreeAndNil(frmMessageDlg);
+  FreeAndNil(ViewMessageDlg);
 
 end;
 
@@ -37,11 +38,11 @@ class function TMessage.MessagemPopUp(pFrmPrinipal: TForm;
   pMenssagem: string): Boolean;
 begin
 
-    FrmMessagePopUp := TFrmMessagePopUp.Create(pFrmPrinipal);
-    FrmMessagePopUp.lblMensagem. Text := pMenssagem;
-    FrmMessagePopUp.ShowModal;
+    ViewMessagePopUp := TViewMessagePopUp.Create(pFrmPrinipal);
+    ViewMessagePopUp.lblMensagem. Text := pMenssagem;
+    ViewMessagePopUp.ShowModal;
     result := fResult;
-    FreeAndNil(FrmMessagePopUp);
+    FreeAndNil(ViewMessagePopUp);
 
 end;
 

@@ -1,4 +1,4 @@
-unit udm_CadProduto;
+unit SmartPro99.Model.Produto;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Stan.StorageBin;
 
 type
-  TdmCadProduto = class(TDataModule)
+  TModelProduto = class(TDataModule)
     FQryProduto: TFDQuery;
     FMentProduto: TFDMemTable;
     FMentProdutoLENGHT: TIntegerField;
@@ -30,47 +30,49 @@ type
 end;
 
 var
-  dmCadProduto: TdmCadProduto;
+  ModelProduto: TModelProduto;
 
 implementation
 
-{%CLASSGROUP 'FMX.Controls.TControl'}
+uses
+  SmartPro99.Model.Conexao, SmartPro99.Model.Principal,
+  SmartPro99.View.Principal;
 
-uses udm_Conexao, udm_Principal, ufrm_Principal;
+{%CLASSGROUP 'FMX.Controls.TControl'}
 
 {$R *.dfm}
 
 { TDataModule1 }
 
-procedure TdmCadProduto.BdToFMentProduto;
+procedure TModelProduto.BdToFMentProduto;
 begin
 
   try
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       FQryProduto.Close;
       FQryProduto.Open;
 
       FMentProduto.Close;
       FMentProduto.Open;
       FMentProduto.EmptyDataSet;
-      DmPrincipal.CopyDataSet(FQryProduto,FMentProduto);
+      ModelPrincipal.CopyDataSet(FQryProduto,FMentProduto);
       FMentProduto.Filtered := False;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao excutar DbToFMentProduto';
+      ViewPrincipal.FMensagemErro := 'Erro ao excutar DbToFMentProduto';
       raise;
     end;
 
   finally
     FQryProduto.Close;
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
 
   end;
 end;
 
-procedure TdmCadProduto.UpdateProduto(pCodProd, pDescricao: String);
+procedure TModelProduto.UpdateProduto(pCodProd, pDescricao: String);
 var
   vSQL : String;
 
@@ -85,10 +87,10 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL);
+    ModelPrincipal.ExcuteSQL(vSQL);
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar UpdateProduto';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar UpdateProduto';
     raise;
 
   end;

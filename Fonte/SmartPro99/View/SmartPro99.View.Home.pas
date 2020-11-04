@@ -1,4 +1,4 @@
-unit uframe_Home;
+unit SmartPro99.View.Home;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FMX.Filter.Effects;
 
 type
-  TFrameHome = class(TFrame)
+  TViewHome = class(TFrame)
     Rectangle1: TRectangle;
     LayoutTitulo: TLayout;
     Line1: TLine;
@@ -46,53 +46,55 @@ type
   end;
 
 var
-   FrameHome:TFrameHome;
+   ViewHome:TViewHome;
 
 implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, uframe_Config, uframe_CadTvs, uframe_CadProduto,
-  udm_Conexao, udm_Principal, udm_CadProduto, Loading, u_Message;
+uses
+  SmartPro99.Model.Principal, SmartPro99.View.Principal,
+  SmartPro99.View.Configuracao, SmartPro99.View.CadTv,
+  SmartPro99.View.CadProduto, SmartPro99.Controlle.Message;
 
 { TFrameHome }
 
-procedure TFrameHome.btnCadProdutoClick(Sender: TObject);
+procedure TViewHome.btnCadProdutoClick(Sender: TObject);
 begin
 
-  FrameCadProduto.CreateFrameCadProduto;
+  ViewCadProdutos.CreateFrameCadProduto;
 
 end;
 
-procedure TFrameHome.btnCadTvClick(Sender: TObject);
+procedure TViewHome.btnCadTvClick(Sender: TObject);
 begin
 
-  FrameCadTv.CreateFrameCadTv;
+  ViewCadTvs.CreateFrameCadTv;
 
 end;
 
-procedure TFrameHome.btnConfiguracaoClick(Sender: TObject);
+procedure TViewHome.btnConfiguracaoClick(Sender: TObject);
 begin
 
-  FrameConfiguracao.CreateFrameConfig;
+  ViewConfiguracao.CreateFrameConfig;
 
 end;
 
-procedure TFrameHome.btnFecharAplicacaoClick(Sender: TObject);
+procedure TViewHome.btnFecharAplicacaoClick(Sender: TObject);
 begin
 
-  if TMessage.MessagemDlg(frmPrincipal,'Deseja fechar o sistema ?') then
+  if TMessage.MessagemDlg(ViewPrincipal,'Deseja fechar o sistema ?') then
   Application.Terminate;
 
 end;
 
-function TFrameHome.PendenciaProduto: Boolean;
+function TViewHome.PendenciaProduto: Boolean;
 begin
 
   try
 
     Result := False;
-    if DmPrincipal.LengthDescricao > 0 then
+    if ModelPrincipal.LengthDescricao > 0 then
     Result := True;
 
   except
@@ -103,18 +105,18 @@ begin
 
 end;
 
-procedure TFrameHome.CreateFremeHome;
+procedure TViewHome.CreateFremeHome;
 begin
 
   try
 
-    if not assigned(FrameHome) then
-    FrameHome := TFrameHome.Create(frmPrincipal);
-    with FrameHome do
+    if not assigned(ViewHome) then
+    ViewHome := TViewHome.Create(ViewPrincipal);
+    with ViewHome do
     begin
 
       Name      := 'FrameHome';
-      Parent    := frmPrincipal;
+      Parent    := ViewPrincipal;
 
       imgPendencia.Visible := PendenciaProduto;
 

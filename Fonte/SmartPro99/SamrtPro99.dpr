@@ -3,27 +3,26 @@ program SamrtPro99;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  ufrm_Principal in 'Units\ufrm_Principal.pas' {frmPrincipal},
-  uframe_Config in 'Units\uframe_Config.pas' {FrameConfiguracao: TFrame},
-  uframe_Home in 'Units\uframe_Home.pas' {FrameHome: TFrame},
-  udm_Conexao in 'DataModule\udm_Conexao.pas' {DmConexao: TDataModule},
-  udm_Principal in 'DataModule\udm_Principal.pas' {DmPrincipal: TDataModule},
-  uframe_CadTvs in 'Units\uframe_CadTvs.pas' {FrameCadTv: TFrame},
-  uframe_CadProduto in 'Units\uframe_CadProduto.pas' {FrameCadProduto: TFrame},
-  uframe_FListarProduto in 'Units\uframe_FListarProduto.pas' {FrameFListarProduto: TFrame},
-  Loading in 'Units\Loading.pas',
-  udm_CadTv in 'DataModule\udm_CadTv.pas' {dmCadTv: TDataModule},
-  udm_CadProduto in 'DataModule\udm_CadProduto.pas' {dmCadProduto: TDataModule},
-  Frm_MessageDlg in 'Units\Frm_MessageDlg.pas' {frmMessageDlg},
-  Frm_MessagePopUp in 'Units\Frm_MessagePopUp.pas' {FrmMessagePopUp},
-  u_Message in 'Units\u_Message.pas';
+  SmartPro99.View.Principal in 'View\SmartPro99.View.Principal.pas' {ViewPrincipal},
+  SmartPro99.View.Configuracao in 'View\SmartPro99.View.Configuracao.pas' {ViewConfiguracao: TFrame},
+  SmartPro99.View.Home in 'View\SmartPro99.View.Home.pas' {ViewHome: TFrame},
+  SmartPro99.Model.Conexao in 'Model\SmartPro99.Model.Conexao.pas' {ModelConexao: TDataModule},
+  SmartPro99.Model.Principal in 'Model\SmartPro99.Model.Principal.pas' {ModelPrincipal: TDataModule},
+  SmartPro99.View.CadTv in 'View\SmartPro99.View.CadTv.pas' {ViewCadTvs: TFrame},
+  SmartPro99.View.CadProduto in 'View\SmartPro99.View.CadProduto.pas' {ViewCadProdutos: TFrame},
+  SmartPro99.Controlle.Loading in 'Controlle\SmartPro99.Controlle.Loading.pas',
+  SmartPro99.Model.Tvs in 'Model\SmartPro99.Model.Tvs.pas' {ModelTvs: TDataModule},
+  SmartPro99.Model.Produto in 'Model\SmartPro99.Model.Produto.pas' {ModelProduto: TDataModule},
+  SmartPro99.View.MessageDlg in 'View\SmartPro99.View.MessageDlg.pas' {ViewMessageDlg},
+  SmartPro99.View.MessagePopUp in 'View\SmartPro99.View.MessagePopUp.pas' {ViewMessagePopUp},
+  SmartPro99.Controlle.Message in 'Controlle\SmartPro99.Controlle.Message.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmMessageDlg, frmMessageDlg);
-  Application.CreateForm(TFrmMessagePopUp, FrmMessagePopUp);
+  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.CreateForm(TViewMessageDlg, ViewMessageDlg);
+  Application.CreateForm(TViewMessagePopUp, ViewMessagePopUp);
   Application.Run;
 end.

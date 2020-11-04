@@ -1,4 +1,4 @@
-unit udm_CadTv;
+unit SmartPro99.Model.Tvs;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin;
 
 type
-  TdmCadTv = class(TDataModule)
+  TModelTvs = class(TDataModule)
     FQryTv: TFDQuery;
     FMenTv: TFDMemTable;
     FQryProdutos: TFDQuery;
@@ -51,23 +51,25 @@ type
   end;
 
 var
-  dmCadTv: TdmCadTv;
+  ModelTvs: TModelTvs;
 
 implementation
 
-{%CLASSGROUP 'FMX.Controls.TControl'}
+uses
+  SmartPro99.Model.Principal, SmartPro99.View.Principal,
+  SmartPro99.Model.Conexao;
 
-uses ufrm_Principal, udm_Principal, udm_Conexao;
+{%CLASSGROUP 'FMX.Controls.TControl'}
 
 {$R *.dfm}
 
-function TdmCadTv.InsertTv(pDescricao: String): integer;
+function TModelTvs.InsertTv(pDescricao: String): integer;
 var
   vSQL,vIdTv: string;
 
 begin
 
-  vIdTv := DmPrincipal.IdTabela('idtv','tv');
+  vIdTv := ModelPrincipal.IdTabela('idtv','tv');
 
   vSQL := 'Insert into tv (idtv,descricaoTv) values'+
           ' ('+ vIdtv + ','+
@@ -75,18 +77,18 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL);
+    ModelPrincipal.ExcuteSQL(vSQL);
     Result := StrToInt(vIdTv);
 
   except
-    frmPrincipal.fMensagemErro := 'Erro ao tentar GravarTv no banco de dados';
+    ViewPrincipal.fMensagemErro := 'Erro ao tentar GravarTv no banco de dados';
     raise
 
   end;
 
 end;
 
-procedure TdmCadTv.MarcaProdTvExcluir(pIdtv: Integer);
+procedure TModelTvs.MarcaProdTvExcluir(pIdtv: Integer);
 var
   vSQL: string;
 begin
@@ -95,17 +97,17 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL);
+    ModelPrincipal.ExcuteSQL(vSQL);
 
   except
-    frmPrincipal.FMensagemErro := 'Erro a executar MarcaProdTvExcluir';
+    ViewPrincipal.FMensagemErro := 'Erro a executar MarcaProdTvExcluir';
     raise;
 
   end;
 
 end;
 
-procedure TdmCadTv.DataModuleCreate(Sender: TObject);
+procedure TModelTvs.DataModuleCreate(Sender: TObject);
 begin
 
   try
@@ -120,7 +122,7 @@ begin
     FMenTv.Close;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao DataModuleCreate';
+    ViewPrincipal.FMensagemErro := 'Erro ao DataModuleCreate';
     raise
 
   end;
@@ -128,7 +130,7 @@ begin
 
 end;
 
-procedure TdmCadTv.DeleteTV(pIdtv: Integer);
+procedure TModelTvs.DeleteTV(pIdtv: Integer);
 var
   vSQL1,vSQL2: String;
 begin
@@ -139,18 +141,18 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL1);
-    DmPrincipal.ExcuteSQL(vSQL2);
+    ModelPrincipal.ExcuteSQL(vSQL1);
+    ModelPrincipal.ExcuteSQL(vSQL2);
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao excluiar a Tv';
+    ViewPrincipal.FMensagemErro := 'Erro ao excluiar a Tv';
     raise
 
   end;
 
 end;
 
-procedure TdmCadTv.RecebeProdNaoTv(pIdTv: Integer);
+procedure TModelTvs.RecebeProdNaoTv(pIdTv: Integer);
 var
   vSQL: String;
 begin
@@ -163,7 +165,7 @@ begin
 
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       FQryProdutos.Close;
       FQryProdutos.SQL.Text := '';
       FQryProdutos.SQL.Add(vSQL);
@@ -172,23 +174,23 @@ begin
       FMentProdNaoTv.Close;
       FMentProdNaoTv.Open;
       FMentProdNaoTv.EmptyDataSet;
-      DmPrincipal.CopyDataSet(FQryProdutos,FMentProdNaoTv);
+      ModelPrincipal.CopyDataSet(FQryProdutos,FMentProdNaoTv);
       FMentProdNaoTv.Filtered := False;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
+      ViewPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
       raise
     end;
 
   finally
     FQryProdutos.Close;
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
 
   end;
 
 end;
 
-procedure TdmCadTv.RecebeProdNaTv(pIdTv: Integer);
+procedure TModelTvs.RecebeProdNaTv(pIdTv: Integer);
 var
   vSQL: String;
 begin
@@ -199,7 +201,7 @@ begin
   try
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       FQryProdutos.Close;
       FQryProdutos.SQL.Text := '';
       FQryProdutos.SQL.Add(vSQL);
@@ -208,30 +210,30 @@ begin
       FMentProdNaTv.Close;
       FMentProdNaTv.Open;
       FMentProdNaTv.EmptyDataSet;
-      DmPrincipal.CopyDataSet(FQryProdutos,FMentProdNaTv);
+      ModelPrincipal.CopyDataSet(FQryProdutos,FMentProdNaTv);
       FMentProdNaTv.Filtered := False;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
+      ViewPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
       raise
 
     end;
 
   finally
     FQryProdutos.Close;
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
 
   end;
 
 end;
 
-procedure TdmCadTv.RecebeTabProdTv(pIdTv: Integer);
+procedure TModelTvs.RecebeTabProdTv(pIdTv: Integer);
 begin
 
   try
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       FQryTabProdTv.Close;
       FQryTabProdTv.Open();
       FQryTabProdTv.Filter := 'idtv = '+ IntToStr(pIdTv);
@@ -240,31 +242,31 @@ begin
       FMentTabProdTv.Close;
       FMentTabProdTv.Open;
       FMentTabProdTv.EmptyDataSet;
-      DmPrincipal.CopyDataSet(FQryTabProdTv,FMentTabProdTv);
+      ModelPrincipal.CopyDataSet(FQryTabProdTv,FMentTabProdTv);
       FMentTabProdTv.Filtered := False;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
+      ViewPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
       raise
 
     end;
 
   finally
     FQryTabProdTv.Close;
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
 
   end;
 
 end;
 
-procedure TdmCadTv.RecebeTv;
+procedure TModelTvs.RecebeTv;
 begin
 
   try
 
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       FQryTv.Close;
       FQryTv.Filtered := False;
       FQryTv.Open;
@@ -272,24 +274,24 @@ begin
       FMenTv.Close;
       FMenTv.Open;
       FMenTv.EmptyDataSet;
-      DmPrincipal.CopyDataSet(FQryTv,FMenTv);
+      ModelPrincipal.CopyDataSet(FQryTv,FMenTv);
       FMenTv.Filtered := False;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
+      ViewPrincipal.FMensagemErro := 'Erro ao RecebeProdNaoTv';
       raise
 
     end;
 
   finally
     FQryTv.Close;
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
 
   end;
 
 end;
 
-procedure TdmCadTv.RemoverProdTvExcluido;
+procedure TModelTvs.RemoverProdTvExcluido;
 var
   vSQL: String;
 begin
@@ -298,17 +300,17 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL);
+    ModelPrincipal.ExcuteSQL(vSQL);
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar procedure UpdateTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar procedure UpdateTv';
     raise
 
   end;
 
 end;
 
-procedure TdmCadTv.UpdateTv(pDescricao: String; pIdTv: integer);
+procedure TModelTvs.UpdateTv(pDescricao: String; pIdTv: integer);
 var
   vSQL: String;
 begin
@@ -317,10 +319,10 @@ begin
 
   try
 
-    DmPrincipal.ExcuteSQL(vSQL);
+    ModelPrincipal.ExcuteSQL(vSQL);
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar procedure UpdateTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar procedure UpdateTv';
     raise
 
   end;

@@ -375,65 +375,60 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Units\ufrm_Principal.pas">
-            <Form>frmPrincipal</Form>
+        <DCCReference Include="View\SmartPro99.View.Principal.pas">
+            <Form>ViewPrincipal</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Units\uframe_Config.pas">
-            <Form>FrameConfiguracao</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Units\uframe_Home.pas">
-            <Form>FrameHome</Form>
+        <DCCReference Include="View\SmartPro99.View.Configuracao.pas">
+            <Form>ViewConfiguracao</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="DataModule\udm_Conexao.pas">
-            <Form>DmConexao</Form>
+        <DCCReference Include="View\SmartPro99.View.Home.pas">
+            <Form>ViewHome</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Model\SmartPro99.Model.Conexao.pas">
+            <Form>ModelConexao</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="DataModule\udm_Principal.pas">
-            <Form>DmPrincipal</Form>
+        <DCCReference Include="Model\SmartPro99.Model.Principal.pas">
+            <Form>ModelPrincipal</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_CadTvs.pas">
-            <Form>FrameCadTv</Form>
+        <DCCReference Include="View\SmartPro99.View.CadTv.pas">
+            <Form>ViewCadTvs</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_CadProduto.pas">
-            <Form>FrameCadProduto</Form>
+        <DCCReference Include="View\SmartPro99.View.CadProduto.pas">
+            <Form>ViewCadProdutos</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\uframe_FListarProduto.pas">
-            <Form>FrameFListarProduto</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Units\Loading.pas"/>
-        <DCCReference Include="DataModule\udm_CadTv.pas">
-            <Form>dmCadTv</Form>
+        <DCCReference Include="Controlle\SmartPro99.Controlle.Loading.pas"/>
+        <DCCReference Include="Model\SmartPro99.Model.Tvs.pas">
+            <Form>ModelTvs</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="DataModule\udm_CadProduto.pas">
-            <Form>dmCadProduto</Form>
+        <DCCReference Include="Model\SmartPro99.Model.Produto.pas">
+            <Form>ModelProduto</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Units\Frm_MessageDlg.pas">
-            <Form>frmMessageDlg</Form>
+        <DCCReference Include="View\SmartPro99.View.MessageDlg.pas">
+            <Form>ViewMessageDlg</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Units\Frm_MessagePopUp.pas">
-            <Form>FrmMessagePopUp</Form>
+        <DCCReference Include="View\SmartPro99.View.MessagePopUp.pas">
+            <Form>ViewMessagePopUp</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Units\u_Message.pas"/>
+        <DCCReference Include="Controlle\SmartPro99.Controlle.Message.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

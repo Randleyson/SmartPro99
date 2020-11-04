@@ -1,10 +1,10 @@
-object dmCadTv: TdmCadTv
+object ModelTvs: TModelTvs
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 324
   Width = 594
   object FQryTv: TFDQuery
-    Connection = DmConexao.FDC_Freeboard
+    Connection = ModelConexao.FDC_Freeboard
     SQL.Strings = (
       'select * from tv')
     Left = 26
@@ -46,7 +46,7 @@ object dmCadTv: TdmCadTv
     Left = 136
     Top = 264
     Content = {
-      414442530F00034681010000FF00010001FF02FF0304000C00000046004D0065
+      414442530F009A2481010000FF00010001FF02FF0304000C00000046004D0065
       006E005400760005000A0000005400610062006C006500060000000000070000
       080032000000090000FF0AFF0B04000800000049004400540056000500080000
       0049004400540056000C00010000000E000D000F000110000111000112000113
@@ -82,7 +82,7 @@ object dmCadTv: TdmCadTv
       0065007300}
   end
   object FQryProdutos: TFDQuery
-    Connection = DmConexao.FDC_Freeboard
+    Connection = ModelConexao.FDC_Freeboard
     Left = 32
     Top = 24
   end
@@ -258,7 +258,7 @@ object dmCadTv: TdmCadTv
     Left = 136
     Top = 168
     Content = {
-      414442530F00034621010000FF00010001FF02FF0304001600000046004D0065
+      414442530F009A2421010000FF00010001FF02FF0304001600000046004D0065
       006E007400500072006F0064005400760005000A0000005400610062006C0065
       00060000000000070000080032000000090000FF0AFF0B04001000000043004F
       0044004200410052005200410005001000000043004F00440042004100520052
@@ -299,8 +299,7 @@ object dmCadTv: TdmCadTv
     end
   end
   object FQryTabProdTv: TFDQuery
-    Active = True
-    Connection = DmConexao.FDC_Freeboard
+    Connection = ModelConexao.FDC_Freeboard
     SQL.Strings = (
       'select * from tv_prod')
     Left = 40

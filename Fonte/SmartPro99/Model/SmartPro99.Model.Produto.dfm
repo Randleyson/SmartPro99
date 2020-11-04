@@ -1,9 +1,9 @@
-object dmCadProduto: TdmCadProduto
+object ModelProduto: TModelProduto
   OldCreateOrder = False
   Height = 338
   Width = 384
   object FQryProduto: TFDQuery
-    Connection = DmConexao.FDC_Freeboard
+    Connection = ModelConexao.FDC_Freeboard
     SQL.Strings = (
       'select'
       ' char_length(replace(coalesce('
@@ -86,7 +86,7 @@ object dmCadProduto: TdmCadProduto
     Left = 128
     Top = 32
     Content = {
-      414442530F00922D17040000FF00010001FF02FF0304001800000046004D0065
+      414442530F009B2417040000FF00010001FF02FF0304001800000046004D0065
       006E007400500072006F006400750074006F0005000A0000005400610062006C
       006500060000000000070000080032000000090000FF0AFF0B04000C0000004C
       0045004E0047004800540005000C0000004C0045004E004700480054000C0001

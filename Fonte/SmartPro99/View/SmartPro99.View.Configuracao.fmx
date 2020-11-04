@@ -1,4 +1,4 @@
-object FrameConfiguracao: TFrameConfiguracao
+object ViewConfiguracao: TViewConfiguracao
   Align = Client
   Size.Width = 729.000000000000000000
   Size.Height = 601.000000000000000000

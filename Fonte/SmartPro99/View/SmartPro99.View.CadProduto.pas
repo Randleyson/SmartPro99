@@ -1,4 +1,4 @@
-unit uframe_CadProduto;
+unit SmartPro99.View.CadProduto;
 
 interface
 
@@ -12,7 +12,7 @@ uses
   FireDAC.Comp.Client, FMX.Effects, FMX.Filter.Effects;
 
 type
-  TFrameCadProduto = class(TFrame)
+  TViewCadProdutos = class(TFrame)
     Rectangle1: TRectangle;
     lytTitulo: TLayout;
     btnFechar: TSpeedButton;
@@ -96,18 +96,20 @@ type
   end;
 
 var
-  FrameCadProduto:TFrameCadProduto;
+  ViewCadProdutos:TViewCadProdutos;
 
 implementation
 
-{$R *.fmx}
+uses
+  SmartPro99.View.Principal, SmartPro99.Model.Produto,
+  SmartPro99.Controlle.Message, SmartPro99.View.Home,
+  SmartPro99.Controlle.Loading;
 
-uses ufrm_Principal, udm_Conexao, udm_Principal,
-  udm_CadProduto, uframe_Home, Loading, u_Message;
+{$R *.fmx}
 
 { TFrameCadProduto }
 
-procedure TFrameCadProduto.AddItemListBox(pCodbarra, pDescricao,
+procedure TViewCadProdutos.AddItemListBox(pCodbarra, pDescricao,
           pVrVenda, pPromo: String; pLenght: integer; pListBox: TListBox;
           pLableSemGerg: TLabel);
 var
@@ -140,33 +142,33 @@ begin
     vItem.IsSelected := True;
 
   except
-    FrmPrincipal.fMensagemErro := 'Não foi possivel adicionar o frame no lisBox';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel adicionar o frame no lisBox';
     raise
   end;
 
 end;
 
 
-procedure TFrameCadProduto.ClickBtnPesqProd;
+procedure TViewCadProdutos.ClickBtnPesqProd;
 begin
 
   try
 
-    dmCadProduto.FMentProduto.Filter := 'codbarra like ''%'+ edtPesqCodBarra.Text+'%'''+
+    ModelProduto.FMentProduto.Filter := 'codbarra like ''%'+ edtPesqCodBarra.Text+'%'''+
                                         ' and descricao like ''%'+ UpperCase(edtPesqDescricao.Text)+'%''';
-    dmCadProduto.FMentProduto.Filtered := True;
+    ModelProduto.FMentProduto.Filtered := True;
 
     ListarProdutos;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaoTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaoTv';
     raise
 
   end;
 
 end;
 
-procedure TFrameCadProduto.btnFecharClick(Sender: TObject);
+procedure TViewCadProdutos.btnFecharClick(Sender: TObject);
 begin
 
   try
@@ -176,14 +178,14 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		 TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadProduto.BtnGravaClick(Sender: TObject);
+procedure TViewCadProdutos.BtnGravaClick(Sender: TObject);
 begin
 
   try
@@ -193,14 +195,14 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		 TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadProduto.btnPesqProdNaoTvClick(Sender: TObject);
+procedure TViewCadProdutos.btnPesqProdNaoTvClick(Sender: TObject);
 begin
 
   try
@@ -210,13 +212,13 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 end;
 
-procedure TFrameCadProduto.DetalharProduto;
+procedure TViewCadProdutos.DetalharProduto;
 begin
 
   try
@@ -226,29 +228,29 @@ begin
 
     fCodProd := lstBoxProd.ListItems[lstBoxProd.ItemIndex].TagString;
 
-    dmCadProduto.FMentProduto.Filter   := 'Codbarra = ' + fCodProd;
-    dmCadProduto.FMentProduto.Filtered := True;
+    ModelProduto.FMentProduto.Filter   := 'Codbarra = ' + fCodProd;
+    ModelProduto.FMentProduto.Filtered := True;
 
-    edtDetCod.Text           := dmCadProduto.FMentProdutoCODBARRA.AsString;
-    lblDescricaoCadstro.Text := dmCadProduto.FMentProdutoDESCRICAO.AsString;
-    edtDetVrVenda.Text       := dmCadProduto.FMentProdutoVRVENDA.AsString;
+    edtDetCod.Text           := ModelProduto.FMentProdutoCODBARRA.AsString;
+    lblDescricaoCadstro.Text := ModelProduto.FMentProdutoDESCRICAO.AsString;
+    edtDetVrVenda.Text       := ModelProduto.FMentProdutoVRVENDA.AsString;
 
-    if dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString = '' then
-    edtDescriAlterada.Text   := copy(dmCadProduto.FMentProdutoDESCRICAO.AsString,0,20)
+    if ModelProduto.FMentProdutoDESCRICAOALTERADA.AsString = '' then
+    edtDescriAlterada.Text   := copy(ModelProduto.FMentProdutoDESCRICAO.AsString,0,20)
     else
-    edtDescriAlterada.Text   := copy(dmCadProduto.FMentProdutoDESCRICAOALTERADA.AsString,0,20);
+    edtDescriAlterada.Text   := copy(ModelProduto.FMentProdutoDESCRICAOALTERADA.AsString,0,20);
 
-    edtDetUnidade.Text       := dmCadProduto.FMentProdutoUNIDADE.AsString;
+    edtDetUnidade.Text       := ModelProduto.FMentProdutoUNIDADE.AsString;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar DetalharProduto';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar DetalharProduto';
     raise;
 
   end;
 
 end;
 
-procedure TFrameCadProduto.edtDescriAlteradaKeyDown(Sender: TObject;
+procedure TViewCadProdutos.edtDescriAlteradaKeyDown(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
 
@@ -257,28 +259,28 @@ begin
   
   if Length(edtDescriAlterada.Text) > 20 then
   begin
-    TMessage.MessagemPopUp(frmPrincipal,'Descrição maior que o permtido (20)');
+    TMessage.MessagemPopUp(ViewPrincipal,'Descrição maior que o permtido (20)');
     KeyChar := #0;
   end;
 
 end;
 
-procedure TFrameCadProduto.FechaFrameCadProduto;
+procedure TViewCadProdutos.FechaFrameCadProduto;
 begin
 
-  FrameHome.CreateFremeHome;
-  FrameCadProduto.Visible := False;
-  FrameCadProduto := nil;
+  ViewHome.CreateFremeHome;
+  ViewCadProdutos.Visible := False;
+  ViewCadProdutos := nil;
 
 end;
 
-procedure TFrameCadProduto.ClickBtnSalvar;
+procedure TViewCadProdutos.ClickBtnSalvar;
 begin
 
   try
 
-    dmCadProduto.UpdateProduto(fCodProd,edtDescriAlterada.Text);
-    dmCadProduto.BdToFMentProduto;
+    ModelProduto.UpdateProduto(fCodProd,edtDescriAlterada.Text);
+    ModelProduto.BdToFMentProduto;
     ListarProdutos;
     DetalharProduto;
 
@@ -289,11 +291,11 @@ begin
 
 end;
 
-procedure TFrameCadProduto.IniciarFrameCadProduto;
+procedure TViewCadProdutos.IniciarFrameCadProduto;
 begin
 
-    frmPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
-    TLoading.Show(frmPrincipal,frmPrincipal.FMensagemAguarde);
+    ViewPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
+    TLoading.Show(ViewPrincipal,ViewPrincipal.FMensagemAguarde);
 
     TThread.CreateAnonymousThread(procedure
     begin
@@ -302,7 +304,7 @@ begin
       try
 
         sleep(1000);
-        dmCadProduto.BdToFMentProduto;
+        ModelProduto.BdToFMentProduto;
         ListarProdutos;
         DetalharProduto;
 
@@ -325,7 +327,7 @@ begin
 
 end;
 
-procedure TFrameCadProduto.LayoutInformativo(pListBoxItem:TListBoxItem;
+procedure TViewCadProdutos.LayoutInformativo(pListBoxItem:TListBoxItem;
           pPendecia : Boolean = False; pPromo: Boolean = False);
 var
   vLayout : TLayout;
@@ -370,7 +372,7 @@ begin
 
 end;
 
-procedure TFrameCadProduto.ListarProdutos;
+procedure TViewCadProdutos.ListarProdutos;
 var
   vLstBoxItems: TListBoxItem;
   vPriRegestro: Boolean;
@@ -380,24 +382,24 @@ begin
 
     lblSemRegestProd.Visible  := True;
     lstBoxProd.Items.Clear;
-    if dmCadProduto.FMentProduto.RecordCount <> 0 then
+    if ModelProduto.FMentProduto.RecordCount <> 0 then
     begin
-      dmCadProduto.FMentProduto.First;
+      ModelProduto.FMentProduto.First;
       lstBoxProd.BeginUpdate;
       vPriRegestro := True;
 
-      while not dmCadProduto.FMentProduto.Eof do
+      while not ModelProduto.FMentProduto.Eof do
       begin
 
-        AddItemListBox(dmCadProduto.FMentProdutoCODBARRA.AsString,
-                       dmCadProduto.FMentProdutoDESCRICAO.AsString,
-                       dmCadProduto.FMentProdutoVRVENDA.AsString,
-                       dmCadProduto.FMentProdutoPROMOCAO.AsString,
-                       dmCadProduto.FMentProdutoLENGHT.AsInteger,
+        AddItemListBox(ModelProduto.FMentProdutoCODBARRA.AsString,
+                       ModelProduto.FMentProdutoDESCRICAO.AsString,
+                       ModelProduto.FMentProdutoVRVENDA.AsString,
+                       ModelProduto.FMentProdutoPROMOCAO.AsString,
+                       ModelProduto.FMentProdutoLENGHT.AsInteger,
                        lstBoxProd,
                        lblSemRegestProd);
 
-        dmCadProduto.FMentProduto.Next;
+        ModelProduto.FMentProduto.Next;
       end;
 
       lstBoxProd.EndUpdate;
@@ -410,7 +412,7 @@ begin
 end;
 
 
-procedure TFrameCadProduto.lstBoxProdItemClick(const Sender: TCustomListBox;
+procedure TViewCadProdutos.lstBoxProdItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
 begin
 
@@ -418,22 +420,22 @@ begin
 
 end;
 
-procedure TFrameCadProduto.CreateFrameCadProduto;
+procedure TViewCadProdutos.CreateFrameCadProduto;
 begin
 
   try
 
-    if not assigned(FrameCadProduto) then
-    FrameCadProduto := TFrameCadProduto.Create(self);
+    if not assigned(ViewCadProdutos) then
+    ViewCadProdutos := TViewCadProdutos.Create(self);
 
-    with FrameCadProduto do
+    with ViewCadProdutos do
     begin
 
       Name         := 'FrameCadProd';
-      Parent       := frmPrincipal;
+      Parent       := ViewPrincipal;
 
-      if not assigned(dmCadProduto) then
-      dmCadProduto := TdmCadProduto.Create(self);
+      if not assigned(ModelProduto) then
+      ModelProduto := TModelProduto.Create(self);
 
       IniciarFrameCadProduto;
 
@@ -443,7 +445,7 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		  TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;

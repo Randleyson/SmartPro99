@@ -1,4 +1,4 @@
-unit Frm_MessagePopUp;
+unit SmartPro99.View.MessagePopUp;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   FMX.Layouts, FMX.Controls.Presentation, FMX.Objects;
 
 type
-  TFrmMessagePopUp = class(TForm)
+  TViewMessagePopUp = class(TForm)
     Rectangle1: TRectangle;
     lblMensagem: TLabel;
     Layout1: TLayout;
@@ -23,20 +23,20 @@ type
   end;
 
 var
-  FrmMessagePopUp: TFrmMessagePopUp;
+  ViewMessagePopUp: TViewMessagePopUp;
 
 implementation
 
 {$R *.fmx}
 
-uses u_Message;
+uses SmartPro99.Controlle.Message;
 
-procedure TFrmMessagePopUp.btnOkClick(Sender: TObject);
+procedure TViewMessagePopUp.btnOkClick(Sender: TObject);
 begin
 
    fResult :=  True;
-  if Assigned(FrmMessagePopUp) then
-  FrmMessagePopUp.Close;
+  if Assigned(ViewMessagePopUp) then
+  ViewMessagePopUp.Close;
 
 end;
 

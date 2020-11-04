@@ -1,4 +1,4 @@
-unit uframe_CadTvs;
+unit SmartPro99.View.CadTv;
 
 interface
 
@@ -16,7 +16,7 @@ uses
   FMX.Grid;
 
 type
-  TFrameCadTv = class(TFrame)
+  TViewCadTvs = class(TFrame)
     Rectangle1: TRectangle;
     lytTitulo: TLayout;
     btnFechar: TSpeedButton;
@@ -154,20 +154,23 @@ type
   end;
 
 var
-  FrameCadTv : TFrameCadTv;
+  ViewCadTvs : TViewCadTvs;
 
 implementation
 
 {$R *.fmx}
 
-uses ufrm_Principal, Loading, udm_CadTv, udm_Principal, u_Message;
+uses
+  SmartPro99.View.Principal, SmartPro99.Model.Tvs,
+  SmartPro99.Controlle.Message,SmartPro99.Controlle.Loading,
+  SmartPro99.Model.Principal ;
 
 { TFrame1 }
 
 
 { TFrameCadTv }
 
-procedure TFrameCadTv.AddItemListBox(pCodbarra, pDescricao, pVrVenda: String;
+procedure TViewCadTvs.AddItemListBox(pCodbarra, pDescricao, pVrVenda: String;
   pListBox: TListBox; pLableSemGerg: TLabel);
 var
   vItem: TListBoxItem;
@@ -191,30 +194,30 @@ begin
     pLableSemGerg.Visible := False;
 
   except
-    FrmPrincipal.fMensagemErro := 'Não foi possivel adicionar o frame no lisBox';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel adicionar o frame no lisBox';
     raise
   end;
 
 end;
 
-procedure TFrameCadTv.AdicionaTv;
+procedure TViewCadTvs.AdicionaTv;
 begin
 
   try
 
-    fidtv                 := dmCadTv.InsertTv(edtDescricaoTv.Text);
+    fidtv                 := ModelTvs.InsertTv(edtDescricaoTv.Text);
     edtCodigoTv.Text      := IntToStr(fidtv);
     fStatusTela           := 'Editar';
 
   except
-    frmPrincipal.fMensagemErro := 'Erro ao executar AdicionaTv';
+    ViewPrincipal.fMensagemErro := 'Erro ao executar AdicionaTv';
     raise
 
   end;  
 
 end;
 
-procedure TFrameCadTv.btnAdicionarTvClick(Sender: TObject);
+procedure TViewCadTvs.btnAdicionarTvClick(Sender: TObject);
 begin
 
   try
@@ -224,14 +227,14 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 
 end;
 
-procedure TFrameCadTv.btnCancelarCadTvClick(Sender: TObject);
+procedure TViewCadTvs.btnCancelarCadTvClick(Sender: TObject);
 begin
 
   try
@@ -241,19 +244,19 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadTv.btnEditarClick(Sender: TObject);
+procedure TViewCadTvs.btnEditarClick(Sender: TObject);
 begin
 
   if lstBoxTvs.ItemIndex = -1 then
   begin
-    TMessage.MessagemPopUp(frmPrincipal,'Selciona a Tv a ser editar');
+    TMessage.MessagemPopUp(ViewPrincipal,'Selciona a Tv a ser editar');
     exit
   end;
 
@@ -264,13 +267,13 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 end;
 
-procedure TFrameCadTv.btnExcluirClick(Sender: TObject);
+procedure TViewCadTvs.btnExcluirClick(Sender: TObject);
 begin
 
   try
@@ -278,23 +281,23 @@ begin
     if lstBoxTvs.Index = -1 then
     begin
 
-      TMessage.MessagemPopUp(frmPrincipal,'Selecione a Tv a ser excluida');
+      TMessage.MessagemPopUp(ViewPrincipal,'Selecione a Tv a ser excluida');
       exit
     end;
 
-    if TMessage.MessagemDlg(frmPrincipal,'Deseja excluir a TV ?') then
+    if TMessage.MessagemDlg(ViewPrincipal,'Deseja excluir a TV ?') then
     ClickBtnExcluirTv;
 
   except
   on e: Exception do
     begin
-		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		  TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 end;
 
-procedure TFrameCadTv.btnFecharClick(Sender: TObject);
+procedure TViewCadTvs.btnFecharClick(Sender: TObject);
 begin
 
   try
@@ -304,19 +307,19 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 
 end;
 
-procedure TFrameCadTv.btnGravarCadTvClick(Sender: TObject);
+procedure TViewCadTvs.btnGravarCadTvClick(Sender: TObject);
 begin
 
   if edtDescricaoTv.Text = '' then
   begin
-    TMessage.MessagemPopUp(frmPrincipal,'É nesecario informar o no da TV');
+    TMessage.MessagemPopUp(ViewPrincipal,'É nesecario informar o no da TV');
     edtDescricaoTv.SetFocus;
     exit
   end;
@@ -328,27 +331,27 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadTv.btnInseriProdNaTvClick(Sender: TObject);
+procedure TViewCadTvs.btnInseriProdNaTvClick(Sender: TObject);
 begin
 
   try
 
     if edtDescricaoTv.Text = '' then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      TMessage.MessagemPopUp(ViewPrincipal,'Informe o nome da TV');
       exit
     end;
 
     if lstBoxProdNaoTV.ItemIndex = -1 then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Selecione o produto a ser adicionado na Tv');
+      TMessage.MessagemPopUp(ViewPrincipal,'Selecione o produto a ser adicionado na Tv');
       exit;
     end;
 
@@ -357,7 +360,7 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
@@ -365,13 +368,13 @@ begin
 end;
 
 
-procedure TFrameCadTv.btnInserirTodoNaTvClick(Sender: TObject);
+procedure TViewCadTvs.btnInserirTodoNaTvClick(Sender: TObject);
 begin
 
   try
     if edtDescricaoTv.Text = '' then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      TMessage.MessagemPopUp(ViewPrincipal,'Informe o nome da TV');
       exit
     end;
 
@@ -380,14 +383,14 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadTv.btnPesqProdNaoTvClick(Sender: TObject);
+procedure TViewCadTvs.btnPesqProdNaoTvClick(Sender: TObject);
 begin
 
 
@@ -398,13 +401,13 @@ begin
   except
   on e: Exception do
     begin
-		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		  TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
   end;
 
 end;
 
-procedure TFrameCadTv.btnPesqProdNaTvClick(Sender: TObject);
+procedure TViewCadTvs.btnPesqProdNaTvClick(Sender: TObject);
 begin
 
   try
@@ -414,7 +417,7 @@ begin
   except
   on e: Exception do
     begin
-		  TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		  TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
 
@@ -422,20 +425,20 @@ begin
 
 end;
 
-procedure TFrameCadTv.btnRemoverProdDaTvClick(Sender: TObject);
+procedure TViewCadTvs.btnRemoverProdDaTvClick(Sender: TObject);
 begin
 
   try
 
     if edtDescricaoTv.Text = '' then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      TMessage.MessagemPopUp(ViewPrincipal,'Informe o nome da TV');
       exit
     end;
 
     if lstBoxProdNaTv.ItemIndex = -1 then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Selecione o produto a ser removido da Tv');
+      TMessage.MessagemPopUp(ViewPrincipal,'Selecione o produto a ser removido da Tv');
       exit
     end;
 
@@ -444,21 +447,21 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadTv.btnRemoverTodosDaTvClick(Sender: TObject);
+procedure TViewCadTvs.btnRemoverTodosDaTvClick(Sender: TObject);
 begin
 
   try
 
     if edtDescricaoTv.Text = '' then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Informe o nome da TV');
+      TMessage.MessagemPopUp(ViewPrincipal,'Informe o nome da TV');
       exit
     end;
 
@@ -467,14 +470,14 @@ begin
   except
   on e: Exception do
     begin
-		TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+		TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameCadTv.ClickBtnAdicionarProdTv;
+procedure TViewCadTvs.ClickBtnAdicionarProdTv;
 var
   vCodBarra: String;
 begin
@@ -487,37 +490,37 @@ begin
     vCodBarra := lstBoxProdNaoTV.ListItems[lstBoxProdNaoTV.ItemIndex].TagString;
 
     {Adiciona produto no FmentProdNaTv}
-    dmCadTv.FMentProdNaoTv.Filter := 'codbarra = '+ vCodBarra;
-    dmCadTv.FMentProdNaoTv.First;
-    dmCadTv.FMentProdNaTv.Insert;
-    dmCadTv.FMentProdNaTvCODBARRA.Value          := dmCadTv.FMentProdNaoTvCODBARRA.AsString;
-    dmCadTv.FMentProdNaTvDESCRICAO.Value         := dmCadTv.FMentProdNaoTvDESCRICAO.AsString;
-    dmCadTv.FMentProdNaTvVRVENDA.Value           := dmCadTv.FMentProdNaoTvVRVENDA.AsString;
-    dmCadTv.FMentProdNaTvDESCRICAOALTERADA.Value := dmCadTv.FMentProdNaoTvDESCRICAOALTERADA.AsString;
-    dmCadTv.FMentProdNaTvEXISTENOARQ.Value       := dmCadTv.FMentProdNaoTvEXISTENOARQ.AsString;
-    dmCadTv.FMentProdNaTv.Post;
-    dmCadTv.FMentProdNaTv.Filtered := False;
+    ModelTvs.FMentProdNaoTv.Filter := 'codbarra = '+ vCodBarra;
+    ModelTvs.FMentProdNaoTv.First;
+    ModelTvs.FMentProdNaTv.Insert;
+    ModelTvs.FMentProdNaTvCODBARRA.Value          := ModelTvs.FMentProdNaoTvCODBARRA.AsString;
+    ModelTvs.FMentProdNaTvDESCRICAO.Value         := ModelTvs.FMentProdNaoTvDESCRICAO.AsString;
+    ModelTvs.FMentProdNaTvVRVENDA.Value           := ModelTvs.FMentProdNaoTvVRVENDA.AsString;
+    ModelTvs.FMentProdNaTvDESCRICAOALTERADA.Value := ModelTvs.FMentProdNaoTvDESCRICAOALTERADA.AsString;
+    ModelTvs.FMentProdNaTvEXISTENOARQ.Value       := ModelTvs.FMentProdNaoTvEXISTENOARQ.AsString;
+    ModelTvs.FMentProdNaTv.Post;
+    ModelTvs.FMentProdNaTv.Filtered := False;
     ListarProdNaTv;
 
     {Remove Produto do FmentProdNaoTv}
-    dmCadTv.FMentProdNaoTv.Delete;
+    ModelTvs.FMentProdNaoTv.Delete;
     ListarProdNaoTv;
 
     {Adiciona produto na FmentTabProdTv}
-    dmCadTv.FMentTabProdTv.Insert;
-    dmCadTv.FMentTabProdTvCODBARRA.Value := vCodBarra;
-    dmCadTv.FMentTabProdTvIDTV.Value := fidtv;
-    dmCadTv.FMentTabProdTv.post;
+    ModelTvs.FMentTabProdTv.Insert;
+    ModelTvs.FMentTabProdTvCODBARRA.Value := vCodBarra;
+    ModelTvs.FMentTabProdTvIDTV.Value := fidtv;
+    ModelTvs.FMentTabProdTv.post;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnAdicionarProdTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnAdicionarProdTv';
     raise
 
   end;
 
 end;
 
-procedure TFrameCadTv.ClickBtnAdicionarTv;
+procedure TViewCadTvs.ClickBtnAdicionarTv;
 begin
 
   try
@@ -533,7 +536,7 @@ begin
 
 end;
 
-procedure TFrameCadTv.ClickBtnEditarTv;
+procedure TViewCadTvs.ClickBtnEditarTv;
 begin
 
   try
@@ -549,7 +552,7 @@ begin
 
 end;
 
-procedure TFrameCadTv.ClickBtnExcluirTodosProdDaTv;
+procedure TViewCadTvs.ClickBtnExcluirTodosProdDaTv;
 begin
 
   try
@@ -561,32 +564,32 @@ begin
     begin
 
       {Adicionar no FMentProdNaoTv}
-      dmCadTv.FMentProdNaTv.Filtered := False;
-      dmCadTv.FMentProdNaTv.First;
-      while not dmCadTv.FMentProdNaTv.eof do
+      ModelTvs.FMentProdNaTv.Filtered := False;
+      ModelTvs.FMentProdNaTv.First;
+      while not ModelTvs.FMentProdNaTv.eof do
       begin
 
-        dmCadTv.FMentProdNaoTv.Insert;
-        dmCadTv.FMentProdNaoTvCODBARRA.Value          := dmCadTv.FMentProdNaTvCODBARRA.AsString;
-        dmCadTv.FMentProdNaoTvDESCRICAO.Value         := dmCadTv.FMentProdNaTvDESCRICAO.AsString;
-        dmCadTv.FMentProdNaoTvVRVENDA.Value           := dmCadTv.FMentProdNaTvVRVENDA.AsString;
-        dmCadTv.FMentProdNaoTvDESCRICAOALTERADA.Value := dmCadTv.FMentProdNaTvDESCRICAOALTERADA.AsString;
-        dmCadTv.FMentProdNaoTvEXISTENOARQ.Value       := dmCadTv.FMentProdNaTvEXISTENOARQ.AsString;
-        dmCadTv.FMentProdNaoTv.Post;
-        dmCadTv.FMentProdNaTv.Next;
+        ModelTvs.FMentProdNaoTv.Insert;
+        ModelTvs.FMentProdNaoTvCODBARRA.Value          := ModelTvs.FMentProdNaTvCODBARRA.AsString;
+        ModelTvs.FMentProdNaoTvDESCRICAO.Value         := ModelTvs.FMentProdNaTvDESCRICAO.AsString;
+        ModelTvs.FMentProdNaoTvVRVENDA.Value           := ModelTvs.FMentProdNaTvVRVENDA.AsString;
+        ModelTvs.FMentProdNaoTvDESCRICAOALTERADA.Value := ModelTvs.FMentProdNaTvDESCRICAOALTERADA.AsString;
+        ModelTvs.FMentProdNaoTvEXISTENOARQ.Value       := ModelTvs.FMentProdNaTvEXISTENOARQ.AsString;
+        ModelTvs.FMentProdNaoTv.Post;
+        ModelTvs.FMentProdNaTv.Next;
 
       end;
 
-      dmCadTv.FMentProdNaoTv.Filtered := false;
+      ModelTvs.FMentProdNaoTv.Filtered := false;
       ListarProdNaoTv;
 
       {Remover do FMentProdNaTv}
-      dmCadTv.FMentProdNaTv.EmptyDataSet;
-      dmCadTv.FMentProdNaTv.Filtered := False;
+      ModelTvs.FMentProdNaTv.EmptyDataSet;
+      ModelTvs.FMentProdNaTv.Filtered := False;
       ListarProdNaTv;
 
       {Remover do FMentProdTv}
-      dmCadTv.FMentTabProdTv.EmptyDataSet;
+      ModelTvs.FMentTabProdTv.EmptyDataSet;
 
     end;
 
@@ -597,11 +600,11 @@ begin
 
 end;
 
-procedure TFrameCadTv.ClickBtnExcluirTv;
+procedure TViewCadTvs.ClickBtnExcluirTv;
 begin
 
-    frmPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
-    TLoading.Show(frmPrincipal,frmPrincipal.FMensagemAguarde);
+    ViewPrincipal.FMensagemAguarde := 'Aguarde... Carregando a Tela';
+    TLoading.Show(ViewPrincipal,ViewPrincipal.FMensagemAguarde);
 
     TThread.CreateAnonymousThread(procedure
     begin
@@ -609,7 +612,7 @@ begin
         try
 
           fIdTv := StrToInt(lstBoxTvs.ListItems[lstBoxTvs.ItemIndex].TagString);
-          dmCadTv.DeleteTV(fIdTv);
+          ModelTvs.DeleteTV(fIdTv);
           ShowTabListarTv;
 
         except
@@ -620,7 +623,7 @@ begin
       TThread.Synchronize(nil,procedure
         begin
           TLoading.Hide;
-          TMessage.MessagemPopUp(frmPrincipal,'Tv excuida com Exito');
+          TMessage.MessagemPopUp(ViewPrincipal,'Tv excuida com Exito');
         end);
       end;
 
@@ -628,7 +631,7 @@ begin
 
 end;
 
-procedure TFrameCadTv.ClickBtnGravaTv;
+procedure TViewCadTvs.ClickBtnGravaTv;
 begin
 
   try
@@ -636,10 +639,10 @@ begin
     if fStatusTela = 'Editar' then
     begin
 
-      dmCadTv.UpdateTv(edtDescricaoTv.Text,fidtv);
-      dmCadTv.MarcaProdTvExcluir(fidtv);
-      DmPrincipal.CopyDataSet(dmCadTv.FMentTabProdTv,dmCadTv.FQryTabProdTv);
-      dmCadTv.RemoverProdTvExcluido;
+      ModelTvs.UpdateTv(edtDescricaoTv.Text,fidtv);
+      ModelTvs.MarcaProdTvExcluir(fidtv);
+      ModelPrincipal.CopyDataSet(ModelTvs.FMentTabProdTv,ModelTvs.FQryTabProdTv);
+      ModelTvs.RemoverProdTvExcluido;
 
       ShowTabListarTv;
 
@@ -650,7 +653,7 @@ begin
       AdicionaTv;
     end;
 
-    TMessage.MessagemPopUp(frmPrincipal,'Alteração salva com Exito');
+    TMessage.MessagemPopUp(ViewPrincipal,'Alteração salva com Exito');
 
   except
     raise;
@@ -658,7 +661,7 @@ begin
   end;
 end;
 
-procedure TFrameCadTv.ClickBtnInserTodosProdNaTv;
+procedure TViewCadTvs.ClickBtnInserTodosProdNaTv;
 begin
 
   try
@@ -670,91 +673,91 @@ begin
     begin
 
       {Adicionar todos produtos na FMentProdNaTv}
-      dmCadTv.FMentProdNaoTv.Filtered := False;
-      dmCadTv.FMentProdNaoTv.First;
-      while not dmCadTv.FMentProdNaoTv.Eof do
+      ModelTvs.FMentProdNaoTv.Filtered := False;
+      ModelTvs.FMentProdNaoTv.First;
+      while not ModelTvs.FMentProdNaoTv.Eof do
       begin
 
-        dmCadTv.FMentProdNaTv.Insert;
-        dmCadTv.FMentProdNaTvCODBARRA.Value          := dmCadTv.FMentProdNaoTvCODBARRA.AsString;
-        dmCadTv.FMentProdNaTvDESCRICAO.Value         := dmCadTv.FMentProdNaoTvDESCRICAO.AsString;
-        dmCadTv.FMentProdNaTvVRVENDA.Value           := dmCadTv.FMentProdNaoTvVRVENDA.AsString;
-        dmCadTv.FMentProdNaTvDESCRICAOALTERADA.Value := dmCadTv.FMentProdNaoTvEXISTENOARQ.AsString;
-        dmCadTv.FMentProdNaTvEXISTENOARQ.Value       := dmCadTv.FMentProdNaTvEXISTENOARQ.AsString;
-        dmCadTv.FMentProdNaTv.Post;
-        dmCadTv.FMentProdNaoTv.Next;
+        ModelTvs.FMentProdNaTv.Insert;
+        ModelTvs.FMentProdNaTvCODBARRA.Value          := ModelTvs.FMentProdNaoTvCODBARRA.AsString;
+        ModelTvs.FMentProdNaTvDESCRICAO.Value         := ModelTvs.FMentProdNaoTvDESCRICAO.AsString;
+        ModelTvs.FMentProdNaTvVRVENDA.Value           := ModelTvs.FMentProdNaoTvVRVENDA.AsString;
+        ModelTvs.FMentProdNaTvDESCRICAOALTERADA.Value := ModelTvs.FMentProdNaoTvEXISTENOARQ.AsString;
+        ModelTvs.FMentProdNaTvEXISTENOARQ.Value       := ModelTvs.FMentProdNaTvEXISTENOARQ.AsString;
+        ModelTvs.FMentProdNaTv.Post;
+        ModelTvs.FMentProdNaoTv.Next;
       end;
-      dmCadTv.FMentProdNaTv.Filtered := False;
+      ModelTvs.FMentProdNaTv.Filtered := False;
       ListarProdNaTv;
 
       {Remover todos os produtos da FMentProdNaoTv}
-      dmCadTv.FMentProdNaoTv.EmptyDataSet;
-      dmCadTv.FMentProdNaoTv.Filtered := false;
+      ModelTvs.FMentProdNaoTv.EmptyDataSet;
+      ModelTvs.FMentProdNaoTv.Filtered := false;
       ListarProdNaoTv;
 
       {Adicionar todos os produtos na FMentProdTv}
-      dmCadTv.FMentProdNaTv.Filtered := False;
-      dmCadTv.FMentProdNaTv.First;
-      while not dmCadTv.FMentProdNaTv.Eof do
+      ModelTvs.FMentProdNaTv.Filtered := False;
+      ModelTvs.FMentProdNaTv.First;
+      while not ModelTvs.FMentProdNaTv.Eof do
       begin
 
-        dmCadTv.FMentTabProdTv.Insert;
-        dmCadTv.FMentTabProdTvCODBARRA.Value := dmCadTv.FMentProdNaTvCODBARRA.AsString;
-        dmCadTv.FMentTabProdTvIDTV.Value := fidtv;
-        dmCadTv.FMentTabProdTv.post;
-        dmCadTv.FMentProdNaTv.Next;
+        ModelTvs.FMentTabProdTv.Insert;
+        ModelTvs.FMentTabProdTvCODBARRA.Value := ModelTvs.FMentProdNaTvCODBARRA.AsString;
+        ModelTvs.FMentTabProdTvIDTV.Value := fidtv;
+        ModelTvs.FMentTabProdTv.post;
+        ModelTvs.FMentProdNaTv.Next;
 
       end;
 
     end;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnInserTodosProdNaTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnInserTodosProdNaTv';
     raise
 
   end;
 
 end;
 
-procedure TFrameCadTv.ClickBtnPesqProdNaoTv;
+procedure TViewCadTvs.ClickBtnPesqProdNaoTv;
 begin
 
   try
 
-    dmCadTv.FMentProdNaoTv.Filter := 'codbarra like ''%'+edtCodbarraNaoTv.Text+'%'''+
+    ModelTvs.FMentProdNaoTv.Filter := 'codbarra like ''%'+edtCodbarraNaoTv.Text+'%'''+
                                      ' and descricao like ''%'+ UpperCase(edtDescricaoNaoTv.Text)+'%''';
-    dmCadTv.FMentProdNaoTv.Filtered := True;
+    ModelTvs.FMentProdNaoTv.Filtered := True;
 
     ListarProdNaoTv;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaoTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaoTv';
     raise
 
   end;
 
 end;
 
-procedure TFrameCadTv.ClickBtnPesqProdNaTv;
+procedure TViewCadTvs.ClickBtnPesqProdNaTv;
 begin
 
   try
 
-    dmCadTv.FMentProdNaTv.Filter := 'codbarra like ''%'+edtCodbarraProdNaTv.Text+'%'''+
+    ModelTvs.FMentProdNaTv.Filter := 'codbarra like ''%'+edtCodbarraProdNaTv.Text+'%'''+
                                     ' and descricao like ''%'+ UpperCase(edtDescricaoProdNaTv.Text)+'%''';
-    dmCadTv.FMentProdNaTv.Filtered := True;
+    ModelTvs.FMentProdNaTv.Filtered := True;
 
     ListarProdNaTv;
 
   except
-    frmPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaTv';
+    ViewPrincipal.FMensagemErro := 'Erro ao executar o ClickBtnPesqProdNaTv';
     raise
 
   end;
 
 end;
 
-procedure TFrameCadTv.ClickBtnRemoverProdTv;
+procedure TViewCadTvs.ClickBtnRemoverProdTv;
 var
   vCodBarra: String;
 begin
@@ -767,31 +770,31 @@ begin
     vCodBarra := lstBoxProdNaTv.ListItems[lstBoxProdNaTv.ItemIndex].TagString;
 
     {Adiciona FMentProdNaoTv}
-    dmCadTv.FMentProdNaTv.Filter   := 'codbarra = '+ vCodBarra;
-    dmCadTv.FMentProdNaTv.Filtered := True;
-    dmCadTv.FMentProdNaTv.First;
-    dmCadTv.FMentProdNaoTv.Insert;
-    dmCadTv.FMentProdNaoTvCODBARRA.Value          := dmCadTv.FMentProdNaTvCODBARRA.AsString;
-    dmCadTv.FMentProdNaoTvDESCRICAO.Value         := dmCadTv.FMentProdNaTvDESCRICAO.AsString;
-    dmCadTv.FMentProdNaoTvVRVENDA.Value           := dmCadTv.FMentProdNaTvVRVENDA.AsString;
-    dmCadTv.FMentProdNaoTvDESCRICAOALTERADA.Value := dmCadTv.FMentProdNaTvDESCRICAOALTERADA.AsString;
-    dmCadTv.FMentProdNaoTvEXISTENOARQ.Value       := dmCadTv.FMentProdNaTvEXISTENOARQ.AsString;
-    dmCadTv.FMentProdNaoTv.Post;
+    ModelTvs.FMentProdNaTv.Filter   := 'codbarra = '+ vCodBarra;
+    ModelTvs.FMentProdNaTv.Filtered := True;
+    ModelTvs.FMentProdNaTv.First;
+    ModelTvs.FMentProdNaoTv.Insert;
+    ModelTvs.FMentProdNaoTvCODBARRA.Value          := ModelTvs.FMentProdNaTvCODBARRA.AsString;
+    ModelTvs.FMentProdNaoTvDESCRICAO.Value         := ModelTvs.FMentProdNaTvDESCRICAO.AsString;
+    ModelTvs.FMentProdNaoTvVRVENDA.Value           := ModelTvs.FMentProdNaTvVRVENDA.AsString;
+    ModelTvs.FMentProdNaoTvDESCRICAOALTERADA.Value := ModelTvs.FMentProdNaTvDESCRICAOALTERADA.AsString;
+    ModelTvs.FMentProdNaoTvEXISTENOARQ.Value       := ModelTvs.FMentProdNaTvEXISTENOARQ.AsString;
+    ModelTvs.FMentProdNaoTv.Post;
     ListarProdNaoTv;
 
     {Remove do FMentProdNaTv}
-    dmCadTv.FMentProdNaTv.Delete;
-    dmCadTv.FMentProdNaTv.Filtered := False;
+    ModelTvs.FMentProdNaTv.Delete;
+    ModelTvs.FMentProdNaTv.Filtered := False;
     ListarProdNaTv;
 
     {Remove da FMentProdTv}
-    dmCadTv.FMentTabProdTv.RecordCount;
-    dmCadTv.FMentTabProdTv.Filter   := 'codbarra = '+ vCodBarra;
-    dmCadTv.FMentTabProdTv.Filtered := True;
-    dmCadTv.FMentTabProdTv.First;
-    dmCadTv.FMentTabProdTv.Delete;
-    dmCadTv.FMentTabProdTv.Filtered := False;
-    dmCadTv.FMentTabProdTv.RecordCount;
+    ModelTvs.FMentTabProdTv.RecordCount;
+    ModelTvs.FMentTabProdTv.Filter   := 'codbarra = '+ vCodBarra;
+    ModelTvs.FMentTabProdTv.Filtered := True;
+    ModelTvs.FMentTabProdTv.First;
+    ModelTvs.FMentTabProdTv.Delete;
+    ModelTvs.FMentTabProdTv.Filtered := False;
+    ModelTvs.FMentTabProdTv.RecordCount;
 
   except
     raise
@@ -800,16 +803,16 @@ begin
 
 end;
 
-procedure TFrameCadTv.ClickCancelarCadTv;
+procedure TViewCadTvs.ClickCancelarCadTv;
 begin
 
   try
 
-    dmCadTv.FQryProdutos.Close;
-    dmCadTv.FQryTabProdTv.Close;
-    dmCadTv.FMentProdNaoTv.Close;
-    dmCadTv.FMentProdNaTv.Close;
-    dmCadTv.FMentTabProdTv.Close;
+    ModelTvs.FQryProdutos.Close;
+    ModelTvs.FQryTabProdTv.Close;
+    ModelTvs.FMentProdNaoTv.Close;
+    ModelTvs.FMentProdNaTv.Close;
+    ModelTvs.FMentTabProdTv.Close;
 
     ShowTabListarTv;
 
@@ -820,7 +823,7 @@ begin
 
 end;
 
-procedure TFrameCadTv.ControlarBotao(pBtnAdicionar, pBtnEdtitar, pExcluir: Boolean);
+procedure TViewCadTvs.ControlarBotao(pBtnAdicionar, pBtnEdtitar, pExcluir: Boolean);
 begin
 
   btnAdicionarTv.Enabled := pBtnAdicionar;
@@ -829,21 +832,21 @@ begin
 
 end;
 
-procedure TFrameCadTv.CreateFrameCadTv;
+procedure TViewCadTvs.CreateFrameCadTv;
 begin
 
   try
 
-    if not assigned(FrameCadTv) then
-    FrameCadTv := TFrameCadTv.Create(self);
+    if not assigned(ViewCadTvs) then
+    ViewCadTvs := TViewCadTvs.Create(self);
 
-    with FrameCadTv do
+    with ViewCadTvs do
     begin
 
       Name      := 'FrameCadTv';
-      Parent    := frmPrincipal;
+      Parent    := ViewPrincipal;
 
-      dmCadTv := TdmCadTv.Create(self);
+      ModelTvs := TModelTvs.Create(self);
 
       ShowTabListarTv;
     end;
@@ -853,7 +856,7 @@ begin
     begin
 
       DestroyFrameCadTv;
-      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
 
     end;
 
@@ -861,25 +864,25 @@ begin
 
 end;
 
-procedure TFrameCadTv.DestroyFrameCadTv;
+procedure TViewCadTvs.DestroyFrameCadTv;
 begin
 
-  dmCadTv.Destroy;
-  FrameCadTv.Visible := False;
-  FrameCadTv         := nil;
+  ModelTvs.Destroy;
+  ViewCadTvs.Visible := False;
+  ViewCadTvs         := nil;
 
 end;
 
-procedure TFrameCadTv.DetalhesDaTv;
+procedure TViewCadTvs.DetalhesDaTv;
 begin
 
   try
 
-    dmCadTv.FMenTv.Filter   := 'Idtv = ' + IntToStr(fIdTv);
-    dmCadTv.FMenTv.Filtered := True;
-    dmCadTv.FMenTv.First;
-    edtCodigoTv.Text        := dmCadTv.FMenTv.FieldByName('IDTV').AsString;
-    edtDescricaoTv.Text     := dmCadTv.FMenTv.FieldByName('DESCRICAOTV').AsString;
+    ModelTvs.FMenTv.Filter   := 'Idtv = ' + IntToStr(fIdTv);
+    ModelTvs.FMenTv.Filtered := True;
+    ModelTvs.FMenTv.First;
+    edtCodigoTv.Text        := ModelTvs.FMenTv.FieldByName('IDTV').AsString;
+    edtDescricaoTv.Text     := ModelTvs.FMenTv.FieldByName('DESCRICAOTV').AsString;
 
   except
     raise;
@@ -887,65 +890,65 @@ begin
   end;
 end;
 
-procedure TFrameCadTv.EditaTv;
+procedure TViewCadTvs.EditaTv;
 begin
 
 end;
 
-procedure TFrameCadTv.ListarProdNaoTv;
+procedure TViewCadTvs.ListarProdNaoTv;
 begin
 
   try
 
     lblSemRegistroProdNaotv.Visible := True;
     lstBoxProdNaoTV.Items.Clear;
-    if dmCadTv.FMentProdNaoTv.RecordCount <> 0 then
+    if ModelTvs.FMentProdNaoTv.RecordCount <> 0 then
     begin
 
       lstBoxProdNaoTV.BeginUpdate;
-      dmCadTv.FMentProdNaoTv.First;
-      while not dmCadTv.FMentProdNaoTv.eof do
+      ModelTvs.FMentProdNaoTv.First;
+      while not ModelTvs.FMentProdNaoTv.eof do
       begin
-        AddItemListBox(dmCadTv.FMentProdNaoTv.FieldByName('CODBARRA').AsString,
-                       dmCadTv.FMentProdNaoTv.FieldByName('DESCRICAO').AsString,
-                       dmCadTv.FMentProdNaoTv.FieldByName('VRVENDA').AsString,
+        AddItemListBox(ModelTvs.FMentProdNaoTv.FieldByName('CODBARRA').AsString,
+                       ModelTvs.FMentProdNaoTv.FieldByName('DESCRICAO').AsString,
+                       ModelTvs.FMentProdNaoTv.FieldByName('VRVENDA').AsString,
                        lstBoxProdNaoTV,lblSemRegistroProdNaotv);
 
-        dmCadTv.FMentProdNaoTv.Next;
+        ModelTvs.FMentProdNaoTv.Next;
       end;
 
       lstBoxProdNaoTV.EndUpdate;
     end;
 
   except
-    frmPrincipal.fMensagemErro := 'Não foi possivel listar produtos que não estao na TV';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel listar produtos que não estao na TV';
     raise;
 
   end;
 
 end;
 
-procedure TFrameCadTv.ListarProdNaTv;
+procedure TViewCadTvs.ListarProdNaTv;
 begin
 
   try
 
     lblSemRegistroProdNaTv.Visible := True;
     lstBoxProdNaTv.Items.Clear;
-    if dmCadTv.FMentProdNaTv.RecordCount <> 0 then
+    if ModelTvs.FMentProdNaTv.RecordCount <> 0 then
     begin
 
-      dmCadTv.FMentProdNaTv.First;
+      ModelTvs.FMentProdNaTv.First;
       lstBoxProdNaTv.BeginUpdate;
-      while not dmCadTv.FMentProdNaTv.eof do
+      while not ModelTvs.FMentProdNaTv.eof do
       begin
 
-        AddItemListBox(dmCadTv.FMentProdNaTv.FieldByName('CODBARRA').AsString,
-                       dmCadTv.FMentProdNaTv.FieldByName('DESCRICAO').AsString,
-                       dmCadTv.FMentProdNaTv.FieldByName('VRVENDA').AsString,
+        AddItemListBox(ModelTvs.FMentProdNaTv.FieldByName('CODBARRA').AsString,
+                       ModelTvs.FMentProdNaTv.FieldByName('DESCRICAO').AsString,
+                       ModelTvs.FMentProdNaTv.FieldByName('VRVENDA').AsString,
                        lstBoxProdNaTv,lblSemRegistroProdNaTv);
 
-        dmCadTv.FMentProdNaTv.Next;
+        ModelTvs.FMentProdNaTv.Next;
 
       end;
 
@@ -953,14 +956,14 @@ begin
     end;
 
   except
-    frmPrincipal.fMensagemErro := 'Não foi possivel listar produtos que não estao na TV';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel listar produtos que não estao na TV';
     raise;
 
   end;
 
 end;
 
-procedure TFrameCadTv.ListarTvCadastrada;
+procedure TViewCadTvs.ListarTvCadastrada;
 var
   vLstBoxItems : TListBoxItem;
   vPriRegestro : Boolean;
@@ -969,24 +972,24 @@ begin
 
   try
 
-    dmCadTv.RecebeTv;
+    ModelTvs.RecebeTv;
 
     lstBoxTvs.Items.Clear;
-    if dmCadTv.FMenTv.RecordCount <> 0  then
+    if ModelTvs.FMenTv.RecordCount <> 0  then
     begin
-      dmCadTv.FMenTv.First;
+      ModelTvs.FMenTv.First;
       lstBoxTvs.BeginUpdate;
       vPriRegestro := True;
-      while not dmCadTv.FMenTv.Eof do
+      while not ModelTvs.FMenTv.Eof do
       begin
 
         vLstBoxItems              := TListBoxItem.Create(lstBoxTvs);
         vLstBoxItems.Text         := '';
         vLstBoxItems.Height       := 30;
 
-        vLstBoxItems.TagString    := dmCadTv.FMenTv.FieldByName('IDTV').AsString;
-        vLstBoxItems.Text         := dmCadTv.FMenTv.FieldByName('IDTV').AsString+
-                                     ' - '+ dmCadTv.FMenTv.FieldByName('DESCRICAOTV').AsString;
+        vLstBoxItems.TagString    := ModelTvs.FMenTv.FieldByName('IDTV').AsString;
+        vLstBoxItems.Text         := ModelTvs.FMenTv.FieldByName('IDTV').AsString+
+                                     ' - '+ ModelTvs.FMenTv.FieldByName('DESCRICAOTV').AsString;
         vLstBoxItems.Parent       := lstBoxTvs;
 
         if vPriRegestro then
@@ -997,7 +1000,7 @@ begin
 
         end;
 
-        dmCadTv.FMenTv.Next;
+        ModelTvs.FMenTv.Next;
       end;
 
       lstBoxTvs.EndUpdate;
@@ -1010,13 +1013,13 @@ begin
     end;
 
   except
-    frmPrincipal.fMensagemErro := 'Não foi possivel listar Tv cadastrada';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel listar Tv cadastrada';
     raise
 
   end;
 end;
 
-procedure TFrameCadTv.ShowTabCadTv;
+procedure TViewCadTvs.ShowTabCadTv;
 begin
 
   try
@@ -1037,15 +1040,15 @@ begin
 
     end;
 
-    dmCadTv.RecebeProdNaoTv(fidtv);
-    dmCadTv.FMentProdNaoTv.Filtered := false;
+    ModelTvs.RecebeProdNaoTv(fidtv);
+    ModelTvs.FMentProdNaoTv.Filtered := false;
     ListarProdNaoTv;
 
-    dmCadTv.RecebeProdNaTv(fidtv);
-    dmCadTv.FMentProdNaTv.Filtered := False;
+    ModelTvs.RecebeProdNaTv(fidtv);
+    ModelTvs.FMentProdNaTv.Filtered := False;
     ListarProdNaTv;
 
-    dmCadTv.RecebeTabProdTv(fidtv);
+    ModelTvs.RecebeTabProdTv(fidtv);
 
     edtDescricaoTv.SetFocus;
     TabControl.ActiveTab := tabCadTv;
@@ -1056,7 +1059,7 @@ begin
 
 end;
 
-procedure TFrameCadTv.ShowTabListarTv;
+procedure TViewCadTvs.ShowTabListarTv;
 begin
 
   try

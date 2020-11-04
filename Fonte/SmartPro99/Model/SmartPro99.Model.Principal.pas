@@ -1,4 +1,4 @@
-unit udm_Principal;
+unit SmartPro99.Model.Principal;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Data.DB, FireDAC.Comp.DataSet;
 
 type
-  TDmPrincipal = class(TDataModule)
+  TModelPrincipal = class(TDataModule)
     FQryConfig: TFDQuery;
   private
 
@@ -32,19 +32,19 @@ type
   end;
 
 var
-  DmPrincipal: TDmPrincipal;
+  ModelPrincipal: TModelPrincipal;
 
 implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses udm_Conexao, System.Variants, ufrm_Principal;
+uses System.Variants, SmartPro99.View.Principal, SmartPro99.Model.Conexao;
 
 {$R *.dfm}
 
 { TDmPrincipal }
 
-procedure TDmPrincipal.CloseFDQTemp;
+procedure TModelPrincipal.CloseFDQTemp;
 begin
 
    if assigned(FDQTemp) then
@@ -52,7 +52,7 @@ begin
 
 end;
 
-procedure TDmPrincipal.CopyDataSet(pDataSetOrigen,pDataSetDestino: TDataSet);
+procedure TModelPrincipal.CopyDataSet(pDataSetOrigen,pDataSetDestino: TDataSet);
 begin
 
     try
@@ -60,7 +60,7 @@ begin
       TFDMemTable(pDataSetDestino).CopyDataSet(pDataSetOrigen);
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao AbreFMenTv';
+      ViewPrincipal.FMensagemErro := 'Erro ao AbreFMenTv';
       raise
 
     end;
@@ -69,24 +69,24 @@ begin
 
 end;
 
-procedure TDmPrincipal.CreateFDQuerTemp(pSQL: string);
+procedure TModelPrincipal.CreateFDQuerTemp(pSQL: string);
 begin
 
   if not assigned(FDQTemp) then
   FDQTemp := TFDQuery.Create(self);
 
   FDQTemp.Close;
-  FDQTemp.Connection  := DmConexao.FDC_Freeboard;
+  FDQTemp.Connection  := ModelConexao.FDC_Freeboard;
   FDQTemp.SQL.Text    := pSQL;
 
 end;
 
-procedure TDmPrincipal.ExcuteSQL(pSQL: string);
+procedure TModelPrincipal.ExcuteSQL(pSQL: string);
 begin
 
   try
     try
-      with DmConexao do
+      with ModelConexao do
       begin
 
         AbreConexaoDb;
@@ -96,20 +96,20 @@ begin
       end;
 
     except
-      frmPrincipal.FMensagemErro := 'Erro ao ExcuteSQL';
+      ViewPrincipal.FMensagemErro := 'Erro ao ExcuteSQL';
       raise;
 
     end;
 
   finally
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
   end;
 
 end;
 
 
 
-procedure TDmPrincipal.FechaDataSet(pTDataSet: TDataSet);
+procedure TModelPrincipal.FechaDataSet(pTDataSet: TDataSet);
 begin
 
   try
@@ -120,18 +120,18 @@ begin
 
 end;
 
-function TDmPrincipal.IdTabela(pCampoChave, pTabela : String ): String;
+function TModelPrincipal.IdTabela(pCampoChave, pTabela : String ): String;
 var
   vSQL : String;
 begin
 
    vSQL := 'select max('+ pCampoChave+ ')+1 id from '+ pTabela;
-   Result := VarToStrDef(DmConexao.FDC_Freeboard.ExecSQLScalar(vSQL),'1');
+   Result := VarToStrDef(ModelConexao.FDC_Freeboard.ExecSQLScalar(vSQL),'1');
 
 end;
 
 
-procedure TDmPrincipal.InseriPrimeiroConfig;
+procedure TModelPrincipal.InseriPrimeiroConfig;
 var
   vSQL: String;
 begin
@@ -142,14 +142,14 @@ begin
     ExcuteSQL(vSQL);
 
   except
-    frmPrincipal.fMensagemErro := 'Não foi possivel Inseri o primeiro config';
+    ViewPrincipal.fMensagemErro := 'Não foi possivel Inseri o primeiro config';
     raise
 
   end;
 
 end;
 
-procedure TDmPrincipal.GravarConfiguracao(pTipoArq, pCaminhoArq: string);
+procedure TModelPrincipal.GravarConfiguracao(pTipoArq, pCaminhoArq: string);
 var
   vSQL : String;
 begin
@@ -162,25 +162,25 @@ begin
 
     try
 
-      DmPrincipal.CreateFDQuerTemp(vSQL);
-      DmPrincipal.FDQTemp.ParamByName('Tipoarquivotxt').Value := pTipoArq;
-      DmPrincipal.FDQTemp.ParamByName('localarquivotxt').Value  := UpperCase(pCaminhoArq);
-      DmPrincipal.FDQTemp.ExecSQL;
+      CreateFDQuerTemp(vSQL);
+      FDQTemp.ParamByName('Tipoarquivotxt').Value := pTipoArq;
+      FDQTemp.ParamByName('localarquivotxt').Value  := UpperCase(pCaminhoArq);
+      FDQTemp.ExecSQL;
 
     except
-      frmPrincipal.fMensagemErro := 'Não foi possivel Salvar a alteracao no banco';
+      ViewPrincipal.fMensagemErro := 'Não foi possivel Salvar a alteracao no banco';
       raise
 
     end;
 
   finally
-    DmPrincipal.CloseFDQTemp;
+    CloseFDQTemp;
 
   end;
 end;
 
 
-function TDmPrincipal.LengthDescricao: integer;
+function TModelPrincipal.LengthDescricao: integer;
 var
   vSQL: string;
   vFQry: TFDQuery;
@@ -192,10 +192,10 @@ begin
   try
 
     try
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
       vFQry             := TFDQuery.Create(self);
       vFQry.Close;
-      vFQry.Connection  := DmConexao.FDC_Freeboard;
+      vFQry.Connection  := ModelConexao.FDC_Freeboard;
       vFQry.SQL.Text    := vSQL;
       vFQry.Open;
       Result            := vFQry.FieldByName('Qtde').AsInteger;
@@ -208,7 +208,7 @@ begin
 
   finally
 
-    DmConexao.FechaConexaoDb;
+    ModelConexao.FechaConexaoDb;
     vFQry.Free;
   end;
 

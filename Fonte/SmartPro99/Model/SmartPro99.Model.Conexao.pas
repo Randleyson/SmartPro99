@@ -1,4 +1,4 @@
-unit udm_Conexao;
+unit SmartPro99.Model.Conexao;
 
 interface
 
@@ -10,7 +10,7 @@ uses
   System.IOUtils,Vcl.Forms,FireDAC.VCLUI.Wait;
 
 type
-  TDmConexao = class(TDataModule)
+  TModelConexao = class(TDataModule)
     FDC_Freeboard: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -23,32 +23,34 @@ type
   end;
 
 var
-  DmConexao: TDmConexao;
+  ModelConexao: TModelConexao;
 
 implementation
 
+uses
+  SmartPro99.View.Principal;
+
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses ufrm_Principal;
 
 {$R *.dfm}
 
-procedure TDmConexao.AbreConexaoDb;
+procedure TModelConexao.AbreConexaoDb;
 begin
 
   FDC_Freeboard.Connected := True;
 
 end;
 
-procedure TDmConexao.ConectaFreeboard;
+procedure TModelConexao.ConectaFreeboard;
 begin
 
   try
 
     if not FileExists(ExtractFileDir(application.ExeName+'\Config.ini')) then
     begin
-      frmPrincipal.fComErro      := True;
-      FrmPrincipal.fMensagemErro := 'Não foi encontrado o arquivo de configuração';
+      ViewPrincipal.fComErro      := True;
+      ViewPrincipal.fMensagemErro := 'Não foi encontrado o arquivo de configuração';
       exit;
     end;
 
@@ -58,13 +60,13 @@ begin
     FDC_Freeboard.Params.LoadFromFile(ExtractFileDir(application.ExeName) + '\Config.ini');
     FDC_Freeboard.Connected                   := True;
     FDC_Freeboard.Connected                   := False;
-    frmPrincipal.fComErro                     := False;
+    ViewPrincipal.fComErro                     := False;
 
   except
     on e: Exception do
     begin
-      FrmPrincipal.fMensagemErro := ' Erro ao tentar se conectar a base da dados freeboard '+ e.Message;
-      frmPrincipal.fComErro      := True;
+      ViewPrincipal.fMensagemErro := ' Erro ao tentar se conectar a base da dados freeboard '+ e.Message;
+      ViewPrincipal.fComErro      := True;
       raise
     end;
 
@@ -72,7 +74,7 @@ begin
 
 end;
 
-procedure TDmConexao.DataModuleCreate(Sender: TObject);
+procedure TModelConexao.DataModuleCreate(Sender: TObject);
 begin
 
   try
@@ -85,7 +87,7 @@ begin
 
 end;
 
-procedure TDmConexao.FechaConexaoDb;
+procedure TModelConexao.FechaConexaoDb;
 begin
 
   FDC_Freeboard.Connected := False;

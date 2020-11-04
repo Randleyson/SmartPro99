@@ -1,4 +1,4 @@
-unit uframe_Config;
+unit SmartPro99.View.Configuracao;
 
 interface
 
@@ -12,7 +12,7 @@ uses
   FireDAC.Comp.Client, FMX.Effects, FMX.Filter.Effects;
 
 type
-  TFrameConfiguracao = class(TFrame)
+  TViewConfiguracao = class(TFrame)
     Rectangle1: TRectangle;
     lytTitulo: TLayout;
     Label1: TLabel;
@@ -60,34 +60,37 @@ type
   end;
 
 var
-  FrameConfiguracao:TFrameConfiguracao;
+  ViewConfiguracao:TViewConfiguracao;
 implementation
+
+uses
+  SmartPro99.Controlle.Message, SmartPro99.Model.Principal,
+  SmartPro99.View.Principal, SmartPro99.Model.Conexao;
 
 {$R *.fmx}
 
-uses ufrm_Principal, udm_Conexao, udm_Principal, u_Message;
 
 { TFrameConfiguracao }
 
-procedure TFrameConfiguracao.FechaFrameConfig;
+procedure TViewConfiguracao.FechaFrameConfig;
 begin
 
   try
 
-    FrameConfiguracao.Visible := False;
-    FrameConfiguracao         := nil;
+    ViewConfiguracao.Visible := False;
+    ViewConfiguracao         := nil;
 
   except
   on e: Exception do
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameConfiguracao.RefreshConfiguracao;
+procedure TViewConfiguracao.RefreshConfiguracao;
 begin
 
   try
@@ -110,13 +113,13 @@ begin
 
 end;
 
-procedure TFrameConfiguracao.SalvarAltercao;
+procedure TViewConfiguracao.SalvarAltercao;
 begin
 
   try
   
-    DmPrincipal.GravarConfiguracao(IntToStr(TipoArquivoSelcionado),edtArquivoTxt.Text);
-    TMessage.MessagemPopUp(frmPrincipal,'Configuração salva com exito');
+    ModelPrincipal.GravarConfiguracao(IntToStr(TipoArquivoSelcionado),edtArquivoTxt.Text);
+    TMessage.MessagemPopUp(ViewPrincipal,'Configuração salva com exito');
     FechaFrameConfig;
 
   except
@@ -125,34 +128,38 @@ begin
 
 end;
 
-procedure TFrameConfiguracao.CreateFrameConfig;
+procedure TViewConfiguracao.CreateFrameConfig;
 begin
 
   try
 
-    if not assigned(FrameConfiguracao) then
-    FrameConfiguracao := TFrameConfiguracao.Create(self);
+    if not assigned(ViewConfiguracao) then
+    ViewConfiguracao := TViewConfiguracao.Create(self);
 
-    with FrameConfiguracao do
+    with ViewConfiguracao do
     begin
 
       Name      := 'FrameConfiguracao';
-      Parent    := frmPrincipal;
+      Parent    := ViewPrincipal;
 
       RefreshConfiguracao;
       BringToFront;
     end;
 
   except
+  on e: exception do
+    begin
 
-    FechaFrameConfig;
-    TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro);
+      FechaFrameConfig;
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro +
+        e.Message);
+    end;
 
   end;
 
 end;
 
-function TFrameConfiguracao.TipoArquivoSelcionado: integer;
+function TViewConfiguracao.TipoArquivoSelcionado: integer;
 begin
 
   if rdTipoTxtItens.IsChecked then
@@ -160,7 +167,7 @@ begin
 
 end;
 
-function TFrameConfiguracao.ValidaCaminho(pCaminho: String): Boolean;
+function TViewConfiguracao.ValidaCaminho(pCaminho: String): Boolean;
 begin
 
   Result := False;
@@ -169,34 +176,34 @@ begin
       
 end;
 
-procedure TFrameConfiguracao.btnBuscarPastaClick(Sender: TObject);
+procedure TViewConfiguracao.btnBuscarPastaClick(Sender: TObject);
 begin
 
   try
 
-    if not (frmPrincipal.OpenDialogDir = '') then
-    edtArquivoTxt.Text          := frmPrincipal.OpenDialogDir;
+    if not (ViewPrincipal.OpenDialogDir = '') then
+    edtArquivoTxt.Text          := ViewPrincipal.OpenDialogDir;
     imgPastaInexistente.Visible := not ValidaCaminho(edtArquivoTxt.Text);
 
 
   except
   on e: exception do
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameConfiguracao.btnFecharClick(Sender: TObject);
+procedure TViewConfiguracao.btnFecharClick(Sender: TObject);
 begin
 
    FechaFrameConfig;
 
 end;
 
-procedure TFrameConfiguracao.btnSairClick(Sender: TObject);
+procedure TViewConfiguracao.btnSairClick(Sender: TObject);
 begin
 
   try
@@ -206,21 +213,21 @@ begin
   except
   on e: Exception do
     begin 
-      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);  
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameConfiguracao.btnSalvarClick(Sender: TObject);
+procedure TViewConfiguracao.btnSalvarClick(Sender: TObject);
 begin
 
   try
 
     if imgPastaInexistente.Visible then
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Caminho do arquivo de integração não e valido');
+      TMessage.MessagemPopUp(ViewPrincipal,'Caminho do arquivo de integração não e valido');
       exit
     end;
 
@@ -229,30 +236,30 @@ begin
   except
     on e: exception do
     begin
-      TMessage.MessagemPopUp(frmPrincipal,'Erro : '+ frmPrincipal.fMensagemErro + e.Message);
+      TMessage.MessagemPopUp(ViewPrincipal,'Erro : '+ ViewPrincipal.fMensagemErro + e.Message);
     end;
 
   end;
 
 end;
 
-procedure TFrameConfiguracao.CarregaParamentros;
+procedure TViewConfiguracao.CarregaParamentros;
 begin
 
   try
 
     try
 
-      DmConexao.AbreConexaoDb;
+      ModelConexao.AbreConexaoDb;
 
-      DmPrincipal.FQryConfig.Close;
-      DmPrincipal.FQryConfig.Open;
+      ModelPrincipal.FQryConfig.Close;
+      ModelPrincipal.FQryConfig.Open;
 
-      if DmPrincipal.FQryConfig.RecordCount = 0 then
-      DmPrincipal.InseriPrimeiroConfig;
+      if ModelPrincipal.FQryConfig.RecordCount = 0 then
+      ModelPrincipal.InseriPrimeiroConfig;
 
-      fTipoArquivo := DmPrincipal.FQryConfig.FieldByName('TIPOARQUIVOTXT').AsInteger;
-      fCaminhoArquivo := DmPrincipal.FQryConfig.FieldByName('LOCALARQUIVOTXT').AsString;
+      fTipoArquivo := ModelPrincipal.FQryConfig.FieldByName('TIPOARQUIVOTXT').AsInteger;
+      fCaminhoArquivo := ModelPrincipal.FQryConfig.FieldByName('LOCALARQUIVOTXT').AsString;
 
     except
       raise
@@ -260,13 +267,13 @@ begin
     end;
 
   finally
-    DmConexao.AbreConexaoDb;
+    ModelConexao.AbreConexaoDb;
 
   end;
 
 end;
 
-procedure TFrameConfiguracao.edtArquivoTxtKeyUp(Sender: TObject; var Key: Word;
+procedure TViewConfiguracao.edtArquivoTxtKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
 

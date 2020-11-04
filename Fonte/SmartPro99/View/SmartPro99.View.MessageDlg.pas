@@ -1,4 +1,4 @@
-unit Frm_MessageDlg;
+unit SmartPro99.View.MessageDlg;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   FMX.Controls.Presentation, FMX.Layouts, FMX.Objects;
 
 type
-  TfrmMessageDlg = class(TForm)
+  TViewMessageDlg = class(TForm)
     Rectangle1: TRectangle;
     Layout1: TLayout;
     Layout2: TLayout;
@@ -25,29 +25,30 @@ type
   end;
 
 var
-  frmMessageDlg: TfrmMessageDlg;
+  ViewMessageDlg: TViewMessageDlg;
 
 implementation
 
 {$R *.fmx}
 
-uses u_Message;
+uses SmartPro99.Controlle.Message;
 
-procedure TfrmMessageDlg.btnNaoClick(Sender: TObject);
+
+procedure TViewMessageDlg.btnNaoClick(Sender: TObject);
 begin
 
   fResult :=  False;
-  if Assigned(frmMessageDlg) then
-  frmMessageDlg.Close;
+  if Assigned(ViewMessageDlg) then
+  ViewMessageDlg.Close;
 
 end;
 
-procedure TfrmMessageDlg.btnSimClick(Sender: TObject);
+procedure TViewMessageDlg.btnSimClick(Sender: TObject);
 begin
 
   fResult :=  True;
-  if Assigned(frmMessageDlg) then
-  frmMessageDlg.Close;
+  if Assigned(ViewMessageDlg) then
+  ViewMessageDlg.Close;
 
 end;
 

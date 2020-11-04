@@ -1,4 +1,4 @@
-unit ufrm_Principal;
+unit SmartPro99.View.Principal;
 
 interface
 
@@ -8,9 +8,9 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts,Vcl.Dialogs,FMX.Forms;
 
 type
-  TfrmPrincipal = class(TForm)
-    procedure FormShow(Sender: TObject);
+  TViewPrincipal = class(TForm)
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,54 +24,60 @@ type
   end;
 
 var
-  frmPrincipal: TfrmPrincipal;
+  ViewPrincipal: TViewPrincipal;
 
 implementation
 
+uses
+  SmartPro99.Model.Conexao, SmartPro99.Model.Principal,
+  SmartPro99.Controlle.Message, SmartPro99.View.Home;
+
 {$R *.fmx}
 
-uses uframe_Home, udm_Conexao, uframe_CadTvs, udm_Principal;
 
 
-procedure TfrmPrincipal.FormCreate(Sender: TObject);
+{ TViewPrincipal }
+
+procedure TViewPrincipal.FormCreate(Sender: TObject);
 begin
 
   try
 
-    if not assigned(DmConexao) then
-    DmConexao := TDmConexao.Create(nil);
+    if not assigned(ModelConexao) then
+    ModelConexao := TModelConexao.Create(nil);
 
-    if not assigned(DmPrincipal) then
-    DmPrincipal := TDmPrincipal.Create(nil);
+    if not assigned(ModelPrincipal) then
+    ModelPrincipal := TModelPrincipal.Create(nil);
 
   except
 
   end;
+
 end;
 
-procedure TfrmPrincipal.FormShow(Sender: TObject);
+procedure TViewPrincipal.FormShow(Sender: TObject);
 begin
 
   try
 
-    if frmPrincipal.fComErro then
+    if ViewPrincipal.fComErro then
     begin
 
-      //FrameMsgPopUp.CreateFrameMsgPopUp(frmPrincipal.FMensagemErro);
-      exit
+      TMessage.MessagemPopUp(ViewPrincipal,ViewPrincipal.FMensagemErro);
+      Application.Terminate
 
     end;
 
-    FrameHome.CreateFremeHome;
+    ViewHome.CreateFremeHome;
 
   except
-    //FrameMsgPopUp.CreateFrameMsgPopUp(frmPrincipal.FMensagemErro);
+    TMessage.MessagemPopUp(ViewPrincipal,ViewPrincipal.FMensagemErro);
 
   end;
 
 end;
 
-function TfrmPrincipal.OpenDialogDir: String;
+function TViewPrincipal.OpenDialogDir: String;
 begin
 
   with TOpenDialog.Create(nil) do
@@ -85,8 +91,6 @@ begin
   finally
     Free;
   end;
-
-
 
 end;
 

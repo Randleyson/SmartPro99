@@ -1,4 +1,4 @@
-object FrameCadTv: TFrameCadTv
+object ViewCadTvs: TViewCadTvs
   Align = Client
   Size.Width = 1096.000000000000000000
   Size.Height = 668.000000000000000000

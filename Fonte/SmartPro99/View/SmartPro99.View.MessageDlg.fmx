@@ -1,8 +1,8 @@
-object frmMessageDlg: TfrmMessageDlg
+object ViewMessageDlg: TViewMessageDlg
   Left = 0
   Top = 0
   BorderStyle = None
-  Caption = 'frmMessageDlg'
+  Caption = 'VeiwMessageDlg'
   ClientHeight = 150
   ClientWidth = 450
   Position = MainFormCenter
