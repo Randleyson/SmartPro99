@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/08/04 19:15:45.000.575,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/04 19:15:45.000.843,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/08/04 19:15:46.000.050,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/08/04 19:16:14.000.417,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/08/04 19:16:42.000.815,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
+    <Transaction>2020/08/04 19:16:43.000.151,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:43:40.000.952,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/25 21:43:43.000.112,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:43:45.000.354,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:44:41.000.990,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:44:43.000.972,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
+    <Transaction>2020/08/25 21:44:44.000.171,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:52:22.000.568,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/25 21:52:24.000.702,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/08/25 21:52:26.000.805,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/11/16 12:45:36.000.872,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2020/11/16 12:45:38.000.846,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
+    <Transaction>2020/11/16 12:45:39.000.408,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2020/12/09 20:54:17.000.968,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/12/10 10:38:35.000.538,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/13 16:32:38.560,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/13 16:33:29.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.fmx=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2021/02/13 16:33:29.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.pas=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/13 16:33:45.080,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\AppSmartPro99.dproj=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>  <ActiveMobileDevice>   <PIOSsumulador iOSSimulator="iPhone5"/>
+    <NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+  </ActiveMobileDevice>
+</BorlandProject>
