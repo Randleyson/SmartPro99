@@ -1,0 +1,210 @@
+object ViewFrmConfiguracao: TViewFrmConfiguracao
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 570
+  ClientWidth = 562
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object ToolBarBotao: TToolBar
+    Align = Bottom
+    Margins.Top = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Position.Y = 528.000000000000000000
+    Size.Width = 562.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Layout3: TLayout
+      Align = Client
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 3.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 3.000000000000000000
+      Size.Width = 546.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object BtnAlter: TRectangle
+        Align = Left
+        Margins.Left = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnAlterClick
+        object Label1: TLabel
+          Align = Client
+          Locked = True
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Alterar'
+          TabOrder = 0
+        end
+      end
+      object BtnCancelar: TRectangle
+        Align = Left
+        Margins.Left = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Position.X = 280.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnCancelarClick
+        object Label2: TLabel
+          Align = Client
+          Locked = True
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Cancelar'
+          TabOrder = 0
+        end
+      end
+      object BtnGravar: TRectangle
+        Align = Left
+        Margins.Left = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Position.X = 144.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnGravarClick
+        object Label3: TLabel
+          Align = Client
+          Locked = True
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Gravar'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object GboxPadraoArquivo: TGroupBox
+    Align = Top
+    StyledSettings = [Family, Style, FontColor, Other]
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 546.000000000000000000
+    Size.Height = 80.000000000000000000
+    Size.PlatformDefault = False
+    Text = ' Padr'#227'o do Arquivo '
+    TextSettings.Font.Size = 14.000000000000000000
+    TabOrder = 3
+    object Layout2: TLayout
+      Align = Client
+      Margins.Left = 15.000000000000000000
+      Margins.Top = 25.000000000000000000
+      Margins.Right = 15.000000000000000000
+      Margins.Bottom = 15.000000000000000000
+      Size.Width = 516.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object RadioArquivoFilizola: TRadioButton
+        Align = Left
+        StyledSettings = [Family, Style, FontColor]
+        Size.Width = 104.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Filizola'
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object RadioArquivoToleto: TRadioButton
+        Align = Left
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 104.000000000000000000
+        Size.Width = 97.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Toleto'
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object RadioOutros: TRadioButton
+        Align = Left
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 201.000000000000000000
+        Size.Width = 104.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Outros'
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+    end
+  end
+  object GBoxLocalArquivo: TGroupBox
+    Align = Top
+    StyledSettings = [Family, Style, FontColor, Other]
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 104.000000000000000000
+    Size.Width = 546.000000000000000000
+    Size.Height = 72.000000000000000000
+    Size.PlatformDefault = False
+    Text = ' Local do Arquivo '
+    TextSettings.Font.Size = 14.000000000000000000
+    TabOrder = 4
+    object Layout1: TLayout
+      Align = Client
+      Margins.Left = 15.000000000000000000
+      Margins.Top = 25.000000000000000000
+      Margins.Right = 15.000000000000000000
+      Margins.Bottom = 15.000000000000000000
+      Size.Width = 516.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object EdtLocalArquivo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        Size.Width = 456.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object BtnPesquisarLocalArquivo: TRectangle
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 461.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = BtnPesquisarLocalArquivoClick
+      end
+    end
+  end
+end

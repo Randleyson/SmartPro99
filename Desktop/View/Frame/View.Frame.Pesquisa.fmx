@@ -1,0 +1,50 @@
+object FramePesquisa: TFramePesquisa
+  Align = Top
+  Size.Width = 537.000000000000000000
+  Size.Height = 53.000000000000000000
+  Size.PlatformDefault = False
+  object RectPesquisaProduto: TRectangle
+    Align = Top
+    Size.Width = 537.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 3.000000000000000000
+    YRadius = 3.000000000000000000
+    object LytPesquisaProduto: TLayout
+      Align = Client
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Size.Width = 521.000000000000000000
+      Size.Height = 34.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object CBoxFiltro: TComboBox
+        Align = Left
+        Margins.Right = 5.000000000000000000
+        Size.Width = 137.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+      object EdtPesquisa: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Right = 5.000000000000000000
+        Size.Width = 324.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object BtnPesquisa: TRectangle
+        Align = Right
+        Position.X = 471.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+end

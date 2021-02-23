@@ -1,0 +1,188 @@
+﻿object ViewFrmPrincipal: TViewFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 616
+  ClientWidth = 914
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object MenuBar: TMenuBar
+    Size.Width = 914.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object SmartPro99: TMenuItem
+      Text = 'SmartPro99'
+      object Configuração: TMenuItem
+        Locked = True
+        Text = 'Configura'#231#227'o'
+      end
+      object Ajudas: TMenuItem
+        Locked = True
+        Text = 'Ajudas'
+      end
+      object Sair: TMenuItem
+        Locked = True
+        Text = 'Sair'
+      end
+    end
+    object Cadastro: TMenuItem
+      Text = 'Cadastro'
+      object Produtos: TMenuItem
+        Locked = True
+        Text = 'Produtos'
+      end
+      object Usuarios: TMenuItem
+        Locked = True
+        Text = 'Usuarios'
+      end
+      object Tvs: TMenuItem
+        Locked = True
+        Text = 'Tvs'
+      end
+    end
+  end
+  object RectBotao: TRectangle
+    Align = Top
+    Fill.Color = xFFF6F6F6
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 898.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 3.000000000000000000
+    YRadius = 3.000000000000000000
+    object BtnConfiguracao: TRectangle
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = BtnConfiguracaoClick
+      object Label1: TLabel
+        Align = Bottom
+        StyledSettings = [Family, Style, FontColor]
+        Locked = True
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 43.000000000000000000
+        Size.Width = 119.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'Configura'#231#245'es'
+        TabOrder = 0
+      end
+    end
+    object BtnProdutos: TRectangle
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 153.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = BtnProdutosClick
+      object Label2: TLabel
+        Align = Bottom
+        StyledSettings = [Family, Style, FontColor]
+        Locked = True
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 43.000000000000000000
+        Size.Width = 119.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'Produtos'
+        TabOrder = 0
+      end
+    end
+    object BtnTvs: TRectangle
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 298.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = BtnTvsClick
+      object Label3: TLabel
+        Align = Bottom
+        StyledSettings = [Family, Style, FontColor]
+        Locked = True
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 43.000000000000000000
+        Size.Width = 119.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'Tvs'
+        TabOrder = 0
+      end
+    end
+  end
+  object ToolBar: TToolBar
+    Align = Bottom
+    Position.Y = 592.000000000000000000
+    Size.Width = 914.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object Label4: TLabel
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'USUARIO: '
+      TabOrder = 1
+    end
+    object LblUsuario: TLabel
+      Align = Left
+      Position.X = 65.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'LblUsuario'
+      TabOrder = 0
+    end
+  end
+end

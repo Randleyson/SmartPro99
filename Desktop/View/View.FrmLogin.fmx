@@ -1,0 +1,105 @@
+object ViewFrmLogin: TViewFrmLogin
+  Left = 0
+  Top = 0
+  Caption = 'ViewFrmLogin'
+  ClientHeight = 419
+  ClientWidth = 319
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Center
+    Size.Width = 249.000000000000000000
+    Size.Height = 328.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object LytLogin: TLayout
+      Align = Bottom
+      Position.Y = 155.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 123.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Label1: TLabel
+        Align = Top
+        StyledSettings = [Style, FontColor]
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 13.000000000000000000
+        Text = 'Login'
+        TabOrder = 1
+      end
+      object EdtLogin: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 2
+        Position.Y = 22.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object EdtSenha: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 3
+        Password = True
+        Position.Y = 74.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Label2: TLabel
+        Align = Top
+        StyledSettings = [Style, FontColor]
+        Margins.Bottom = 5.000000000000000000
+        Position.Y = 52.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 13.000000000000000000
+        Text = 'Senha'
+        TabOrder = 0
+      end
+    end
+    object Layout3: TLayout
+      Align = Bottom
+      Position.Y = 278.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object BtnAcessar: TRectangle
+        Align = Client
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 233.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnAcessarClick
+        object Label3: TLabel
+          Align = Client
+          StyledSettings = [Family, Style, FontColor]
+          Locked = True
+          Size.Width = 233.000000000000000000
+          Size.Height = 34.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.HorzAlign = Center
+          Text = 'Acessar'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+end
