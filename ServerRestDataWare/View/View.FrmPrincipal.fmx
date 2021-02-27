@@ -1,0 +1,694 @@
+object FrmPrincipal: TFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Ws Apollo Gestao Mobile'
+  ClientHeight = 394
+  ClientWidth = 667
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 667.000000000000000000
+    Size.Height = 394.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 1
+    TabPosition = PlatformDefault
+    Sizes = (
+      667s
+      368s
+      667s
+      368s)
+    object TabConfiguracao: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 91.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Configura'#231#227'o'
+      ExplicitSize.cx = 91.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object RectPrincipal: TRectangle
+        Align = Client
+        Fill.Color = claWhite
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 651.000000000000000000
+        Size.Height = 352.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object LytConfiguracaoServidor: TLayout
+          Align = Top
+          Size.Width = 651.000000000000000000
+          Size.Height = 97.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object LytImagem: TLayout
+            Align = Right
+            Position.X = 439.000000000000000000
+            Size.Width = 212.000000000000000000
+            Size.Height = 97.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Image2: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Align = Client
+              Size.Width = 212.000000000000000000
+              Size.Height = 80.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Layout1: TLayout
+              Align = Top
+              Size.Width = 212.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+            end
+          end
+          object LytClient: TLayout
+            Align = Client
+            Size.Width = 439.000000000000000000
+            Size.Height = 97.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object Line1: TLine
+              Align = Top
+              LineType = Diagonal
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 5.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 5.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 38.000000000000000000
+              Size.Width = 429.000000000000000000
+              Size.Height = 1.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Color = xFF878787
+              Stroke.Thickness = 2.000000000000000000
+            end
+            object LblConfiguracaoServer: TLabel
+              Align = Top
+              StyledSettings = []
+              Size.Width = 439.000000000000000000
+              Size.Height = 33.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF0E00CD
+              Text = 'CONFIGURA'#199'AO DO SERVIDOR RESTDW'
+              TabOrder = 2
+            end
+            object LytConfig1: TLayout
+              Align = Top
+              Margins.Top = 8.000000000000000000
+              Position.Y = 52.000000000000000000
+              Size.Width = 439.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Layout8: TLayout
+                Align = Client
+                Size.Width = 439.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                object Layout9: TLayout
+                  Align = Left
+                  Margins.Left = 5.000000000000000000
+                  Margins.Right = 5.000000000000000000
+                  Position.X = 5.000000000000000000
+                  Size.Width = 97.000000000000000000
+                  Size.Height = 35.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 0
+                  object Label17: TLabel
+                    Align = Top
+                    StyledSettings = []
+                    Size.Width = 97.000000000000000000
+                    Size.Height = 17.000000000000000000
+                    Size.PlatformDefault = False
+                    TextSettings.Font.Family = 'Yu Gothic UI'
+                    TextSettings.Font.Size = 11.000000000000000000
+                    TextSettings.Font.StyleExt = {00060000000000000004000000}
+                    TextSettings.FontColor = xFF747474
+                    Text = 'PORTA'
+                    TabOrder = 0
+                  end
+                  object EdtPortaServer: TEdit
+                    Touch.InteractiveGestures = [LongTap, DoubleTap]
+                    Align = Client
+                    TabOrder = 1
+                    Size.Width = 97.000000000000000000
+                    Size.Height = 18.000000000000000000
+                    Size.PlatformDefault = False
+                  end
+                end
+                object Layout10: TLayout
+                  Align = Left
+                  Margins.Left = 5.000000000000000000
+                  Margins.Right = 5.000000000000000000
+                  Position.X = 112.000000000000000000
+                  Size.Width = 161.000000000000000000
+                  Size.Height = 35.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 2
+                  object Label18: TLabel
+                    Align = Top
+                    StyledSettings = []
+                    Size.Width = 161.000000000000000000
+                    Size.Height = 17.000000000000000000
+                    Size.PlatformDefault = False
+                    TextSettings.Font.Family = 'Yu Gothic UI'
+                    TextSettings.Font.Size = 11.000000000000000000
+                    TextSettings.Font.StyleExt = {00060000000000000004000000}
+                    TextSettings.FontColor = xFF747474
+                    Text = 'USUARIO'
+                    TabOrder = 0
+                  end
+                  object EdtUsuarioServer: TEdit
+                    Touch.InteractiveGestures = [LongTap, DoubleTap]
+                    Align = Client
+                    TabOrder = 1
+                    Size.Width = 161.000000000000000000
+                    Size.Height = 18.000000000000000000
+                    Size.PlatformDefault = False
+                  end
+                end
+                object Layout11: TLayout
+                  Align = Left
+                  Margins.Left = 5.000000000000000000
+                  Margins.Right = 5.000000000000000000
+                  Position.X = 283.000000000000000000
+                  Size.Width = 158.000000000000000000
+                  Size.Height = 35.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 1
+                  object Label19: TLabel
+                    Align = Top
+                    StyledSettings = []
+                    Size.Width = 158.000000000000000000
+                    Size.Height = 17.000000000000000000
+                    Size.PlatformDefault = False
+                    TextSettings.Font.Family = 'Yu Gothic UI'
+                    TextSettings.Font.Size = 11.000000000000000000
+                    TextSettings.Font.StyleExt = {00060000000000000004000000}
+                    TextSettings.FontColor = xFF747474
+                    Text = 'SENHA'
+                    TabOrder = 0
+                  end
+                  object EdtSenhaServer: TEdit
+                    Touch.InteractiveGestures = [LongTap, DoubleTap]
+                    Align = Client
+                    TabOrder = 1
+                    Password = True
+                    Size.Width = 158.000000000000000000
+                    Size.Height = 18.000000000000000000
+                    Size.PlatformDefault = False
+                  end
+                end
+              end
+            end
+          end
+        end
+        object LytBotao: TLayout
+          Align = Top
+          Position.Y = 281.000000000000000000
+          Size.Width = 651.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object BtnStart: TRectangle
+            Align = Right
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 344.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 122.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnStartClick
+            object Label7: TLabel
+              Align = Client
+              StyledSettings = []
+              Locked = True
+              Size.Width = 122.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.Size = 11.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF4C4C4C
+              TextSettings.HorzAlign = Center
+              Text = 'Start'
+              TabOrder = 0
+            end
+          end
+          object BtnStop: TRectangle
+            Align = Right
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 474.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 116.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnStopClick
+            object Label8: TLabel
+              Align = Client
+              StyledSettings = []
+              Locked = True
+              Size.Width = 116.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Yu Gothic UI'
+              TextSettings.Font.Size = 11.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF4C4C4C
+              TextSettings.HorzAlign = Center
+              Text = 'Stop'
+              TabOrder = 0
+            end
+          end
+          object CliStatus: TCircle
+            Align = Right
+            Fill.Color = xFFE50E0E
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 598.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 49.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object LblOnOff: TLabel
+              Align = Client
+              StyledSettings = [Style]
+              Size.Width = 49.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.FontColor = claWhite
+              TextSettings.HorzAlign = Center
+              Text = 'OFF'
+              TabOrder = 0
+            end
+          end
+        end
+        object LblRodaPe: TLabel
+          Align = Top
+          StyledSettings = []
+          Position.Y = 321.000000000000000000
+          Size.Width = 651.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Yu Gothic UI'
+          TextSettings.Font.Size = 11.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFF7D7D7D
+          TextSettings.HorzAlign = Center
+          Text = 'LblRodaPe'
+          TabOrder = 2
+        end
+        object LytConfiguracaoDB: TLayout
+          Align = Top
+          Position.Y = 97.000000000000000000
+          Size.Width = 651.000000000000000000
+          Size.Height = 184.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object Label5: TLabel
+            Align = Top
+            StyledSettings = []
+            Size.Width = 651.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Yu Gothic UI'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = xFF0E00CD
+            Text = 'CONFIGURA'#199#195'O DO BANCO  DE DADOS'
+            TabOrder = 0
+          end
+          object LytConfgDB1: TLayout
+            Align = Top
+            Position.Y = 42.000000000000000000
+            Size.Width = 651.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object Layout13: TLayout
+              Align = Client
+              Size.Width = 651.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Layout14: TLayout
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 265.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 2
+                object Label20: TLabel
+                  Align = Top
+                  StyledSettings = []
+                  Size.Width = 265.000000000000000000
+                  Size.Height = 17.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.Font.Family = 'Yu Gothic UI'
+                  TextSettings.Font.Size = 11.000000000000000000
+                  TextSettings.Font.StyleExt = {00060000000000000004000000}
+                  TextSettings.FontColor = xFF747474
+                  Text = 'IP'
+                  TabOrder = 0
+                end
+                object EdtIpDB: TEdit
+                  Touch.InteractiveGestures = [LongTap, DoubleTap]
+                  Align = Client
+                  TabOrder = 1
+                  Size.Width = 265.000000000000000000
+                  Size.Height = 23.000000000000000000
+                  Size.PlatformDefault = False
+                end
+              end
+              object Layout15: TLayout
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Position.X = 525.000000000000000000
+                Size.Width = 120.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+                object Label21: TLabel
+                  Align = Top
+                  StyledSettings = []
+                  Size.Width = 120.000000000000000000
+                  Size.Height = 17.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.Font.Family = 'Yu Gothic UI'
+                  TextSettings.Font.Size = 11.000000000000000000
+                  TextSettings.Font.StyleExt = {00060000000000000004000000}
+                  TextSettings.FontColor = xFF747474
+                  Text = 'SENHA'
+                  TabOrder = 0
+                end
+                object EdtSenhaDB: TEdit
+                  Touch.InteractiveGestures = [LongTap, DoubleTap]
+                  Align = Client
+                  TabOrder = 1
+                  Password = True
+                  Size.Width = 120.000000000000000000
+                  Size.Height = 23.000000000000000000
+                  Size.PlatformDefault = False
+                end
+              end
+              object Layout16: TLayout
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Position.X = 381.000000000000000000
+                Size.Width = 136.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                object Label22: TLabel
+                  Align = Top
+                  StyledSettings = []
+                  Size.Width = 136.000000000000000000
+                  Size.Height = 17.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.Font.Family = 'Yu Gothic UI'
+                  TextSettings.Font.Size = 11.000000000000000000
+                  TextSettings.Font.StyleExt = {00060000000000000004000000}
+                  TextSettings.FontColor = xFF747474
+                  Text = 'USUARIO'
+                  TabOrder = 0
+                end
+                object EdtUsuarioDB: TEdit
+                  Touch.InteractiveGestures = [LongTap, DoubleTap]
+                  Align = Client
+                  TabOrder = 1
+                  Size.Width = 136.000000000000000000
+                  Size.Height = 23.000000000000000000
+                  Size.PlatformDefault = False
+                end
+              end
+              object Layout17: TLayout
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Position.X = 277.000000000000000000
+                Size.Width = 96.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 3
+                object Label23: TLabel
+                  Align = Top
+                  StyledSettings = []
+                  Size.Width = 96.000000000000000000
+                  Size.Height = 17.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.Font.Family = 'Yu Gothic UI'
+                  TextSettings.Font.Size = 11.000000000000000000
+                  TextSettings.Font.StyleExt = {00060000000000000004000000}
+                  TextSettings.FontColor = xFF747474
+                  Text = 'PORTA'
+                  TabOrder = 0
+                end
+                object EdtPortaDB: TEdit
+                  Touch.InteractiveGestures = [LongTap, DoubleTap]
+                  Align = Client
+                  TabOrder = 1
+                  Size.Width = 96.000000000000000000
+                  Size.Height = 23.000000000000000000
+                  Size.PlatformDefault = False
+                end
+              end
+            end
+          end
+          object LytConfigDB2: TLayout
+            Align = Top
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.Y = 87.000000000000000000
+            Size.Width = 651.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            object Layout19: TLayout
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Size.Width = 457.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label24: TLabel
+                Align = Top
+                StyledSettings = []
+                Size.Width = 457.000000000000000000
+                Size.Height = 17.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Yu Gothic UI'
+                TextSettings.Font.Size = 11.000000000000000000
+                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                TextSettings.FontColor = xFF747474
+                Text = 'PASTA'
+                TabOrder = 0
+              end
+              object EdtPastaDB: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Size.Width = 457.000000000000000000
+                Size.Height = 23.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+            object Layout20: TLayout
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Position.X = 469.000000000000000000
+              Size.Width = 180.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Label25: TLabel
+                Align = Top
+                StyledSettings = []
+                Size.Width = 180.000000000000000000
+                Size.Height = 17.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Yu Gothic UI'
+                TextSettings.Font.Size = 11.000000000000000000
+                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                TextSettings.FontColor = xFF747474
+                Text = 'BANCO'
+                TabOrder = 0
+              end
+              object EdtBancoDB: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Size.Width = 180.000000000000000000
+                Size.Height = 23.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+          end
+          object Line2: TLine
+            Align = Top
+            LineType = Diagonal
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 33.000000000000000000
+            Size.Width = 635.000000000000000000
+            Size.Height = 1.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Color = xFF8E8E8E
+            Stroke.Thickness = 2.000000000000000000
+          end
+          object Layout2: TLayout
+            Align = Top
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.Y = 137.000000000000000000
+            Size.Width = 651.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object Layout3: TLayout
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Size.Width = 149.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Label1: TLabel
+                Align = Top
+                StyledSettings = []
+                Size.Width = 149.000000000000000000
+                Size.Height = 17.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Yu Gothic UI'
+                TextSettings.Font.Size = 11.000000000000000000
+                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                TextSettings.FontColor = xFF747474
+                Text = 'Driver'
+                TabOrder = 0
+              end
+              object CboxDriverBD: TComboBox
+                Align = Top
+                Position.Y = 17.000000000000000000
+                Size.Width = 149.000000000000000000
+                Size.Height = 22.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+          end
+        end
+      end
+    end
+    object TabLos: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 45.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Logs'
+      ExplicitSize.cx = 45.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object MmLogs: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 647.000000000000000000
+        Size.Height = 348.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 643.000000000000000000
+        Viewport.Height = 344.000000000000000000
+      end
+    end
+  end
+  object RESTPooler: TRESTServicePooler
+    Active = False
+    CORS = False
+    CORS_CustomHeaders.Strings = (
+      'Access-Control-Allow-Origin=*'
+      
+        'Access-Control-Allow-Methods=GET, POST, PATCH, PUT, DELETE, OPTI' +
+        'ONS'
+      
+        'Access-Control-Allow-Headers=Content-Type, Origin, Accept, Autho' +
+        'rization, X-CUSTOM-HEADER')
+    RequestTimeout = -1
+    ServicePort = 10060
+    ProxyOptions.Port = 8888
+    AuthenticationOptions.AuthorizationOption = rdwAOBasic
+    AuthenticationOptions.OptionParams.AuthDialog = True
+    AuthenticationOptions.OptionParams.CustomDialogAuthMessage = 'Protected Space...'
+    AuthenticationOptions.OptionParams.Custom404TitleMessage = '(404) The address you are looking for does not exist'
+    AuthenticationOptions.OptionParams.Custom404BodyMessage = '404'
+    AuthenticationOptions.OptionParams.Custom404FooterMessage = 'Take me back to <a href="./">Home REST Dataware'
+    AuthenticationOptions.OptionParams.Username = 'admin'
+    AuthenticationOptions.OptionParams.Password = 'admin'
+    SSLMethod = sslvSSLv2
+    SSLVersions = []
+    Encoding = esUtf8
+    RootPath = '/'
+    SSLVerifyMode = []
+    SSLVerifyDepth = 0
+    ForceWelcomeAccess = False
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    MultiCORE = False
+    Left = 592
+    Top = 8
+  end
+end

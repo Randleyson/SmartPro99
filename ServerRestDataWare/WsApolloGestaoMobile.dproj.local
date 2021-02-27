@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <ActiveMobileDevice>   <PIOSsumulador iOSSimulator="iPhone5"/>
+    <NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+  </ActiveMobileDevice>
+  <Transactions>
+    <Transaction>2021/02/23 22:56:32.753,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoDB.dfm=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoOracle.dfm</Transaction>
+    <Transaction>2021/02/23 22:56:32.753,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoDB.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoOracle.pas</Transaction>
+    <Transaction>2021/02/23 23:03:21.579,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oFiltroConsulta.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:23.720,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oFinanceiro.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:25.405,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oLogin.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:27.287,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oProduto.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:29.195,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oUtilitario.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:32.198,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oVendas.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:34.489,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uFinanceiro.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:36.265,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uLogin.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:38.125,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uProduto.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:40.148,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uVendas.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:43.950,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmFinanceiro.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:45.840,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmLogin.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:47.900,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmProduto.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:50.186,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmVendas.pas=</Transaction>
+  </Transactions>
+</BorlandProject>
