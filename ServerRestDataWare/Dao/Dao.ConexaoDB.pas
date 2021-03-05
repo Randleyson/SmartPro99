@@ -8,11 +8,11 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.Oracle,
   FireDAC.Phys.OracleDef, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, Controller.oConfiguracao, StrUtils,
+  FireDAC.DApt, FireDAC.Comp.DataSet, StrUtils,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase;
 
 type
-  TConexaoOracle = class(TDataModule)
+  TDaoConexaoDB = class(TDataModule)
     FDConn: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -20,7 +20,7 @@ type
 
   public
     { Public declarations }
-    function ConfigurarConexao(oConfiguracao: ToConfiguracao): Boolean;
+    function ConfigurarConexao: Boolean;
     function ExcecutarSQL(pSQL: String; out sErro: String): Boolean;
   end;
 
@@ -31,17 +31,16 @@ implementation
 
 { TConexaoOracle }
 uses
-  View.FrmPrincipal, Controller.uConfiguracao;
+  View.FrmPrincipal, Controller.oConfiguracao;
 
-function TConexaoOracle.ConfigurarConexao(oConfiguracao
-  : ToConfiguracao): Boolean;
+function TDaoConexaoDB.ConfigurarConexao: Boolean;
 var
   vDatabase: String;
 begin
 
   with oConfiguracao do
   begin
-    case AnsiIndexStr(UpperCase(oConfiguracao.DriverDB), ['ORA', 'FB']) of
+    case AnsiIndexStr(UpperCase(DriverDB), ['ORA', 'FB']) of
       0:
         vDatabase := '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=' + IpDB + ')' +
           '(PORT=' + PortaDB + '))(CONNECT_DATA=(SERVICE_NAME=' +
@@ -85,7 +84,7 @@ begin
 
 end;
 
-procedure TConexaoOracle.DataModuleCreate(Sender: TObject);
+procedure TDaoConexaoDB.DataModuleCreate(Sender: TObject);
 var
   oConfiguracao: ToConfiguracao;
   sErro: string;
@@ -94,7 +93,7 @@ begin
   oConfiguracao := ToConfiguracao.Create;
   try
     oConfiguracao.CarregaConfigIni;
-    ConfigurarConexao(oConfiguracao);
+    ConfigurarConexao;
 
   finally
     FreeAndNil(oConfiguracao);
@@ -102,7 +101,7 @@ begin
 
 end;
 
-function TConexaoOracle.ExcecutarSQL(pSQL: String; out sErro: String): Boolean;
+function TDaoConexaoDB.ExcecutarSQL(pSQL: String; out sErro: String): Boolean;
 begin
 
   try

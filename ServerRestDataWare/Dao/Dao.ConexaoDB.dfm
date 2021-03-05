@@ -1,4 +1,4 @@
-object ConexaoOracle: TConexaoOracle
+object DaoConexaoDB: TDaoConexaoDB
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 316

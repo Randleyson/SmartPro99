@@ -9,8 +9,7 @@ type
   TuConexaoSQL = Class
   private
   public
-    function ConexaoComBanco(oConfiguracao: ToConfiguracao;
-      out sErro: String): Boolean;
+    function ConexaoComBanco: Boolean;
   End;
 
 implementation
@@ -20,14 +19,13 @@ uses
 
 { TControllerConexaoSQL }
 
-function TuConexaoSQL.ConexaoComBanco(oConfiguracao: ToConfiguracao;
-  out sErro: String): Boolean;
+function TuConexaoSQL.ConexaoComBanco: Boolean;
 var
-  ConexaoOracle: TConexaoOracle;
+  ConexaoOracle: TDaoConexaoDB;
 begin
-  ConexaoOracle := TConexaoOracle.Create(Nil);
+  ConexaoOracle := TDaoConexaoDB.Create(Nil);
   try
-    Result := ConexaoOracle.ConfigurarConexao(oConfiguracao);
+    Result := ConexaoOracle.ConfigurarConexao;
   finally
     FreeAndNil(ConexaoOracle);
   end;

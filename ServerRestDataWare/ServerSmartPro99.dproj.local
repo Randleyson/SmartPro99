@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<ActiveMobileDevice>
+		<PIOSsumulador iOSSimulator="iPhone5"/>
+		<NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+	</ActiveMobileDevice>
+	<Transactions>
+    <Transaction>2021/02/23 22:56:32.000.753,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoDB.dfm=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoOracle.dfm</Transaction>
+    <Transaction>2021/02/23 22:56:32.000.753,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoDB.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Dao\Dao.ConexaoOracle.pas</Transaction>
+    <Transaction>2021/02/23 23:03:27.000.287,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oProduto.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:38.000.125,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uProduto.pas=</Transaction>
+    <Transaction>2021/02/23 23:03:47.000.900,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmProduto.pas=</Transaction>
+    <Transaction>2021/02/27 10:21:05.000.099,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/02/27 10:22:33.000.645,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uTvs.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/02/27 10:29:49.000.167,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/02/27 10:30:14.000.817,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uTvs.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/02/27 10:40:22.000.007,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/02/27 10:40:38.000.602,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmTvs.dfm=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.dfm</Transaction>
+    <Transaction>2021/02/27 10:40:38.000.602,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmTvs.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/02 19:50:20.000.638,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\WsApolloGestaoMobile.dproj=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\ServerSmartPro99.dproj</Transaction>
+    <Transaction>2021/03/04 13:10:26.000.937,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/04 13:10:49.000.977,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.oSincronizacao.pas</Transaction>
+    <Transaction>2021/03/04 13:22:58.000.304,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/04 13:23:13.000.596,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uSincronizacao.pas</Transaction>
+    <Transaction>2021/03/04 13:24:21.000.098,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/04 13:26:29.000.932,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmSincronizacao.pas</Transaction>
+    <Transaction>2021/03/04 13:26:29.000.932,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.dfm=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Module\Module.DmSincronizacao.dfm</Transaction>
+    <Transaction>2021/03/04 19:38:13.924,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/04 19:38:30.893,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uUtlis.pas=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Unit1.pas</Transaction>
+    <Transaction>2021/03/04 19:41:29.375,=D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uUtil.pas</Transaction>
+    <Transaction>2021/03/04 19:41:37.755,D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Controller\Controller.uUtlis.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

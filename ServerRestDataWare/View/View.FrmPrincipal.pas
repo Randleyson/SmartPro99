@@ -72,10 +72,14 @@ type
     Layout3: TLayout;
     Label1: TLabel;
     CboxDriverBD: TComboBox;
+    TmSincronizaProduto: TTimer;
+    PBarSincronizara: TProgressBar;
+    Layout4: TLayout;
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure BtnStartClick(Sender: TObject);
     procedure BtnStopClick(Sender: TObject);
+    procedure TmSincronizaProdutoTimer(Sender: TObject);
   private
     { Private declarations }
     procedure ReloadFrmPrincipal;
@@ -83,6 +87,7 @@ type
     procedure StopServer;
     procedure SalvarConfiguracaoNoIni;
     procedure StatusServer(Values: Boolean);
+    procedure SincronizarProdutos;
   public
   { Public declarations }
     const
@@ -96,7 +101,8 @@ var
 implementation
 
 uses
-  Module.ServerMethod, Controller.uConfiguracao, Controller.uConexaoSQL;
+  Module.ServerMethod, Controller.uConfiguracao, Controller.uConexaoSQL,
+  Controller.oSincronizacao;
 
 {$R *.fmx}
 
@@ -128,8 +134,11 @@ begin
     BtnStart.Enabled := True;
     BtnStop.Enabled := False;
 
-    LblRodaPe.Text := '© 2021 Consolide Registro de Marcas - Todos os direitos reservados.'+
-      'Versão: '+ cVersao;
+    LblRodaPe.Text :=
+      '© 2021 Consolide Registro de Marcas - Todos os direitos reservados.' +
+      'Versão: ' + cVersao;
+
+    PBarSincronizara.Visible := False;
 
   except
     raise;
@@ -164,17 +173,68 @@ begin
 
 end;
 
+procedure TFrmPrincipal.SincronizarProdutos;
+begin
+
+  if not FileExists(oConfiguracao.PathAquivoIntegracao) then
+  begin
+    EscreveMmLogs('o Arquivo de integacao nao exite');
+    exit;
+  end;
+
+  oSincronizacao := ToSincronizacao.Create;
+  try
+
+    PBarSincronizara.Max := oSincronizacao.QuantidadeLinha;
+    PBarSincronizara.Value := 1;
+    PBarSincronizara.Visible := True;
+
+    EscreveMmLogs('Sincronizacao Inicia');
+    TThread.CreateAnonymousThread(
+      procedure
+      begin
+        try
+          try
+            oSincronizacao.SincronizarProdutos;
+
+          except
+            raise
+          end;
+
+        finally
+
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              EscreveMmLogs('Sincronizacao finalizada');
+              FreeAndNil(oSincronizacao);
+              PBarSincronizara.Visible := False;
+            end);
+        end;
+
+      end).Start;
+
+  except
+    on E: Exception do
+    begin
+      EscreveMmLogs('Erro ao sincronizar produtos :' + E.Message);
+    end;
+  end;
+
+end;
+
 procedure TFrmPrincipal.StartServer;
 begin
 
   try
     try
       SalvarConfiguracaoNoIni;
-      // Stratando server
+
       RESTPooler.ServerMethodClass := TDmServerMethod;
       RESTPooler.ServicePort := StrToint(oConfiguracao.PortaServer);
       RESTPooler.Active := True;
       EscreveMmLogs('Server Iniciado');
+      TmSincronizaProduto.Enabled := True;
 
     except
       raise;
@@ -213,9 +273,15 @@ begin
   FrmPrincipal.BtnStop.Enabled := False;
   FreeAndNil(DmServerMethod);
   StatusServer(False);
+  TmSincronizaProduto.Enabled := False;
 
   MmLogs.Lines.Add('Serviço parado ...');
 
+end;
+
+procedure TFrmPrincipal.TmSincronizaProdutoTimer(Sender: TObject);
+begin
+  SincronizarProdutos;
 end;
 
 procedure TFrmPrincipal.BtnStartClick(Sender: TObject);
@@ -223,6 +289,7 @@ begin
 
   try
     StartServer;
+
   except
     on E: Exception do
     begin
@@ -265,41 +332,6 @@ begin
       ShowMessage('Erro ao iniciar o serviço ' + E.Message);
     end;
   end;
-
-  {
-
-
-
-
-
-
-
-
-
-
-
-    try
-    try
-    if oConfiguracao.ReloadConfigIni(oConfiguracao, sErro) then
-    begin
-    ReloadFrmPrincipal(oConfiguracao);
-    end;
-
-    StartServer;
-    except
-    on E: Exception do
-    begin
-    MmLogs.Lines.Add('Erro ao iniciar o serviço ' + E.Message);
-    end;
-
-    end;
-
-    finally
-    LblRodaPe.Text := 'powered by Apollo Sistema Versão: ' + cVersao;
-    FreeAndNil(oConfiguracao);
-    FreeAndNil(Controller);
-    end;
-    ] }
 
 end;
 

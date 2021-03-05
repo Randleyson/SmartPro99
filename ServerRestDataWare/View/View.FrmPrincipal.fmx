@@ -1,8 +1,8 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'Ws Apollo Gestao Mobile'
-  ClientHeight = 394
+  Caption = 'Server SmartPro99'
+  ClientHeight = 412
   ClientWidth = 667
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -13,16 +13,16 @@ object FrmPrincipal: TFrmPrincipal
   object TabControl: TTabControl
     Align = Client
     Size.Width = 667.000000000000000000
-    Size.Height = 394.000000000000000000
+    Size.Height = 412.000000000000000000
     Size.PlatformDefault = False
     TabIndex = 0
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
       667s
-      368s
+      386s
       667s
-      368s)
+      386s)
     object TabConfiguracao: TTabItem
       CustomIcon = <
         item
@@ -44,7 +44,7 @@ object FrmPrincipal: TFrmPrincipal
         Margins.Right = 8.000000000000000000
         Margins.Bottom = 8.000000000000000000
         Size.Width = 651.000000000000000000
-        Size.Height = 352.000000000000000000
+        Size.Height = 370.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         object LytConfiguracaoServidor: TLayout
@@ -108,7 +108,7 @@ object FrmPrincipal: TFrmPrincipal
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00060000000000000004000000}
               TextSettings.FontColor = xFF0E00CD
-              Text = 'CONFIGURA'#199'AO DO SERVIDOR RESTDW'
+              Text = 'CONFIGURA'#199#195'O DO SERVIDOR RESTDW'
               TabOrder = 2
             end
             object LytConfig1: TLayout
@@ -624,6 +624,21 @@ object FrmPrincipal: TFrmPrincipal
             end
           end
         end
+        object Layout4: TLayout
+          Align = Bottom
+          Position.Y = 348.000000000000000000
+          Size.Width = 651.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object PBarSincronizara: TProgressBar
+            Align = Client
+            Orientation = Horizontal
+            Size.Width = 651.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
       end
     end
     object TabLos: TTabItem
@@ -648,13 +663,20 @@ object FrmPrincipal: TFrmPrincipal
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
         Size.Width = 647.000000000000000000
-        Size.Height = 348.000000000000000000
+        Size.Height = 366.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         Viewport.Width = 643.000000000000000000
-        Viewport.Height = 344.000000000000000000
+        Viewport.Height = 362.000000000000000000
       end
     end
+  end
+  object TmSincronizaProduto: TTimer
+    Enabled = False
+    Interval = 15000
+    OnTimer = TmSincronizaProdutoTimer
+    Left = 592
+    Top = 76
   end
   object RESTPooler: TRESTServicePooler
     Active = False

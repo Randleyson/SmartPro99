@@ -20,6 +20,7 @@ type
     FUsuarioServer: String;
     FSenhaServer: String;
     FPastaDB: String;
+    FPathAquivoIntegracao: String;
   public
     property DriverDB: String read FDriverDB write FDriverDB;
     property IpDB: string read FIpBD write FIpBD;
@@ -31,8 +32,11 @@ type
     property UsuarioServer: string read FUsuarioServer write FUsuarioServer;
     property SenhaServer: string read FSenhaServer write FSenhaServer;
     property PortaServer: String read FPortaServer write FPortaServer;
+    property PathAquivoIntegracao: String read FPathAquivoIntegracao
+      write FPathAquivoIntegracao;
     procedure CarregaConfigIni;
     procedure SalvarConfigIni;
+    procedure SincronizarProdutos;
   end;
 
 var
@@ -62,6 +66,8 @@ begin
       FUsuarioServer := uConfiguracao.GetConfig('Server', 'Usuario');
       FSenhaServer := uConfiguracao.GetConfig('Server', 'Senha');
 
+      PathAquivoIntegracao := uConfiguracao.GetConfig('Integercao', 'Path');
+
     except
       raise
     end;
@@ -87,6 +93,25 @@ begin
       uConfiguracao.SetConfig('Server', 'DriverID', FPortaServer);
       uConfiguracao.SetConfig('Server', 'Usuario', FUsuarioServer);
       uConfiguracao.SetConfig('Server', 'Senha', FSenhaServer);
+    except
+      raise;
+
+    end;
+
+  finally
+    FreeAndNil(uConfiguracao);
+  end;
+
+end;
+
+procedure ToConfiguracao.SincronizarProdutos;
+begin
+
+ uConfiguracao := TuConfiguracao.create;
+  try
+
+    try
+      uConfiguracao.SincronizarProdutos;
     except
       raise;
 
