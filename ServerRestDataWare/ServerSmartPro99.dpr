@@ -10,18 +10,18 @@ uses
   Module.DmConfiguracao in 'Module\Module.DmConfiguracao.pas' {DmConfiguracao: TDataModule},
   Controller.uConfiguracao in 'Controller\Controller.uConfiguracao.pas',
   Controller.uConexaoSQL in 'Controller\Controller.uConexaoSQL.pas',
-  Controller.oTvs in 'Controller\Controller.oTvs.pas',
-  Controller.uTvs in 'Controller\Controller.uTvs.pas',
-  Module.DmTvs in 'Module\Module.DmTvs.pas' {DmTvs: TDataModule},
   Controller.oSincronizacao in 'Controller\Controller.oSincronizacao.pas',
   Controller.uSincronizacao in 'Controller\Controller.uSincronizacao.pas',
   Module.DmSincronizacao in 'Module\Module.DmSincronizacao.pas' {DmSincronizacao: TDataModule},
-  Controller.uUtil in 'Controller\Controller.uUtil.pas';
+  Controller.uUtil in 'Controller\Controller.uUtil.pas',
+  uDm in 'Dm\uDm.pas' {Dm: TDataModule},
+  uFiredac in 'Units\uFiredac.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+  Application.CreateForm(TDm, Dm);
   Application.Run;
 end.

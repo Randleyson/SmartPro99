@@ -323,8 +323,8 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <DCC_ExeOutput>D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Versao\</DCC_ExeOutput>
-        <DCC_DcuOutput>D:\Projetos\SmartPro99\trunk\ServerRestDataWare\Versao\</DCC_DcuOutput>
+        <DCC_ExeOutput>D:\Projetos\SmartPro99\trunk\Versao\Server\</DCC_ExeOutput>
+        <DCC_DcuOutput>D:\Projetos\SmartPro99\trunk\Versao\Server\</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;RestDatawareCORE;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;RESTDWDriverFD;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;TeeDB;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -368,8 +368,6 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>WsApolloGestaoMobile_Icon.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>..\..\Imagens\IcoServer44x44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>..\..\Imagens\IcoServer150x150.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -401,13 +399,6 @@
         </DCCReference>
         <DCCReference Include="Controller\Controller.uConfiguracao.pas"/>
         <DCCReference Include="Controller\Controller.uConexaoSQL.pas"/>
-        <DCCReference Include="Controller\Controller.oTvs.pas"/>
-        <DCCReference Include="Controller\Controller.uTvs.pas"/>
-        <DCCReference Include="Module\Module.DmTvs.pas">
-            <Form>DmTvs</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <DCCReference Include="Controller\Controller.oSincronizacao.pas"/>
         <DCCReference Include="Controller\Controller.uSincronizacao.pas"/>
         <DCCReference Include="Module\Module.DmSincronizacao.pas">
@@ -416,6 +407,12 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="Controller\Controller.uUtil.pas"/>
+        <DCCReference Include="Dm\uDm.pas">
+            <Form>Dm</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Units\uFiredac.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -470,7 +467,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Versao\ServerSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\Versao\Server\ServerSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ServerSmartPro99.exe</RemoteName>
                         <Overwrite>true</Overwrite>

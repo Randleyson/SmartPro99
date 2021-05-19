@@ -101,7 +101,9 @@ var
 implementation
 
 uses
-  Module.ServerMethod, Controller.uConfiguracao, Controller.uConexaoSQL,
+  Module.ServerMethod,
+  Controller.uConfiguracao,
+  Controller.uConexaoSQL,
   Controller.oSincronizacao;
 
 {$R *.fmx}
@@ -215,10 +217,7 @@ begin
       end).Start;
 
   except
-    on E: Exception do
-    begin
-      EscreveMmLogs('Erro ao sincronizar produtos :' + E.Message);
-    end;
+    on E: Exception do EscreveMmLogs('Erro ao sincronizar produtos :' + E.Message);
   end;
 
 end;
@@ -234,6 +233,7 @@ begin
       RESTPooler.ServicePort := StrToint(oConfiguracao.PortaServer);
       RESTPooler.Active := True;
       EscreveMmLogs('Server Iniciado');
+      TmSincronizaProduto.Interval := 15000;
       TmSincronizaProduto.Enabled := True;
 
     except

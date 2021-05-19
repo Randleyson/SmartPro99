@@ -32,7 +32,7 @@ var
 implementation
 
 uses
-  View.FrmPrincipal, Controller.oTvs;
+  View.FrmPrincipal, uDm;
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 {$R *.dfm}
@@ -49,65 +49,16 @@ end;
 procedure TDmServerMethod.DWSEventsEventsListarProdutosReplyEventByType
   (var Params: TDWParams; var Result: string; const RequestType: TRequestType;
   var StatusCode: Integer; RequestHeader: TStringList);
-var
-  vJson: uDWJSONObject.TJSONValue;
-  oTvs: ToTvs;
 begin
-  vJson := uDWJSONObject.TJSONValue.Create;
-  oTvs := ToTvs.Create;
-  try
-    try
-      oTvs.IdTv := Params.ItemsString['IdTv'].AsInteger;
-      vJson.LoadFromDataset('', oTvs.DataSetProdutosTv, false, jmPureJSON);
-      Result := vJson.ToJSON;
-      StatusCode := 200;
-
-    except
-      on E: Exception do
-      begin
-        StatusCode := 412;
-        Result := '{"Erro":"' + E.Message + '"}';
-        FrmPrincipal.EscreveMmLogs(Result);
-      end;
-
-    end;
-
-  finally
-    FreeAndNil(vJson);
-  end;
-
+  Result := Dm.JSONArrayProduto(Params.ItemsString['IdTv'].AsInteger).ToString;
 end;
 
 //Tvs
 procedure TDmServerMethod.DWSEventsEventsListaTvReplyEventByType
   (var Params: TDWParams; var Result: string; const RequestType: TRequestType;
   var StatusCode: Integer; RequestHeader: TStringList);
-var
-  vJson: uDWJSONObject.TJSONValue;
-  oTvs: ToTvs;
 begin
-  vJson := uDWJSONObject.TJSONValue.Create;
-  oTvs := ToTvs.Create;
-  try
-    try
-      vJson.LoadFromDataset('', oTvs.DataSetListaTvs, false, jmPureJSON);
-      Result := vJson.ToJSON;
-      StatusCode := 200;
-    except
-      on E: Exception do
-      begin
-        StatusCode := 412;
-        Result := '{"Erro":"' + E.Message + '"}';
-        FrmPrincipal.EscreveMmLogs(Result);
-
-      end;
-    end;
-
-  finally
-    FreeAndNil(vJson);
-    FreeAndNil(oTvs);
-  end;
-
+  Result := Dm.JSONArrayTv.ToString;
 end;
 
 //Versao Server

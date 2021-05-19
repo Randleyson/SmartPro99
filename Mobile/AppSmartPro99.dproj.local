@@ -1,31 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2020/08/04 19:15:45.000.575,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/08/04 19:15:45.000.843,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/08/04 19:15:46.000.050,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/08/04 19:16:14.000.417,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/08/04 19:16:42.000.815,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
-    <Transaction>2020/08/04 19:16:43.000.151,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:43:40.000.952,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/08/25 21:43:43.000.112,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:43:45.000.354,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:44:41.000.990,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:44:43.000.972,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
-    <Transaction>2020/08/25 21:44:44.000.171,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:52:22.000.568,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/08/25 21:52:24.000.702,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/08/25 21:52:26.000.805,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/11/16 12:45:36.000.872,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
-    <Transaction>2020/11/16 12:45:38.000.846,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerConst1.pas</Transaction>
-    <Transaction>2020/11/16 12:45:39.000.408,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
-    <Transaction>2020/12/09 20:54:17.000.968,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/12/10 10:38:35.000.538,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/02/13 16:32:38.560,=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/02/13 16:33:29.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.fmx=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
-    <Transaction>2021/02/13 16:33:29.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.pas=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/02/13 16:33:45.080,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\AppSmartPro99.dproj=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-  </Transactions>  <ActiveMobileDevice>   <PIOSsumulador iOSSimulator="iPhone5"/>
-    <NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
-  </ActiveMobileDevice>
+    <Transaction>2021/02/13 16:33:29.000.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.fmx=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2021/02/13 16:33:45.000.080,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\AppSmartPro99.dproj=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/02/27 14:57:19.000.258,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.Splash.fmx</Transaction>
+    <Transaction>2021/02/27 15:11:55.000.635,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.TabelaPreco.fmx</Transaction>
+    <Transaction>2021/02/27 15:19:30.000.740,D:\Projetos\SmartPro99\trunk\Mobile\Unit2.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.Configuracao.fmx</Transaction>
+    <Transaction>2021/02/27 16:48:37.000.607,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmConfiguracoes.dfm</Transaction>
+    <Transaction>2021/02/27 16:55:55.000.482,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Dao\Dao.Conexoes.dfm</Transaction>
+    <Transaction>2021/02/27 18:24:40.000.036,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmProdutos.dfm</Transaction>
+    <Transaction>2021/02/28 10:26:26.000.881,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx</Transaction>
+    <Transaction>2021/02/28 11:10:44.000.421,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmTv.dfm</Transaction>
+    <Transaction>2021/05/16 14:09:16.000.581,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx</Transaction>
+    <Transaction>2021/05/16 19:57:42.000.286,D:\Projetos\SmartPro99\trunk\Mobile\Model\Dao\Model.Dao.TabelaPreco.pas=D:\Projetos\SmartPro99\trunk\Mobile\Model\Dao\Model.Dao.TabelaPrecoInterface.pas</Transaction>
+    <Transaction>2021/05/16 22:00:03.000.830,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Untis\Units.Dm.dfm</Transaction>
+    <Transaction>2021/05/17 17:48:28.000.898,D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.ItemLista.fmx</Transaction>
+    <Transaction>2021/05/17 17:48:57.000.491,D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.TabelaCores.fmx</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PIOSsumulador iOSSimulator="iPhone5"/>
+		<NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+	</ActiveMobileDevice>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="android-support-v4.dex.jar"/>
+    <File Path="cloud-messaging.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-base.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-analytics.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-base.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-basement.16.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-gass.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-identity.16.0.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-maps.16.1.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-stats.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-tasks.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-wallet.16.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-analytics.16.4.0.dex.jar"/>
+    <File Path="com-google-firebase.firebase-common.16.1.0.dex.jar"/>
+    <File Path="com-google-firebase.firebase-iid-interop.16.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-iid.17.1.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-messaging.17.5.0.dex.jar"/>
+    <File Path="fmx.dex.jar"/>
+    <File Path="google-play-billing.dex.jar"/>
+    <File Path="google-play-licensing.dex.jar"/>
+    <File Path="Model"/>
+    <File Path="Model\Behaviors"/>
+    <File Path="Model\Behaviors\Model.Behaviors.pas"/>
+    <File Path="Model\Components"/>
+    <File Path="Model\Components\RestDataWare"/>
+    <File Path="Model\Components\RestDataWare\Model.Components.RestDataWare.Interfaces.pas"/>
+    <File Path="Model\Components\RestDataWare\Model.Components.RestDataWare.pas"/>
+    <File Path="Untis"/>
+    <File Path="Untis\Units.uFiredac.pas"/>
+    <File Path="Untis\Units.Dm.pas"/>
+    <File Path="Untis\Units.Dm.dfm"/>
+    <File Path="Untis\Units.uRestDataWare.pas"/>
+    <File Path="View"/>
+    <File Path="View\Frames"/>
+    <File Path="View\Frames\View.Frames.ItemLista.pas"/>
+    <File Path="View\Frames\View.Frames.ItemLista.fmx"/>
+    <File Path="View\Frames\View.Frames.TabelaCores.pas"/>
+    <File Path="View\Frames\View.Frames.TabelaCores.fmx"/>
+    <File Path="View\View.Configuracao.pas"/>
+    <File Path="View\View.Configuracao.fmx"/>
+    <File Path="View\View.Principal.pas"/>
+    <File Path="View\View.Principal.fmx"/>
+    <File Path="View\View.TabelaPreco.pas"/>
+    <File Path="View\View.TabelaPreco.fmx"/>
+  </ProjectSortOrder>
 </BorlandProject>
