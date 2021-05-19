@@ -25,7 +25,8 @@ uses
   Module.DmTvs in 'Module\Module.DmTvs.pas' {DmTvs: TDataModule},
   View.FrmTvs in 'View\View.FrmTvs.pas' {ViewFrmTvs},
   View.Frame.Cabecalho in 'View\Frame\View.Frame.Cabecalho.pas' {FrameCabecalho: TFrame},
-  Controller.uMessageDialog in 'Controller\Controller.uMessageDialog.pas';
+  Controller.uMessageDialog in 'Controller\Controller.uMessageDialog.pas',
+  View.Frame.PaletaCores in 'View\Frame\View.Frame.PaletaCores.pas' {FramePaletaCores: TFrame};
 
 {$R *.res}
 

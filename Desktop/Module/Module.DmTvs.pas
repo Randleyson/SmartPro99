@@ -243,9 +243,10 @@ var
 begin
 
   try
+
     { FAZ BACKUP }
     vSQL := 'Update tv_prod set ie = ''E'' where codtv = :CODTV';
-    TuSmartPro99.SubstituirString(vSQL, ':CODTV', IntToStr(oTvs.IdTv));
+    vSQL := TuSmartPro99.SubstituirString(vSQL, ':CODTV', IntToStr(oTvs.IdTv));
     DmConexaoSQL.ExecutaSQL(vSQL);
 
     { INSERT NOVOS REGISTRO }

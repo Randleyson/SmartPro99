@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Menus;
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Menus, FMX.Layouts;
 
 type
   TViewFrmPrincipal = class(TForm)
@@ -29,6 +29,11 @@ type
     ToolBar: TToolBar;
     Label4: TLabel;
     LblUsuario: TLabel;
+    RectClient: TRectangle;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Layout2: TLayout;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnConfiguracaoClick(Sender: TObject);
     procedure BtnProdutosClick(Sender: TObject);

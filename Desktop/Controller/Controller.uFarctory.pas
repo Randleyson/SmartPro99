@@ -22,7 +22,6 @@ type
     FDmConfiguracao: TDmConfiguracao;
     procedure DefineFormMain(FormAtivo: TForm);
   public
-    { View }
     function PrincipalView: TViewFrmPrincipal;
     function ConfiguracaoView: TViewFrmConfiguracao;
     function ProdutosView: TViewFrmProdutos;
@@ -30,8 +29,6 @@ type
     procedure ProdutosDestroyView;
     procedure TvsDestroyView;
     procedure ConfiguracaoDestroyView;
-
-    { Module }
     function TvsDm: TDmTvs;
     function ProdutosDm: TDmProdutos;
     function UsuarioDm: TDmUsuario;
@@ -40,7 +37,6 @@ type
     procedure ProdutosDestroyDm;
     procedure UsuarioDestroyDm;
     procedure ConfiguracaoDestroyDm;
-
   end;
 
 var
@@ -92,7 +88,9 @@ end;
 function TFarctory.TvsView: TViewFrmTvs;
 begin
   if not Assigned(FViewFrmTvs) then
-    FViewFrmTvs := TViewFrmTvs.Create(nil);
+    FViewFrmTvs := TViewFrmTvs.Create(Nil);
+
+  FViewFrmTvs.Parent := FViewFrmPrincipal;
   Result := FViewFrmTvs;
 
 end;

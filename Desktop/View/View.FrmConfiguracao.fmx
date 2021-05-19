@@ -4,207 +4,337 @@ object ViewFrmConfiguracao: TViewFrmConfiguracao
   Caption = 'Form1'
   ClientHeight = 570
   ClientWidth = 562
+  Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnShow = FormShow
   DesignerMasterStyle = 0
-  object ToolBarBotao: TToolBar
-    Align = Bottom
-    Margins.Top = 10.000000000000000000
-    Margins.Bottom = 10.000000000000000000
-    Position.Y = 528.000000000000000000
+  inline FrameCabecalho1: TFrameCabecalho
+    Align = Top
+    Position.Y = 19.000000000000000000
     Size.Width = 562.000000000000000000
-    Size.Height = 32.000000000000000000
+    Size.Height = 69.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
-    object Layout3: TLayout
-      Align = Client
-      Margins.Left = 8.000000000000000000
-      Margins.Top = 3.000000000000000000
-      Margins.Right = 8.000000000000000000
-      Margins.Bottom = 3.000000000000000000
-      Size.Width = 546.000000000000000000
-      Size.Height = 26.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-      object BtnAlter: TRectangle
-        Align = Left
-        Margins.Left = 8.000000000000000000
-        Margins.Right = 8.000000000000000000
-        Position.X = 8.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 26.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Kind = None
-        XRadius = 3.000000000000000000
-        YRadius = 3.000000000000000000
-        OnClick = BtnAlterClick
-        object Label1: TLabel
-          Align = Client
-          Locked = True
-          Size.Width = 120.000000000000000000
-          Size.Height = 26.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.HorzAlign = Center
-          Text = 'Alterar'
-          TabOrder = 0
-        end
+    inherited Rectangle1: TRectangle
+      Size.Width = 562.000000000000000000
+      inherited LblNomeDaTela: TLabel
+        Size.Width = 546.000000000000000000
       end
-      object BtnCancelar: TRectangle
-        Align = Left
-        Margins.Left = 8.000000000000000000
-        Margins.Right = 8.000000000000000000
-        Position.X = 280.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 26.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Kind = None
-        XRadius = 3.000000000000000000
-        YRadius = 3.000000000000000000
-        OnClick = BtnCancelarClick
-        object Label2: TLabel
-          Align = Client
-          Locked = True
-          Size.Width = 120.000000000000000000
-          Size.Height = 26.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.HorzAlign = Center
-          Text = 'Cancelar'
-          TabOrder = 0
-        end
-      end
-      object BtnGravar: TRectangle
-        Align = Left
-        Margins.Left = 8.000000000000000000
-        Margins.Right = 8.000000000000000000
-        Position.X = 144.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 26.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Kind = None
-        XRadius = 3.000000000000000000
-        YRadius = 3.000000000000000000
-        OnClick = BtnGravarClick
-        object Label3: TLabel
-          Align = Client
-          Locked = True
-          Size.Width = 120.000000000000000000
-          Size.Height = 26.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.HorzAlign = Center
-          Text = 'Gravar'
-          TabOrder = 0
-        end
+      inherited Label1: TLabel
+        Size.Width = 546.000000000000000000
       end
     end
   end
-  object GboxPadraoArquivo: TGroupBox
-    Align = Top
-    StyledSettings = [Family, Style, FontColor, Other]
-    Margins.Left = 8.000000000000000000
-    Margins.Top = 8.000000000000000000
-    Margins.Right = 8.000000000000000000
-    Margins.Bottom = 8.000000000000000000
-    Position.X = 8.000000000000000000
-    Position.Y = 8.000000000000000000
-    Size.Width = 546.000000000000000000
-    Size.Height = 80.000000000000000000
+  object Layout4: TLayout
+    Align = Client
+    Size.Width = 562.000000000000000000
+    Size.Height = 482.000000000000000000
     Size.PlatformDefault = False
-    Text = ' Padr'#227'o do Arquivo '
-    TextSettings.Font.Size = 14.000000000000000000
     TabOrder = 3
-    object Layout2: TLayout
-      Align = Client
-      Margins.Left = 15.000000000000000000
-      Margins.Top = 25.000000000000000000
-      Margins.Right = 15.000000000000000000
-      Margins.Bottom = 15.000000000000000000
-      Size.Width = 516.000000000000000000
-      Size.Height = 40.000000000000000000
+    object GboxPadraoArquivo: TGroupBox
+      Align = Top
+      StyledSettings = [Family, Style, FontColor, Other]
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 546.000000000000000000
+      Size.Height = 80.000000000000000000
       Size.PlatformDefault = False
+      Text = ' Padr'#227'o do Arquivo '
+      TextSettings.Font.Size = 14.000000000000000000
       TabOrder = 0
-      object RadioArquivoFilizola: TRadioButton
-        Align = Left
-        StyledSettings = [Family, Style, FontColor]
-        Size.Width = 104.000000000000000000
+      object Layout2: TLayout
+        Align = Client
+        Margins.Left = 15.000000000000000000
+        Margins.Top = 25.000000000000000000
+        Margins.Right = 15.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 516.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Text = 'Filizola'
-        TextSettings.Font.Size = 14.000000000000000000
-      end
-      object RadioArquivoToleto: TRadioButton
-        Align = Left
-        StyledSettings = [Family, Style, FontColor]
-        Position.X = 104.000000000000000000
-        Size.Width = 97.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        Text = 'Toleto'
-        TextSettings.Font.Size = 14.000000000000000000
-      end
-      object RadioOutros: TRadioButton
-        Align = Left
-        StyledSettings = [Family, Style, FontColor]
-        Position.X = 201.000000000000000000
-        Size.Width = 104.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 2
-        Text = 'Outros'
-        TextSettings.Font.Size = 14.000000000000000000
+        object RadioArquivoFilizola: TRadioButton
+          Align = Left
+          StyledSettings = [Family, Style, FontColor]
+          Size.Width = 104.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Filizola'
+          TextSettings.Font.Size = 14.000000000000000000
+        end
+        object RadioArquivoToleto: TRadioButton
+          Align = Left
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 104.000000000000000000
+          Size.Width = 97.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Toleto'
+          TextSettings.Font.Size = 14.000000000000000000
+        end
+        object RadioOutros: TRadioButton
+          Align = Left
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 201.000000000000000000
+          Size.Width = 104.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Outros'
+          TextSettings.Font.Size = 14.000000000000000000
+        end
       end
     end
-  end
-  object GBoxLocalArquivo: TGroupBox
-    Align = Top
-    StyledSettings = [Family, Style, FontColor, Other]
-    Margins.Left = 8.000000000000000000
-    Margins.Top = 8.000000000000000000
-    Margins.Right = 8.000000000000000000
-    Margins.Bottom = 8.000000000000000000
-    Position.X = 8.000000000000000000
-    Position.Y = 104.000000000000000000
-    Size.Width = 546.000000000000000000
-    Size.Height = 72.000000000000000000
-    Size.PlatformDefault = False
-    Text = ' Local do Arquivo '
-    TextSettings.Font.Size = 14.000000000000000000
-    TabOrder = 4
-    object Layout1: TLayout
-      Align = Client
-      Margins.Left = 15.000000000000000000
-      Margins.Top = 25.000000000000000000
-      Margins.Right = 15.000000000000000000
-      Margins.Bottom = 15.000000000000000000
-      Size.Width = 516.000000000000000000
-      Size.Height = 32.000000000000000000
+    object GBoxLocalArquivo: TGroupBox
+      Align = Top
+      StyledSettings = [Family, Style, FontColor, Other]
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 104.000000000000000000
+      Size.Width = 546.000000000000000000
+      Size.Height = 72.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
-      object EdtLocalArquivo: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Text = ' Local do Arquivo '
+      TextSettings.Font.Size = 14.000000000000000000
+      TabOrder = 1
+      object Layout1: TLayout
         Align = Client
-        TabOrder = 0
-        Size.Width = 456.000000000000000000
+        Margins.Left = 15.000000000000000000
+        Margins.Top = 25.000000000000000000
+        Margins.Right = 15.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 516.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
-      end
-      object BtnPesquisarLocalArquivo: TRectangle
-        Align = Right
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 461.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 50.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Kind = None
-        OnClick = BtnPesquisarLocalArquivoClick
+        TabOrder = 0
+        object EdtLocalArquivo: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Size.Width = 466.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object imgPasta: TImage
+          MultiResBitmap.Height = 212
+          MultiResBitmap.Width = 228
+          MultiResBitmap = <
+            item
+              Width = 228
+              Height = 212
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000E4000000D408060000008C2D8F
+                20000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                090F49444154785EEDDD5B6854F91DC0F1FFCE2463E2253126238D988B222962
+                1EE292A7A0E858225EA02FFA601B2951310FEBB2AB9485165CD6A5D5165A2A2D
+                5864E9C53E047C11B50F0A529F447D89CB3E08A20FC92AD554CDFD6226577A7E
+                C7FF846C366BC62467FEBF33F3FDC030E79CE425C3FF3BE79CFF393331000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000040DA3EB0CF2A5CB972E5C3070F1E7CD8DFDFBFDA6ECA19B1586CACB2
+                B2F2DBEDDBB7DFABAFAFEFB29B9163540479F6ECD99FDFBE7DFB27F9F9F91305
+                05052D7673CE191F1F379393935F79AF41F2E4C9937F482412FFB53F428E701E
+                E4A143877EE7ED118B0A0B0B3FB29B729E17A5191818B874F8F0E1D663C78EFD
+                C76E460E88D867279A9A9A7E333232B29C18BF2B1A8D9A929292E6D6D6D69F79
+                8F6D76337240D43E679C1CA63E7EFCF8C7DEB9D3C7761366F10E5DB7DEBF7FDF
+                747474FCDB6E42967316643299FC95B717386A57F103BCF3EA3B070E1C587FE7
+                CE9DAFED2664312787AC7218565C5CDC6757F10EDEE1EB2777EFDEDD6E5791E5
+                9C4CEA9C3A75EA93F6F6F63FCBB9528A4C64C82CE3E8E8A8DD927BF2F2F2FCF3
+                47EF50D56E79ABAFAFEF1F172F5E3C555353336037214B39D943BE7AF52A6E17
+                7DC3C3C332E8FCE78989899C7D7887F1FE6BD0DBDBEB2FA77887AD479F3F7F5E
+                645791C59CCDB2CA9E40F68AB3071F8C999A9AF2C39407728BB320EDB5367FF0
+                616EF246C59B556E7116E4D0D01031A62175188FDCE024486FEF98C73B7FFA06
+                0707ED12B29D932047474763761169181B1BB34BC8764E2E7BECDDBBF78277FE
+                F8914CF3637E72C85A5757F719D76E33231E8FF7D4D6D67ED3D8D8D86E37658C
+                B320DFBC79C3FDABEF41AE4DCEBE3E8960A43E75138944260E1E3C78359337F8
+                136448AC58B182201D181E1EFEAABCBCFC7F972E5DFAC26E0A94B35956200CBC
+                37C296972F5F963537377F6937058A208179C8C7033B3B3B7F74FEFCF99FDA4D
+                812148200DB2A7BC76EDDA01BB1A188204D2E49DC327E57B9FEC6A2098D40989
+                4824E23F10BC1FFAD48DDCEEB965CB96E3E7CE9DFB9BDDB4E408127807895266
+                B88504B97EFDFACF2E5CB8F0477F430078CB05DE416EF1944F24498C62787878
+                95BF10108204E6211F82904F2665024102699028E5134A412348204D99F88452
+                564CEA8C8C8CF8CF7C2A0233C5626F3F54545858E83F2F96DCE45F5D5DFDDBD6
+                D6D6CFEDA62517EA2025C4929212535F5F6F366FDE6CCACBCBED4F00633A3B3B
+                CDA3478F4C5B5B9B3F31B3D83025C88A8A8ADF5FBE7CF9D776D3920B6590F2C2
+                C81DF94D4D4D66F7EEDD66F9F2E5F627C0F77963CDDCBA754BBE7E745151CAB8
+                5BBB76ED9FAE5EBDFA4BBB69C9852E48795156AE5C694E9F3E6D2A2B2BFD3081
+                F9E4E7E79B67CF9E993367CEF8E7820BF92C6E26820CE5A40E31E27DC9589131
+                23416A1E37A10A52CE198F1C39428C581019331B376E342D2D2DD31381DA842A
+                4899C0696C6C24462C9884B873E74EB36A55A037DC2C98BA20533751CF7EC80B
+                B96FDF3EFB5BC0C2C9F9E4FEFDFBFD3135D75873494590A917414E9A53DFD83D
+                FB21FF6AA0A2A2C2FF3D60B1AAABABA7FF7DC5EC87842A6351643A501541A65E
+                0479968BFB733D64EA9A73472C051943F178DC1F53738D3579A4C6A42C6792F3
+                20537F743A7F78EACE0B60B1D2B91E3933CC4C7116A41C12B8780702DE978CD1
+                4C45E92C48396C204684858CD54C9C2E3909726A6A2A8F1811369918B34E6E9D
+                DBB56BD7DF7B7A7A8EDAD5B4747575991B376E98D2D2D2E919306021E4B6B9EE
+                EE6EFF325A595999DD9A9EAAAAAABF5CBF7EFD53BBBAE49C04994824FED9DBDB
+                DB6C577D326123D787E43B4CE6BACF50DE9D1A1A1AA6BFDF04580C99ACB977EF
+                DE9C1385F2862FF7BBCE755A555E5EFED79B376F9EB0AB4BCE49903B76ECF857
+                7F7FFF2FECAA7F074E51D1FCFFB19B4B1E584AB203988F7C75877C742B25AB83
+                947727396448E785015C911DC18B172FFCE5A083747A1D921811063246D7AD5B
+                67D782E52C48394C254684858C5519B3417312642412994AE79C11D0241363D6
+                49900505056FEC22102AC5C5C5817E41ABAB2083FF3E3D2000D16834D08BE04E
+                825CB66C19B7E9207464B6D53B979CB2AB817036A903E0FB0812508420014508
+                1250842001450812508420014508125084200145081250842001450812508420
+                0145081250842001450812508420014508125084200145081250842001450812
+                5084200145081250842001450812508420014508125084200145081250842001
+                4508125084200145081250842001450812508420014508125084200145081250
+                8420014508125084200145081250842001450812508420014508125084200145
+                0812508420014508125084200145081250842001450812508420014508125084
+                2001450812508420014508125084200145081250842001450812508420014508
+                1250842001450812508420014508125084200145081250842001450812508420
+                0145081250842001450812508420014508125084200145081250842001450812
+                5084200145081250842001450812508420014508125084200145081250842001
+                459C04198D4627EC2280199C04B97AF5EAFEF1F171BB068447494949B75D0C84
+                9320376DDAD43E393969D7807090315B5959F9AD5D0D8493206B6B6BBF191B1B
+                B36B4038249349535757F7B55D0D849320ABAAAABA1A1A1A0C87AD080B19ABDB
+                B66D33D5D5D55D7653209C0429F6ECD9638A8A8A8812EAC91895B12A63D65B8E
+                D9CD817012E4C0C040ACB0B0D01C3F7E9C28A19A1CA6CA1895B12A6336684E82
+                F4FE40FF04321E8F9B13274E98AD5BB79AA1A121FF8F274EB8266350C6A28CC9
+                FAFA7A7F8C161717DB9F06EB03FB9C511D1D1D05DDDDDD2BBDC5D7B21E8BC5CC
+                EBD7AFCDC3870FCDD3A74F4D4F4F8F6C069C58B3668DCC73C8E4A3BFD3983101
+                192F2D2D1DDAB06143D2AE2F3927418AB6B6B632EFC90F3245C204B498E34A40
+                DCDB63063AA9A32A4840B9C0837436CB3A3838D8E73DC5DFAE01EAC5ED980D94
+                B33DA478F2E44991CCB87A8BEC29A1595C26226B6A6A06EC7A609CED21C58C3F
+                903D25B4CA588CC2E91E3265C6AC6B0A7B4CB834BD8390C3D4442291B14F27A9
+                0872268933E8BB218077C9CFCF1F0BF2D2060000000000000000000000000000
+                000000000000000000000000D9CF98FF0312B106BF94CFCA160000000049454E
+                44AE426082}
+              FileName = 'D:\Projetos\SmartPro99\trunk\Desktop\Imagens\pasta.png'
+            end>
+          Align = Right
+          Position.X = 466.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = imgPastaClick
+          object FillRGBEffect1: TFillRGBEffect
+            Color = xFFAECC5F
+          end
+        end
       end
     end
+    object ToolBarBotao: TToolBar
+      Align = Bottom
+      Margins.Top = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.Y = 440.000000000000000000
+      Size.Width = 562.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Layout3: TLayout
+        Align = Client
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 3.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Size.Width = 546.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object BtnAlter: TRectangle
+          Align = Left
+          Fill.Color = xFFF0F6DF
+          Margins.Left = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFFDAE7B6
+          Stroke.Thickness = 2.000000000000000000
+          XRadius = 3.000000000000000000
+          YRadius = 3.000000000000000000
+          OnClick = BtnAlterClick
+          object Label1: TLabel
+            Align = Client
+            StyledSettings = [Style]
+            Locked = True
+            Size.Width = 120.000000000000000000
+            Size.Height = 26.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 13.000000000000000000
+            TextSettings.FontColor = xFF363435
+            TextSettings.HorzAlign = Center
+            Text = 'Alterar'
+            TabOrder = 0
+          end
+        end
+        object BtnCancelar: TRectangle
+          Align = Left
+          Fill.Color = xFFF0F6DF
+          Margins.Left = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Position.X = 280.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFFDAE7B6
+          Stroke.Thickness = 2.000000000000000000
+          XRadius = 3.000000000000000000
+          YRadius = 3.000000000000000000
+          OnClick = BtnCancelarClick
+          object Label2: TLabel
+            Align = Client
+            StyledSettings = [Style]
+            Locked = True
+            Size.Width = 120.000000000000000000
+            Size.Height = 26.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 13.000000000000000000
+            TextSettings.FontColor = xFF363435
+            TextSettings.HorzAlign = Center
+            Text = 'Cancelar'
+            TabOrder = 0
+          end
+        end
+        object BtnGravar: TRectangle
+          Align = Left
+          Fill.Color = xFFF0F6DF
+          Margins.Left = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Position.X = 144.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFFDAE7B6
+          Stroke.Thickness = 2.000000000000000000
+          XRadius = 3.000000000000000000
+          YRadius = 3.000000000000000000
+          OnClick = BtnGravarClick
+          object Label3: TLabel
+            Align = Client
+            StyledSettings = [Style]
+            Locked = True
+            Size.Width = 120.000000000000000000
+            Size.Height = 26.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 13.000000000000000000
+            TextSettings.FontColor = xFF363435
+            TextSettings.HorzAlign = Center
+            Text = 'Gravar'
+            TabOrder = 0
+          end
+        end
+      end
+    end
+  end
+  inline FramePaletaCores1: TFramePaletaCores
+    Align = Top
+    Size.Width = 562.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
   end
 end

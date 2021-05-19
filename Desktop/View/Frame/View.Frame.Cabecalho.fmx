@@ -5,7 +5,7 @@ object FrameCabecalho: TFrameCabecalho
   Size.PlatformDefault = False
   object Rectangle1: TRectangle
     Align = Client
-    Fill.Color = xFF236FFF
+    Fill.Color = xFFAECC5F
     Size.Width = 657.000000000000000000
     Size.Height = 69.000000000000000000
     Size.PlatformDefault = False

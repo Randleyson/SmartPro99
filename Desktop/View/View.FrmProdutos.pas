@@ -3,15 +3,35 @@ unit View.FrmProdutos;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
   System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Layouts, FMX.Objects, FMX.Edit, FMX.ListBox,
-  FMX.Controls.Presentation, FMX.StdCtrls, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, View.Frame.Pesquisa;
-
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs,
+  FMX.Layouts,
+  FMX.Objects,
+  FMX.Edit,
+  FMX.ListBox,
+  FMX.Controls.Presentation,
+  FMX.StdCtrls,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  Data.DB,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  View.Frame.Pesquisa,
+  View.Frame.Cabecalho,
+  View.Frame.PaletaCores;
 type
   TViewFrmProdutos = class(TForm)
     LytListaProdutos: TLayout;
@@ -46,22 +66,25 @@ type
     EdtVrVenda: TEdit;
     Label10: TLabel;
     FramePesquisa: TFramePesquisa;
+    FrameCabecalho1: TFrameCabecalho;
+    FramePaletaCores1: TFramePaletaCores;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure LstBoxProdutosItemClick(const Sender: TCustomListBox;
-      const Item: TListBoxItem);
+    procedure LstBoxProdutosItemClick(const Sender: TCustomListBox; const Item: TListBoxItem);
     procedure FramePesquisaBtnPesquisaClick(Sender: TObject);
+    procedure FramePesquisaEdtPesquisaKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
   private
     { Private declarations }
-    procedure InicializaCadProdutos;
-    procedure CloseViewProdutos;
-    procedure CarregaProdutosDataSet;
-    procedure ListarProdutos;
     procedure AddItemLisBoxProduto;
-    procedure SetComboxPesquisa;
-    function GetComboxPesquisa: String;
-    procedure PesquisarProduto;
+    procedure CarregaProdutosDataSet;
+    procedure CloseViewProdutos;
     procedure DetalharCadProduto;
+    procedure InicializaCadProdutos;
+    function GetComboxPesquisa: String;
+    procedure ListarProdutos;
+    procedure SetComboxPesquisa;
+    procedure PesquisarProduto;
+
   public
     { Public declarations }
   end;
@@ -70,8 +93,10 @@ implementation
 
 {$R *.fmx}
 
-uses Controller.uFarctory, Controller.oProdutos, Controller.uProdutos,
-  Controller.uSmartPro99;
+uses Controller.uFarctory,
+     Controller.oProdutos,
+     Controller.uProdutos,
+     Controller.uSmartPro99;
 
 { TViewFrmProdutos }
 
@@ -80,79 +105,49 @@ var
   vItem: TListBoxItem;
   vImg: TImage;
 begin
+  vItem := TListBoxItem.Create(LstBoxProdutos);
+  vItem.Text := '';
+  vItem.align := TAlignLayout.Client;
+  vItem.StyleLookup := 'listboxitembottomdetail';
+  vItem.Height := 40;
+  vItem.TagString := oProdutos.Codbarra;
+  vItem.ItemData.Text := oProdutos.Descricao;
+  vItem.ItemData.Detail := 'Cod: ' + oProdutos.Codbarra + '      R$: ' +
+    TuSmartPro99.FormatReal(oProdutos.VrVenda) + '      Unidade: ' +
+    oProdutos.Unidade;
 
-  try
-
-    vItem := TListBoxItem.Create(LstBoxProdutos);
-    vItem.Text := '';
-    vItem.align := TAlignLayout.Client;
-    vItem.StyleLookup := 'listboxitembottomdetail';
-    vItem.Height := 40;
-    vItem.TagString := oProdutos.Codbarra;
-    vItem.ItemData.Text := oProdutos.Descricao;
-    vItem.ItemData.Detail := 'Cod: ' + oProdutos.Codbarra + '      R$: ' +
-      TuSmartPro99.FormatReal(oProdutos.VrVenda) + '      Unidade: ' +
-      oProdutos.Unidade;
-
-    { if pLenght > 20 then
-      CriaimgPendencia(vItem); }
-    LstBoxProdutos.AddObject(vItem);
-
-    if LstBoxProdutos.Count = 1 then
-      vItem.IsSelected := True;
-
-  except
-    raise
-  end;
-
+  { if pLenght > 20 then
+    CriaimgPendencia(vItem); }
+  LstBoxProdutos.AddObject(vItem);
+  if LstBoxProdutos.Count = 1 then
+    vItem.IsSelected := True;
 end;
 
 procedure TViewFrmProdutos.CarregaProdutosDataSet;
 begin
-
-  with FMenTableProdutos do
-  begin
-    Close;
-    Open;
-    EmptyDataSet;
-    TuProdutos.New.CarregaProdutoDb(FMenTableProdutos);
-    FMenTableProdutos.Filtered := False;
-
-  end;
+  FMenTableProdutos.Close;
+  FMenTableProdutos.Open;
+  FMenTableProdutos.EmptyDataSet;
+  TuProdutos.New.CarregaProdutoDb(FMenTableProdutos);
+  FMenTableProdutos.Filtered := False;
   ListarProdutos;
-
 end;
 
 procedure TViewFrmProdutos.CloseViewProdutos;
 begin
-
   FreeAndNil(oProdutos);
   uFarctory.ProdutosDestroyView;
-
 end;
 
 procedure TViewFrmProdutos.DetalharCadProduto;
 begin
-
-  try
-    with oProdutos do
-    begin
-      Codbarra := LstBoxProdutos.ListItems[LstBoxProdutos.ItemIndex].TagString;
-
-      FMenTableProdutos.Filter := 'Codbarra = ' + Codbarra;
-      FMenTableProdutos.Filtered := True;
-
-      EdtCodBarra.Text := FMenTableProdutosCODBARRA.AsString;
-      EdtDecricao.Text := FMenTableProdutosDESCRICAO.AsString;
-      EdtUnidade.Text := FMenTableProdutosUNIDADE.AsString;
-      EdtVrVenda.Text := FMenTableProdutosVRVENDA.AsString;
-    end;
-
-  except
-    raise;
-
-  end;
-
+  oProdutos.Codbarra := LstBoxProdutos.ListItems[LstBoxProdutos.ItemIndex].TagString;
+  FMenTableProdutos.Filter := 'Codbarra = ' + oProdutos.Codbarra;
+  FMenTableProdutos.Filtered := True;
+  EdtCodBarra.Text := FMenTableProdutosCODBARRA.AsString;
+  EdtDecricao.Text := FMenTableProdutosDESCRICAO.AsString;
+  EdtUnidade.Text := FMenTableProdutosUNIDADE.AsString;
+  EdtVrVenda.Text := FMenTableProdutosVRVENDA.AsString;
 end;
 
 procedure TViewFrmProdutos.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -168,6 +163,13 @@ end;
 procedure TViewFrmProdutos.FramePesquisaBtnPesquisaClick(Sender: TObject);
 begin
   PesquisarProduto;
+end;
+
+procedure TViewFrmProdutos.FramePesquisaEdtPesquisaKeyDown(Sender: TObject;
+  var Key: Word; var KeyChar: Char; Shift: TShiftState);
+begin
+  if KeyChar = #0 then
+    PesquisarProduto;
 end;
 
 function TViewFrmProdutos.GetComboxPesquisa: String;
@@ -191,9 +193,10 @@ begin
 
   oProdutos := ToProdutos.Create;
   try
-    //FrameCabecalho.LblNomeDaTela.Text := 'Cadastro de Produtos';
+    FrameCabecalho1.LblNomeDaTela.Text := 'Cadastro de Produtos';
     CarregaProdutosDataSet;
     SetComboxPesquisa;
+    FramePaletaCores1.Visible := False;
 
   except
     on E: Exception do
@@ -201,7 +204,6 @@ begin
       ShowMessage('Erro: ' + E.Message);
       exit;
     end;
-
   end;
 
 end;
@@ -211,10 +213,9 @@ var
   vLstBoxItems: TListBoxItem;
 begin
 
-  LstBoxProdutos.Items.Clear;
   LstBoxProdutos.BeginUpdate;
   try
-
+    LstBoxProdutos.Items.Clear;
     LblSemRegistro.Visible := True;
     if FMenTableProdutos.RecordCount <> 0 then
     begin
@@ -228,13 +229,11 @@ begin
         oProdutos.Unidade := FMenTableProdutosUNIDADE.AsString;
         oProdutos.VrVenda := FMenTableProdutosVRVENDA.AsCurrency;
         AddItemLisBoxProduto;
-
-        FMenTableProdutos.FieldByName('Codbarra').AsString;
         FMenTableProdutos.Next;
       end;
-
       DetalharCadProduto;
     end;
+
   finally
     LstBoxProdutos.EndUpdate;
   end;

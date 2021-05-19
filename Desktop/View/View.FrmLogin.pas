@@ -13,20 +13,29 @@ type
   TViewFrmLogin = class(TForm)
     EdtLogin: TEdit;
     EdtSenha: TEdit;
-    Layout1: TLayout;
-    Label1: TLabel;
-    Label2: TLabel;
-    Layout3: TLayout;
     BtnAcessar: TRectangle;
     LytLogin: TLayout;
     Label3: TLabel;
+    LblRodaPe: TLabel;
+    Image1: TImage;
+    RectClient: TRectangle;
+    LblSair: TLabel;
+    Layout2: TLayout;
+    Label5: TLabel;
+    Layout4: TLayout;
+    Label6: TLabel;
+    RectSenha: TRectangle;
+    RectLogin: TRectangle;
+    LytBotao: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure BtnAcessarClick(Sender: TObject);
+    procedure LblSairClick(Sender: TObject);
   private
     { Private declarations }
-    procedure InicializaViewLogin;
+    const cVersao : String = '1.0.0';
     procedure Acessar;
     procedure CloseViewLogin;
+    procedure InicializaViewLogin;
   public
     { Public declarations }
   end;
@@ -51,7 +60,6 @@ var
       Result := True;
     if oUsuario.Login = '' then
       Result := True;
-
   end;
 
 begin
@@ -112,6 +120,17 @@ begin
   EdtLogin.Text := 'ADMIN';
   EdtSenha.Text := 'ADMIN';
 {$ENDIF}
+
+  LblRodaPe.Text :=
+  '© 2021 Consolide Registro de Marcas - Todos os direitos reservados.' +
+      'Versão: ' + cVersao;
+end;
+
+
+procedure TViewFrmLogin.LblSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+
 end;
 
 end.

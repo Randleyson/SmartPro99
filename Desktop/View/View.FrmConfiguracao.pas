@@ -7,13 +7,13 @@ uses
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Edit,
-  FMX.Layouts, Controller.oConfiguracao;
+  FMX.Layouts, Controller.oConfiguracao, View.Frame.PaletaCores,
+  View.Frame.Cabecalho, FMX.Effects, FMX.Filter.Effects;
 
 type
   TViewFrmConfiguracao = class(TForm)
     ToolBarBotao: TToolBar;
     EdtLocalArquivo: TEdit;
-    BtnPesquisarLocalArquivo: TRectangle;
     BtnAlter: TRectangle;
     BtnGravar: TRectangle;
     BtnCancelar: TRectangle;
@@ -28,25 +28,30 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Layout3: TLayout;
+    FrameCabecalho1: TFrameCabecalho;
+    Layout4: TLayout;
+    FramePaletaCores1: TFramePaletaCores;
+    imgPasta: TImage;
+    FillRGBEffect1: TFillRGBEffect;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtnAlterClick(Sender: TObject);
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
-    procedure BtnPesquisarLocalArquivoClick(Sender: TObject);
+    procedure imgPastaClick(Sender: TObject);
   private
     { Private declarations }
-    procedure InicializaFrmConfiguracao;
+    procedure Alterar;
+    procedure BloqueiaBotao(pBtnAlterar, pBtnGrava, pBtnCancelar: Boolean);
     procedure CloseViewConfiguracao;
-    procedure RecharConfiguracao;
+    procedure Cancelar;
+    procedure EnabledCampo(pParams: Boolean);
+    procedure InicializaFrmConfiguracao;
+    procedure Gravar;
     procedure PesquisarLocalArquivo;
     procedure PadraoDoArquivoToRadio(pPadraoDoArquivo: String);
-    function RadioToPadraoDoArquivo: String;
-    procedure EnabledCampo(pParams: Boolean);
-    procedure BloqueiaBotao(pBtnAlterar, pBtnGrava, pBtnCancelar: Boolean);
-    procedure Alterar;
-    procedure Gravar;
-    procedure Cancelar;
+    procedure RecharConfiguracao;
+    function  RadioToPadraoDoArquivo: String;
   public
     { Public declarations }
   end;
@@ -55,13 +60,14 @@ implementation
 
 {$R *.fmx}
 
-uses Controller.uFarctory, StrUtils, Controller.uConfiguracao;
+uses Controller.uFarctory,
+     StrUtils,
+     Controller.uConfiguracao;
 
 procedure TViewFrmConfiguracao.Alterar;
 begin
   BloqueiaBotao(False, True, True);
   EnabledCampo(True);
-
 end;
 
 procedure TViewFrmConfiguracao.BloqueiaBotao(pBtnAlterar, pBtnGrava,
@@ -70,7 +76,6 @@ begin
   BtnAlter.Enabled := pBtnAlterar;
   BtnGravar.Enabled := pBtnGrava;
   BtnCancelar.Enabled := pBtnCancelar;
-
 end;
 
 procedure TViewFrmConfiguracao.BtnAlterClick(Sender: TObject);
@@ -78,11 +83,6 @@ begin
   Alterar;
 end;
 
-procedure TViewFrmConfiguracao.BtnPesquisarLocalArquivoClick(Sender: TObject);
-begin
-  PesquisarLocalArquivo;
-
-end;
 
 procedure TViewFrmConfiguracao.BtnCancelarClick(Sender: TObject);
 begin
@@ -121,7 +121,7 @@ begin
   RadioArquivoFilizola.Enabled := pParams;
   RadioOutros.Enabled := pParams;
   EdtLocalArquivo.Enabled := pParams;
-
+  imgPasta.Enabled := pParams;
 end;
 
 procedure TViewFrmConfiguracao.FormShow(Sender: TObject);
@@ -161,22 +161,23 @@ begin
 
 end;
 
+procedure TViewFrmConfiguracao.imgPastaClick(Sender: TObject);
+begin
+  PesquisarLocalArquivo;
+end;
+
 procedure TViewFrmConfiguracao.InicializaFrmConfiguracao;
 begin
 
   try
     oConfiguracao := ToConfiguracao.Create;
     RecharConfiguracao;
-    //FrameCabecalho.LblNomeDaTela.Text := 'Configurações';
+    FrameCabecalho1.LblNomeDaTela.Text := 'Configurações';
+    FramePaletaCores1.Visible := False;
     EnabledCampo(False);
     BloqueiaBotao(True, False, False);
-
   except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-
+    on E: Exception do ShowMessage('Erro: ' + E.Message);
   end;
 
 end;

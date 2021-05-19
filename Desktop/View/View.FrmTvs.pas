@@ -72,55 +72,52 @@ type
     Label13: TLabel;
     Label14: TLabel;
     procedure FormShow(Sender: TObject);
-    procedure FramePesquisaTvsBtnPesquisaClick(Sender: TObject);
     procedure LstBoxTvsItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
-    procedure FramePesquisaProdutosBtnPesquisaClick(Sender: TObject);
     procedure BtnAdicionarProdTvClick(Sender: TObject);
     procedure BtnRemoverProdTvClick(Sender: TObject);
     procedure BtnAdicionarTodosClick(Sender: TObject);
     procedure BtnRemoverTodosClick(Sender: TObject);
-    procedure FramePesquisaProdTvBtnPesquisaClick(Sender: TObject);
     procedure BtnAdicionarClick(Sender: TObject);
     procedure BtnEditarClick(Sender: TObject);
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
+    procedure FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure FramePesquisaProdutosEdtPesquisaKeyDown(Sender: TObject;
+      var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FramePesquisaProdTvEdtPesquisaKeyDown(Sender: TObject;
+      var Key: Word; var KeyChar: Char; Shift: TShiftState);
   private
     oTvs: ToTvs;
     FStatusTela: String;
-    procedure CloseViewTvs;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure InicializaViewCadTvs;
-    procedure DetalharCadTvs;
-    procedure ListarTVs;
-    procedure ListarProdNaoTv;
-    procedure ListarProdutoTv;
-    function GetCBoxPesquisaTv: String;
-    function GetCBoxPesquisaProduto: String;
-    function GetCBoxPesquisaProdTv: String;
+    procedure AdicinarProdutoTv;
+    procedure AdicionarTodosProdutoTv;
+    procedure AdicionarTv;
+    procedure Cancelar;
     procedure CarregaTvs;
     procedure CarregaProdNaoTv;
     procedure CarregaProdutoTv;
-
-    //Botao
-    procedure AdicinarProdutoTv;
-    procedure AdicionarTodosProdutoTv;
+    procedure CloseViewTvs;
+    procedure DetalharCadTvs;
+    procedure EditarTv;
+    procedure EnabledButton(pBtnAdicionar, pEdita, pGravar, pExcluir, pCancelar: Boolean);
+    procedure ExcluirTv;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    function GetCBoxPesquisaTv: String;
+    function GetCBoxPesquisaProduto: String;
+    function GetCBoxPesquisaProdTv: String;
+    procedure GravarTv;
+    procedure InicializaViewCadTvs;
+    procedure ListarTVs;
+    procedure ListarProdNaoTv;
+    procedure ListarProdutoTv;
     procedure RemoverProdutoTv;
     procedure RemoverTodosProdutosTv;
-
     procedure PesquisarTvs;
     procedure PesquisarProdutos;
     procedure PesquisarProdutoTv;
-
-    procedure AdicionarTv;
-    procedure EditarTv;
-    procedure GravarTv;
-    procedure ExcluirTv;
-    procedure Cancelar;
-
-    procedure EnabledButton(pBtnAdicionar, pEdita, pGravar, pExcluir,
-      pCancelar: Boolean);
     { Private declarations }
   public
     { Public declarations }
@@ -132,7 +129,8 @@ var
 implementation
 
 uses
-  Controller.uFarctory, Controller.uMessageDialog;
+  Controller.uFarctory,
+  Controller.uMessageDialog;
 
 {$R *.fmx}
 
@@ -365,21 +363,27 @@ begin
 
 end;
 
-procedure TViewFrmTvs.FramePesquisaProdTvBtnPesquisaClick(Sender: TObject);
+procedure TViewFrmTvs.FramePesquisaProdTvEdtPesquisaKeyDown(Sender: TObject;
+  var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
-  PesquisarProdutoTv;
+  If KeyChar = #0 then
+    PesquisarProdutoTv;
 end;
 
-procedure TViewFrmTvs.FramePesquisaProdutosBtnPesquisaClick(Sender: TObject);
+procedure TViewFrmTvs.FramePesquisaProdutosEdtPesquisaKeyDown(Sender: TObject;
+  var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
-  PesquisarProdutos;
-
+  If KeyChar = #0 then;
+    PesquisarProdutos;
 end;
 
-procedure TViewFrmTvs.FramePesquisaTvsBtnPesquisaClick(Sender: TObject);
+procedure TViewFrmTvs.FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject;
+  var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
-  PesquisarTvs;
+  If KeyChar = #0 then
+    PesquisarTvs;
 end;
+
 
 function TViewFrmTvs.GetCBoxPesquisaTv: String;
 begin
@@ -396,12 +400,12 @@ end;
 procedure TViewFrmTvs.GravarTv;
 begin
 
+  //Valida Nome da Tvs;
   if EdtDescricaoTv.Text = '' then
   begin
     ShowMessage('O nome da Tv deve ser infromado');
     exit;
   end;
-
 
   try
     try
@@ -535,7 +539,6 @@ var
   begin
 
     try
-
       vItem := TListBoxItem.Create(LstBoxProdNaoTv);
       vItem.Text := '';
       vItem.align := TAlignLayout.Client;
@@ -543,9 +546,7 @@ var
       vItem.Height := 40;
       vItem.TagString := vCodBarra;
       vItem.ItemData.Text := vCodBarra + ' - ' + vDescricao;
-
       LstBoxProdNaoTv.AddObject(vItem);
-
       if LstBoxProdNaoTv.count = 1 then
         vItem.IsSelected := True;
 
