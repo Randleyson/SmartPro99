@@ -1,4 +1,4 @@
-unit Controller.uMessageDialog;
+unit uMsgDialog;
 
 interface
 

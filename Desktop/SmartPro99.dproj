@@ -378,70 +378,45 @@
             <Form>ViewFrmLogin</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Controller\Controller.uFarctory.pas"/>
         <DCCReference Include="View\View.FrmPrincipal.pas">
             <Form>ViewFrmPrincipal</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="View\View.FrmConfiguracao.pas">
-            <Form>ViewFrmConfiguracao</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="View\View.FrmProdutos.pas">
-            <Form>ViewFrmProdutos</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.oUsuario.pas"/>
-        <DCCReference Include="Module\Module.DmUsuario.pas">
-            <Form>DmUsuario</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.uUsuario.pas"/>
-        <DCCReference Include="Dao\Doa.DmConexaoSQL.pas">
-            <Form>DmConexaoSQL</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.oConfiguracao.pas"/>
-        <DCCReference Include="Controller\Controller.uConfiguracao.pas"/>
-        <DCCReference Include="Module\Module.DmConfiguracao.pas">
-            <Form>DmConfiguracao</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.uSmartPro99.pas"/>
-        <DCCReference Include="Controller\Controller.uProdutos.pas"/>
-        <DCCReference Include="Controller\Controller.oProdutos.pas"/>
-        <DCCReference Include="Module\Module.DmProdutos.pas">
-            <Form>DmProdutos</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
+        <DCCReference Include="Units\uUtilis.pas"/>
         <DCCReference Include="View\Frame\View.Frame.Pesquisa.pas">
             <Form>FramePesquisa</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.uTvs.pas"/>
-        <DCCReference Include="Controller\Controller.oTvs.pas"/>
-        <DCCReference Include="Module\Module.DmTvs.pas">
-            <Form>DmTvs</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="View\View.FrmTvs.pas">
-            <Form>ViewFrmTvs</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="View\Frame\View.Frame.Cabecalho.pas">
             <Form>FrameCabecalho</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Controller\Controller.uMessageDialog.pas"/>
+        <DCCReference Include="Units\uMsgDialog.pas"/>
         <DCCReference Include="View\Frame\View.Frame.PaletaCores.pas">
             <Form>FramePaletaCores</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Units\uDm.pas">
+            <Form>Dm</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Units\uFiredac.pas"/>
+        <DCCReference Include="View\View.Configuracao.pas">
+            <Form>FrameConfiguracao</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="View\View.CadProdutos.pas">
+            <Form>FrameCadProdutos</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="View\View.CadTVs.pas">
+            <Form>FrameCadTVs</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

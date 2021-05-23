@@ -4,34 +4,23 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   View.FrmLogin in 'View\View.FrmLogin.pas' {ViewFrmLogin},
-  Controller.uFarctory in 'Controller\Controller.uFarctory.pas',
   View.FrmPrincipal in 'View\View.FrmPrincipal.pas' {ViewFrmPrincipal},
-  View.FrmConfiguracao in 'View\View.FrmConfiguracao.pas' {ViewFrmConfiguracao},
-  View.FrmProdutos in 'View\View.FrmProdutos.pas' {ViewFrmProdutos},
-  Controller.oUsuario in 'Controller\Controller.oUsuario.pas',
-  Module.DmUsuario in 'Module\Module.DmUsuario.pas' {DmUsuario: TDataModule},
-  Controller.uUsuario in 'Controller\Controller.uUsuario.pas',
-  Doa.DmConexaoSQL in 'Dao\Doa.DmConexaoSQL.pas' {DmConexaoSQL: TDataModule},
-  Controller.oConfiguracao in 'Controller\Controller.oConfiguracao.pas',
-  Controller.uConfiguracao in 'Controller\Controller.uConfiguracao.pas',
-  Module.DmConfiguracao in 'Module\Module.DmConfiguracao.pas' {DmConfiguracao: TDataModule},
-  Controller.uSmartPro99 in 'Controller\Controller.uSmartPro99.pas',
-  Controller.uProdutos in 'Controller\Controller.uProdutos.pas',
-  Controller.oProdutos in 'Controller\Controller.oProdutos.pas',
-  Module.DmProdutos in 'Module\Module.DmProdutos.pas' {DmProdutos: TDataModule},
+  uUtilis in 'Units\uUtilis.pas',
   View.Frame.Pesquisa in 'View\Frame\View.Frame.Pesquisa.pas' {FramePesquisa: TFrame},
-  Controller.uTvs in 'Controller\Controller.uTvs.pas',
-  Controller.oTvs in 'Controller\Controller.oTvs.pas',
-  Module.DmTvs in 'Module\Module.DmTvs.pas' {DmTvs: TDataModule},
-  View.FrmTvs in 'View\View.FrmTvs.pas' {ViewFrmTvs},
   View.Frame.Cabecalho in 'View\Frame\View.Frame.Cabecalho.pas' {FrameCabecalho: TFrame},
-  Controller.uMessageDialog in 'Controller\Controller.uMessageDialog.pas',
-  View.Frame.PaletaCores in 'View\Frame\View.Frame.PaletaCores.pas' {FramePaletaCores: TFrame};
+  uMsgDialog in 'Units\uMsgDialog.pas',
+  View.Frame.PaletaCores in 'View\Frame\View.Frame.PaletaCores.pas' {FramePaletaCores: TFrame},
+  uDm in 'Units\uDm.pas' {Dm: TDataModule},
+  uFiredac in 'Units\uFiredac.pas',
+  View.Configuracao in 'View\View.Configuracao.pas' {FrameConfiguracao: TFrame},
+  View.CadProdutos in 'View\View.CadProdutos.pas' {FrameCadProdutos: TFrame},
+  View.CadTVs in 'View\View.CadTVs.pas' {FrameCadTVs: TFrame};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TViewFrmLogin, ViewFrmLogin);
+  Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TViewFrmPrincipal, ViewFrmPrincipal);
   Application.Run;
 end.

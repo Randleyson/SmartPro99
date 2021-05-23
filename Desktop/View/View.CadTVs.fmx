@@ -1,0 +1,706 @@
+object FrameCadTVs: TFrameCadTVs
+  Align = Client
+  Size.Width = 930.000000000000000000
+  Size.Height = 520.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 930.000000000000000000
+    Size.Height = 520.000000000000000000
+    Size.PlatformDefault = False
+    object LytListaTv: TLayout
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 77.000000000000000000
+      Size.Width = 289.000000000000000000
+      Size.Height = 389.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Label1: TLabel
+        Align = Top
+        StyledSettings = [Style]
+        Size.Width = 289.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFF1D1D1D
+        Text = 'Tvs'
+        TabOrder = 0
+      end
+      object LstBoxTvs: TListBox
+        Align = Client
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 273.000000000000000000
+        Size.Height = 284.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnItemClick = LstBoxTvsItemClick
+        Viewport.Width = 269.000000000000000000
+        Viewport.Height = 280.000000000000000000
+        object LblSemRegistroLstBoxTv: TLabel
+          Align = Top
+          StyledSettings = [Family, Style, FontColor]
+          Margins.Left = 8.000000000000000000
+          Margins.Top = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 253.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.HorzAlign = Center
+          Text = '< Sem Registro >'
+          TabOrder = 0
+        end
+      end
+      inline FramePesquisaTvs: TFramePesquisa
+        Align = Top
+        Position.Y = 25.000000000000000000
+        Size.Width = 289.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        inherited RectPesquisaProduto: TRectangle
+          Size.Width = 289.000000000000000000
+          inherited CBoxFiltro: TComboBox
+            Size.Width = 279.000000000000000000
+          end
+          inherited Rectangle1: TRectangle
+            Size.Width = 283.000000000000000000
+            inherited Image1: TImage
+              MultiResBitmap.Height = 512
+              MultiResBitmap.Width = 512
+            end
+            inherited EdtPesquisa: TEdit
+              Size.Width = 233.000000000000000000
+              OnKeyDown = FramePesquisaTvsEdtPesquisaKeyDown
+            end
+          end
+        end
+      end
+    end
+    object LytCadTv: TLayout
+      Align = Client
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Size.Width = 609.000000000000000000
+      Size.Height = 389.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object LytProdTv: TLayout
+        Align = Client
+        Size.Width = 609.000000000000000000
+        Size.Height = 308.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label5: TLabel
+          Align = Top
+          StyledSettings = [Style]
+          Size.Width = 609.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.FontColor = xFF282828
+          TextSettings.HorzAlign = Center
+          Text = 'Produtos'
+          TabOrder = 0
+        end
+        object LytCadProd: TLayout
+          Align = Left
+          Position.Y = 25.000000000000000000
+          Size.Width = 250.000000000000000000
+          Size.Height = 283.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object LstBoxProdNaoTv: TListBox
+            Align = Client
+            Size.Width = 250.000000000000000000
+            Size.Height = 219.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 246.000000000000000000
+            Viewport.Height = 215.000000000000000000
+            object LblSemRegistroProdNaoTv: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 8.000000000000000000
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '< Sem Registro >'
+              TabOrder = 0
+            end
+          end
+          inline FramePesquisaProdutos: TFramePesquisa
+            Align = Top
+            Size.Width = 250.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            inherited RectPesquisaProduto: TRectangle
+              Size.Width = 250.000000000000000000
+              inherited CBoxFiltro: TComboBox
+                Size.Width = 240.000000000000000000
+              end
+              inherited Rectangle1: TRectangle
+                Size.Width = 244.000000000000000000
+                inherited Image1: TImage
+                  MultiResBitmap.Height = 512
+                  MultiResBitmap.Width = 512
+                end
+                inherited EdtPesquisa: TEdit
+                  Size.Width = 194.000000000000000000
+                  OnKeyDown = FramePesquisaProdutosEdtPesquisaKeyDown
+                end
+              end
+            end
+          end
+        end
+        object LytProdTvs: TLayout
+          Align = Right
+          Position.X = 359.000000000000000000
+          Position.Y = 25.000000000000000000
+          Size.Width = 250.000000000000000000
+          Size.Height = 283.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object LstBoxProdTv: TListBox
+            Align = Client
+            Size.Width = 250.000000000000000000
+            Size.Height = 219.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 246.000000000000000000
+            Viewport.Height = 215.000000000000000000
+            object LblSemRegistroProdTv: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 8.000000000000000000
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '< Sem Registro >'
+              TabOrder = 0
+            end
+          end
+          inline FramePesquisaProdTv: TFramePesquisa
+            Align = Top
+            Size.Width = 250.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            inherited RectPesquisaProduto: TRectangle
+              Size.Width = 250.000000000000000000
+              inherited CBoxFiltro: TComboBox
+                Size.Width = 240.000000000000000000
+              end
+              inherited Rectangle1: TRectangle
+                Size.Width = 244.000000000000000000
+                inherited Image1: TImage
+                  MultiResBitmap.Height = 512
+                  MultiResBitmap.Width = 512
+                end
+                inherited EdtPesquisa: TEdit
+                  Size.Width = 194.000000000000000000
+                  OnKeyDown = FramePesquisaProdTvEdtPesquisaKeyDown
+                end
+              end
+            end
+          end
+        end
+        object LytBotao: TLayout
+          Align = Client
+          Size.Width = 109.000000000000000000
+          Size.Height = 283.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object BtnAdicionarProdTv: TRectangle
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 93.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnAdicionarProdTvClick
+            object Label6: TLabel
+              Align = Client
+              StyledSettings = [Family, Style, FontColor]
+              Locked = True
+              Size.Width = 93.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 24.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '>'
+              TabOrder = 0
+            end
+          end
+          object BtnRemoverProdTv: TRectangle
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 64.000000000000000000
+            Size.Width = 93.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnRemoverProdTvClick
+            object Label7: TLabel
+              Align = Client
+              StyledSettings = [Family, Style, FontColor]
+              Locked = True
+              Size.Width = 93.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 24.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '<'
+              TabOrder = 0
+            end
+          end
+          object BtnRemoverTodos: TRectangle
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 176.000000000000000000
+            Size.Width = 93.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnRemoverTodosClick
+            object Label8: TLabel
+              Align = Client
+              StyledSettings = [Family, Style, FontColor]
+              Locked = True
+              Size.Width = 93.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 24.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '<<'
+              TabOrder = 0
+            end
+          end
+          object BtnAdicionarTodos: TRectangle
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 120.000000000000000000
+            Size.Width = 93.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = BtnAdicionarTodosClick
+            object Label9: TLabel
+              Align = Client
+              StyledSettings = [Family, Style, FontColor]
+              Locked = True
+              Size.Width = 93.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 24.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = '>>'
+              TabOrder = 0
+            end
+          end
+        end
+      end
+      object LytDetalhesTv: TLayout
+        Align = Top
+        Size.Width = 609.000000000000000000
+        Size.Height = 81.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object Label2: TLabel
+          Align = Top
+          StyledSettings = [Style]
+          Size.Width = 609.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.FontColor = xFF303030
+          Text = 'Detalhes'
+          TabOrder = 0
+        end
+        object Layout5: TLayout
+          Align = Top
+          Position.Y = 25.000000000000000000
+          Size.Width = 609.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object Layout6: TLayout
+            Align = Left
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 97.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object Label3: TLabel
+              Align = Top
+              Size.Width = 97.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Codigo'
+              TabOrder = 0
+            end
+            object EdtIdTv: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Bottom
+              TabOrder = 1
+              Position.Y = 18.000000000000000000
+              Size.Width = 97.000000000000000000
+              Size.Height = 22.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+          object Layout7: TLayout
+            Align = Left
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 121.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 312.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Label4: TLabel
+              Align = Top
+              Size.Width = 312.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Nome da TV'
+              TabOrder = 0
+            end
+            object EdtDescricaoTv: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Bottom
+              TabOrder = 1
+              Position.Y = 18.000000000000000000
+              Size.Width = 312.000000000000000000
+              Size.Height = 22.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+        end
+      end
+    end
+    inline FrameCabecalho1: TFrameCabecalho
+      Align = Top
+      Size.Width = 930.000000000000000000
+      Size.Height = 69.000000000000000000
+      Size.PlatformDefault = False
+      inherited Rectangle1: TRectangle
+        Size.Width = 930.000000000000000000
+        inherited LblNomeDaTela: TLabel
+          Size.Width = 914.000000000000000000
+        end
+        inherited Label1: TLabel
+          Size.Width = 914.000000000000000000
+          inherited Layout1: TLayout
+            Position.X = 864.000000000000000000
+            inherited ImgFechar: TImage
+              MultiResBitmap.Height = 512
+              MultiResBitmap.Width = 512
+              OnClick = FrameCabecalho1ImgFecharClick
+            end
+          end
+        end
+      end
+    end
+    object ToolBarBotao: TToolBar
+      Align = Bottom
+      Position.Y = 474.000000000000000000
+      Size.Width = 930.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object BtnAdicionar: TRectangle
+        Align = Left
+        Fill.Color = xFFF0F6DF
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDAE7B6
+        Stroke.Thickness = 2.000000000000000000
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnAdicionarClick
+        object Label10: TLabel
+          Align = Client
+          StyledSettings = [Style]
+          Locked = True
+          Size.Width = 100.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF363435
+          TextSettings.HorzAlign = Center
+          Text = 'Adicionar'
+          TabOrder = 0
+        end
+      end
+      object BtnCancelar: TRectangle
+        Align = Left
+        Fill.Color = xFFF0F6DF
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 472.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDAE7B6
+        Stroke.Thickness = 2.000000000000000000
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnCancelarClick
+        object Label11: TLabel
+          Align = Client
+          StyledSettings = [Style]
+          Locked = True
+          Size.Width = 100.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF363435
+          TextSettings.HorzAlign = Center
+          Text = 'Cancelar'
+          TabOrder = 0
+        end
+      end
+      object BtnExcluir: TRectangle
+        Align = Left
+        Fill.Color = xFFF0F6DF
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 356.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDAE7B6
+        Stroke.Thickness = 2.000000000000000000
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnExcluirClick
+        object Label12: TLabel
+          Align = Client
+          StyledSettings = [Style]
+          Locked = True
+          Size.Width = 100.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF363435
+          TextSettings.HorzAlign = Center
+          Text = 'Excluir'
+          TabOrder = 0
+        end
+      end
+      object BtnGravar: TRectangle
+        Align = Left
+        Fill.Color = xFFF0F6DF
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 240.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDAE7B6
+        Stroke.Thickness = 2.000000000000000000
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnGravarClick
+        object Label14: TLabel
+          Align = Client
+          StyledSettings = [Style]
+          Locked = True
+          Size.Width = 100.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF363435
+          TextSettings.HorzAlign = Center
+          Text = 'Gravar'
+          TabOrder = 0
+        end
+      end
+      object BtnEditar: TRectangle
+        Align = Left
+        Fill.Color = xFFF0F6DF
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 124.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDAE7B6
+        Stroke.Thickness = 2.000000000000000000
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = BtnEditarClick
+        object Label13: TLabel
+          Align = Client
+          StyledSettings = [Style]
+          Locked = True
+          Size.Width = 100.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF363435
+          TextSettings.HorzAlign = Center
+          Text = 'Editar'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object FMemTableTvs: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 48
+    Top = 184
+    object FMemTableTvsIDTV: TIntegerField
+      FieldName = 'IDTV'
+    end
+    object FMemTableTvsDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+  end
+  object FMemTableProdNaoTv: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 368
+    Top = 280
+    object FMemTableProdNaoTvCODBARRA: TStringField
+      FieldName = 'CODBARRA'
+    end
+    object FMemTableProdNaoTvDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+    end
+    object FMemTableProdNaoTvCODTV: TIntegerField
+      FieldName = 'CODTV'
+    end
+  end
+  object FMemTableProdTv: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 544
+    Top = 296
+    object FMemTableProdTvCODBARRA: TStringField
+      FieldName = 'CODBARRA'
+    end
+    object FMemTableProdTvDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+    end
+    object FMemTableProdTvCODTV: TIntegerField
+      FieldName = 'CODTV'
+    end
+  end
+end

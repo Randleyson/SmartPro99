@@ -1,8 +1,8 @@
-unit Controller.uSmartPro99;
+unit uUtilis;
 
 interface
 type
-  TuSmartPro99 = class
+  TUtilis = class
     private
     public
     class function SubstituirString(pString,pOld,pNew: String): String;
@@ -16,12 +16,12 @@ uses
 
 { TuSmartPro99 }
 
-class function TuSmartPro99.FormatReal(pValor: Currency): String;
+class function TUtilis.FormatReal(pValor: Currency): String;
 begin
   Result := Formatfloat('##,###,##0.00', pValor);
 end;
 
-class function TuSmartPro99.SubstituirString(pString, pOld,
+class function TUtilis.SubstituirString(pString, pOld,
   pNew: String): String;
 begin
   Result := StringReplace(pString,pOld,pNew,[rfReplaceAll, rfIgnoreCase]);

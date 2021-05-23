@@ -3,10 +3,21 @@ unit View.FrmPrincipal;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
   System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Menus, FMX.Layouts;
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs,
+  FMX.Controls.Presentation,
+  FMX.StdCtrls,
+  FMX.Objects,
+  FMX.Menus,
+  FMX.Layouts;
 
 type
   TViewFrmPrincipal = class(TForm)
@@ -24,7 +35,6 @@ type
     Label1: TLabel;
     BtnProdutos: TRectangle;
     Label2: TLabel;
-    BtnTvs: TRectangle;
     Label3: TLabel;
     ToolBar: TToolBar;
     Label4: TLabel;
@@ -33,21 +43,21 @@ type
     Image1: TImage;
     Image2: TImage;
     Image3: TImage;
-    Layout2: TLayout;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    Layout1: TLayout;
+    LytFrame: TLayout;
     procedure BtnConfiguracaoClick(Sender: TObject);
     procedure BtnProdutosClick(Sender: TObject);
-    procedure BtnTvsClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure RectBotaoClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    procedure FecharAplicacao;
-    procedure IniciaFrmPrincial;
-    procedure AbreFrmConfiguracao;
-    procedure AbreFrmProduto;
-    procedure AbreFrmTvs;
+    FUsuario: String;
+    const cVersao: String = '2.0.0';
+    procedure FinalizaFrames;
   public
     { Public declarations }
+    property Usuario: String read FUsuario write FUsuario;
   end;
 
 var
@@ -57,60 +67,55 @@ implementation
 
 {$R *.fmx}
 
-uses Controller.oUsuario, Controller.uFarctory;
-
-procedure TViewFrmPrincipal.AbreFrmConfiguracao;
-begin
-  uFarctory.ConfiguracaoView.ShowModal;
-end;
-
-procedure TViewFrmPrincipal.AbreFrmProduto;
-begin
-  uFarctory.ProdutosView.ShowModal;
-
-end;
-
-procedure TViewFrmPrincipal.AbreFrmTvs;
-begin
-  uFarctory.TvsView.ShowModal;
-
-end;
+uses  View.CadProdutos,
+      View.CadTVs,
+      View.Configuracao;
 
 procedure TViewFrmPrincipal.BtnConfiguracaoClick(Sender: TObject);
 begin
-  AbreFrmConfiguracao;
+  FinalizaFrames;
+  if not Assigned(FrameConfiguracao) then
+    FrameConfiguracao       := TFrameConfiguracao.Create(Nil);
+  FrameConfiguracao.Parent  := LytFrame;
+  FrameConfiguracao.BringToFront;
 end;
 
 procedure TViewFrmPrincipal.BtnProdutosClick(Sender: TObject);
 begin
-  AbreFrmProduto;
+  FinalizaFrames;
+  if not Assigned(FrameCadProdutos) then
+    FrameCadProdutos      := TFrameCadProdutos.Create(Nil);
+  FrameCadProdutos.Parent := LytFrame;
+  FrameCadProdutos.BringToFront;
 end;
 
-procedure TViewFrmPrincipal.BtnTvsClick(Sender: TObject);
+procedure TViewFrmPrincipal.FinalizaFrames;
 begin
-  AbreFrmTvs;
+  if Assigned(FrameCadProdutos) then
+    FrameCadProdutos.CloseCadProduto;
+  if Assigned(FrameConfiguracao) then
+    FrameConfiguracao.CloseConfiguracao;
+  if Assigned(FrameCadTVs) then
+    FrameCadTVs.CloseCadTVs;
 end;
 
-procedure TViewFrmPrincipal.FecharAplicacao;
+procedure TViewFrmPrincipal.FormDestroy(Sender: TObject);
 begin
-  FreeAndNil(uFarctory);
-end;
-
-procedure TViewFrmPrincipal.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  FecharAplicacao;
+  FinalizaFrames;
 end;
 
 procedure TViewFrmPrincipal.FormShow(Sender: TObject);
 begin
-  IniciaFrmPrincial;
+  LblUsuario.Text := 'Versão: ' + cVersao;
 end;
 
-procedure TViewFrmPrincipal.IniciaFrmPrincial;
+procedure TViewFrmPrincipal.RectBotaoClick(Sender: TObject);
 begin
-  LblUsuario.Text := IntToStr(oUsuario.CodUsuario) + ' - ' + oUsuario.Nome;
-
+  FinalizaFrames;
+  if not Assigned(FrameCadTVs) then
+    FrameCadTVs       := TFrameCadTVs.Create(Nil);
+  FrameCadTVs.Parent  := LytFrame;
+  FrameCadTVs.BringToFront;
 end;
 
 end.

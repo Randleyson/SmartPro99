@@ -6,8 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.Edit, FMX.Objects, FMX.Layouts,
-  Controller.oUsuario;
+  FMX.Controls.Presentation, FMX.Edit, FMX.Objects, FMX.Layouts;
 
 type
   TViewFrmLogin = class(TForm)
@@ -33,13 +32,9 @@ type
   private
     { Private declarations }
     const cVersao : String = '1.0.0';
-    procedure Acessar;
-    procedure CloseViewLogin;
-    procedure InicializaViewLogin;
   public
     { Public declarations }
   end;
-
 var
   ViewFrmLogin: TViewFrmLogin;
 
@@ -47,72 +42,24 @@ implementation
 
 {$R *.fmx}
 
-uses Controller.uFarctory;
-
-procedure TViewFrmLogin.Acessar;
-var
-  sMsg: String;
-
-  function LoginSenhaVaisa: Boolean;
-  begin
-    Result := False;
-    if oUsuario.Login = '' then
-      Result := True;
-    if oUsuario.Login = '' then
-      Result := True;
-  end;
-
-begin
-
-  oUsuario.Login := EdtLogin.Text;
-  oUsuario.Senha := EdtSenha.Text;
-  if LoginSenhaVaisa then
-  begin
-    ShowMessage('Login ou Senha não informada');
-    exit;
-  end;
-
-  try
-    if oUsuario.ValidaLogin then
-    begin
-      uFarctory.PrincipalView.Show;
-      CloseViewLogin;
-    end
-    else
-      ShowMessage('Usuario Não Cadastrado');
-  except
-    on E: Exception do
-    begin
-      ShowMessage(E.Message);
-    end;
-
-  end;
-
-end;
+uses View.FrmPrincipal, uDm;
 
 procedure TViewFrmLogin.BtnAcessarClick(Sender: TObject);
 begin
-  Acessar;
-end;
-
-procedure TViewFrmLogin.CloseViewLogin;
-begin
-  self.Destroy;
-
+  if Dm.ValidaLogin(EdtLogin.Text,EdtSenha.Text) then
+  begin
+    ViewFrmPrincipal := TViewFrmPrincipal.Create(Nil);
+    ViewFrmPrincipal.Usuario := EdtLogin.Text;
+    ViewFrmPrincipal.Show;
+    ViewFrmLogin.Close;
+    ViewFrmLogin.DisposeOf;
+  end
+  else
+    ShowMessage('Usuario ou senha Invalida');
 end;
 
 procedure TViewFrmLogin.FormCreate(Sender: TObject);
 begin
-  InicializaViewLogin;
-
-end;
-
-procedure TViewFrmLogin.InicializaViewLogin;
-begin
-
-  uFarctory := TFarctory.create;
-  oUsuario := ToUsuario.create;
-
   EdtLogin.Text := '';
   EdtSenha.Text := '';
 
@@ -126,11 +73,9 @@ begin
       'Versão: ' + cVersao;
 end;
 
-
 procedure TViewFrmLogin.LblSairClick(Sender: TObject);
 begin
   Application.Terminate;
-
 end;
 
 end.
