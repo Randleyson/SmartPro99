@@ -18,7 +18,10 @@ uses
   FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteDef,
   FireDAC.Phys.SQLite,
-  FireDAC.Dapt
+  FireDAC.Dapt,
+  FireDAC.Phys.FBDef,
+  FireDAC.Phys.IBBase,
+  FireDAC.Phys.FB
   {$IFDEF ANDROID}
   ,System.IOUtils
   {$ENDIF};
@@ -44,7 +47,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.IniFiles;
+  System.SysUtils, System.IniFiles, VCl.Forms;
 
 { TModelComponnentsConeectionFiredac }
 
@@ -61,27 +64,15 @@ begin
 end;
 
 constructor TFiredac.Create;
-var
-  vArquivoINI: TIniFile;
-  vCaminhoDB: String;
 begin
-
-  vArquivoINI := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Config.ini');
-  try
-    vCaminhoDB := vArquivoINI.ReadString('BancoDados', 'CaminhoDB', '');
-  finally
-    vArquivoINI.DisposeOf;
-  end;
-
-
-  FDConnection := TFDConnection.Create(Nil);
-  FQuery := TFDQuery.Create(Nil);
+  FDConnection      := TFDConnection.Create(Nil);
+  FQuery            := TFDQuery.Create(Nil);
   FQuery.Connection := FDConnection;
-  FDConnection.Params.Add('Database='+ vCaminhoDB);
-  FDConnection.Params.Add('User_Name=sysdba');
-  FDConnection.Params.Add('Password=masterkey');
-  FDConnection.Params.Add('DriverID=FB');
 
+  FDConnection.LoginPrompt := False;
+  FDConnection.Params.Clear;
+  FDConnection.Params.Add('LockingMode=Normal');
+  FDConnection.Params.LoadFromFile(ExtractFileDir(application.ExeName) + '\Config.ini');
 
   try
     FDConnection.Connected := True;

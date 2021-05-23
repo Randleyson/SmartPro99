@@ -1,10 +1,16 @@
-unit Module.ServerMethod;
+unit uServerMethod;
 
 interface
 
 uses
-  System.SysUtils, System.Classes, uDWAbout, uRESTDWServerEvents, uDWDataModule,
-  uDWJSONObject, System.json, uDWConsts;
+  System.SysUtils,
+  System.Classes,
+  uDWAbout,
+  uRESTDWServerEvents,
+  uDWDataModule,
+  uDWJSONObject,
+  System.json,
+  uDWConsts;
 
 type
   TDmServerMethod = class(TServerMethodDataModule)

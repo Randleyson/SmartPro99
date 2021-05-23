@@ -381,33 +381,12 @@
             <Form>FrmPrincipal</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Module\Module.ServerMethod.pas">
+        <DCCReference Include="Units\uServerMethod.pas">
             <Form>DmServerMethod</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Dao\Dao.ConexaoDB.pas">
-            <Form>DaoConexaoDB</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.oConfiguracao.pas"/>
-        <DCCReference Include="Module\Module.DmConfiguracao.pas">
-            <Form>DmConfiguracao</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.uConfiguracao.pas"/>
-        <DCCReference Include="Controller\Controller.uConexaoSQL.pas"/>
-        <DCCReference Include="Controller\Controller.oSincronizacao.pas"/>
-        <DCCReference Include="Controller\Controller.uSincronizacao.pas"/>
-        <DCCReference Include="Module\Module.DmSincronizacao.pas">
-            <Form>DmSincronizacao</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Controller\Controller.uUtil.pas"/>
-        <DCCReference Include="Dm\uDm.pas">
+        <DCCReference Include="Units\uDm.pas">
             <Form>Dm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
@@ -467,12 +446,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Versao\Server\ServerSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>ServerSmartPro99.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
@@ -480,6 +453,12 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\Versao\Server\ServerSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ServerSmartPro99.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
