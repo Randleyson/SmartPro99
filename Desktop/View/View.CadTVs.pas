@@ -37,14 +37,14 @@ type
     LytCadTv: TLayout;
     LytProdTv: TLayout;
     Label5: TLabel;
-    LytCadProd: TLayout;
-    LstBoxProdNaoTv: TListBox;
-    LblSemRegistroProdNaoTv: TLabel;
-    FramePesquisaProdutos: TFramePesquisa;
-    LytProdTvs: TLayout;
-    LstBoxProdTv: TListBox;
-    LblSemRegistroProdTv: TLabel;
-    FramePesquisaProdTv: TFramePesquisa;
+    LytProdutoNotTV: TLayout;
+    LstProdutosNotTV: TListBox;
+    LblSemRegProdutosNotTV: TLabel;
+    FramePesqProdutosNotTV: TFramePesquisa;
+    LytProdutosCadTv: TLayout;
+    LstProdutosCadTV: TListBox;
+    LblSemRegProdutosCadTV: TLabel;
+    FramePesqProdutosCadTV: TFramePesquisa;
     LytBotao: TLayout;
     BtnAdicionarProdTv: TRectangle;
     Label6: TLabel;
@@ -66,20 +66,18 @@ type
     LytListaTv: TLayout;
     Label1: TLabel;
     LstBoxTvs: TListBox;
-    LblSemRegistroLstBoxTv: TLabel;
+    LblSemRegTVs: TLabel;
     FramePesquisaTvs: TFramePesquisa;
     FrameCabecalho1: TFrameCabecalho;
-    FMemTableTvs: TFDMemTable;
-    FMemTableTvsIDTV: TIntegerField;
-    FMemTableTvsDESCRICAO: TStringField;
-    FMemTableProdNaoTv: TFDMemTable;
-    FMemTableProdNaoTvCODBARRA: TStringField;
-    FMemTableProdNaoTvDESCRICAO: TStringField;
-    FMemTableProdNaoTvCODTV: TIntegerField;
-    FMemTableProdTv: TFDMemTable;
-    FMemTableProdTvCODBARRA: TStringField;
-    FMemTableProdTvDESCRICAO: TStringField;
-    FMemTableProdTvCODTV: TIntegerField;
+    DS_TVs: TFDMemTable;
+    DS_TVsIDTV: TIntegerField;
+    DS_TVsDESCRICAO: TStringField;
+    DS_ProdutosNotTV: TFDMemTable;
+    DS_ProdutosNotTVCODBARRA: TStringField;
+    DS_ProdutosNotTVDESCRICAO: TStringField;
+    DS_ProdutosCadTV: TFDMemTable;
+    DS_ProdutosCadTVCODBARRA: TStringField;
+    DS_ProdutosCadTVDESCRICAO: TStringField;
     ToolBarBotao: TToolBar;
     BtnAdicionar: TRectangle;
     Label10: TLabel;
@@ -104,9 +102,9 @@ type
     procedure BtnCancelarClick(Sender: TObject);
     procedure FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
-    procedure FramePesquisaProdutosEdtPesquisaKeyDown(Sender: TObject;
+    procedure FramePesqProdutosNotTVEdtPesquisaKeyDown(Sender: TObject;
       var Key: Word; var KeyChar: Char; Shift: TShiftState);
-    procedure FramePesquisaProdTvEdtPesquisaKeyDown(Sender: TObject;
+    procedure FramePesqProdutosCadTVEdtPesquisaKeyDown(Sender: TObject;
       var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure FrameCabecalho1ImgFecharClick(Sender: TObject);
   private
@@ -117,8 +115,8 @@ type
     procedure DetalharTv;
     procedure EnabledBtn(pBtnAdicionar, pEdita, pGravar, pExcluir, pCancelar: Boolean);
     procedure ListarTVs;
-    procedure ListarProdNaoTv;
-    procedure ListarProdutoTv;
+    procedure ListarProdutosNotTV;
+    procedure ListarProdutoCadTV;
     { Private declarations }
   public
     { Public declarations }
@@ -146,38 +144,44 @@ begin
   LytCadTv.Enabled    := True;
   LytListaTv.Enabled  := False;
 
-  ListarProdNaoTv;
-  ListarProdutoTv;
+  ListarProdutosNotTV;
+  ListarProdutoCadTV;
   EnabledBtn(False,False,True,False,True);
 end;
 
 procedure TFrameCadTVs.BtnAdicionarProdTvClick(Sender: TObject);
 begin
-  FMemTableProdNaoTv.Filtered     := False;
-  FMemTableProdNaoTv.Filter       := 'CodBarra = ' + LstBoxProdNaoTv.ListItems[LstBoxProdNaoTv.ItemIndex].TagString;
-  FMemTableProdNaoTv.Filtered     := True;
-  FMemTableProdTv.Insert;
-  FMemTableProdTv.Fields[0].Value := FMemTableProdNaoTv.Fields[0].AsString;
-  FMemTableProdTv.Fields[1].Value := FMemTableProdNaoTv.Fields[1].AsString;
-  FMemTableProdTv.Post;
-  FMemTableProdNaoTv.Delete;
-  FMemTableProdNaoTv.Filtered     := False;
+  if LstProdutosNotTV.Index < 0 then
+  begin
+    ShowMessage('Produtos nao selecionado');
+    Exit;
+  end;
 
-  ListarProdutoTv;
-  ListarProdNaoTv;
+  DS_ProdutosNotTV.Filtered     := False;
+  DS_ProdutosNotTV.Filter       := 'CodBarra = ' + QuotedStr(LstProdutosNotTV.ListItems[LstProdutosNotTV.ItemIndex].TagString);
+  DS_ProdutosNotTV.Filtered     := True;
+  DS_ProdutosCadTV.Insert;
+  DS_ProdutosCadTV.Fields[0].Value := DS_ProdutosNotTVCODBARRA.AsString;
+  DS_ProdutosCadTV.Fields[1].Value := DS_ProdutosNotTVDESCRICAO.AsString;
+  DS_ProdutosCadTV.Post;
+  DS_ProdutosNotTV.Delete;
+  DS_ProdutosNotTV.Filtered     := False;
+  DS_ProdutosCadTV.Filtered     := False;
+  ListarProdutoCadTV;
+  ListarProdutosNotTV;
 end;
 
 procedure TFrameCadTVs.BtnAdicionarTodosClick(Sender: TObject);
 begin
-  FMemTableProdNaoTv.Filtered     := False;
-  FMemTableProdTv.Insert;
-  FMemTableProdTv.Fields[0].Value := FMemTableProdNaoTv.Fields[0].AsString;
-  FMemTableProdTv.Fields[1].Value := FMemTableProdNaoTv.Fields[1].AsString;
-  FMemTableProdTv.Post;
-  FMemTableProdNaoTv.Delete;
+  DS_ProdutosNotTV.Filtered     := False;
+  DS_ProdutosCadTV.Insert;
+  DS_ProdutosCadTV.Fields[0].Value := DS_ProdutosNotTV.Fields[0].AsString;
+  DS_ProdutosCadTV.Fields[1].Value := DS_ProdutosNotTV.Fields[1].AsString;
+  DS_ProdutosCadTV.Post;
+  DS_ProdutosNotTV.Delete;
 
-  ListarProdutoTv;
-  ListarProdNaoTv;
+  ListarProdutoCadTV;
+  ListarProdutosNotTV;
 end;
 
 procedure TFrameCadTVs.BtnCancelarClick(Sender: TObject);
@@ -214,44 +218,44 @@ begin
   CloseCadTVs;
 end;
 
-procedure TFrameCadTVs.FramePesquisaProdTvEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadTVs.FramePesqProdutosCadTVEdtPesquisaKeyDown(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
   vParant: String;
 begin
   vFilter := UpperCase('%' + FramePesquisaTvs.EdtPesquisa.Text + '%');
-  case FramePesquisaProdTv.CBoxFiltro.ItemIndex of
+  case FramePesqProdutosCadTV.CBoxFiltro.ItemIndex of
     0:
       vParant := 'CODBARRA';
     1:
       vParant := 'DESCRICAO';
   end;
 
-  FMemTableProdTv.Filtered  := False;
-  FMemTableProdTv.Filter    := vParant + ' Like ' + QuotedStr(vFilter);
-  FMemTableProdTv.Filtered  := True;
-  ListarProdutoTv;
+  DS_ProdutosCadTV.Filtered  := False;
+  DS_ProdutosCadTV.Filter    := vParant + ' Like ' + vFilter;
+  DS_ProdutosCadTV.Filtered  := True;
+  ListarProdutoCadTV;
 end;
 
 
-procedure TFrameCadTVs.FramePesquisaProdutosEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadTVs.FramePesqProdutosNotTVEdtPesquisaKeyDown(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
   vParant: String;
 begin
-  vFilter := UpperCase('%' + FramePesquisaProdutos.EdtPesquisa.Text + '%');
-  case FramePesquisaProdutos.CBoxFiltro.ItemIndex of
+  vFilter := UpperCase('%' + FramePesqProdutosNotTV.EdtPesquisa.Text + '%');
+  case FramePesqProdutosNotTV.CBoxFiltro.ItemIndex of
     0:
       vParant := 'CODBARRA';
     1:
       vParant := 'DESCRICAO';
   end;
-  FMemTableProdNaoTv.Filtered := False;
-  FMemTableProdNaoTv.Filter   := vParant + ' Like ' + QuotedStr(vFilter);
-  FMemTableProdNaoTv.Filtered := True;
-  ListarProdNaoTv;
+  DS_ProdutosNotTV.Filtered := False;
+  DS_ProdutosNotTV.Filter   := vParant + ' Like ' + vFilter;
+  DS_ProdutosNotTV.Filtered := True;
+  ListarProdutosNotTV;
 end;
 
 procedure TFrameCadTVs.FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject;
@@ -267,9 +271,9 @@ begin
     1:
       vParant := 'DESCRICAO';
   end;
-  FMemTableTvs.Filtered := False;
-  FMemTableTvs.Filter   := vParant + ' Like ' + QuotedStr(vFilter);
-  FMemTableTvs.Filtered := True;
+  DS_TVs.Filtered := False;
+  DS_TVs.Filter   := vParant + ' Like ' + vFilter;
+  DS_TVs.Filtered := True;
   ListarTVs;
 end;
 
@@ -280,14 +284,17 @@ begin
     ShowMessage('O nome da Tv deve ser infromado');
     exit;
   end;
+
   FDescricaoTv := EdtDescricaoTv.Text;
   if FStatusTela = 'ADICIONAR' then
-    Dm.InsertTv(FDescricaoTv)
-      .InsertProdutos(FMemTableProdTv);
+    Dm
+      .InsertTv(FDescricaoTv)
+      .InsertProdutos(DS_ProdutosCadTV);
 
   if FStatusTela = 'EDITAR' then
-    Dm.UpdateTv(FDescricaoTv)
-      .InsertProdutos(FMemTableProdTv);
+    Dm
+      .UpdateTv(FIDTV,FDescricaoTv)
+      .InsertProdutos(DS_ProdutosCadTV);
 
   ListarTVs;
   DetalharTv;
@@ -318,26 +325,26 @@ procedure TFrameCadTVs.BtnRemoverProdTvClick(Sender: TObject);
 var
   vFilter: String;
 begin
-  if LstBoxProdTv.count > 0 then
+  if LstProdutosCadTV.count > 0 then
   begin
-    vFilter := LstBoxProdTv.ListItems[LstBoxProdTv.ItemIndex].TagString;
-    FMemTableProdTv.Filtered  := False;
-    FMemTableProdTv.Filter    := 'CodBarra = ' + vFilter;
-    FMemTableProdTv.Filtered  := True;
+    vFilter := LstProdutosCadTV.ListItems[LstProdutosCadTV.ItemIndex].TagString;
+    DS_ProdutosCadTV.Filtered  := False;
+    DS_ProdutosCadTV.Filter    := 'CodBarra = ' + vFilter;
+    DS_ProdutosCadTV.Filtered  := True;
 
-    FMemTableProdTv.First;
-    while not FMemTableProdTv.Eof do
+    DS_ProdutosCadTV.First;
+    while not DS_ProdutosCadTV.Eof do
     begin
-      FMemTableProdNaoTv.Insert;
-      FMemTableProdNaoTv.Fields[0].Value := FMemTableProdTv.Fields[0].AsString;
-      FMemTableProdNaoTv.Fields[1].Value := FMemTableProdTv.Fields[1].AsString;
-      FMemTableProdNaoTv.Post;
-      FMemTableProdTv.Delete;
-      FMemTableProdTv.Next;
+      DS_ProdutosNotTV.Insert;
+      DS_ProdutosNotTV.Fields[0].Value := DS_ProdutosCadTV.Fields[0].AsString;
+      DS_ProdutosNotTV.Fields[1].Value := DS_ProdutosCadTV.Fields[1].AsString;
+      DS_ProdutosNotTV.Post;
+      DS_ProdutosCadTV.Delete;
+      DS_ProdutosCadTV.Next;
     end;
-    FMemTableProdTv.Filtered := False;
-    ListarProdutoTv;
-    ListarProdNaoTv;
+    DS_ProdutosCadTV.Filtered := False;
+    ListarProdutoCadTV;
+    ListarProdutosNotTV;
   end
   else
     ShowMessage('Não a produto para ser removido da Tv');
@@ -345,21 +352,21 @@ end;
 
 procedure TFrameCadTVs.BtnRemoverTodosClick(Sender: TObject);
 begin
-  if LstBoxProdTv.count > 0 then
+  if LstProdutosCadTV.count > 0 then
   begin
-    FMemTableProdTv.Filtered  := False;
-    FMemTableProdTv.First;
-    while not FMemTableProdTv.Eof do
+    DS_ProdutosCadTV.Filtered  := False;
+    DS_ProdutosCadTV.First;
+    while not DS_ProdutosCadTV.Eof do
     begin
-      FMemTableProdNaoTv.Insert;
-      FMemTableProdNaoTv.Fields[0].Value := FMemTableProdTv.Fields[0].AsString;
-      FMemTableProdNaoTv.Fields[1].Value := FMemTableProdTv.Fields[1].AsString;
-      FMemTableProdNaoTv.Post;
-      FMemTableProdTv.Delete;
-      FMemTableProdTv.Next;
+      DS_ProdutosNotTV.Insert;
+      DS_ProdutosNotTV.Fields[0].Value := DS_ProdutosCadTV.Fields[0].AsString;
+      DS_ProdutosNotTV.Fields[1].Value := DS_ProdutosCadTV.Fields[1].AsString;
+      DS_ProdutosNotTV.Post;
+      DS_ProdutosCadTV.Delete;
+      DS_ProdutosCadTV.Next;
     end;
-    ListarProdutoTv;
-    ListarProdNaoTv;
+    ListarProdutoCadTV;
+    ListarProdutosNotTV;
   end
   else
     ShowMessage('Não a produto para ser removido da Tv');
@@ -377,16 +384,38 @@ end;
 
 procedure TFrameCadTVs.DetalharTv;
 begin
-  FMemTableTvs.Filtered := False;
-  FMemTableTvs.Filter   := 'IDTv = '+ IntToStr(FIdTv);
-  FMemTableTvs.Filtered := True;
+  FIdTv := StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString);
+  DS_TVs.Filter := 'IdTv = ' + IntToStr(FIdTv);
+  DS_TVs.Filtered := True;
+  EdtIdTv.Text := DS_TVsIDTV.AsString;
+  EdtDescricaoTv.Text := DS_TVsDESCRICAO.AsString;
+  DS_TVs.Filtered := False;
 
-  EdtIdTv.Text := IntToStr(FIdTv);
-  EdtIdTv.Text := FMemTableTvs.FieldByName('descricao').AsString;
-  FMemTableTvs.Filtered := False;
+  //PRODUTOSNOTTV
+  DS_ProdutosNotTV.Close;
+  DS_ProdutosNotTV.Open;
+  DS_ProdutosNotTV.EmptyDataSet;
+  TFDMemTable(DS_ProdutosNotTV).CopyDataSet(Dm.DS_ProdutosNotTV(FIdTv));
+  DS_ProdutosNotTV.Filtered := False;
 
-  ListarProdNaoTv;
-  ListarProdutoTv;
+  FramePesqProdutosNotTV.CBoxFiltro.Clear;
+  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Codigo Barra');
+  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Descrição');
+  FramePesqProdutosNotTV.CBoxFiltro.ItemIndex := 0;
+  ListarProdutosNotTV;
+
+  //PRODUTOSCADTV
+  DS_ProdutosCadTV.Close;
+  DS_ProdutosCadTV.Open;
+  DS_ProdutosCadTV.EmptyDataSet;
+  TFDMemTable(DS_ProdutosCadTV).CopyDataSet(Dm.DS_ProdutosCadTV(FIdTv));
+  DS_ProdutosNotTV.Filtered := False;
+
+  FramePesqProdutosCadTV.CBoxFiltro.Clear;
+  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Codigo Barra');
+  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Descrição');
+  FramePesqProdutosCadTV.CBoxFiltro.ItemIndex := 0;
+  ListarProdutoCadTV;
 end;
 
 procedure TFrameCadTVs.EnabledBtn(pBtnAdicionar, pEdita, pGravar, pExcluir,
@@ -403,15 +432,15 @@ procedure TFrameCadTVs.ListarTVs;
 var
   vListBoxItem: TListBoxItem;
 begin
-  LblSemRegistroLstBoxTv.Visible := True;
+  LblSemRegTVs.Visible := True;
   EnabledBtn(True,False,False,False,False);
 
   //Atualiza o DataSet;
-  FMemTableTvs.Close;
-  FMemTableTvs.Open;
-  FMemTableTvs.EmptyDataSet;
-  TFDMemTable(FMemTableTvs).CopyDataSet(Dm.DataSetTv);
-  FMemTableTvs.Filtered := False;
+  DS_TVs.Close;
+  DS_TVs.Open;
+  DS_TVs.EmptyDataSet;
+  TFDMemTable(DS_TVs).CopyDataSet(Dm.DataSetTv);
+  DS_TVs.Filtered := False;
 
   //Combox de pesquisa;
   FramePesquisaTvs.CBoxFiltro.Clear;
@@ -423,36 +452,28 @@ begin
   LstBoxTvs.Items.Clear;
   LstBoxTvs.BeginUpdate;
   try
-    if FMemTableTvs.RecordCount > 0 then
+    if DS_TVs.RecordCount > 0 then
     begin
-      LblSemRegistroLstBoxTv.Visible := False;
+      LblSemRegTVs.Visible := False;
       EnabledBtn(True,True,False,True,False);
 
-      FMemTableTvs.First;
-      while not FMemTableTvs.Eof do
+      DS_TVs.First;
+      while not DS_TVs.Eof do
       begin
         vListBoxItem                := TListBoxItem.Create(LstBoxTvs);
         vListBoxItem.Text           := '';
         vListBoxItem.align          := TAlignLayout.Client;
         vListBoxItem.StyleLookup    := 'listboxitembottomdetail';
         vListBoxItem.Height         := 40;
-        vListBoxItem.TagString      := FMemTableTvsIDTV.AsString;
-        vListBoxItem.ItemData.Text  := FMemTableTvsIDTV.AsString + ' - ' + FMemTableTvsDESCRICAO.AsString;
+        vListBoxItem.TagString      := DS_TVsIDTV.AsString;
+        vListBoxItem.ItemData.Text  := DS_TVsIDTV.AsString + ' - ' + DS_TVsDESCRICAO.AsString;
         LstBoxTvs.AddObject(vListBoxItem);
 
         if LstBoxTvs.count = 1 then
           vListBoxItem.IsSelected := True;
-        FMemTableTvs.Next;
+        DS_TVs.Next;
       end;
-
-      FIdTv := StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString);
-      FMemTableTvs.Filter := 'IdTv = ' + IntToStr(FIdTv);
-      FMemTableTvs.Filtered := True;
-      EdtIdTv.Text := FMemTableTvsIDTV.AsString;
-      EdtDescricaoTv.Text := FMemTableTvsDESCRICAO.AsString;
-
-      ListarProdNaoTv;
-      ListarProdutoTv;
+      DetalharTV;
     end;
 
   finally
@@ -468,105 +489,83 @@ begin
   DetalharTv;
 end;
 
-procedure TFrameCadTVs.ListarProdutoTv;
+procedure TFrameCadTVs.ListarProdutoCadTV;
 var
   vListBoxItem: TListBoxItem;
 begin
-  LblSemRegistroProdTv.Visible  := True;
+  LblSemRegProdutosCadTV.Visible  := True;
   BtnRemoverProdTv.Enabled      := False;
   BtnRemoverTodos.Enabled       := False;
 
-  //Atualiza o DataSet;
-  FMemTableProdTv.Close;
-  FMemTableProdTv.Open;
-  FMemTableProdTv.EmptyDataSet;
-  TFDMemTable(FMemTableProdTv).CopyDataSet(Dm.DataSetProduto(FIdTv));
-  FMemTableProdNaoTv.Filtered := False;
-
   //Listar Protudos da Tv;
-  LstBoxProdTv.Items.Clear;
-  LstBoxProdTv.BeginUpdate;
+  LstProdutosCadTV.Items.Clear;
+  LstProdutosCadTV.BeginUpdate;
   try
-    if FMemTableProdTv.RecordCount > 0 then
+    if DS_ProdutosCadTV.RecordCount > 0 then
     begin
-      LblSemRegistroProdTv.Visible := False;
+      LblSemRegProdutosCadTV.Visible := False;
       BtnRemoverProdTv.Enabled     := True;
       BtnRemoverTodos.Enabled      := True;
 
-      FMemTableProdTv.First;
-      while not FMemTableProdTv.Eof do
+      DS_ProdutosCadTV.First;
+      while not DS_ProdutosCadTV.Eof do
       begin
-        vListBoxItem                := TListBoxItem.Create(LstBoxProdTv);
+        vListBoxItem                := TListBoxItem.Create(LstProdutosCadTV);
         vListBoxItem.Text           := '';
         vListBoxItem.align          := TAlignLayout.Client;
         vListBoxItem.StyleLookup    := 'listboxitembottomdetail';
         vListBoxItem.Height         := 40;
-        vListBoxItem.TagString      :=  FMemTableProdNaoTvCODBARRA.AsString;;
-        vListBoxItem.ItemData.Text  := FMemTableProdNaoTvCODBARRA.AsString + ' - ' + FMemTableProdNaoTvDESCRICAO.AsString;
-        LstBoxProdTv.AddObject(vListBoxItem);
+        vListBoxItem.TagString      :=  DS_ProdutosCadTVCODBARRA.AsString;;
+        vListBoxItem.ItemData.Text  := DS_ProdutosCadTVCODBARRA.AsString + ' - ' + DS_ProdutosCadTVDESCRICAO.AsString;
+        LstProdutosCadTV.AddObject(vListBoxItem);
 
-        if LstBoxProdTv.count = 1 then
+        if LstProdutosCadTV.count = 1 then
           vListBoxItem.IsSelected   := True;
-        FMemTableProdNaoTv.Next;
-        FMemTableProdTv.Next;
+        DS_ProdutosCadTV.Next;
       end;
     end;
   finally
-    LstBoxProdTv.EndUpdate;
+    LstProdutosCadTV.EndUpdate;
   end;
 end;
 
-procedure TFrameCadTVs.ListarProdNaoTv;
+procedure TFrameCadTVs.ListarProdutosNotTV;
 var
   vListBoxItem: TListBoxItem;
 begin
-  LblSemRegistroProdNaoTv.Visible := True;
+  LblSemRegProdutosNotTV.Visible := True;
   BtnAdicionarProdTv.Enabled      := False;
   BtnAdicionarTodos.Enabled       := False;
 
-  //Atualiza o DataSet;
-  FMemTableProdNaoTv.Close;
-  FMemTableProdNaoTv.Open;
-  FMemTableProdNaoTv.EmptyDataSet;
-  TFDMemTable(FMemTableProdNaoTv).CopyDataSet(Dm.DataSetProdNaoTv(FIdTv));
-  FMemTableProdNaoTv.Filtered := False;
-
-  //Adiciona os filtro de pesquisa
-  FramePesquisaProdutos.CBoxFiltro.Clear;
-  FramePesquisaProdutos.CBoxFiltro.Items.Add('Codigo Barra');
-  FramePesquisaProdutos.CBoxFiltro.Items.Add('Descrição');
-  FramePesquisaProdutos.CBoxFiltro.ItemIndex := 0;
-
   //Listar ProdutosNaoTv;
-  LstBoxProdNaoTv.Items.Clear;
-  LstBoxProdNaoTv.BeginUpdate;
+  LstProdutosNotTV.Items.Clear;
+  LstProdutosNotTV.BeginUpdate;
   try
-    if FMemTableProdNaoTv.RecordCount > 0 then
+    if DS_ProdutosNotTV.RecordCount > 0 then
     begin
-      LblSemRegistroProdNaoTv.Visible := False;
+      LblSemRegProdutosNotTV.Visible := False;
       BtnAdicionarProdTv.Enabled      := True;
       BtnAdicionarTodos.Enabled       := True;
 
-      FMemTableProdNaoTv.First;
-      while not FMemTableProdNaoTv.Eof do
+      DS_ProdutosNotTV.First;
+      while not DS_ProdutosNotTV.Eof do
       begin
-        vListBoxItem := TListBoxItem.Create(LstBoxProdTv);
+        vListBoxItem := TListBoxItem.Create(LstProdutosNotTV);
         vListBoxItem.Text           := '';
         vListBoxItem.align          := TAlignLayout.Client;
         vListBoxItem.StyleLookup    := 'listboxitembottomdetail';
         vListBoxItem.Height         := 40;
-        vListBoxItem.TagString      := FMemTableProdNaoTvCODBARRA.AsString;;
-        vListBoxItem.ItemData.Text  :=
-          FMemTableProdNaoTvCODBARRA.AsString + ' - ' + FMemTableProdNaoTvDESCRICAO.AsString;
-        LstBoxProdNaoTv.AddObject(vListBoxItem);
+        vListBoxItem.TagString      := DS_ProdutosNotTVCODBARRA.AsString;
+        vListBoxItem.ItemData.Text  := DS_ProdutosNotTVCODBARRA.AsString + ' - ' + DS_ProdutosNotTVDESCRICAO.AsString;
+        LstProdutosNotTV.AddObject(vListBoxItem);
 
-        if LstBoxProdTv.count = 1 then
+        if LstProdutosNotTV.count = 1 then
           vListBoxItem.IsSelected   := True;
-        FMemTableProdNaoTv.Next;
+        DS_ProdutosNotTV.Next;
       end;
     end;
   finally
-    LstBoxProdNaoTv.EndUpdate;
+    LstProdutosNotTV.EndUpdate;
   end;
 end;
 

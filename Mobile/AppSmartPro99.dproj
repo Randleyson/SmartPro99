@@ -397,16 +397,14 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Model\Behaviors\Model.Behaviors.pas"/>
-        <DCCReference Include="Model\Components\RestDataWare\Model.Components.RestDataWare.Interfaces.pas"/>
-        <DCCReference Include="Model\Components\RestDataWare\Model.Components.RestDataWare.pas"/>
-        <DCCReference Include="Untis\Units.uFiredac.pas"/>
+        <DCCReference Include="Untis\uBehaviors.pas"/>
+        <DCCReference Include="Untis\uFiredac.pas"/>
         <DCCReference Include="Untis\Units.Dm.pas">
             <Form>Dm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Untis\Units.uRestDataWare.pas"/>
+        <DCCReference Include="Untis\uRestDataWare.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -450,7 +448,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\AppSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\Versao\Android\AppSmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>AppSmartPro99.exe</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -1,4 +1,4 @@
-unit Units.uFiredac;
+unit uFiredac;
 
 interface
 
@@ -42,7 +42,7 @@ type
   end;
 
 var
-  uFiredac: TFiredac;
+  Firedac: TFiredac;
 
 implementation
 

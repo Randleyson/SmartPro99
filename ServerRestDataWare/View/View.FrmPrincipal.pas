@@ -95,7 +95,7 @@ begin
             procedure
             begin
               EscreveMmLogs('Sincronizacao finalizada');
-              PBarSincronizara.Visible := False;;
+              PBarSincronizara.Visible := False;
             end);
         end;
       end).Start;
@@ -104,7 +104,7 @@ end;
 procedure TFrmPrincipal.StartServer;
 begin
   RESTPooler.Active := True;
-  TmSincronizaProduto.Interval  := 15000;
+  TmSincronizaProduto.Interval  := 30000;
   TmSincronizaProduto.Enabled   := True;
   FrmPrincipal.BtnStart.Enabled := not RESTPooler.Active;
   FrmPrincipal.BtnStop.Enabled  := RESTPooler.Active;

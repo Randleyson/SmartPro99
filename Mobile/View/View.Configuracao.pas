@@ -84,6 +84,8 @@ type
     Destructor Destroy; override;
     procedure ShowView(aParent: TFmxObject);
   end;
+var
+  FrameConfiguracao: TViewConfiguracoes;
 
 implementation
 
@@ -115,8 +117,9 @@ end;
 procedure TViewConfiguracoes.BtnFecharViewClick(Sender: TObject);
 begin
   Dm.ReloandProdutos;
-  Self.Visible := False;
-  Self.DisposeOf;
+  FrameConfiguracao.Visible := False;
+  FrameConfiguracao.DisposeOf;
+  FrameConfiguracao := Nil;
 end;
 
 procedure TViewConfiguracoes.BtnGravarServerClick(Sender: TObject);

@@ -29,7 +29,6 @@ type
     procedure TmSplashTimer(Sender: TObject);
   private
     { Private declarations }
-    FFrameTabelaPreco: TViewTabelaPreco;
   public
     { Public declarations }
     procedure FecharAplicacao;
@@ -42,8 +41,6 @@ implementation
 
 {$R *.fmx}
 
-uses Model.Behaviors;
-
 procedure TViewPrincipal.FecharAplicacao;
 begin
   Application.Terminate;
@@ -51,15 +48,15 @@ end;
 
 procedure TViewPrincipal.FormShow(Sender: TObject);
 begin
-  TmSplash.Interval := 2000;
+  TmSplash.Interval := 1500;
   TmSplash.Enabled := True;
 end;
 
 procedure TViewPrincipal.TmSplashTimer(Sender: TObject);
 begin
   TmSplash.Enabled := False;
-  FFrameTabelaPreco := TViewTabelaPreco.Create(Nil);
-  FFrameTabelaPreco.ShowView(Self);
+  FrameTabelaPreco := TViewTabelaPreco.Create(Nil);
+  FrameTabelaPreco.ShowView(Self);
 end;
 
 end.

@@ -8,12 +8,10 @@ uses
   View.Configuracao in 'View\View.Configuracao.pas' {ViewConfiguracoes: TFrame},
   View.Frames.TabelaCores in 'View\Frames\View.Frames.TabelaCores.pas' {FrameTabelaCores: TFrame},
   View.Frames.ItemLista in 'View\Frames\View.Frames.ItemLista.pas' {FrameItemList: TFrame},
-  Model.Behaviors in 'Model\Behaviors\Model.Behaviors.pas',
-  Model.Components.RestDataWare.Interfaces in 'Model\Components\RestDataWare\Model.Components.RestDataWare.Interfaces.pas',
-  Model.Components.RestDataWare in 'Model\Components\RestDataWare\Model.Components.RestDataWare.pas',
-  Units.uFiredac in 'Untis\Units.uFiredac.pas',
+  uBehaviors in 'Untis\uBehaviors.pas',
+  uFiredac in 'Untis\uFiredac.pas',
   Units.Dm in 'Untis\Units.Dm.pas' {Dm: TDataModule},
-  Units.uRestDataWare in 'Untis\Units.uRestDataWare.pas';
+  uRestDataWare in 'Untis\uRestDataWare.pas';
 
 {$R *.res}
 

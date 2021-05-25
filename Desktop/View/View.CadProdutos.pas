@@ -63,11 +63,11 @@ type
     EdtVrVenda: TEdit;
     Rectangle1: TRectangle;
     FrameCabecalho1: TFrameCabecalho;
-    FMenTableProdutos: TFDMemTable;
-    FMenTableProdutosCODBARRA: TStringField;
-    FMenTableProdutosDESCRICAO: TStringField;
-    FMenTableProdutosUNIDADE: TStringField;
-    FMenTableProdutosVRVENDA: TCurrencyField;
+    DS_Produtos: TFDMemTable;
+    DS_ProdutosCODBARRA: TStringField;
+    DS_ProdutosDESCRICAO: TStringField;
+    DS_ProdutosUNIDADE: TStringField;
+    DS_ProdutosVRVENDA: TCurrencyField;
     procedure FrameCabecalho1ImgFecharClick(Sender: TObject);
     procedure LstBoxProdutosItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
@@ -109,11 +109,11 @@ end;
 
 procedure TFrameCadProdutos.CarregaProdutosDataSet;
 begin
-  FMenTableProdutos.Close;
-  FMenTableProdutos.Open;
-  FMenTableProdutos.EmptyDataSet;
-  TFDMemTable(FMenTableProdutos).CopyDataSet(Dm.DataSetProdutos);
-  FMenTableProdutos.Filtered := False;
+  DS_Produtos.Close;
+  DS_Produtos.Open;
+  DS_Produtos.EmptyDataSet;
+  TFDMemTable(DS_Produtos).CopyDataSet(Dm.DataSetProdutos);
+  DS_Produtos.Filtered := False;
 
   FramePesquisa.CBoxFiltro.Items.Clear;
   FramePesquisa.CBoxFiltro.Items.Add('CODIGO BARRA');
@@ -138,21 +138,20 @@ procedure TFrameCadProdutos.ListarProdutos;
 var
   vLstBoxItems: TListBoxItem;
 begin
+  LblSemRegistro.Visible := True;
   LstBoxProdutos.BeginUpdate;
   try
     LstBoxProdutos.Items.Clear;
-    LblSemRegistro.Visible := True;
-    if FMenTableProdutos.RecordCount <> 0 then
+    if DS_Produtos.RecordCount <> 0 then
     begin
       LblSemRegistro.Visible := False;
-
-      FMenTableProdutos.First;
-      while not FMenTableProdutos.Eof do
+      DS_Produtos.First;
+      while not DS_Produtos.Eof do
       begin
-        FCodbarra   := FMenTableProdutosCODBARRA.AsString;
-        FDescricao  := FMenTableProdutosDESCRICAO.AsString;
-        FUnidade    := FMenTableProdutosUNIDADE.AsString;
-        FVrVenda    := FMenTableProdutosVRVENDA.AsCurrency;
+        FCodbarra   := DS_ProdutosCODBARRA.AsString;
+        FDescricao  := DS_ProdutosDESCRICAO.AsString;
+        FUnidade    := DS_ProdutosUNIDADE.AsString;
+        FVrVenda    := DS_ProdutosVRVENDA.AsCurrency;
         vLstBoxItems := TListBoxItem.Create(LstBoxProdutos);
         vLstBoxItems.Text := '';
         vLstBoxItems.align := TAlignLayout.Client;
@@ -166,7 +165,7 @@ begin
         LstBoxProdutos.AddObject(vLstBoxItems);
         if LstBoxProdutos.Count = 1 then
           vLstBoxItems.IsSelected := True;
-        FMenTableProdutos.Next;
+        DS_Produtos.Next;
       end;
       DetalharCadProduto;
     end;
@@ -186,13 +185,13 @@ end;
 procedure TFrameCadProdutos.DetalharCadProduto;
 begin
   FCodbarra := LstBoxProdutos.ListItems[LstBoxProdutos.ItemIndex].TagString;
-  FMenTableProdutos.Filter    := 'Codbarra = ' + FCodbarra;
-  FMenTableProdutos.Filtered  := True;
-  EdtCodBarra.Text            := FMenTableProdutosCODBARRA.AsString;
-  EdtDecricao.Text            := FMenTableProdutosDESCRICAO.AsString;
-  EdtUnidade.Text             := FMenTableProdutosUNIDADE.AsString;
-  EdtVrVenda.Text             := FMenTableProdutosVRVENDA.AsString;
-  FMenTableProdutos.Filtered  := False;
+  DS_Produtos.Filter    := 'Codbarra = ' + QuotedStr(FCodbarra);
+  DS_Produtos.Filtered  := True;
+  EdtCodBarra.Text      := DS_ProdutosCODBARRA.AsString;
+  EdtDecricao.Text      := DS_ProdutosDESCRICAO.AsString;
+  EdtUnidade.Text       := DS_ProdutosUNIDADE.AsString;
+  EdtVrVenda.Text       := DS_ProdutosVRVENDA.AsString;
+  DS_Produtos.Filtered  := False;
 end;
 
 procedure TFrameCadProdutos.FrameCabecalho1ImgFecharClick(Sender: TObject);
@@ -217,9 +216,9 @@ begin
     3:
       vParant := 'VRVENDA';
   end;
-  FMenTableProdutos.Filtered  := False;
-  FMenTableProdutos.Filter    := vParant + ' Like ' + QuotedStr(vFilter);
-  FMenTableProdutos.Filtered  := True;
+  DS_Produtos.Filtered  := False;
+  DS_Produtos.Filter    := vParant + ' Like ' + QuotedStr(vFilter);
+  DS_Produtos.Filtered  := True;
   ListarProdutos;
 end;
 

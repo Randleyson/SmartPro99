@@ -51,14 +51,15 @@ end;
 
 procedure TDm.SincronizarProdutos(pProgressBar: TProgressBar; aPathArquivo: String);
 var
-
   vTextFile: TextFile;
   vLinha: String;
   vDataSet: TDataSet;
   vStringList: TStringList;
+  vFiredac: TFiredac;
 begin
-  pProgressBar.Value   := 1;
-  vStringList := TStringList.Create;
+
+  pProgressBar.Value := 1;
+  vStringList        := TStringList.Create;
   try
     vStringList.LoadFromFile(aPathArquivo);
     pProgressBar.Max := vStringList.Count;
@@ -66,66 +67,72 @@ begin
     vStringList.DisposeOf;
   end;
 
-  uFiredac
-    .Active(False)
-      .SQLClear
-        .SQL('Update produtos set EXISTENOARQ = :PARANTER')
-        .AddParan('PARANTER','N')
-      .ExceSQL;
-
-  AssignFile(vTextFile, aPathArquivo);
-  reset(vTextFile);
+  vFiredac := TFiredac.New;
   try
-    while not EOF(vTextFile) do
-    begin
-      Readln(vTextFile, vLinha);
-      if Length(vLinha) < 50 then
-        Exit;
-      FCodBarra := Copy(vLinha, 6, 6);
-      FDescricao := Copy(vLinha, 21, 25);
-      FVrVenda := Copy(Copy(vLinha, 12, 6), 0, 4) + '.' + Copy(Copy(vLinha, 12, 6), 5, 2);
-      FUnidade := Copy(vLinha,5,1);
-      if uFiredac
-          .Active(False)
-            .SQLClear
-            .SQL('select * from produtos where codbarra = :CODBARRA')
-            .AddParan('CODBARRA',FCodBarra)
-            .Open
-          .DataSet.RecordCount > 0 then
-        uFiredac
-          .Active(False)
-            .SQLClear
-            .SQL(' update produtos set descricao = :DESCRICAO,')
-            .SQL(' vrvenda = :VRVENDA, Unidade = :UNIDADE, EXISTENOARQ= :EXISTENOARQ')
-            .SQL(' WHERE codbarra = :CODBARRA')
-            .AddParan('DESCRICAO',FDescricao)
-            .AddParan('VRVENDA',FVrVenda)
-            .AddParan('UNIDADE',Unidade)
-            .AddParan('EXISTENOARQ','S')
-            .AddParan('CODBARRA',FCodBarra)
-          .ExceSQL
-      else
-        uFiredac
-          .Active(False)
-            .SQLClear
-            .SQL('INSERT INTO produtos (codbarra,descricao,vrvenda,unidade,existenoarq)')
-            .SQL(' values (:CODBARRA, :DESCRICAO, :VRVENDA,:UNIDADE, :EXISTENOARQ)')
-            .AddParan('CODBARRA',FCodBarra)
-            .AddParan('DESCRICAO',FDescricao)
-            .AddParan('VRVENDA',FVrVenda)
-            .AddParan('UNIDADE',Unidade)
-            .AddParan('EXISTENOARQ','S')
-          .ExceSQL;
-      pProgressBar.Value := pProgressBar.Value + 1
-    end;
-    uFiredac
+    vFiredac
       .Active(False)
         .SQLClear
-        .SQL('Delete from produtos where EXISTENOARQ = :EXISTENOARQ')
-        .AddParan('EXISTENOARQ','N')
-      .ExceSQL;
+          .SQL('Update produtos set EXISTENOARQ = :PARANTER')
+          .AddParan('PARANTER','N')
+        .ExceSQL;
+
+    AssignFile(vTextFile, aPathArquivo);
+    reset(vTextFile);
+    try
+      while not EOF(vTextFile) do
+      begin
+        Readln(vTextFile, vLinha);
+        if Length(vLinha) < 50 then
+          Exit;
+        FCodBarra := Copy(vLinha, 6, 6);
+        FDescricao := Copy(vLinha, 21, 25);
+        FVrVenda := Copy(Copy(vLinha, 12, 6), 0, 4) + '.' + Copy(Copy(vLinha, 12, 6), 5, 2);
+        FUnidade := Copy(vLinha,5,1);
+        if vFiredac
+            .Active(False)
+              .SQLClear
+              .SQL('select * from produtos where codbarra = :CODBARRA')
+              .AddParan('CODBARRA',FCodBarra)
+              .Open
+            .DataSet.RecordCount > 0 then
+          vFiredac
+            .Active(False)
+              .SQLClear
+              .SQL(' update produtos set descricao = :DESCRICAO,')
+              .SQL(' vrvenda = :VRVENDA, Unidade = :UNIDADE, EXISTENOARQ= :EXISTENOARQ')
+              .SQL(' WHERE codbarra = :CODBARRA')
+              .AddParan('DESCRICAO',FDescricao)
+              .AddParan('VRVENDA',FVrVenda)
+              .AddParan('UNIDADE',Unidade)
+              .AddParan('EXISTENOARQ','S')
+              .AddParan('CODBARRA',FCodBarra)
+            .ExceSQL
+        else
+          vFiredac
+            .Active(False)
+              .SQLClear
+              .SQL('INSERT INTO produtos (codbarra,descricao,vrvenda,unidade,existenoarq)')
+              .SQL(' values (:CODBARRA, :DESCRICAO, :VRVENDA,:UNIDADE, :EXISTENOARQ)')
+              .AddParan('CODBARRA',FCodBarra)
+              .AddParan('DESCRICAO',FDescricao)
+              .AddParan('VRVENDA',FVrVenda)
+              .AddParan('UNIDADE',Unidade)
+              .AddParan('EXISTENOARQ','S')
+            .ExceSQL;
+        pProgressBar.Value := pProgressBar.Value + 1
+      end;
+      vFiredac
+        .Active(False)
+          .SQLClear
+          .SQL('Delete from produtos where EXISTENOARQ = :EXISTENOARQ')
+          .AddParan('EXISTENOARQ','N')
+        .ExceSQL;
+    finally
+      CloseFile(vTextFile);
+    end;
+
   finally
-    CloseFile(vTextFile);
+    vFiredac.DisposeOf;
   end;
 end;
 

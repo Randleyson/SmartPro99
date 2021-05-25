@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Units.uRestDataWare, System.JSON, Units.uFiredac;
+  System.JSON, uRestDataWare, uFiredac;
 
 type
   TDm = class(TDataModule)
@@ -23,10 +23,10 @@ type
     FHostServer: String;
   public
     { Public declarations }
-    procedure ReloandProdutos;
+    function ReloandProdutos: Integer;
     procedure ReloandTv;
-    function MenTableProduto: TFDMemTable;
-    function MentTableTvs: TFDMemTable;
+    function DS_Produtos: TFDMemTable;
+    function DS_Tvs: TFDMemTable;
     function IdTv: Integer; overload;
     function IdTv( aValue: Integer): TDm; overload;
     function HostServer: String; overload;
@@ -54,14 +54,18 @@ begin
   vDataSet := uFiredac
                   .Active(False)
                   .SQLClear
-                  .SQL('select idtv,hostserver,portaserver from tab_configuracoes')
+                  .SQL('select idtv, hostserver, portaserver from tab_configuracoes')
                 .Open
                .DataSet;
+  try
+    FHostServer := vDataSet.FieldByName('hostserver').AsString + ':' + vDataSet.FieldByName('portaserver').AsString;
+    FIdTV := vDataSet.FieldByName('Idtv').AsInteger;
+    uRestDataWare := TRestDataWare.Create;
+    uRestDataWare.HostServer(FHostServer);
+  finally
+    uFiredac.Active(False);
+  end;
 
-  FHostServer := vDataSet.FieldByName('hostserver').AsString + ':' + vDataSet.FieldByName('portaserver').AsString;
-  FIdTV := vDataSet.FieldByName('Idtv').AsInteger;
-  uRestDataWare := TRestDataWare.Create;
-  uRestDataWare.HostServer(FHostServer);
 end;
 
 procedure TDm.DataModuleDestroy(Sender: TObject);
@@ -114,20 +118,21 @@ begin
   Result := FIdTV;
 end;
 
-function TDm.MenTableProduto: TFDMemTable;
+function TDm.DS_Produtos: TFDMemTable;
 begin
   Result := FMenProduto;
 end;
 
-function TDm.MentTableTvs: TFDMemTable;
+function TDm.DS_TVs: TFDMemTable;
 begin
   Result := FMenTvs;
 end;
 
-procedure TDm.ReloandProdutos;
+function TDm.ReloandProdutos: Integer;
 var
   i: Integer;
 begin
+  Result := 1;
   //Receber Produtos Server
   FJOSNArray := Nil;
   FJOSNArray := uRestDataWare
@@ -140,6 +145,7 @@ begin
   if uRestDataWare.StatusCode = 200 then
   begin
     try
+      Result := 0;
       //Insert no banco Local
       uFiredac
         .Active(False)
@@ -169,9 +175,6 @@ begin
         .Active(False)
           .SQLClear.SQL('delete from tab_produtos where ie = ''E''')
         .ExceSQL;
-
-
-
     except
       uFiredac
         .Active(False)

@@ -48,9 +48,9 @@ object FrameCadTVs: TFrameCadTVs
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
         OnItemClick = LstBoxTvsItemClick
-        Viewport.Width = 269.000000000000000000
-        Viewport.Height = 280.000000000000000000
-        object LblSemRegistroLstBoxTv: TLabel
+        Viewport.Width = 273.000000000000000000
+        Viewport.Height = 284.000000000000000000
+        object LblSemRegTVs: TLabel
           Align = Top
           StyledSettings = [Family, Style, FontColor]
           Margins.Left = 8.000000000000000000
@@ -122,14 +122,14 @@ object FrameCadTVs: TFrameCadTVs
           Text = 'Produtos'
           TabOrder = 0
         end
-        object LytCadProd: TLayout
+        object LytProdutoNotTV: TLayout
           Align = Left
           Position.Y = 25.000000000000000000
           Size.Width = 250.000000000000000000
           Size.Height = 283.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          object LstBoxProdNaoTv: TListBox
+          object LstProdutosNotTV: TListBox
             Align = Client
             Size.Width = 250.000000000000000000
             Size.Height = 219.000000000000000000
@@ -139,9 +139,9 @@ object FrameCadTVs: TFrameCadTVs
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 246.000000000000000000
-            Viewport.Height = 215.000000000000000000
-            object LblSemRegistroProdNaoTv: TLabel
+            Viewport.Width = 250.000000000000000000
+            Viewport.Height = 219.000000000000000000
+            object LblSemRegProdutosNotTV: TLabel
               Align = Top
               StyledSettings = [Family, Style, FontColor]
               Margins.Left = 8.000000000000000000
@@ -159,7 +159,7 @@ object FrameCadTVs: TFrameCadTVs
               TabOrder = 0
             end
           end
-          inline FramePesquisaProdutos: TFramePesquisa
+          inline FramePesqProdutosNotTV: TFramePesquisa
             Align = Top
             Size.Width = 250.000000000000000000
             Size.Height = 64.000000000000000000
@@ -177,13 +177,12 @@ object FrameCadTVs: TFrameCadTVs
                 end
                 inherited EdtPesquisa: TEdit
                   Size.Width = 194.000000000000000000
-                  OnKeyDown = FramePesquisaProdutosEdtPesquisaKeyDown
                 end
               end
             end
           end
         end
-        object LytProdTvs: TLayout
+        object LytProdutosCadTv: TLayout
           Align = Right
           Position.X = 359.000000000000000000
           Position.Y = 25.000000000000000000
@@ -191,7 +190,7 @@ object FrameCadTVs: TFrameCadTVs
           Size.Height = 283.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
-          object LstBoxProdTv: TListBox
+          object LstProdutosCadTV: TListBox
             Align = Client
             Size.Width = 250.000000000000000000
             Size.Height = 219.000000000000000000
@@ -201,9 +200,9 @@ object FrameCadTVs: TFrameCadTVs
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 246.000000000000000000
-            Viewport.Height = 215.000000000000000000
-            object LblSemRegistroProdTv: TLabel
+            Viewport.Width = 250.000000000000000000
+            Viewport.Height = 219.000000000000000000
+            object LblSemRegProdutosCadTV: TLabel
               Align = Top
               StyledSettings = [Family, Style, FontColor]
               Margins.Left = 8.000000000000000000
@@ -221,7 +220,7 @@ object FrameCadTVs: TFrameCadTVs
               TabOrder = 0
             end
           end
-          inline FramePesquisaProdTv: TFramePesquisa
+          inline FramePesqProdutosCadTV: TFramePesquisa
             Align = Top
             Size.Width = 250.000000000000000000
             Size.Height = 64.000000000000000000
@@ -239,7 +238,6 @@ object FrameCadTVs: TFrameCadTVs
                 end
                 inherited EdtPesquisa: TEdit
                   Size.Width = 194.000000000000000000
-                  OnKeyDown = FramePesquisaProdTvEdtPesquisaKeyDown
                 end
               end
             end
@@ -645,7 +643,7 @@ object FrameCadTVs: TFrameCadTVs
       end
     end
   end
-  object FMemTableTvs: TFDMemTable
+  object DS_TVs: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -655,15 +653,15 @@ object FrameCadTVs: TFrameCadTVs
     UpdateOptions.AutoCommitUpdates = True
     Left = 48
     Top = 184
-    object FMemTableTvsIDTV: TIntegerField
+    object DS_TVsIDTV: TIntegerField
       FieldName = 'IDTV'
     end
-    object FMemTableTvsDESCRICAO: TStringField
+    object DS_TVsDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 100
     end
   end
-  object FMemTableProdNaoTv: TFDMemTable
+  object DS_ProdutosNotTV: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -671,19 +669,16 @@ object FrameCadTVs: TFrameCadTVs
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 368
-    Top = 280
-    object FMemTableProdNaoTvCODBARRA: TStringField
+    Left = 360
+    Top = 296
+    object DS_ProdutosNotTVCODBARRA: TStringField
       FieldName = 'CODBARRA'
     end
-    object FMemTableProdNaoTvDESCRICAO: TStringField
+    object DS_ProdutosNotTVDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-    end
-    object FMemTableProdNaoTvCODTV: TIntegerField
-      FieldName = 'CODTV'
     end
   end
-  object FMemTableProdTv: TFDMemTable
+  object DS_ProdutosCadTV: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -691,16 +686,13 @@ object FrameCadTVs: TFrameCadTVs
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 544
-    Top = 296
-    object FMemTableProdTvCODBARRA: TStringField
+    Left = 728
+    Top = 288
+    object DS_ProdutosCadTVCODBARRA: TStringField
       FieldName = 'CODBARRA'
     end
-    object FMemTableProdTvDESCRICAO: TStringField
+    object DS_ProdutosCadTVDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-    end
-    object FMemTableProdTvCODTV: TIntegerField
-      FieldName = 'CODTV'
     end
   end
 end

@@ -345,7 +345,7 @@ object FrameCadProdutos: TFrameCadProdutos
       end
     end
   end
-  object FMenTableProdutos: TFDMemTable
+  object DS_Produtos: TFDMemTable
     FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -358,19 +358,19 @@ object FrameCadProdutos: TFrameCadProdutos
     StoreDefs = True
     Left = 64
     Top = 216
-    object FMenTableProdutosCODBARRA: TStringField
+    object DS_ProdutosCODBARRA: TStringField
       FieldName = 'CODBARRA'
       Size = 15
     end
-    object FMenTableProdutosDESCRICAO: TStringField
+    object DS_ProdutosDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 100
     end
-    object FMenTableProdutosUNIDADE: TStringField
+    object DS_ProdutosUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 2
     end
-    object FMenTableProdutosVRVENDA: TCurrencyField
+    object DS_ProdutosVRVENDA: TCurrencyField
       FieldName = 'VRVENDA'
     end
   end

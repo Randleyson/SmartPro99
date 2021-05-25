@@ -34,7 +34,9 @@ uses
   FMX.ListView,
   Units.Dm,
   View.Frames.TabelaCores,
-  View.Configuracao;
+  View.Configuracao,
+  System.ImageList,
+  FMX.ImgList;
 
 type
   TViewTabelaPreco = class(TFrame)
@@ -51,12 +53,11 @@ type
     Image1: TImage;
     Layout1: TLayout;
     TmProxino: TTimer;
+    ImageList1: TImageList;
     procedure ImgConfiguracoesClick(Sender: TObject);
     procedure TmProxinoTimer(Sender: TObject);
   private
     { Private declarations }
-    FParent: TFmxObject;
-    FFrameConfiguracao: TViewConfiguracoes;
     procedure ListarProdutos;
   public
     { Public declarations }
@@ -64,6 +65,8 @@ type
     Destructor Destroy; override;
     procedure ShowView(aParent: TFmxObject);
   end;
+var
+  FrameTabelaPreco: TViewTabelaPreco;
 
 implementation
 
@@ -85,9 +88,9 @@ end;
 
 procedure TViewTabelaPreco.ImgConfiguracoesClick(Sender: TObject);
 begin
-  FFrameConfiguracao := Nil;
-  FFrameConfiguracao := TViewConfiguracoes.Create(Nil);
-  FFrameConfiguracao.ShowView(FParent);
+  FrameConfiguracao := Nil;
+  FrameConfiguracao := TViewConfiguracoes.Create(Nil);
+  FrameConfiguracao.ShowView(FParent);
 end;
 
 procedure TViewTabelaPreco.ListarProdutos;
@@ -95,70 +98,61 @@ var
   vFrame: TFrameItemList;
   vListBoxItem: TListBoxItem;
   i: Integer;
-
+  x: TSizeF;
 begin
   i := 0;
-  LstProdutos.Items.Clear;
+  LblSemRegistro.Visible  := True;
   LstProdutos.BeginUpdate;
   try
-
-    LblSemRegistro.Visible := True;
-    if dm.FMenProduto.RecordCount <> 0 then
+    LstProdutos.Items.Clear;
+    while not dm.DS_Produtos.Eof do
     begin
-      LblSemRegistro.Visible := False;
+      LblSemRegistro.Visible  := False;
+      vListBoxItem            := TListBoxItem.Create(LstProdutos);
+      vListBoxItem.Height     := 50;
+      vListBoxItem.TagString  := dm.FMenProduto.FieldByName('codbarra').AsString;
 
-      while not dm.FMenProduto.Eof do
+      vFrame        := TFrameItemList.Create(Nil);
+      vFrame.Parent := vListBoxItem;
+      vFrame.Align  := Align.alClient;
+      vFrame.LblDescricao.Text  := dm.DS_Produtos.FieldByName('descricao').AsString;
+      vFrame.LblValor.Text      := Formatfloat('##,###,##0.00', dm.DS_Produtos.FieldByName('vrvenda').AsCurrency);
+      vFrame.LblUnd.Text        := dm.DS_Produtos.FieldByName('unidade').AsString;
+
+      i := i + 1;
+      vFrame.CorFundo(i mod 2);
+      LstProdutos.AddObject(vListBoxItem);
+      if i = 5 then
+        Exit;
+      Dm.DS_Produtos.Next;
+
+      if dm.DS_Produtos.Eof then
       begin
-        vListBoxItem := TListBoxItem.Create(LstProdutos);
-        vListBoxItem.Height := 50;
-        vListBoxItem.TagString := dm.FMenProduto.FieldByName('codbarra').AsString;
-
-        vFrame := TFrameItemList.Create(Nil);
-        vFrame.Parent := vListBoxItem;
-        vFrame.Align := Align.alClient;
-        vFrame.LblDescricao.Text := dm.FMenProduto.FieldByName('descricao').AsString;
-        vFrame.LblValor.Text := dm.FMenProduto.FieldByName('vrvenda').AsString;
-        vFrame.LblUnd.Text := dm.FMenProduto.FieldByName('unidade').AsString;
-
-        i := i + 1;
-        vFrame.CorFundo(i mod 2);
-        LstProdutos.AddObject(vListBoxItem);
-
-        if i = 5 then
-          Exit;
-
-        Dm.FMenProduto.Next;
-        if dm.FMenProduto.Eof then
-        begin
-          Dm.ReloandProdutos;
-          Dm.FMenProduto.First;
-        end;
+        Dm.ReloandProdutos;
+        Dm.DS_Produtos.First;
       end;
-
     end;
   finally
     LstProdutos.EndUpdate;
   end;
-
 end;
 
 procedure TViewTabelaPreco.ShowView(aParent: TFmxObject);
 begin
-  FParent := aParent;
-  Self.Parent := FParent;
+  Parent                    := aParent;
   FrameTabelaCores1.Visible := False;
+  TmProxino.Interval        := 3000;
+  TmProxino.Enabled         := True;
   Dm.ReloandProdutos;
-  Dm.FMenProduto.First;
+  Dm.DS_Produtos.First;
   ListarProdutos;
-  TmProxino.Interval := 3000;
-  TmProxino.Enabled := True;
-  FrameTabelaCores1.Visible := False;
-  Self.BringToFront;
+  BringToFront;
 end;
 
 procedure TViewTabelaPreco.TmProxinoTimer(Sender: TObject);
 begin
-  ListarProdutos;
+  if not Assigned(FrameConfiguracao) then
+    ListarProdutos;
 end;
 
 end.

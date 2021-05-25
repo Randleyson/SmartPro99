@@ -16,10 +16,11 @@ type
     Firedac: TFiredac;
     FTipoIntegracao: String;
     FPathArquivo: String;
+    FIdTv: Integer;
   public
     { Public declarations }
-    function DataSetProdNaoTv( aParant: Integer): TDataSet;
-    function DataSetProduto( aParant: Integer): TDataSet;
+    function DS_ProdutosNotTV( aParant: Integer): TDataSet;
+    function DS_ProdutosCadTV( aParant: Integer): TDataSet;
     function DataSetProdutos: TDataSet;
     function DataSetTv: TDataSet;
     procedure ExcluirTv( pIdTv: integer);
@@ -30,7 +31,7 @@ type
     function SalvarConfiguracao: TDm;
     function TipoIntegracao( aValue: String): TDm; overload;
     function TipoIntegracao: String; overload;
-    function UpdateTv(pDescricao: String): Tdm;
+    function UpdateTv(pIdTV:Integer; pDescricao: String): Tdm;
     function ValidaLogin(pLogin,pSenha: String): Boolean;
   end;
 
@@ -50,7 +51,7 @@ begin
   Firedac := TFiredac.New;
 end;
 
-function TDm.DataSetProdNaoTv( aParant: Integer): TDataSet;
+function TDm.DS_ProdutosNotTV( aParant: Integer): TDataSet;
 begin
   Result := Firedac
               .Active(False)
@@ -64,7 +65,7 @@ begin
             .DataSet;
 end;
 
-function TDm.DataSetProduto( aParant: Integer): TDataSet;
+function TDm.DS_ProdutosCadTV( aParant: Integer): TDataSet;
 begin
   Result := Firedac
               .Active(False)
@@ -116,23 +117,13 @@ begin
 end;
 
 procedure TDm.InsertProdutos(pProdutos: TDataSet);
-var
-  vIdTv: Integer;
 begin
-
-vIdTv := Firedac
-            .Active(False)
-              .SQLClear
-              .SQL('select max(idtv) from tvs')
-            .Open
-            .DataSet.Fields[0].AsInteger;
-            
   {BACKUP PRODUTOS}
   Firedac
     .Active(False)
       .SQLClear
       .SQL('Update tv_prod set ie = ''E'' where codtv = :IDTV')
-      .AddParan('IDTV',vIdTv)
+      .AddParan('IDTV',FIdTv)
     .ExceSQL;
 
     {INSERT NOVOS REGISTRO}
@@ -142,9 +133,9 @@ vIdTv := Firedac
       Firedac
         .Active(False)
           .SQLClear
-          .SQL('insert Into tv_prod (codproduto,codtv) values ('':CODBARRA'',:IDTV)')
+          .SQL('insert Into tv_prod (codproduto,codtv) values (:CODBARRA,:IDTV)')
           .AddParan('CODBARRA',pProdutos.Fields[0].AsString)
-          .AddParan('IDTV',pProdutos.Fields[1].AsString)
+          .AddParan('IDTV',FIdTv)
         .ExceSQL;
       pProdutos.Next;
     end;
@@ -154,7 +145,7 @@ vIdTv := Firedac
       .Active(False)
         .SQLClear
         .SQL('Delete from tv_prod where ie = ''E'' and codtv = :IDTV')
-        .AddParan('IDTV',vIdTv)
+        .AddParan('IDTV',FIdTv)
       .ExceSQL;
 
 end;
@@ -169,6 +160,14 @@ begin
       .SQL(' values (:Descricao) ')
       .AddParan('Descricao',pDescricao)
     .ExceSQL;
+
+  FIdTv := Firedac
+            .Active(False)
+              .SQLClear
+              .SQL('select max(idtv) from tvs')
+            .Open
+            .DataSet.Fields[0].AsInteger;
+
 end;
 
 function TDm.PathArquivo: String;
@@ -217,13 +216,16 @@ begin
             .DataSet.Fields[0].AsString;
 end;
 
-function TDm.UpdateTv(pDescricao: String): Tdm;
+function TDm.UpdateTv(pIdTV: Integer; pDescricao: String): Tdm;
 begin
   REsult := Self;
+  FIdTv  := pIdTV;
   Firedac
     .Active(False)
       .SQLClear
       .SQL(' update Tvs set Descricao = :Descricao ')
+      .SQL(' where idtv = :IDTV')
+      .AddParan('IDTV',FIdTv)
       .AddParan('Descricao',pDescricao)
     .ExceSQL;
 end;

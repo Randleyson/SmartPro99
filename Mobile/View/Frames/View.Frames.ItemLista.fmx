@@ -17,7 +17,7 @@ object FrameItemList: TFrameItemList
       Size.Width = 386.000000000000000000
       Size.Height = 58.000000000000000000
       Size.PlatformDefault = False
-      TextSettings.Font.Family = 'Comic Sans MS'
+      TextSettings.Font.Family = 'Nirmala UI'
       TextSettings.Font.Size = 20.000000000000000000
       TextSettings.FontColor = xFF2C2C2C
       Text = 'LblDescricao acem moido'
@@ -32,7 +32,7 @@ object FrameItemList: TFrameItemList
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Nirmala UI'
       TextSettings.Font.Size = 14.000000000000000000
-      TextSettings.FontColor = xFF2C2C2C
+      TextSettings.FontColor = xFF757575
       Text = 'LblUnd'
       TabOrder = 2
     end
@@ -43,7 +43,7 @@ object FrameItemList: TFrameItemList
       Size.Width = 210.000000000000000000
       Size.Height = 58.000000000000000000
       Size.PlatformDefault = False
-      TextSettings.Font.Family = 'Nirmala UI'
+      TextSettings.Font.Family = 'Segoe Print'
       TextSettings.Font.Size = 25.000000000000000000
       TextSettings.FontColor = xFFFF0101
       TextSettings.HorzAlign = Center

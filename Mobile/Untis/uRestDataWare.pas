@@ -1,9 +1,8 @@
-unit Model.Components.RestDataWare;
+unit uRestDataWare;
 
 interface
 
 uses
-  Model.Components.RestDataWare.Interfaces,
   Datasnap.DSClientRest,
   REST.Types,
   REST.Client,
@@ -12,7 +11,7 @@ uses
   Data.Bind.Components,
   Data.Bind.ObjectScope;
 type
-  TModelComponentsRestDataWare = class(TInterfacedObject, iModelComponentsRestDataWare)
+  TRestDataWare = class
   private
     FRESTClient: TRESTClient;
     FRESTRequest: TRESTRequest;
@@ -20,13 +19,14 @@ type
   public
   constructor Create;
   destructor Destroy; override;
-  class function New : TModelComponentsRestDataWare;
-  function AddParameter(pParans: String; aValues: Variant): iModelComponentsRestDataWare;
-  function ClearParans: iModelComponentsRestDataWare;
-  function Execute: iModelComponentsRestDataWare;
-  function HostServer( aValue: String): iModelComponentsRestDataWare;
+  class function New : TRestDataWare;
+  function AddParameter(pParans: String; aValues: Variant): TRestDataWare;
+  function ClearParans: TRestDataWare;
+  function Execute: TRestDataWare;
+  function HostServer( aValue: String): TRestDataWare;
   function JSONString( aParant: String): String;
-  function Resource( aValue: String) : iModelComponentsRestDataWare;
+  function JSONArray: TJSONArray;
+  function Resource( aValue: String) : TRestDataWare;
   function StatusCode: Integer;
   end;
 
@@ -37,20 +37,20 @@ uses
 
 { TModelComponentsRestDataWare }
 
-function TModelComponentsRestDataWare.AddParameter(pParans: String;
-  aValues: Variant): iModelComponentsRestDataWare;
+function TRestDataWare.AddParameter(pParans: String;
+  aValues: Variant): TRestDataWare;
 begin
   Result := Self;
   FRESTRequest.AddParameter(pParans, aValues);
 end;
 
-function TModelComponentsRestDataWare.ClearParans: iModelComponentsRestDataWare;
+function TRestDataWare.ClearParans: TRestDataWare;
 begin
   Result := Self;
   FRESTRequest.Params.Clear;
 end;
 
-constructor TModelComponentsRestDataWare.Create;
+constructor TRestDataWare.Create;
 begin
   FRESTClient := TRESTClient.Create(Nil);
   FRESTClient.Accept := 'application/json';
@@ -63,7 +63,7 @@ begin
   FRESTRequest.Client := FRESTClient;
 end;
 
-destructor TModelComponentsRestDataWare.Destroy;
+destructor TRestDataWare.Destroy;
 begin
   FRESTRequest.DisposeOf;
   FRESTClient.DisposeOf;
@@ -71,19 +71,28 @@ begin
   inherited;
 end;
 
-function TModelComponentsRestDataWare.Execute: iModelComponentsRestDataWare;
+function TRestDataWare.Execute: TRestDataWare;
 begin
   Result := Self;
-  FRESTRequest.Execute;
+  try
+    FRESTRequest.Execute;
+  except
+  end;
 end;
 
-function TModelComponentsRestDataWare.HostServer( aValue: String): iModelComponentsRestDataWare;
+function TRestDataWare.HostServer( aValue: String): TRestDataWare;
 begin
   Result := Self;
   FRESTClient.BaseURL := 'http://'+ aValue;
 end;
 
-function TModelComponentsRestDataWare.JSONString( aParant: String): String;
+function TRestDataWare.JSONArray: TJSONArray;
+begin
+  Result := TJsonObject.ParseJSONValue
+    (TEncoding.UTF8.GetBytes(FRESTRequest.Response.JSONText), 0) as TJSONArray;
+end;
+
+function TRestDataWare.JSONString( aParant: String): String;
 begin
   Result := (TJsonObject.ParseJSONValue
               (TEncoding.UTF8.GetBytes
@@ -91,18 +100,18 @@ begin
                   as TJSONObject).GetValue(aParant).Value;
 end;
 
-class function TModelComponentsRestDataWare.New: TModelComponentsRestDataWare;
+class function TRestDataWare.New: TRestDataWare;
 begin
-  Result := TModelComponentsRestDataWare.Create;
+  Result := TRestDataWare.Create;
 end;
 
-function TModelComponentsRestDataWare.Resource( aValue: String): iModelComponentsRestDataWare;
+function TRestDataWare.Resource( aValue: String): TRestDataWare;
 begin
   Result := Self;
   FRESTRequest.Resource := aValue;
 end;
 
-function TModelComponentsRestDataWare.StatusCode: Integer;
+function TRestDataWare.StatusCode: Integer;
 begin
   Result := FRESTRequest.Response.StatusCode
 end;
