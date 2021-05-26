@@ -16,10 +16,10 @@ uses
   View.TabelaPreco,
   FMX.Controls.Presentation,
   FMX.StdCtrls,
-  FMX.Layouts, FMX.Objects;
+  FMX.Layouts, FMX.Objects, View.Configuracao;
 
 type
-  TViewPrincipal = class(TForm)
+  TFrmPrincipal = class(TForm)
     TmSplash: TTimer;
     Layout1: TLayout;
     Label2: TLabel;
@@ -27,36 +27,41 @@ type
     Rectangle1: TRectangle;
     procedure FormShow(Sender: TObject);
     procedure TmSplashTimer(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    procedure FecharAplicacao;
+    FrameTabelaPreco: TViewTabelaPreco;
+    FrameConfiguracao: TViewConfiguracoes;
   end;
 
 var
-  ViewPrincipal: TViewPrincipal;
+  FrmPrincipal: TFrmPrincipal;
 
 implementation
 
 {$R *.fmx}
 
-procedure TViewPrincipal.FecharAplicacao;
+procedure TFrmPrincipal.FormDestroy(Sender: TObject);
 begin
-  Application.Terminate;
+  if Assigned(FrameTabelaPreco) then
+    FrameTabelaPreco.DisposeOf;
+  if Assigned(FrameConfiguracao) then
+    FrameConfiguracao.DisposeOf;
 end;
 
-procedure TViewPrincipal.FormShow(Sender: TObject);
+procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
   TmSplash.Interval := 1500;
   TmSplash.Enabled := True;
 end;
 
-procedure TViewPrincipal.TmSplashTimer(Sender: TObject);
+procedure TFrmPrincipal.TmSplashTimer(Sender: TObject);
 begin
   TmSplash.Enabled := False;
   FrameTabelaPreco := TViewTabelaPreco.Create(Nil);
-  FrameTabelaPreco.ShowView(Self);
+  FrameTabelaPreco.ShowView;
 end;
 
 end.

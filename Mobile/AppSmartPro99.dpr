@@ -3,7 +3,7 @@ program AppSmartPro99;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  View.Principal in 'View\View.Principal.pas' {ViewPrincipal},
+  View.Principal in 'View\View.Principal.pas' {FrmPrincipal},
   View.TabelaPreco in 'View\View.TabelaPreco.pas' {ViewTabelaPreco: TFrame},
   View.Configuracao in 'View\View.Configuracao.pas' {ViewConfiguracoes: TFrame},
   View.Frames.TabelaCores in 'View\Frames\View.Frames.TabelaCores.pas' {FrameTabelaCores: TFrame},
@@ -17,7 +17,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.CreateForm(TDm, Dm);
   Application.Run;
 end.

@@ -53,7 +53,6 @@ type
     Image1: TImage;
     Layout1: TLayout;
     TmProxino: TTimer;
-    ImageList1: TImageList;
     procedure ImgConfiguracoesClick(Sender: TObject);
     procedure TmProxinoTimer(Sender: TObject);
   private
@@ -63,15 +62,14 @@ type
     { Public declarations }
     Constructor Create(AOwner: TComponent); override;
     Destructor Destroy; override;
-    procedure ShowView(aParent: TFmxObject);
+    procedure ShowView;
   end;
-var
-  FrameTabelaPreco: TViewTabelaPreco;
 
 implementation
 
 uses
-  View.Frames.ItemLista;
+  View.Frames.ItemLista,
+  View.Principal;
 
 {$R *.fmx}
 { TViewTabelaPreco }
@@ -88,9 +86,10 @@ end;
 
 procedure TViewTabelaPreco.ImgConfiguracoesClick(Sender: TObject);
 begin
-  FrameConfiguracao := Nil;
-  FrameConfiguracao := TViewConfiguracoes.Create(Nil);
-  FrameConfiguracao.ShowView(FParent);
+  if not Assigned(FrmPrincipal.FrameConfiguracao) then
+    FrmPrincipal.FrameConfiguracao := TViewConfiguracoes.Create(Nil);
+  FrmPrincipal.FrameConfiguracao.ShowView;
+  FrmPrincipal.FrameTabelaPreco.Visible := False;
 end;
 
 procedure TViewTabelaPreco.ListarProdutos;
@@ -128,8 +127,22 @@ begin
 
       if dm.DS_Produtos.Eof then
       begin
-        Dm.ReloandProdutos;
-        Dm.DS_Produtos.First;
+        TThread.CreateAnonymousThread(
+        procedure
+        begin
+          try
+            TmProxino.Enabled := False;
+            Dm.ReloandProdutos;
+          finally
+
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              Dm.DS_Produtos.First;
+              TmProxino.Enabled := True;
+            end);
+          end;
+        end).Start;
       end;
     end;
   finally
@@ -137,11 +150,12 @@ begin
   end;
 end;
 
-procedure TViewTabelaPreco.ShowView(aParent: TFmxObject);
+procedure TViewTabelaPreco.ShowView;
 begin
-  Parent                    := aParent;
+  Parent                    := FrmPrincipal;
   FrameTabelaCores1.Visible := False;
-  TmProxino.Interval        := 3000;
+  Visible                   := True;
+  TmProxino.Interval        := Dm.Time;
   TmProxino.Enabled         := True;
   Dm.ReloandProdutos;
   Dm.DS_Produtos.First;
@@ -151,7 +165,7 @@ end;
 
 procedure TViewTabelaPreco.TmProxinoTimer(Sender: TObject);
 begin
-  if not Assigned(FrameConfiguracao) then
+  if not Assigned(FrmPrincipal.FrameConfiguracao) then
     ListarProdutos;
 end;
 

@@ -374,7 +374,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="View\View.Principal.pas">
-            <Form>ViewPrincipal</Form>
+            <Form>FrmPrincipal</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="View\View.TabelaPreco.pas">

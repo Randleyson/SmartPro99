@@ -31,16 +31,11 @@ type
     LstBoxTvs: TListBox;
     LytConfiguracoes: TLayout;
     LytTvPadrao: TLayout;
-    Label14: TLabel;
     Line2: TLine;
     Label15: TLabel;
     Layout1: TLayout;
-    Label16: TLabel;
     Layout2: TLayout;
-    EdtIdTv: TEdit;
-    EdtDescricao: TEdit;
     LytServidor: TLayout;
-    Label17: TLabel;
     Line3: TLine;
     Layout4: TLayout;
     Label18: TLabel;
@@ -63,6 +58,12 @@ type
     LblSemRegistro: TLabel;
     BtnFecharView: TRectangle;
     Image1: TImage;
+    Label9: TLabel;
+    LblCodigo: TLabel;
+    LblDescricao: TLabel;
+    Layout7: TLayout;
+    Label8: TLabel;
+    EdtTime: TEdit;
     procedure BtnAlterarTvClick(Sender: TObject);
     procedure BtnGravarTvClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
@@ -73,25 +74,26 @@ type
     procedure BtnFecharViewClick(Sender: TObject);
   private
     { Private declarations }
+    FIdTv: Integer;
+    FDescricao: String;
     procedure DetalharTvPadrao;
     procedure ListarHostServer;
-    procedure EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
+    procedure EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime: Boolean);
     procedure EnabledBtnServer(pEdtServer, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
     procedure ListarTvs;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
     Destructor Destroy; override;
-    procedure ShowView(aParent: TFmxObject);
+    procedure ShowView;
   end;
-var
-  FrameConfiguracao: TViewConfiguracoes;
 
 implementation
 
 {$R *.fmx}
 
-uses  Units.Dm;
+uses  Units.Dm,
+      View.Principal;
 { TViewConfiguracao }
 
 procedure TViewConfiguracoes.BtnAlterarServerClick(Sender: TObject);
@@ -101,12 +103,12 @@ end;
 
 procedure TViewConfiguracoes.BtnAlterarTvClick(Sender: TObject);
 begin
-  EnabledBtnTvs(True, False, True, True);
+  EnabledBtnTvs(True, False, True, True,True);
 end;
 
 procedure TViewConfiguracoes.BtnCancelarClick(Sender: TObject);
 begin
-  EnabledBtnTvs(False, True, False, False);
+  EnabledBtnTvs(False, True, False, False,False);
 end;
 
 procedure TViewConfiguracoes.BtnCancelarServerClick(Sender: TObject);
@@ -117,9 +119,10 @@ end;
 procedure TViewConfiguracoes.BtnFecharViewClick(Sender: TObject);
 begin
   Dm.ReloandProdutos;
-  FrameConfiguracao.Visible := False;
-  FrameConfiguracao.DisposeOf;
-  FrameConfiguracao := Nil;
+  FrmPrincipal.FrameConfiguracao.Visible := False;
+  FrmPrincipal.FrameConfiguracao.DisposeOf;
+  FrmPrincipal.FrameConfiguracao := Nil;
+  FrmPrincipal.FrameTabelaPreco.ShowView;
 end;
 
 procedure TViewConfiguracoes.BtnGravarServerClick(Sender: TObject);
@@ -130,8 +133,11 @@ end;
 
 procedure TViewConfiguracoes.BtnGravarTvClick(Sender: TObject);
 begin
-  dm.IdTv(StrToInt(EdtIdTv.Text)).GravarTv;
+  Dm.FIdTv := FIdTv;
+  Dm.Time(StrToInt(EdtTime.Text));
+  dm.GravarTv;
   ListarTvs;
+  EnabledBtnTvs(False,True,False,False,False);
   ShowMessage('Tv Padrao definida com exito.');
 end;
 
@@ -152,14 +158,17 @@ end;
 
 procedure TViewConfiguracoes.DetalharTvPadrao;
 begin
-  EdtIdTv.Enabled := False;
-  EdtDescricao.Enabled := False;
-  dm.IdTv(StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString));
-  Dm.FMenTvs.Filter := 'IdTv = ' + IntToStr(dm.IdTv);
-  Dm.FMenTvs.Filtered := True;
-
-  EdtIdTv.Text := Dm.FMenTvs.FieldByName('idtv').AsString;
-  EdtDescricao.Text := Dm.FMenTvs.FieldByName('Descricao').AsString;
+  if LstBoxTvs.ItemIndex < 0 then
+  begin
+    LblCodigo.Text    := '';
+    LblDescricao.Text := '';
+    Exit;
+  end;
+  FIdTv             := StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString);
+  FDescricao        := LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].Text;
+  LblCodigo.Text    := IntToStr(FIdTv);
+  LblDescricao.Text := FDescricao;
+  EdtTime.Text      := IntToStr(Dm.Time);
 end;
 
 procedure TViewConfiguracoes.EnabledBtnServer(pEdtServer, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
@@ -170,50 +179,55 @@ begin
   BtnCancelarServer.Enabled := pBtnCancelar;
 end;
 
-procedure TViewConfiguracoes.EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
+procedure TViewConfiguracoes.EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime: Boolean);
 begin
-  LstBoxTvs.Enabled := pLstTvs;
-  BtnAlterarTv.Enabled := pBtnAlterar;
-  BtnGravarTv.Enabled := pBtnGravar;
-  BtnCancelar.Enabled := pBtnCancelar;
+  LstBoxTvs.Enabled     := pLstTvs;
+  BtnAlterarTv.Enabled  := pBtnAlterar;
+  BtnGravarTv.Enabled   := pBtnGravar;
+  BtnCancelar.Enabled   := pBtnCancelar;
+  EdtTime.Enabled       := pTime;
 end;
 
 procedure TViewConfiguracoes.ListarTvs;
 var
   vIdTv, vDescricao: String;
-  vItem: TListBoxItem;
+  vListItem: TListBoxItem;
 begin
-  dm.ReloandTv;
+
+  try
+    dm.ReloandTv;
+  Except
+    Exit;
+  end;
+
   LstBoxTvs.Items.Clear;
   LstBoxTvs.BeginUpdate;
   try
-    Dm.FMenTvs.Filtered := False;
-    LblSemRegistro.Visible := True;
+    Dm.FMenTvs.Filtered     := False;
+    LblSemRegistro.Visible  := True;
     if Dm.FMenTvs.RecordCount > 0 then
     begin
       LblSemRegistro.Visible := False;
       Dm.FMenTvs.First;
       while not Dm.FMenTvs.Eof do
       begin
-        vIdTv := Dm.FMenTvs.FieldByName('idtv').AsString;
-        vDescricao := Dm.FMenTvs.FieldByName('descricao').AsString;
+        vIdTv                   := Dm.FMenTvs.FieldByName('idtv').AsString;
+        vDescricao              := Dm.FMenTvs.FieldByName('descricao').AsString;
+        vListItem               := TListBoxItem.Create(LstBoxTvs);
+        vListItem.Text          := '';
+        vListItem.align         := TAlignLayout.Client;
+        vListItem.StyleLookup   := 'listboxitembottomdetail';
+        vListItem.Height        := 40;
+        vListItem.TagString     := vIdTv;
+        vListItem.ItemData.Text := vDescricao;
 
-        vItem := TListBoxItem.Create(LstBoxTvs);
-        vItem.Text := '';
-        vItem.align := TAlignLayout.Client;
-        vItem.StyleLookup := 'listboxitembottomdetail';
-        vItem.Height := 40;
-        vItem.TagString := vIdTv;
-        vItem.ItemData.Text := vIdTv + ' - ' + vDescricao;
+        LstBoxTvs.AddObject(vListItem);
 
-        LstBoxTvs.AddObject(vItem);
-
-        if vIdTv = IntToStr(dm.IdTv) then
-          vItem.IsSelected := True;;
+        if vIdTv = IntToStr(FIdTv) then
+          vListItem.IsSelected := True;
         Dm.FMenTvs.Next;
       end;
       DetalharTvPadrao;
-      EnabledBtnTvs(False, True, False, False);
     end;
 
   finally
@@ -228,10 +242,10 @@ begin
   DetalharTvPadrao;
 end;
 
-procedure TViewConfiguracoes.ShowView(aParent: TFmxObject);
+procedure TViewConfiguracoes.ShowView;
 begin
-  Parent := aParent;
-  EnabledBtnTvs(False, False, False, False);
+  Parent := FrmPrincipal;
+  EnabledBtnTvs(False, True, False, False, False);
   EnabledBtnServer(False, True, False, False);
   ListarTvs;
   ListarHostServer;

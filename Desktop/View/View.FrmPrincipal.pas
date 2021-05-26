@@ -68,8 +68,8 @@ implementation
 {$R *.fmx}
 
 uses  View.CadProdutos,
-      View.CadTVs,
-      View.Configuracao;
+      View.Configuracao,
+      View.CadTVs;
 
 procedure TViewFrmPrincipal.BtnConfiguracaoClick(Sender: TObject);
 begin

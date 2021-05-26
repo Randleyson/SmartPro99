@@ -139,13 +139,15 @@ var
   vLstBoxItems: TListBoxItem;
 begin
   LblSemRegistro.Visible := True;
-  LstBoxProdutos.BeginUpdate;
-  try
+  if DS_Produtos.RecordCount <> 0 then
+  begin
+    LblSemRegistro.Visible := False;
     LstBoxProdutos.Items.Clear;
-    if DS_Produtos.RecordCount <> 0 then
-    begin
-      LblSemRegistro.Visible := False;
-      DS_Produtos.First;
+    DS_Produtos.First;
+
+    LstBoxProdutos.BeginUpdate;
+    try
+
       while not DS_Produtos.Eof do
       begin
         FCodbarra   := DS_ProdutosCODBARRA.AsString;
@@ -168,10 +170,9 @@ begin
         DS_Produtos.Next;
       end;
       DetalharCadProduto;
+    finally
+      LstBoxProdutos.EndUpdate;
     end;
-
-  finally
-    LstBoxProdutos.EndUpdate;
   end;
 
 end;

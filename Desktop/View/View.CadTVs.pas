@@ -55,11 +55,8 @@ type
     BtnAdicionarTodos: TRectangle;
     Label9: TLabel;
     LytDetalhesTv: TLayout;
-    Label2: TLabel;
-    Layout5: TLayout;
     Layout6: TLayout;
     Label3: TLabel;
-    EdtIdTv: TEdit;
     Layout7: TLayout;
     Label4: TLabel;
     EdtDescricaoTv: TEdit;
@@ -89,6 +86,8 @@ type
     Label14: TLabel;
     BtnEditar: TRectangle;
     Label13: TLabel;
+    LblCodTv: TLabel;
+    Line1: TLine;
     procedure LstBoxTvsItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
     procedure BtnAdicionarProdTvClick(Sender: TObject);
@@ -100,23 +99,23 @@ type
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
-    procedure FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject; var Key: Word;
-      var KeyChar: Char; Shift: TShiftState);
-    procedure FramePesqProdutosNotTVEdtPesquisaKeyDown(Sender: TObject;
-      var Key: Word; var KeyChar: Char; Shift: TShiftState);
-    procedure FramePesqProdutosCadTVEdtPesquisaKeyDown(Sender: TObject;
-      var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure FrameCabecalho1ImgFecharClick(Sender: TObject);
+    procedure FramePesquisaTvsEdtPesquisaKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FramePesqProdutosNotTVEdtPesquisaKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FramePesqProdutosCadTVEdtPesquisaKeyUp(Sender: TObject;  var Key: Word; var KeyChar: Char; Shift: TShiftState);
   private
     FStatusTela: String;
     FIdTv: Integer;
     FDescricaoTv: String;
-    procedure CarregaTvs;
     procedure DetalharTv;
     procedure EnabledBtn(pBtnAdicionar, pEdita, pGravar, pExcluir, pCancelar: Boolean);
+    procedure LimpaEditPesquisa;
     procedure ListarTVs;
     procedure ListarProdutosNotTV;
     procedure ListarProdutoCadTV;
+    procedure Recharge_DS_TVs;
+    procedure Recharge_DS_ProdutosNotTV;
+    procedure Recharge_DS_ProdutosCadTV;
     { Private declarations }
   public
     { Public declarations }
@@ -138,15 +137,19 @@ uses
 procedure TFrameCadTVs.BtnAdicionarClick(Sender: TObject);
 begin
   FStatusTela         := 'ADICIONAR';
-  EdtIdTv.Text        := '';
+  LblCodTv.Text        := '';
   EdtDescricaoTv.Text := '';
   FIdTv               := 0;
   LytCadTv.Enabled    := True;
   LytListaTv.Enabled  := False;
 
+  Recharge_DS_ProdutosNotTV;
   ListarProdutosNotTV;
+
+  Recharge_DS_ProdutosCadTV;
   ListarProdutoCadTV;
   EnabledBtn(False,False,True,False,True);
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.BtnAdicionarProdTvClick(Sender: TObject);
@@ -169,11 +172,12 @@ begin
   DS_ProdutosCadTV.Filtered     := False;
   ListarProdutoCadTV;
   ListarProdutosNotTV;
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.BtnAdicionarTodosClick(Sender: TObject);
 begin
-  DS_ProdutosNotTV.Filtered     := False;
+  DS_ProdutosNotTV.Filtered        := False;
   DS_ProdutosCadTV.Insert;
   DS_ProdutosCadTV.Fields[0].Value := DS_ProdutosNotTV.Fields[0].AsString;
   DS_ProdutosCadTV.Fields[1].Value := DS_ProdutosNotTV.Fields[1].AsString;
@@ -182,14 +186,16 @@ begin
 
   ListarProdutoCadTV;
   ListarProdutosNotTV;
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.BtnCancelarClick(Sender: TObject);
 begin
   LytCadTv.Enabled    := False;
   LytListaTv.Enabled  := True;
-  CarregaTvs;
+  ListarTVs;
   EnabledBtn(True,True,False,True,False);
+  LimpaEditPesquisa;
 end;
 
 
@@ -199,6 +205,7 @@ begin
   LytCadTv.Enabled    := True;
   LytListaTv.Enabled  := False;
   EnabledBtn(False,False,True,False,True);
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.BtnExcluirClick(Sender: TObject);
@@ -206,10 +213,12 @@ begin
   if TuMessage.MensagemConfirmacao('Deseja realmente excluir a Tv?') then
   begin
     Dm.ExcluirTv(FIdTv);
+    Recharge_DS_TVs;
     ListarTVs;
-    LytCadTv.Enabled := False;
+    LytCadTv.Enabled   := False;
     LytListaTv.Enabled := True;
     EnabledBtn(True,True,False,True,False);
+    LimpaEditPesquisa;
   end;
 end;
 
@@ -218,7 +227,7 @@ begin
   CloseCadTVs;
 end;
 
-procedure TFrameCadTVs.FramePesqProdutosCadTVEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadTVs.FramePesqProdutosCadTVEdtPesquisaKeyUp(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
@@ -233,18 +242,18 @@ begin
   end;
 
   DS_ProdutosCadTV.Filtered  := False;
-  DS_ProdutosCadTV.Filter    := vParant + ' Like ' + vFilter;
+  DS_ProdutosCadTV.Filter    := vParant + ' Like ' + QuotedStr(vFilter);
   DS_ProdutosCadTV.Filtered  := True;
   ListarProdutoCadTV;
 end;
 
-
-procedure TFrameCadTVs.FramePesqProdutosNotTVEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadTVs.FramePesqProdutosNotTVEdtPesquisaKeyUp(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
   vParant: String;
 begin
+
   vFilter := UpperCase('%' + FramePesqProdutosNotTV.EdtPesquisa.Text + '%');
   case FramePesqProdutosNotTV.CBoxFiltro.ItemIndex of
     0:
@@ -253,17 +262,18 @@ begin
       vParant := 'DESCRICAO';
   end;
   DS_ProdutosNotTV.Filtered := False;
-  DS_ProdutosNotTV.Filter   := vParant + ' Like ' + vFilter;
+  DS_ProdutosNotTV.Filter   := vParant + ' Like ' + QuotedStr(vFilter);
   DS_ProdutosNotTV.Filtered := True;
   ListarProdutosNotTV;
 end;
 
-procedure TFrameCadTVs.FramePesquisaTvsEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadTVs.FramePesquisaTvsEdtPesquisaKeyUp(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
   vParant: String;
 begin
+
   vFilter := UpperCase('%' + FramePesquisaTvs.EdtPesquisa.Text + '%');
   case FramePesquisaTvs.CBoxFiltro.ItemIndex of
     0:
@@ -272,7 +282,7 @@ begin
       vParant := 'DESCRICAO';
   end;
   DS_TVs.Filtered := False;
-  DS_TVs.Filter   := vParant + ' Like ' + vFilter;
+  DS_TVs.Filter   := vParant + ' Like ' + QuotedStr(vFilter);
   DS_TVs.Filtered := True;
   ListarTVs;
 end;
@@ -285,7 +295,7 @@ begin
     exit;
   end;
 
-  FDescricaoTv := EdtDescricaoTv.Text;
+  FDescricaoTv := UpperCase(EdtDescricaoTv.Text);
   if FStatusTela = 'ADICIONAR' then
     Dm
       .InsertTv(FDescricaoTv)
@@ -296,19 +306,13 @@ begin
       .UpdateTv(FIDTV,FDescricaoTv)
       .InsertProdutos(DS_ProdutosCadTV);
 
+  Recharge_DS_TVs;
   ListarTVs;
-  DetalharTv;
   LytCadTv.Enabled := False;
   LytListaTv.Enabled := True;
   ShowMessage('Registro gravado com exito');
   EnabledBtn(True,True,False,True,False);
-end;
-
-
-procedure TFrameCadTVs.CarregaTvs;
-begin
-  ListarTVs;
-  DetalharTv;
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.CloseCadTVs;
@@ -348,6 +352,7 @@ begin
   end
   else
     ShowMessage('Não a produto para ser removido da Tv');
+  LimpaEditPesquisa;
 end;
 
 procedure TFrameCadTVs.BtnRemoverTodosClick(Sender: TObject);
@@ -370,7 +375,7 @@ begin
   end
   else
     ShowMessage('Não a produto para ser removido da Tv');
-
+  LimpaEditPesquisa;
 end;
 
 constructor TFrameCadTVs.Create(AOwner: TComponent);
@@ -378,7 +383,7 @@ begin
   inherited;
   FrameCabecalho1.LblNomeDaTela.Text  := 'TVs';
   LytCadTv.Enabled                    := False;
-  EdtIdTv.Enabled                     := False;
+  Recharge_DS_TVs;
   ListarTVs;
 end;
 
@@ -387,34 +392,14 @@ begin
   FIdTv := StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString);
   DS_TVs.Filter := 'IdTv = ' + IntToStr(FIdTv);
   DS_TVs.Filtered := True;
-  EdtIdTv.Text := DS_TVsIDTV.AsString;
+  LblCodTv.Text := DS_TVsIDTV.AsString;
   EdtDescricaoTv.Text := DS_TVsDESCRICAO.AsString;
   DS_TVs.Filtered := False;
 
-  //PRODUTOSNOTTV
-  DS_ProdutosNotTV.Close;
-  DS_ProdutosNotTV.Open;
-  DS_ProdutosNotTV.EmptyDataSet;
-  TFDMemTable(DS_ProdutosNotTV).CopyDataSet(Dm.DS_ProdutosNotTV(FIdTv));
-  DS_ProdutosNotTV.Filtered := False;
-
-  FramePesqProdutosNotTV.CBoxFiltro.Clear;
-  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Codigo Barra');
-  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Descrição');
-  FramePesqProdutosNotTV.CBoxFiltro.ItemIndex := 0;
+  Recharge_DS_ProdutosNotTV;
   ListarProdutosNotTV;
 
-  //PRODUTOSCADTV
-  DS_ProdutosCadTV.Close;
-  DS_ProdutosCadTV.Open;
-  DS_ProdutosCadTV.EmptyDataSet;
-  TFDMemTable(DS_ProdutosCadTV).CopyDataSet(Dm.DS_ProdutosCadTV(FIdTv));
-  DS_ProdutosNotTV.Filtered := False;
-
-  FramePesqProdutosCadTV.CBoxFiltro.Clear;
-  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Codigo Barra');
-  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Descrição');
-  FramePesqProdutosCadTV.CBoxFiltro.ItemIndex := 0;
+  Recharge_DS_ProdutosCadTV;
   ListarProdutoCadTV;
 end;
 
@@ -435,29 +420,16 @@ begin
   LblSemRegTVs.Visible := True;
   EnabledBtn(True,False,False,False,False);
 
-  //Atualiza o DataSet;
-  DS_TVs.Close;
-  DS_TVs.Open;
-  DS_TVs.EmptyDataSet;
-  TFDMemTable(DS_TVs).CopyDataSet(Dm.DataSetTv);
-  DS_TVs.Filtered := False;
-
-  //Combox de pesquisa;
-  FramePesquisaTvs.CBoxFiltro.Clear;
-  FramePesquisaTvs.CBoxFiltro.Items.Add('Codigo Tv');
-  FramePesquisaTvs.CBoxFiltro.Items.Add('Descrição');
-  FramePesquisaTvs.CBoxFiltro.ItemIndex := 0;
-
   //Lista Tv ListaView;
   LstBoxTvs.Items.Clear;
-  LstBoxTvs.BeginUpdate;
-  try
-    if DS_TVs.RecordCount > 0 then
-    begin
-      LblSemRegTVs.Visible := False;
-      EnabledBtn(True,True,False,True,False);
+  if DS_TVs.RecordCount > 0 then
+  begin
+    LblSemRegTVs.Visible := False;
+    EnabledBtn(True,True,False,True,False);
+    DS_TVs.First;
 
-      DS_TVs.First;
+    LstBoxTvs.BeginUpdate;
+    try
       while not DS_TVs.Eof do
       begin
         vListBoxItem                := TListBoxItem.Create(LstBoxTvs);
@@ -474,10 +446,9 @@ begin
         DS_TVs.Next;
       end;
       DetalharTV;
+    finally
+      LstBoxTvs.EndUpdate;
     end;
-
-  finally
-    LstBoxTvs.EndUpdate;
   end;
 
 end;
@@ -487,6 +458,54 @@ procedure TFrameCadTVs.LstBoxTvsItemClick(const Sender: TCustomListBox;
 begin
   FIdTv := StrToInt(Item.TagString);
   DetalharTv;
+end;
+
+procedure TFrameCadTVs.Recharge_DS_ProdutosCadTV;
+begin
+  DS_ProdutosCadTV.Close;
+  DS_ProdutosCadTV.Open;
+  DS_ProdutosCadTV.EmptyDataSet;
+  TFDMemTable(DS_ProdutosCadTV).CopyDataSet(Dm.DS_ProdutosCadTV(FIdTv));
+  DS_ProdutosNotTV.Filtered := False;
+
+  FramePesqProdutosCadTV.CBoxFiltro.Clear;
+  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Codigo Barra');
+  FramePesqProdutosCadTV.CBoxFiltro.Items.Add('Descrição');
+  FramePesqProdutosCadTV.CBoxFiltro.ItemIndex := 1;
+end;
+
+procedure TFrameCadTVs.Recharge_DS_ProdutosNotTV;
+begin
+  DS_ProdutosNotTV.Close;
+  DS_ProdutosNotTV.Open;
+  DS_ProdutosNotTV.EmptyDataSet;
+  TFDMemTable(DS_ProdutosNotTV).CopyDataSet(Dm.DS_ProdutosNotTV(FIdTv));
+  DS_ProdutosNotTV.Filtered := False;
+
+  FramePesqProdutosNotTV.CBoxFiltro.Clear;
+  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Codigo Barra');
+  FramePesqProdutosNotTV.CBoxFiltro.Items.Add('Descrição');
+  FramePesqProdutosNotTV.CBoxFiltro.ItemIndex := 1;
+end;
+
+procedure TFrameCadTVs.Recharge_DS_TVs;
+begin
+  DS_TVs.Close;
+  DS_TVs.Open;
+  DS_TVs.EmptyDataSet;
+  TFDMemTable(DS_TVs).CopyDataSet(Dm.DataSetTv);
+  DS_TVs.Filtered := False;
+  FramePesquisaTvs.CBoxFiltro.Clear;
+  FramePesquisaTvs.CBoxFiltro.Items.Add('Codigo Tv');
+  FramePesquisaTvs.CBoxFiltro.Items.Add('Descrição');
+  FramePesquisaTvs.CBoxFiltro.ItemIndex := 1;
+end;
+
+procedure TFrameCadTVs.LimpaEditPesquisa;
+begin
+  FramePesqProdutosNotTV.EdtPesquisa.Text := '';
+  FramePesqProdutosCadTV.EdtPesquisa.Text := '';
+  FramePesquisaTvs.EdtPesquisa.Text := '';
 end;
 
 procedure TFrameCadTVs.ListarProdutoCadTV;
@@ -499,15 +518,15 @@ begin
 
   //Listar Protudos da Tv;
   LstProdutosCadTV.Items.Clear;
-  LstProdutosCadTV.BeginUpdate;
-  try
-    if DS_ProdutosCadTV.RecordCount > 0 then
-    begin
-      LblSemRegProdutosCadTV.Visible := False;
-      BtnRemoverProdTv.Enabled     := True;
-      BtnRemoverTodos.Enabled      := True;
+  if DS_ProdutosCadTV.RecordCount > 0 then
+  begin
+    LblSemRegProdutosCadTV.Visible := False;
+    BtnRemoverProdTv.Enabled     := True;
+    BtnRemoverTodos.Enabled      := True;
+    DS_ProdutosCadTV.First;
 
-      DS_ProdutosCadTV.First;
+    LstProdutosCadTV.BeginUpdate;
+    try
       while not DS_ProdutosCadTV.Eof do
       begin
         vListBoxItem                := TListBoxItem.Create(LstProdutosCadTV);
@@ -523,9 +542,10 @@ begin
           vListBoxItem.IsSelected   := True;
         DS_ProdutosCadTV.Next;
       end;
+
+    finally
+      LstProdutosCadTV.EndUpdate;
     end;
-  finally
-    LstProdutosCadTV.EndUpdate;
   end;
 end;
 
@@ -533,21 +553,22 @@ procedure TFrameCadTVs.ListarProdutosNotTV;
 var
   vListBoxItem: TListBoxItem;
 begin
-  LblSemRegProdutosNotTV.Visible := True;
+  LblSemRegProdutosNotTV.Visible  := True;
   BtnAdicionarProdTv.Enabled      := False;
   BtnAdicionarTodos.Enabled       := False;
 
   //Listar ProdutosNaoTv;
   LstProdutosNotTV.Items.Clear;
-  LstProdutosNotTV.BeginUpdate;
-  try
-    if DS_ProdutosNotTV.RecordCount > 0 then
-    begin
-      LblSemRegProdutosNotTV.Visible := False;
-      BtnAdicionarProdTv.Enabled      := True;
-      BtnAdicionarTodos.Enabled       := True;
+  if DS_ProdutosNotTV.RecordCount > 0 then
+  begin
+    LblSemRegProdutosNotTV.Visible := False;
+    BtnAdicionarProdTv.Enabled      := True;
+    BtnAdicionarTodos.Enabled       := True;
+    DS_ProdutosNotTV.First;
 
-      DS_ProdutosNotTV.First;
+    LstProdutosNotTV.BeginUpdate;
+    try
+
       while not DS_ProdutosNotTV.Eof do
       begin
         vListBoxItem := TListBoxItem.Create(LstProdutosNotTV);
@@ -563,9 +584,10 @@ begin
           vListBoxItem.IsSelected   := True;
         DS_ProdutosNotTV.Next;
       end;
+
+    finally
+      LstProdutosNotTV.EndUpdate;
     end;
-  finally
-    LstProdutosNotTV.EndUpdate;
   end;
 end;
 

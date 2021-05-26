@@ -1,4 +1,4 @@
-object ViewPrincipal: TViewPrincipal
+object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
   Caption = 'FrmPrincipal'
@@ -7,6 +7,7 @@ object ViewPrincipal: TViewPrincipal
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnDestroy = FormDestroy
   OnShow = FormShow
   DesignerMasterStyle = 0
   object TmSplash: TTimer

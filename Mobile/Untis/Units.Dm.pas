@@ -19,20 +19,21 @@ type
     uRestDataWare: TRestDataWare;
     uFiredac: TFiredac;
     FJOSNArray: TJSONArray;
-    FIdTV: Integer;
     FHostServer: String;
+    FTime: Integer;
   public
     { Public declarations }
-    function ReloandProdutos: Integer;
-    procedure ReloandTv;
+    FIdTv: Integer;
     function DS_Produtos: TFDMemTable;
     function DS_Tvs: TFDMemTable;
-    function IdTv: Integer; overload;
-    function IdTv( aValue: Integer): TDm; overload;
-    function HostServer: String; overload;
-    function HostServer( aValue: String): TDm; overload;
     function GravarTv: TDm;
     function GravarServer: TDm;
+    function HostServer: String; overload;
+    function HostServer( aValue: String): TDm; overload;
+    function ReloandProdutos: Integer;
+    procedure ReloandTv;
+    function Time( aValue: Integer): TDm; overload;
+    function Time: Integer; overload;
   end;
 
 var
@@ -54,12 +55,13 @@ begin
   vDataSet := uFiredac
                   .Active(False)
                   .SQLClear
-                  .SQL('select idtv, hostserver, portaserver from tab_configuracoes')
+                  .SQL('select idtv, hostserver, portaserver, Time from tab_configuracoes')
                 .Open
                .DataSet;
   try
-    FHostServer := vDataSet.FieldByName('hostserver').AsString + ':' + vDataSet.FieldByName('portaserver').AsString;
-    FIdTV := vDataSet.FieldByName('Idtv').AsInteger;
+    FHostServer   := vDataSet.FieldByName('hostserver').AsString + ':' + vDataSet.FieldByName('portaserver').AsString;
+    FIdTV         := vDataSet.FieldByName('Idtv').AsInteger;
+    FTime         := vDataSet.FieldByName('Time').AsInteger;
     uRestDataWare := TRestDataWare.Create;
     uRestDataWare.HostServer(FHostServer);
   finally
@@ -91,8 +93,9 @@ begin
   uFiredac
     .Active(False)
     .SQLClear
-      .SQL('update tab_configuracoes set idtv = :IDTV')
-      .AddParan('IDTV',FIdTV)
+      .SQL('update tab_configuracoes set idtv = :IDTV, Time = :TIME')
+      .AddParan('IDTV', FIdTv)
+      .AddParan('TIME', FTime)
     .ExceSQL;
 end;
 
@@ -105,17 +108,6 @@ end;
 function TDm.HostServer: String;
 begin
   Result := FHostServer;
-end;
-
-function TDm.IdTv(aValue: Integer): TDm;
-begin
-  Result := Self;
-  FIdTV := aValue;
-end;
-
-function TDm.IdTv: Integer;
-begin
-  Result := FIdTV;
 end;
 
 function TDm.DS_Produtos: TFDMemTable;
@@ -215,7 +207,7 @@ begin
                   .Execute
                 .JSONArray;
 
-  if uRestDataWare.StatusCode <> 200 then
+  if uRestDataWare.StatusCode = 200 then
   begin
     try
       //Inserir Tvs no banco Local;
@@ -260,6 +252,16 @@ begin
                             .DataSet);
 end;
 
+function TDm.Time(aValue: Integer): TDm;
+begin
+  FTime := aValue;
+end;
 
+function TDm.Time: Integer;
+begin
+  Result := FTime;
+  if FTime = 0 then
+    Result := 50000;
+end;
 
 end.

@@ -1,19 +1,19 @@
 object ViewConfiguracoes: TViewConfiguracoes
   Align = Client
-  Size.Width = 758.000000000000000000
-  Size.Height = 495.000000000000000000
+  Size.Width = 800.000000000000000000
+  Size.Height = 500.000000000000000000
   Size.PlatformDefault = False
   object RectClient: TRectangle
     Align = Client
     Fill.Color = claWhite
-    Size.Width = 758.000000000000000000
-    Size.Height = 495.000000000000000000
+    Size.Width = 800.000000000000000000
+    Size.Height = 500.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
     object ToolBar: TRectangle
       Align = Top
       Fill.Color = xFF1B98E0
-      Size.Width = 758.000000000000000000
+      Size.Width = 800.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
@@ -22,7 +22,7 @@ object ViewConfiguracoes: TViewConfiguracoes
         StyledSettings = [Family]
         Locked = True
         Margins.Left = 15.000000000000000000
-        Size.Width = 693.000000000000000000
+        Size.Width = 735.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 20.000000000000000000
@@ -34,7 +34,7 @@ object ViewConfiguracoes: TViewConfiguracoes
       object BtnFecharView: TRectangle
         Align = Right
         Fill.Kind = None
-        Position.X = 708.000000000000000000
+        Position.X = 750.000000000000000000
         Size.Width = 50.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
@@ -185,7 +185,7 @@ object ViewConfiguracoes: TViewConfiguracoes
       Position.X = 15.000000000000000000
       Position.Y = 58.000000000000000000
       Size.Width = 289.000000000000000000
-      Size.Height = 429.000000000000000000
+      Size.Height = 434.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object Label13: TLabel
@@ -197,7 +197,7 @@ object ViewConfiguracoes: TViewConfiguracoes
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.Font.StyleExt = {00030000000000000004000000}
         TextSettings.HorzAlign = Center
-        Text = 'Lista de Tvs'
+        Text = 'TVs Cadastradas'
         TabOrder = 0
       end
       object Line1: TLine
@@ -212,8 +212,8 @@ object ViewConfiguracoes: TViewConfiguracoes
         Size.Width = 279.000000000000000000
         Size.Height = 1.000000000000000000
         Size.PlatformDefault = False
-        Stroke.Color = xFF13293D
-        Stroke.Thickness = 2.000000000000000000
+        Stroke.Color = xFFE8F0F9
+        Stroke.Thickness = 3.000000000000000000
       end
       object LstBoxTvs: TListBox
         Align = Client
@@ -222,16 +222,17 @@ object ViewConfiguracoes: TViewConfiguracoes
         Margins.Right = 3.000000000000000000
         Margins.Bottom = 3.000000000000000000
         Size.Width = 283.000000000000000000
-        Size.Height = 395.000000000000000000
+        Size.Height = 400.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
         TabOrder = 2
         DisableFocusEffect = True
         DefaultItemStyles.ItemStyle = ''
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
         OnItemClick = LstBoxTvsItemClick
-        Viewport.Width = 279.000000000000000000
-        Viewport.Height = 391.000000000000000000
+        Viewport.Width = 283.000000000000000000
+        Viewport.Height = 400.000000000000000000
         object LblSemRegistro: TLabel
           Align = Top
           StyledSettings = [Family, Size]
@@ -241,7 +242,7 @@ object ViewConfiguracoes: TViewConfiguracoes
           Margins.Bottom = 8.000000000000000000
           Position.X = 8.000000000000000000
           Position.Y = 8.000000000000000000
-          Size.Width = 263.000000000000000000
+          Size.Width = 267.000000000000000000
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.StyleExt = {00030000000000000004000000}
@@ -258,28 +259,16 @@ object ViewConfiguracoes: TViewConfiguracoes
       Margins.Top = 8.000000000000000000
       Margins.Right = 8.000000000000000000
       Margins.Bottom = 8.000000000000000000
-      Size.Width = 423.000000000000000000
-      Size.Height = 429.000000000000000000
+      Size.Width = 465.000000000000000000
+      Size.Height = 434.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
       object LytTvPadrao: TLayout
         Align = Top
-        Size.Width = 423.000000000000000000
+        Size.Width = 465.000000000000000000
         Size.Height = 153.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        object Label14: TLabel
-          Align = Top
-          StyledSettings = [Family, FontColor]
-          Size.Width = 423.000000000000000000
-          Size.Height = 17.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.Font.StyleExt = {00030000000000000004000000}
-          TextSettings.HorzAlign = Center
-          Text = 'Tv Padr'#227'o'
-          TabOrder = 0
-        end
         object Line2: TLine
           Align = Top
           LineType = Diagonal
@@ -288,87 +277,78 @@ object ViewConfiguracoes: TViewConfiguracoes
           Margins.Right = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
           Position.X = 5.000000000000000000
-          Position.Y = 22.000000000000000000
-          Size.Width = 413.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 455.000000000000000000
           Size.Height = 1.000000000000000000
           Size.PlatformDefault = False
-          Stroke.Color = xFF13293D
-          Stroke.Thickness = 2.000000000000000000
+          Stroke.Color = xFFE8F0F9
+          Stroke.Thickness = 3.000000000000000000
         end
         object Layout1: TLayout
           Align = Top
-          Position.Y = 28.000000000000000000
-          Size.Width = 423.000000000000000000
+          Position.Y = 11.000000000000000000
+          Size.Width = 465.000000000000000000
           Size.Height = 29.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 2
+          TabOrder = 1
           object Label15: TLabel
             Align = Left
             StyledSettings = [Family, Style, FontColor]
-            Size.Width = 120.000000000000000000
+            Size.Width = 70.000000000000000000
             Size.Height = 29.000000000000000000
             Size.PlatformDefault = False
-            TextSettings.Font.Size = 14.000000000000000000
-            Text = 'Codigo Tv'
+            TextSettings.Font.Size = 13.000000000000000000
+            Text = 'Codigo:'
             TabOrder = 1
           end
-          object Label16: TLabel
+          object LblCodigo: TLabel
             Align = Left
             StyledSettings = [Family, Style, FontColor]
-            Position.X = 120.000000000000000000
+            Position.X = 70.000000000000000000
             Size.Width = 120.000000000000000000
             Size.Height = 29.000000000000000000
             Size.PlatformDefault = False
-            TextSettings.Font.Size = 14.000000000000000000
-            Text = 'Descri'#231#227'o'
+            TextSettings.Font.Size = 15.000000000000000000
+            Text = 'LblCodigo'
             TabOrder = 0
           end
         end
         object Layout2: TLayout
           Align = Top
-          Position.Y = 57.000000000000000000
-          Size.Width = 423.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 465.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 3
-          object EdtIdTv: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 2
+          object Label9: TLabel
             Align = Left
+            StyledSettings = [Family, Style, FontColor]
+            Size.Width = 70.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 13.000000000000000000
+            Text = 'Descri'#231#227'o:'
             TabOrder = 1
-            Position.X = 5.000000000000000000
-            Position.Y = 5.000000000000000000
-            Enabled = False
-            Margins.Left = 5.000000000000000000
-            Margins.Top = 5.000000000000000000
-            Margins.Right = 5.000000000000000000
-            Margins.Bottom = 5.000000000000000000
-            Size.Width = 100.000000000000000000
-            Size.Height = 22.000000000000000000
-            Size.PlatformDefault = False
           end
-          object EdtDescricao: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
+          object LblDescricao: TLabel
             Align = Left
-            TabOrder = 0
-            Position.X = 115.000000000000000000
-            Position.Y = 5.000000000000000000
-            Enabled = False
-            Margins.Left = 5.000000000000000000
-            Margins.Top = 5.000000000000000000
-            Margins.Right = 5.000000000000000000
-            Margins.Bottom = 5.000000000000000000
-            Size.Width = 253.000000000000000000
-            Size.Height = 22.000000000000000000
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 70.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
+            TextSettings.Font.Size = 15.000000000000000000
+            Text = 'LblDescricao'
+            TabOrder = 0
           end
         end
         object Layout3: TLayout
           Align = Top
-          Position.Y = 89.000000000000000000
-          Size.Width = 423.000000000000000000
-          Size.Height = 32.000000000000000000
+          Position.Y = 104.000000000000000000
+          Size.Width = 465.000000000000000000
+          Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 4
+          TabOrder = 3
           object BtnAlterarTv: TRectangle
             Align = Left
             Margins.Left = 5.000000000000000000
@@ -378,7 +358,7 @@ object ViewConfiguracoes: TViewConfiguracoes
             Position.X = 5.000000000000000000
             Position.Y = 5.000000000000000000
             Size.Width = 84.000000000000000000
-            Size.Height = 22.000000000000000000
+            Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
             XRadius = 3.000000000000000000
@@ -389,7 +369,7 @@ object ViewConfiguracoes: TViewConfiguracoes
               StyledSettings = [Family]
               Locked = True
               Size.Width = 84.000000000000000000
-              Size.Height = 22.000000000000000000
+              Size.Height = 23.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00060000000000000004000000}
@@ -408,7 +388,7 @@ object ViewConfiguracoes: TViewConfiguracoes
             Position.X = 193.000000000000000000
             Position.Y = 5.000000000000000000
             Size.Width = 84.000000000000000000
-            Size.Height = 22.000000000000000000
+            Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
             XRadius = 3.000000000000000000
@@ -419,7 +399,7 @@ object ViewConfiguracoes: TViewConfiguracoes
               StyledSettings = [Family]
               Locked = True
               Size.Width = 84.000000000000000000
-              Size.Height = 22.000000000000000000
+              Size.Height = 23.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00060000000000000004000000}
@@ -438,7 +418,7 @@ object ViewConfiguracoes: TViewConfiguracoes
             Position.X = 99.000000000000000000
             Position.Y = 5.000000000000000000
             Size.Width = 84.000000000000000000
-            Size.Height = 22.000000000000000000
+            Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
             XRadius = 3.000000000000000000
@@ -449,7 +429,7 @@ object ViewConfiguracoes: TViewConfiguracoes
               StyledSettings = [Family]
               Locked = True
               Size.Width = 84.000000000000000000
-              Size.Height = 22.000000000000000000
+              Size.Height = 23.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00060000000000000004000000}
@@ -460,26 +440,46 @@ object ViewConfiguracoes: TViewConfiguracoes
             end
           end
         end
+        object Layout7: TLayout
+          Align = Top
+          Position.Y = 72.000000000000000000
+          Size.Width = 465.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object Label8: TLabel
+            Align = Left
+            StyledSettings = [Family, Style, FontColor]
+            Size.Width = 70.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 13.000000000000000000
+            Text = 'Time:'
+            TabOrder = 0
+          end
+          object EdtTime: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 1
+            Position.X = 75.000000000000000000
+            Position.Y = 5.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Size.Width = 83.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
       end
       object LytServidor: TLayout
         Align = Top
         Position.Y = 153.000000000000000000
-        Size.Width = 423.000000000000000000
+        Size.Width = 465.000000000000000000
         Size.Height = 144.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        object Label17: TLabel
-          Align = Top
-          StyledSettings = [Family, FontColor]
-          Size.Width = 423.000000000000000000
-          Size.Height = 17.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.Font.StyleExt = {00030000000000000004000000}
-          TextSettings.HorzAlign = Center
-          Text = 'Configurac'#227'o do Servidor'
-          TabOrder = 0
-        end
         object Line3: TLine
           Align = Top
           LineType = Diagonal
@@ -488,20 +488,20 @@ object ViewConfiguracoes: TViewConfiguracoes
           Margins.Right = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
           Position.X = 5.000000000000000000
-          Position.Y = 22.000000000000000000
-          Size.Width = 413.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 455.000000000000000000
           Size.Height = 1.000000000000000000
           Size.PlatformDefault = False
-          Stroke.Color = xFF13293D
-          Stroke.Thickness = 2.000000000000000000
+          Stroke.Color = xFFE8F0F9
+          Stroke.Thickness = 3.000000000000000000
         end
         object Layout4: TLayout
           Align = Top
-          Position.Y = 28.000000000000000000
-          Size.Width = 423.000000000000000000
+          Position.Y = 11.000000000000000000
+          Size.Width = 465.000000000000000000
           Size.Height = 29.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 2
+          TabOrder = 1
           object Label18: TLabel
             Align = Left
             StyledSettings = [Family, Style, FontColor]
@@ -515,11 +515,11 @@ object ViewConfiguracoes: TViewConfiguracoes
         end
         object Layout5: TLayout
           Align = Top
-          Position.Y = 57.000000000000000000
-          Size.Width = 423.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 465.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 3
+          TabOrder = 2
           object EdtHostServer: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Client
@@ -528,18 +528,18 @@ object ViewConfiguracoes: TViewConfiguracoes
             Margins.Top = 5.000000000000000000
             Margins.Right = 5.000000000000000000
             Margins.Bottom = 5.000000000000000000
-            Size.Width = 413.000000000000000000
+            Size.Width = 455.000000000000000000
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
           end
         end
         object Layout6: TLayout
           Align = Top
-          Position.Y = 89.000000000000000000
-          Size.Width = 423.000000000000000000
+          Position.Y = 72.000000000000000000
+          Size.Width = 465.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 4
+          TabOrder = 3
           object BtnAlterarServer: TRectangle
             Align = Left
             Margins.Left = 5.000000000000000000
