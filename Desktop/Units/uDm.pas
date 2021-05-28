@@ -56,10 +56,10 @@ begin
   Result := Firedac
               .Active(False)
                 .SQLClear
-                .SQL(' select codbarra, descricao from produtos p ')
+                .SQL(' select codbarra, descricao,vrvenda,unidade from produtos p ')
                 .SQL(' where codbarra not in ')
                 .SQL(' (select codproduto from tv_prod where codtv = :IDTV) ')
-                .SQL(' group by codbarra,descricao')
+                .SQL(' group by codbarra,descricao,vrvenda,unidade')
                 .AddParan('IDTV',aParant)
               .Open
             .DataSet;
@@ -70,10 +70,10 @@ begin
   Result := Firedac
               .Active(False)
                 .SQLClear
-                .SQL(' select codbarra, descricao from produtos p ')
+                .SQL(' select codbarra, descricao,vrvenda,unidade from produtos p ')
                 .SQL(' where codbarra in ')
                 .SQL(' (select codproduto from tv_prod where codtv = :IDTV) ')
-                .SQL(' group by codbarra,descricao')
+                .SQL(' group by codbarra,descricao,vrvenda,unidade')
                 .AddParan('IDTV',aParant)
               .Open
             .DataSet;
@@ -94,7 +94,7 @@ begin
   Result := Firedac
               .Active(False)
                 .SQLClear
-                .SQL('select idTv,Descricao from tvs')
+                .SQL('select IdTv,Descricao from tvs')
                 .Open
               .DataSet;
 end;

@@ -9,6 +9,7 @@ object FrameCadProdutos: TFrameCadProdutos
     Size.Width = 759.000000000000000000
     Size.Height = 484.000000000000000000
     Size.PlatformDefault = False
+    Stroke.Kind = None
     object Layout1: TLayout
       Align = Client
       Size.Width = 759.000000000000000000
@@ -23,14 +24,14 @@ object FrameCadProdutos: TFrameCadProdutos
         Margins.Bottom = 8.000000000000000000
         Position.X = 8.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 353.000000000000000000
+        Size.Width = 393.000000000000000000
         Size.Height = 468.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Label1: TLabel
           Align = Top
           StyledSettings = [Style]
-          Size.Width = 353.000000000000000000
+          Size.Width = 393.000000000000000000
           Size.Height = 25.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Arial'
@@ -42,7 +43,7 @@ object FrameCadProdutos: TFrameCadProdutos
         object Layout3: TLayout
           Align = Top
           Position.Y = 91.000000000000000000
-          Size.Width = 353.000000000000000000
+          Size.Width = 393.000000000000000000
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
@@ -56,7 +57,7 @@ object FrameCadProdutos: TFrameCadProdutos
           end
           object Label3: TLabel
             Align = Right
-            Position.X = 214.000000000000000000
+            Position.X = 254.000000000000000000
             Size.Width = 58.000000000000000000
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
@@ -74,7 +75,7 @@ object FrameCadProdutos: TFrameCadProdutos
           end
           object Label5: TLabel
             Align = Right
-            Position.X = 272.000000000000000000
+            Position.X = 312.000000000000000000
             Size.Width = 81.000000000000000000
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
@@ -91,13 +92,14 @@ object FrameCadProdutos: TFrameCadProdutos
           Size.Height = 347.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
+          Visible = False
           DisableFocusEffect = True
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
           OnItemClick = LstBoxProdutosItemClick
-          Viewport.Width = 333.000000000000000000
-          Viewport.Height = 343.000000000000000000
+          Viewport.Width = 337.000000000000000000
+          Viewport.Height = 347.000000000000000000
           object LblSemRegistro: TLabel
             Align = Top
             StyledSettings = [Family, Style]
@@ -120,17 +122,17 @@ object FrameCadProdutos: TFrameCadProdutos
         inline FramePesquisa: TFramePesquisa
           Align = Top
           Position.Y = 25.000000000000000000
-          Size.Width = 353.000000000000000000
+          Size.Width = 393.000000000000000000
           Size.Height = 66.000000000000000000
           Size.PlatformDefault = False
           inherited RectPesquisaProduto: TRectangle
-            Size.Width = 353.000000000000000000
+            Size.Width = 393.000000000000000000
             Size.Height = 66.000000000000000000
             inherited CBoxFiltro: TComboBox
-              Size.Width = 343.000000000000000000
+              Size.Width = 383.000000000000000000
             end
             inherited Rectangle1: TRectangle
-              Size.Width = 347.000000000000000000
+              Size.Width = 387.000000000000000000
               Size.Height = 25.000000000000000000
               inherited Image1: TImage
                 MultiResBitmap.Height = 512
@@ -138,12 +140,25 @@ object FrameCadProdutos: TFrameCadProdutos
                 Size.Height = 21.000000000000000000
               end
               inherited EdtPesquisa: TEdit
-                Size.Width = 297.000000000000000000
+                Size.Width = 337.000000000000000000
                 Size.Height = 25.000000000000000000
-                OnKeyDown = FramePesquisaEdtPesquisaKeyDown
+                OnKeyUp = FramePesquisaEdtPesquisaKeyUp
               end
             end
           end
+        end
+        object Grid: TStringGrid
+          Align = Client
+          CanFocus = True
+          ClipChildren = True
+          Size.Width = 393.000000000000000000
+          Size.Height = 355.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+          OnCellClick = GridCellClick
+          Viewport.Width = 389.000000000000000000
+          Viewport.Height = 330.000000000000000000
         end
       end
       object LytCadProduto: TLayout
@@ -152,20 +167,20 @@ object FrameCadProdutos: TFrameCadProdutos
         Margins.Top = 8.000000000000000000
         Margins.Right = 8.000000000000000000
         Margins.Bottom = 8.000000000000000000
-        Size.Width = 374.000000000000000000
+        Size.Width = 334.000000000000000000
         Size.Height = 468.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         object Layout4: TLayout
           Align = Top
-          Size.Width = 374.000000000000000000
+          Size.Width = 334.000000000000000000
           Size.Height = 161.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object Layout5: TLayout
             Align = Top
             Position.Y = 35.000000000000000000
-            Size.Width = 374.000000000000000000
+            Size.Width = 334.000000000000000000
             Size.Height = 62.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -241,7 +256,7 @@ object FrameCadProdutos: TFrameCadProdutos
           object Label10: TLabel
             Align = Top
             StyledSettings = [Style]
-            Size.Width = 374.000000000000000000
+            Size.Width = 334.000000000000000000
             Size.Height = 35.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Arial'

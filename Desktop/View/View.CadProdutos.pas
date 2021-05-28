@@ -30,7 +30,7 @@ uses
   FireDAC.DApt.Intf,
   Data.DB,
   FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, System.Rtti, FMX.Grid.Style, FMX.ScrollBox, FMX.Grid;
 
 type
   TFrameCadProdutos = class(TFrame)
@@ -68,11 +68,11 @@ type
     DS_ProdutosDESCRICAO: TStringField;
     DS_ProdutosUNIDADE: TStringField;
     DS_ProdutosVRVENDA: TCurrencyField;
+    Grid: TStringGrid;
     procedure FrameCabecalho1ImgFecharClick(Sender: TObject);
-    procedure LstBoxProdutosItemClick(const Sender: TCustomListBox;
-      const Item: TListBoxItem);
-    procedure FramePesquisaEdtPesquisaKeyDown(Sender: TObject; var Key: Word;
-      var KeyChar: Char; Shift: TShiftState);
+    procedure LstBoxProdutosItemClick(const Sender: TCustomListBox; const Item: TListBoxItem);
+    procedure GridCellClick(const Column: TColumn; const Row: Integer);
+    procedure FramePesquisaEdtPesquisaKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
   private
     FCodbarra: String;
     FDescricao: String;
@@ -80,6 +80,7 @@ type
     FUnidade: String;
     procedure CarregaProdutosDataSet;
     procedure ListarProdutos;
+    procedure ListarGrid;
     procedure DetalharCadProduto;
     { Private declarations }
   public
@@ -120,8 +121,9 @@ begin
   FramePesquisa.CBoxFiltro.Items.Add('DESCRIÇÃO');
   FramePesquisa.CBoxFiltro.Items.Add('UNIDADE');
   FramePesquisa.CBoxFiltro.Items.Add('VALOR VENDA');
-  FramePesquisa.CBoxFiltro.ItemIndex := 0;
-  ListarProdutos;
+  FramePesquisa.CBoxFiltro.ItemIndex := 1;
+  ListarGrid;
+  //ListarProdutos;
 end;
 
 procedure TFrameCadProdutos.CloseCadProduto;
@@ -134,10 +136,46 @@ begin
   end;
 end;
 
+procedure TFrameCadProdutos.ListarGrid;
+var
+  vColumn: TColumn;
+  vlin,vCol: Integer;
+begin
+  Grid.ClearColumns;
+  Grid.RowCount := DS_Produtos.RecordCount;
+  vColumn := TColumn.Create(Nil);
+  vColumn.Header := 'CodBarra';
+  vColumn.Parent := Grid;
+
+  vColumn := TColumn.Create(Nil);
+  vColumn.Header := 'Descricao';
+  vColumn.Parent := Grid;
+
+  vColumn := TColumn.Create(Nil);
+  vColumn.Header := 'Unidade';
+  vColumn.Parent := Grid;
+
+  vColumn := TColumn.Create(Nil);
+  vColumn.Header := 'Valor';
+  vColumn.Parent := Grid;
+
+  DS_Produtos.First;
+  while not DS_Produtos.Eof do
+  begin
+    Grid.Cells[0,DS_Produtos.RecNo-1] := DS_Produtos.FieldByName('CodBarra').AsString;
+    Grid.Cells[1,DS_Produtos.RecNo-1] := DS_Produtos.FieldByName('Descricao').AsString;
+    Grid.Cells[2,DS_Produtos.RecNo-1] := DS_Produtos.FieldByName('Unidade').AsString;
+    Grid.Cells[3,DS_Produtos.RecNo-1] := DS_Produtos.FieldByName('VrVenda').AsString;
+    DS_Produtos.Next;
+  end;
+
+end;
+
 procedure TFrameCadProdutos.ListarProdutos;
 var
   vLstBoxItems: TListBoxItem;
 begin
+
   LblSemRegistro.Visible := True;
   if DS_Produtos.RecordCount <> 0 then
   begin
@@ -200,12 +238,23 @@ begin
   CloseCadProduto;
 end;
 
-procedure TFrameCadProdutos.FramePesquisaEdtPesquisaKeyDown(Sender: TObject;
+procedure TFrameCadProdutos.GridCellClick(const Column: TColumn;
+  const Row: Integer);
+begin
+  EdtCodBarra.Text := Grid.Cells[0,Row];
+  EdtDecricao.Text := Grid.Cells[1,Row];
+  EdtUnidade.Text := Grid.Cells[2,Row];
+  EdtVrVenda.Text := Grid.Cells[3,Row];
+end;
+
+procedure TFrameCadProdutos.FramePesquisaEdtPesquisaKeyUp(Sender: TObject;
   var Key: Word; var KeyChar: Char; Shift: TShiftState);
 var
   vFilter: String;
   vParant: String;
 begin
+
+  if Key = 120 then Exit;
   vFilter := UpperCase('%' + FramePesquisa.EdtPesquisa.Text + '%');
   case FramePesquisa.CBoxFiltro.ItemIndex of
     0:
@@ -220,7 +269,9 @@ begin
   DS_Produtos.Filtered  := False;
   DS_Produtos.Filter    := vParant + ' Like ' + QuotedStr(vFilter);
   DS_Produtos.Filtered  := True;
-  ListarProdutos;
+  ListarGrid;
+  exit;
+  //ListarProdutos;
 end;
 
 end.

@@ -44,13 +44,14 @@ object FrameCadTVs: TFrameCadTVs
         Size.Height = 284.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
+        Visible = False
         DisableFocusEffect = True
         DefaultItemStyles.ItemStyle = ''
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
         OnItemClick = LstBoxTvsItemClick
-        Viewport.Width = 269.000000000000000000
-        Viewport.Height = 280.000000000000000000
+        Viewport.Width = 273.000000000000000000
+        Viewport.Height = 284.000000000000000000
         object LblSemRegTVs: TLabel
           Align = Top
           StyledSettings = [Family, Style, FontColor]
@@ -92,6 +93,19 @@ object FrameCadTVs: TFrameCadTVs
             end
           end
         end
+      end
+      object GridTv: TStringGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 289.000000000000000000
+        Size.Height = 300.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+        OnCellClick = GridTvCellClick
+        Viewport.Width = 285.000000000000000000
+        Viewport.Height = 275.000000000000000000
       end
     end
     object LytCadTv: TLayout
@@ -135,6 +149,7 @@ object FrameCadTVs: TFrameCadTVs
             Size.Height = 227.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
+            Visible = False
             DisableFocusEffect = True
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
@@ -182,6 +197,18 @@ object FrameCadTVs: TFrameCadTVs
               end
             end
           end
+          object GridProdutoNotTV: TStringGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 300.000000000000000000
+            Size.Height = 227.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+            Viewport.Width = 296.000000000000000000
+            Viewport.Height = 202.000000000000000000
+          end
         end
         object LytProdutosCadTv: TLayout
           Align = Right
@@ -197,6 +224,7 @@ object FrameCadTVs: TFrameCadTVs
             Size.Height = 227.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
+            Visible = False
             DisableFocusEffect = True
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
@@ -243,6 +271,18 @@ object FrameCadTVs: TFrameCadTVs
                 end
               end
             end
+          end
+          object GridProdutosCadTV: TStringGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 300.000000000000000000
+            Size.Height = 227.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+            Viewport.Width = 296.000000000000000000
+            Viewport.Height = 202.000000000000000000
           end
         end
         object LytBotao: TLayout
@@ -670,6 +710,12 @@ object FrameCadTVs: TFrameCadTVs
     object DS_ProdutosNotTVDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
     end
+    object DS_ProdutosNotTVVRVENDA: TCurrencyField
+      FieldName = 'VRVENDA'
+    end
+    object DS_ProdutosNotTVUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+    end
   end
   object DS_ProdutosCadTV: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -686,6 +732,12 @@ object FrameCadTVs: TFrameCadTVs
     end
     object DS_ProdutosCadTVDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
+    end
+    object DS_ProdutosCadTVVRVENDA: TCurrencyField
+      FieldName = 'VRVENDA'
+    end
+    object DS_ProdutosCadTVUNIDADE: TStringField
+      FieldName = 'UNIDADE'
     end
   end
 end
