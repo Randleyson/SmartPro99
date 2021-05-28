@@ -51,7 +51,7 @@ type
     LstProdutos: TListBox;
     LblSemRegistro: TLabel;
     Image1: TImage;
-    Layout1: TLayout;
+    LytImagen: TLayout;
     TmProxino: TTimer;
     procedure ImgConfiguracoesClick(Sender: TObject);
     procedure TmProxinoTimer(Sender: TObject);
@@ -121,7 +121,7 @@ begin
       i := i + 1;
       vFrame.CorFundo(i mod 2);
       LstProdutos.AddObject(vListBoxItem);
-      if i = 5 then
+      if i = Dm.QtdeProduto then
         Exit;
       Dm.DS_Produtos.Next;
 
@@ -157,6 +157,7 @@ begin
   Visible                   := True;
   TmProxino.Interval        := Dm.Time;
   TmProxino.Enabled         := True;
+  LytImagen.Width           := Dm.WidthLayoutImagen;
   Dm.ReloandProdutos;
   Dm.DS_Produtos.First;
   ListarProdutos;

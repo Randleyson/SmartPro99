@@ -21,6 +21,9 @@ type
     FJOSNArray: TJSONArray;
     FHostServer: String;
     FTime: Integer;
+    FQtdeProdutos: Integer;
+    FWidthLayoutImagen: Integer;
+
   public
     { Public declarations }
     FIdTv: Integer;
@@ -34,6 +37,10 @@ type
     procedure ReloandTv;
     function Time( aValue: Integer): TDm; overload;
     function Time: Integer; overload;
+    function QtdeProduto( aValue: Integer): TDm; overload;
+    function QtdeProduto: Integer; overload;
+    function WidthLayoutImagen( aValue: Integer): TDm; overload;
+    function WidthLayoutImagen: Integer; overload;
   end;
 
 var
@@ -55,13 +62,15 @@ begin
   vDataSet := uFiredac
                   .Active(False)
                   .SQLClear
-                  .SQL('select idtv, hostserver, portaserver, Time from tab_configuracoes')
+                  .SQL('select idtv, hostserver, Time, QtdeProdutos, WidthLayoutImagen from tab_configuracoes')
                 .Open
                .DataSet;
   try
-    FHostServer   := vDataSet.FieldByName('hostserver').AsString + ':' + vDataSet.FieldByName('portaserver').AsString;
-    FIdTV         := vDataSet.FieldByName('Idtv').AsInteger;
-    FTime         := vDataSet.FieldByName('Time').AsInteger;
+    FHostServer         := vDataSet.FieldByName('hostserver').AsString;
+    FIdTV               := vDataSet.FieldByName('Idtv').AsInteger;
+    FTime               := vDataSet.FieldByName('Time').AsInteger;
+    FQtdeProdutos       := vDataSet.FieldByName('QtdeProdutos').AsInteger;
+    FWidthLayoutImagen  := vDataSet.FieldByName('WidthLayoutImagen').AsInteger;
     uRestDataWare := TRestDataWare.Create;
     uRestDataWare.HostServer(FHostServer);
   finally
@@ -93,9 +102,12 @@ begin
   uFiredac
     .Active(False)
     .SQLClear
-      .SQL('update tab_configuracoes set idtv = :IDTV, Time = :TIME')
+      .SQL('update tab_configuracoes set idtv = :IDTV, Time = :TIME,')
+      .SQL('QtdeProdutos = :QTDEPRODUTOS, WidthLayoutImagen = :WIDTHLAYOUTIMAGEN')
       .AddParan('IDTV', FIdTv)
       .AddParan('TIME', FTime)
+      .AddParan('QTDEPRODUTOS',FQtdeProdutos)
+      .AddParan('WIDTHLAYOUTIMAGEN',FWidthLayoutImagen)
     .ExceSQL;
 end;
 
@@ -103,6 +115,17 @@ function TDm.HostServer(aValue: String): TDm;
 begin
   Result := Self;
   FHostServer := aValue;
+end;
+
+function TDm.QtdeProduto: Integer;
+begin
+  Result := FQtdeProdutos;
+end;
+
+function TDm.QtdeProduto(aValue: Integer): TDm;
+begin
+  Result := Self;
+  FQtdeProdutos := aValue;
 end;
 
 function TDm.HostServer: String;
@@ -262,6 +285,17 @@ begin
   Result := FTime;
   if FTime = 0 then
     Result := 50000;
+end;
+
+function TDm.WidthLayoutImagen: Integer;
+begin
+  Result := FWidthLayoutImagen;
+end;
+
+function TDm.WidthLayoutImagen(aValue: Integer): TDm;
+begin
+  Result := Self;
+  FWidthLayoutImagen := aValue;
 end;
 
 end.

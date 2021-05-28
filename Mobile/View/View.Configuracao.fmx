@@ -471,6 +471,33 @@ object ViewConfiguracoes: TViewConfiguracoes
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
           end
+          object Label10: TLabel
+            Align = Left
+            Position.X = 163.000000000000000000
+            Size.Width = 94.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Qtde Produtos'
+            TabOrder = 2
+          end
+          object EdtQtde: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 3
+            Position.X = 257.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object edtWidthLaouytImagen: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 4
+            Position.X = 357.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
       end
       object LytServidor: TLayout

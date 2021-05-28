@@ -64,6 +64,9 @@ type
     Layout7: TLayout;
     Label8: TLabel;
     EdtTime: TEdit;
+    Label10: TLabel;
+    EdtQtde: TEdit;
+    edtWidthLaouytImagen: TEdit;
     procedure BtnAlterarTvClick(Sender: TObject);
     procedure BtnGravarTvClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
@@ -74,11 +77,11 @@ type
     procedure BtnFecharViewClick(Sender: TObject);
   private
     { Private declarations }
-    FIdTv: Integer;
-    FDescricao: String;
+    //FIdTv: Integer;
+    //FDescricao: String;
     procedure DetalharTvPadrao;
     procedure ListarHostServer;
-    procedure EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime: Boolean);
+    procedure EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime, pQtde, pWidthLaouytImagen: Boolean);
     procedure EnabledBtnServer(pEdtServer, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
     procedure ListarTvs;
   public
@@ -103,12 +106,12 @@ end;
 
 procedure TViewConfiguracoes.BtnAlterarTvClick(Sender: TObject);
 begin
-  EnabledBtnTvs(True, False, True, True,True);
+  EnabledBtnTvs(True, False, True, True,True,True,True);
 end;
 
 procedure TViewConfiguracoes.BtnCancelarClick(Sender: TObject);
 begin
-  EnabledBtnTvs(False, True, False, False,False);
+  EnabledBtnTvs(False, True, False, False,False,False,False);
 end;
 
 procedure TViewConfiguracoes.BtnCancelarServerClick(Sender: TObject);
@@ -133,11 +136,13 @@ end;
 
 procedure TViewConfiguracoes.BtnGravarTvClick(Sender: TObject);
 begin
-  Dm.FIdTv := FIdTv;
+  Dm.FIdTv := StrToInt(LblCodigo.Text);
   Dm.Time(StrToInt(EdtTime.Text));
+  Dm.QtdeProduto(StrToInt(EdtQtde.Text));
+  Dm.WidthLayoutImagen(StrToInt(edtWidthLaouytImagen.Text));
   dm.GravarTv;
   ListarTvs;
-  EnabledBtnTvs(False,True,False,False,False);
+  EnabledBtnTvs(False,True,False,False,False,False,False);
   ShowMessage('Tv Padrao definida com exito.');
 end;
 
@@ -164,11 +169,8 @@ begin
     LblDescricao.Text := '';
     Exit;
   end;
-  FIdTv             := StrToInt(LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString);
-  FDescricao        := LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].Text;
-  LblCodigo.Text    := IntToStr(FIdTv);
-  LblDescricao.Text := FDescricao;
-  EdtTime.Text      := IntToStr(Dm.Time);
+  LblCodigo.Text    := LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].TagString;
+  LblDescricao.Text := LstBoxTvs.ListItems[LstBoxTvs.ItemIndex].Text;
 end;
 
 procedure TViewConfiguracoes.EnabledBtnServer(pEdtServer, pBtnAlterar, pBtnGravar, pBtnCancelar: Boolean);
@@ -179,13 +181,15 @@ begin
   BtnCancelarServer.Enabled := pBtnCancelar;
 end;
 
-procedure TViewConfiguracoes.EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime: Boolean);
+procedure TViewConfiguracoes.EnabledBtnTvs(pLstTvs, pBtnAlterar, pBtnGravar, pBtnCancelar, pTime, pQtde, pWidthLaouytImagen: Boolean);
 begin
   LstBoxTvs.Enabled     := pLstTvs;
   BtnAlterarTv.Enabled  := pBtnAlterar;
   BtnGravarTv.Enabled   := pBtnGravar;
   BtnCancelar.Enabled   := pBtnCancelar;
   EdtTime.Enabled       := pTime;
+  EdtQtde.Enabled       := pQtde;
+  edtWidthLaouytImagen.Enabled := pWidthLaouytImagen
 end;
 
 procedure TViewConfiguracoes.ListarTvs;
@@ -193,7 +197,9 @@ var
   vIdTv, vDescricao: String;
   vListItem: TListBoxItem;
 begin
-
+  EdtTime.Text              := IntToStr(Dm.Time);
+  EdtQtde.Text              := IntToStr(Dm.QtdeProduto);
+  edtWidthLaouytImagen.Text := IntToStr(Dm.WidthLayoutImagen);
   try
     dm.ReloandTv;
   Except
@@ -223,7 +229,7 @@ begin
 
         LstBoxTvs.AddObject(vListItem);
 
-        if vIdTv = IntToStr(FIdTv) then
+        if vIdTv = IntToStr(Dm.FIdTv) then
           vListItem.IsSelected := True;
         Dm.FMenTvs.Next;
       end;
@@ -245,7 +251,7 @@ end;
 procedure TViewConfiguracoes.ShowView;
 begin
   Parent := FrmPrincipal;
-  EnabledBtnTvs(False, True, False, False, False);
+  EnabledBtnTvs(False, True, False, False, False,False,False);
   EnabledBtnServer(False, True, False, False);
   ListarTvs;
   ListarHostServer;
