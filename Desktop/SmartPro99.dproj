@@ -351,6 +351,8 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_ExeOutput>C:\SmartPro99\</DCC_ExeOutput>
+        <DCC_DcuOutput>D:\Projetos\SmartPro99\trunk\Desktop\Du\</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -420,6 +422,12 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="Units\uEntityTV.pas"/>
+        <DCCReference Include="Units\uModel.Dao.TV.pas"/>
+        <DCCReference Include="Units\uController.pas"/>
+        <DCCReference Include="Units\uTv.pas"/>
+        <DCCReference Include="Units\uProdutos.pas"/>
+        <DCCReference Include="Units\uConfiguracao.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -463,7 +471,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Versao\Desktop\SmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="C:\SmartPro99\SmartPro99.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SmartPro99.exe</RemoteName>
                         <Overwrite>true</Overwrite>

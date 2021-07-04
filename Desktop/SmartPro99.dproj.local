@@ -48,6 +48,6 @@
   </Transactions>
 	<ActiveMobileDevice>
 		<PIOSsumulador iOSSimulator="iPhone5"/>
-		<NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+		<NoProfile Android=""/>
 	</ActiveMobileDevice>
 </BorlandProject>

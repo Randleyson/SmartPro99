@@ -20,7 +20,9 @@ uses
   FMX.Filter.Effects,
   FMX.Edit,
   FMX.Controls.Presentation,
-  FMX.Layouts;
+  FMX.Layouts, uConfiguracao;
+
+
 
 type
   TFrameConfiguracao = class(TFrame)
@@ -50,15 +52,16 @@ type
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
   private
+    Configuracao: TConfiguracao;
     function OpenDialogDir: String;
     procedure EnabledBtn(pBtnAlterar, pBtnGrava, pBtnCancelar: Boolean);
     procedure EnabledCampo(pParams: Boolean);
-    function RadioToPadraoDoArquivo: String;
     procedure CarregaConfiguracaoNaTela;
     { Private declarations }
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
     procedure CloseConfiguracao;
   end;
 var
@@ -87,15 +90,19 @@ end;
 
 procedure TFrameConfiguracao.CarregaConfiguracaoNaTela;
 begin
-    case AnsiIndexStr(UpperCase(dm.TipoIntegracao), ['T', 'F', 'O']) of
-    0:
-      RadioArquivoToleto.IsChecked := True;
-    1:
-      RadioArquivoFilizola.IsChecked := True;
-    3:
-      RadioOutros.IsChecked := True;
+
+  Dm.LerConfiguracao(Configuracao);
+
+  case Configuracao.TipoIntegracao of
+  tsToledo:
+    RadioArquivoToleto.IsChecked   := True;
+  tsFilizola:
+    RadioArquivoFilizola.IsChecked := True;
+  tsOutros:
+    RadioOutros.IsChecked          := True;
   end;
-  EdtLocalArquivo.Text := dm.PathArquivo;
+
+  EdtLocalArquivo.Text := Configuracao.LocalArquivo;
   EnabledCampo(False);
   EnabledBtn(True, False, False);
 end;
@@ -113,28 +120,33 @@ end;
 constructor TFrameConfiguracao.Create(AOwner: TComponent);
 begin
   inherited;
+  Configuracao := TConfiguracao.New;
+
   FrameCabecalho1.LblNomeDaTela.Text := 'Configurações';
   CarregaConfiguracaoNaTela;
 end;
 
-procedure TFrameConfiguracao.BtnGravarClick(Sender: TObject);
+destructor TFrameConfiguracao.Destroy;
 begin
-  Dm.PathArquivo(EdtLocalArquivo.Text)
-    .TipoIntegracao(RadioToPadraoDoArquivo)
-  .SalvarConfiguracao;
-
-  EnabledBtn(True, False, False);
-  EnabledCampo(False);
+  Configuracao.DisposeOf;
+  inherited;
 end;
 
-function TFrameConfiguracao.RadioToPadraoDoArquivo: String;
+procedure TFrameConfiguracao.BtnGravarClick(Sender: TObject);
 begin
+  Configuracao.LocalArquivo := EdtLocalArquivo.Text;
+
   if RadioArquivoToleto.IsChecked then
-    Result := 'T';
+    Configuracao.TipoIntegracao(tsToledo);
   if RadioArquivoFilizola.IsChecked then
-    Result := 'F';
+    Configuracao.TipoIntegracao(tsFilizola);
   if RadioOutros.IsChecked then
-    Result := 'O';
+    Configuracao.TipoIntegracao(tsOutros);
+
+  Dm.GravarConfiguracao(Configuracao);
+  EnabledBtn(True, False, False);
+  EnabledCampo(False);
+
 end;
 
 procedure TFrameConfiguracao.EnabledBtn(pBtnAlterar, pBtnGrava,

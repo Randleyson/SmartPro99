@@ -46,16 +46,16 @@ uses View.FrmPrincipal, uDm;
 
 procedure TViewFrmLogin.BtnAcessarClick(Sender: TObject);
 begin
-  if Dm.ValidaLogin(EdtLogin.Text,EdtSenha.Text) then
-  begin
-    ViewFrmPrincipal := TViewFrmPrincipal.Create(Nil);
-    ViewFrmPrincipal.Usuario := EdtLogin.Text;
-    ViewFrmPrincipal.Show;
-    ViewFrmLogin.Close;
-    ViewFrmLogin.DisposeOf;
-  end
-  else
-    ShowMessage('Usuario ou senha Invalida');
+  //if Dm.ValidaLogin(EdtLogin.Text,EdtSenha.Text) then
+  //begin
+  //  ViewFrmPrincipal := TViewFrmPrincipal.Create(Nil);
+  //  ViewFrmPrincipal.Usuario := EdtLogin.Text;
+  //  ViewFrmPrincipal.Show;
+  //  ViewFrmLogin.Close;
+   // ViewFrmLogin.DisposeOf;
+  //end
+  //else
+  //  ShowMessage('Usuario ou senha Invalida');
 end;
 
 procedure TViewFrmLogin.FormCreate(Sender: TObject);

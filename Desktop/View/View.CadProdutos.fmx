@@ -1,18 +1,18 @@
 object FrameCadProdutos: TFrameCadProdutos
   Align = Client
-  Size.Width = 759.000000000000000000
+  Size.Width = 912.000000000000000000
   Size.Height = 553.000000000000000000
   Size.PlatformDefault = False
   object Rectangle1: TRectangle
     Align = Client
     Fill.Color = claWhite
-    Size.Width = 759.000000000000000000
+    Size.Width = 912.000000000000000000
     Size.Height = 484.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
     object Layout1: TLayout
       Align = Client
-      Size.Width = 759.000000000000000000
+      Size.Width = 912.000000000000000000
       Size.Height = 484.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -97,7 +97,6 @@ object FrameCadProdutos: TFrameCadProdutos
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          OnItemClick = LstBoxProdutosItemClick
           Viewport.Width = 337.000000000000000000
           Viewport.Height = 347.000000000000000000
           object LblSemRegistro: TLabel
@@ -147,7 +146,7 @@ object FrameCadProdutos: TFrameCadProdutos
             end
           end
         end
-        object Grid: TStringGrid
+        object GrdProduto: TStringGrid
           Align = Client
           CanFocus = True
           ClipChildren = True
@@ -156,7 +155,7 @@ object FrameCadProdutos: TFrameCadProdutos
           Size.PlatformDefault = False
           TabOrder = 3
           Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
-          OnCellClick = GridCellClick
+          OnCellClick = GrdProdutoCellClick
           Viewport.Width = 389.000000000000000000
           Viewport.Height = 330.000000000000000000
         end
@@ -167,20 +166,20 @@ object FrameCadProdutos: TFrameCadProdutos
         Margins.Top = 8.000000000000000000
         Margins.Right = 8.000000000000000000
         Margins.Bottom = 8.000000000000000000
-        Size.Width = 334.000000000000000000
+        Size.Width = 487.000000000000000000
         Size.Height = 468.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         object Layout4: TLayout
           Align = Top
-          Size.Width = 334.000000000000000000
+          Size.Width = 487.000000000000000000
           Size.Height = 161.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object Layout5: TLayout
             Align = Top
             Position.Y = 35.000000000000000000
-            Size.Width = 334.000000000000000000
+            Size.Width = 487.000000000000000000
             Size.Height = 62.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
@@ -213,6 +212,7 @@ object FrameCadProdutos: TFrameCadProdutos
                 Align = Bottom
                 TabOrder = 1
                 Position.Y = 24.000000000000000000
+                Enabled = False
                 Size.Width = 113.000000000000000000
                 Size.Height = 22.000000000000000000
                 Size.PlatformDefault = False
@@ -247,6 +247,7 @@ object FrameCadProdutos: TFrameCadProdutos
                 Align = Bottom
                 TabOrder = 1
                 Position.Y = 24.000000000000000000
+                Enabled = False
                 Size.Width = 312.000000000000000000
                 Size.Height = 22.000000000000000000
                 Size.PlatformDefault = False
@@ -256,7 +257,7 @@ object FrameCadProdutos: TFrameCadProdutos
           object Label10: TLabel
             Align = Top
             StyledSettings = [Style]
-            Size.Width = 334.000000000000000000
+            Size.Width = 487.000000000000000000
             Size.Height = 35.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Arial'
@@ -294,6 +295,7 @@ object FrameCadProdutos: TFrameCadProdutos
               Align = Bottom
               TabOrder = 1
               Position.Y = 26.000000000000000000
+              Enabled = False
               Size.Width = 64.000000000000000000
               Size.Height = 22.000000000000000000
               Size.PlatformDefault = False
@@ -328,6 +330,7 @@ object FrameCadProdutos: TFrameCadProdutos
               Align = Bottom
               TabOrder = 1
               Position.Y = 26.000000000000000000
+              Enabled = False
               Size.Width = 113.000000000000000000
               Size.Height = 22.000000000000000000
               Size.PlatformDefault = False
@@ -339,18 +342,18 @@ object FrameCadProdutos: TFrameCadProdutos
   end
   inline FrameCabecalho1: TFrameCabecalho
     Align = Top
-    Size.Width = 759.000000000000000000
+    Size.Width = 912.000000000000000000
     Size.Height = 69.000000000000000000
     Size.PlatformDefault = False
     inherited Rectangle1: TRectangle
-      Size.Width = 759.000000000000000000
+      Size.Width = 912.000000000000000000
       inherited LblNomeDaTela: TLabel
-        Size.Width = 743.000000000000000000
+        Size.Width = 896.000000000000000000
       end
       inherited Label1: TLabel
-        Size.Width = 743.000000000000000000
+        Size.Width = 896.000000000000000000
         inherited Layout1: TLayout
-          Position.X = 693.000000000000000000
+          Position.X = 846.000000000000000000
           inherited ImgFechar: TImage
             MultiResBitmap.Height = 512
             MultiResBitmap.Width = 512
@@ -360,33 +363,22 @@ object FrameCadProdutos: TFrameCadProdutos
       end
     end
   end
-  object DS_Produtos: TFDMemTable
-    FieldDefs = <>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 64
-    Top = 216
-    object DS_ProdutosCODBARRA: TStringField
-      FieldName = 'CODBARRA'
-      Size = 15
-    end
-    object DS_ProdutosDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-      Size = 100
-    end
-    object DS_ProdutosUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-      Size = 2
-    end
-    object DS_ProdutosVRVENDA: TCurrencyField
-      FieldName = 'VRVENDA'
+  object BindSourceDB1: TBindSourceDB
+    DataSet = Dm.DS_Produtos
+    ScopeMappings = <>
+    Left = 48
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = GrdProduto
+      Columns = <>
     end
   end
 end

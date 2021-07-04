@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2021/02/13 16:33:29.000.117,C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.fmx</Transaction>
-    <Transaction>2021/02/13 16:33:45.000.080,C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos\SmartPro99\trunk\Fonte\Mobile\AppSmartPro99.dproj</Transaction>
-    <Transaction>2021/02/27 14:57:19.000.258,D:\Projetos\SmartPro99\trunk\Mobile\View\View.Splash.fmx=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx</Transaction>
-    <Transaction>2021/02/27 15:11:55.000.635,D:\Projetos\SmartPro99\trunk\Mobile\View\View.TabelaPreco.fmx=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx</Transaction>
-    <Transaction>2021/02/27 15:19:30.000.740,D:\Projetos\SmartPro99\trunk\Mobile\View\View.Configuracao.fmx=D:\Projetos\SmartPro99\trunk\Mobile\Unit2.fmx</Transaction>
-    <Transaction>2021/02/27 16:48:37.000.607,D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmConfiguracoes.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm</Transaction>
-    <Transaction>2021/02/27 16:55:55.000.482,D:\Projetos\SmartPro99\trunk\Mobile\Dao\Dao.Conexoes.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm</Transaction>
-    <Transaction>2021/02/27 18:24:40.000.036,D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmProdutos.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm</Transaction>
-    <Transaction>2021/02/28 10:26:26.000.881,D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx</Transaction>
-    <Transaction>2021/02/28 11:10:44.000.421,D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmTv.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm</Transaction>
-    <Transaction>2021/05/16 14:09:16.000.581,D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx</Transaction>
-    <Transaction>2021/05/16 22:00:03.000.830,D:\Projetos\SmartPro99\trunk\Mobile\Untis\Units.Dm.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm</Transaction>
-    <Transaction>2021/05/17 17:48:28.000.898,D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.ItemLista.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx</Transaction>
-    <Transaction>2021/05/17 17:48:57.000.491,D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.TabelaCores.fmx=D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx</Transaction>
+    <Transaction>2021/02/13 16:33:29.000.117,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\View\View.Principal.fmx=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2021/02/13 16:33:45.000.080,D:\Projetos\SmartPro99\trunk\Fonte\Mobile\AppSmartPro99.dproj=C:\Users\Randleyson\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/02/27 14:57:19.000.258,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.Splash.fmx</Transaction>
+    <Transaction>2021/02/27 15:11:55.000.635,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.TabelaPreco.fmx</Transaction>
+    <Transaction>2021/02/27 15:19:30.000.740,D:\Projetos\SmartPro99\trunk\Mobile\Unit2.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.Configuracao.fmx</Transaction>
+    <Transaction>2021/02/27 16:48:37.000.607,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmConfiguracoes.dfm</Transaction>
+    <Transaction>2021/02/27 16:55:55.000.482,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Dao\Dao.Conexoes.dfm</Transaction>
+    <Transaction>2021/02/27 18:24:40.000.036,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmProdutos.dfm</Transaction>
+    <Transaction>2021/02/28 10:26:26.000.881,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx</Transaction>
+    <Transaction>2021/02/28 11:10:44.000.421,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Module\Module.DmTv.dfm</Transaction>
+    <Transaction>2021/05/16 14:09:16.000.581,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx</Transaction>
+    <Transaction>2021/05/16 22:00:03.000.830,D:\Projetos\SmartPro99\trunk\Mobile\Unit1.dfm=D:\Projetos\SmartPro99\trunk\Mobile\Untis\Units.Dm.dfm</Transaction>
+    <Transaction>2021/05/17 17:48:28.000.898,D:\Projetos\SmartPro99\trunk\Mobile\View\View.FrameItemLista.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.ItemLista.fmx</Transaction>
+    <Transaction>2021/05/17 17:48:57.000.491,D:\Projetos\SmartPro99\trunk\Mobile\FrmTabelaCores.fmx=D:\Projetos\SmartPro99\trunk\Mobile\View\Frames\View.Frames.TabelaCores.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<PIOSsumulador iOSSimulator="iPhone5"/>
-		<NoProfile Android="AVD_for_10_1_WXGA_Tablet"/>
+		<NoProfile Android=""/>
 	</ActiveMobileDevice>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="android-support-v4.dex.jar"/>

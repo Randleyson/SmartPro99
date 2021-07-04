@@ -60,7 +60,7 @@ type
   public
   { Public declarations }
     const
-    cVersao: String = '2.0.0';
+    cVersao: String = '3.0.0';
     procedure EscreveMmLogs(pErro: String);
   end;
 

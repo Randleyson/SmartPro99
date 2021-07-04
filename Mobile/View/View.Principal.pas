@@ -30,6 +30,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    const cVersao: String = '3.0.0';
   public
     { Public declarations }
     FrameTabelaPreco: TViewTabelaPreco;

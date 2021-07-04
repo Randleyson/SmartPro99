@@ -1,12 +1,12 @@
 object FrameCadTVs: TFrameCadTVs
   Align = Client
-  Size.Width = 1001.000000000000000000
+  Size.Width = 1007.000000000000000000
   Size.Height = 520.000000000000000000
   Size.PlatformDefault = False
   object Rectangle1: TRectangle
     Align = Client
     Fill.Color = claWhite
-    Size.Width = 1001.000000000000000000
+    Size.Width = 1007.000000000000000000
     Size.Height = 520.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -114,20 +114,20 @@ object FrameCadTVs: TFrameCadTVs
       Margins.Top = 8.000000000000000000
       Margins.Right = 8.000000000000000000
       Margins.Bottom = 8.000000000000000000
-      Size.Width = 680.000000000000000000
+      Size.Width = 686.000000000000000000
       Size.Height = 389.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object LytProdTv: TLayout
         Align = Client
-        Size.Width = 680.000000000000000000
+        Size.Width = 686.000000000000000000
         Size.Height = 324.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
         object Label5: TLabel
           Align = Top
           StyledSettings = [Style]
-          Size.Width = 680.000000000000000000
+          Size.Width = 686.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Arial'
@@ -154,8 +154,8 @@ object FrameCadTVs: TFrameCadTVs
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 296.000000000000000000
-            Viewport.Height = 223.000000000000000000
+            Viewport.Width = 300.000000000000000000
+            Viewport.Height = 227.000000000000000000
             object LblSemRegProdutosNotTV: TLabel
               Align = Top
               StyledSettings = [Family, Style, FontColor]
@@ -212,7 +212,7 @@ object FrameCadTVs: TFrameCadTVs
         end
         object LytProdutosCadTv: TLayout
           Align = Right
-          Position.X = 380.000000000000000000
+          Position.X = 386.000000000000000000
           Position.Y = 33.000000000000000000
           Size.Width = 300.000000000000000000
           Size.Height = 291.000000000000000000
@@ -229,8 +229,8 @@ object FrameCadTVs: TFrameCadTVs
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 296.000000000000000000
-            Viewport.Height = 223.000000000000000000
+            Viewport.Width = 300.000000000000000000
+            Viewport.Height = 227.000000000000000000
             object LblSemRegProdutosCadTV: TLabel
               Align = Top
               StyledSettings = [Family, Style, FontColor]
@@ -287,7 +287,7 @@ object FrameCadTVs: TFrameCadTVs
         end
         object LytBotao: TLayout
           Align = Client
-          Size.Width = 80.000000000000000000
+          Size.Width = 86.000000000000000000
           Size.Height = 291.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
@@ -299,7 +299,7 @@ object FrameCadTVs: TFrameCadTVs
             Margins.Bottom = 8.000000000000000000
             Position.X = 8.000000000000000000
             Position.Y = 8.000000000000000000
-            Size.Width = 64.000000000000000000
+            Size.Width = 70.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -310,7 +310,7 @@ object FrameCadTVs: TFrameCadTVs
               Align = Client
               StyledSettings = [Family, Style, FontColor]
               Locked = True
-              Size.Width = 64.000000000000000000
+              Size.Width = 70.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 24.000000000000000000
@@ -327,7 +327,7 @@ object FrameCadTVs: TFrameCadTVs
             Margins.Bottom = 8.000000000000000000
             Position.X = 8.000000000000000000
             Position.Y = 64.000000000000000000
-            Size.Width = 64.000000000000000000
+            Size.Width = 70.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -338,7 +338,7 @@ object FrameCadTVs: TFrameCadTVs
               Align = Client
               StyledSettings = [Family, Style, FontColor]
               Locked = True
-              Size.Width = 64.000000000000000000
+              Size.Width = 70.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 24.000000000000000000
@@ -355,7 +355,7 @@ object FrameCadTVs: TFrameCadTVs
             Margins.Bottom = 8.000000000000000000
             Position.X = 8.000000000000000000
             Position.Y = 176.000000000000000000
-            Size.Width = 64.000000000000000000
+            Size.Width = 70.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -366,7 +366,7 @@ object FrameCadTVs: TFrameCadTVs
               Align = Client
               StyledSettings = [Family, Style, FontColor]
               Locked = True
-              Size.Width = 64.000000000000000000
+              Size.Width = 70.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 24.000000000000000000
@@ -383,7 +383,7 @@ object FrameCadTVs: TFrameCadTVs
             Margins.Bottom = 8.000000000000000000
             Position.X = 8.000000000000000000
             Position.Y = 120.000000000000000000
-            Size.Width = 64.000000000000000000
+            Size.Width = 70.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -394,7 +394,7 @@ object FrameCadTVs: TFrameCadTVs
               Align = Client
               StyledSettings = [Family, Style, FontColor]
               Locked = True
-              Size.Width = 64.000000000000000000
+              Size.Width = 70.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 24.000000000000000000
@@ -407,7 +407,7 @@ object FrameCadTVs: TFrameCadTVs
       end
       object LytDetalhesTv: TLayout
         Align = Top
-        Size.Width = 680.000000000000000000
+        Size.Width = 686.000000000000000000
         Size.Height = 65.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
@@ -476,7 +476,7 @@ object FrameCadTVs: TFrameCadTVs
           Align = Bottom
           LineType = Diagonal
           Position.Y = 64.000000000000000000
-          Size.Width = 680.000000000000000000
+          Size.Width = 686.000000000000000000
           Size.Height = 1.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFF7FAEF
@@ -486,18 +486,18 @@ object FrameCadTVs: TFrameCadTVs
     end
     inline FrameCabecalho1: TFrameCabecalho
       Align = Top
-      Size.Width = 1001.000000000000000000
+      Size.Width = 1007.000000000000000000
       Size.Height = 69.000000000000000000
       Size.PlatformDefault = False
       inherited Rectangle1: TRectangle
-        Size.Width = 1001.000000000000000000
+        Size.Width = 1007.000000000000000000
         inherited LblNomeDaTela: TLabel
-          Size.Width = 985.000000000000000000
+          Size.Width = 991.000000000000000000
         end
         inherited Label1: TLabel
-          Size.Width = 985.000000000000000000
+          Size.Width = 991.000000000000000000
           inherited Layout1: TLayout
-            Position.X = 935.000000000000000000
+            Position.X = 941.000000000000000000
             inherited ImgFechar: TImage
               MultiResBitmap.Height = 512
               MultiResBitmap.Width = 512
@@ -510,7 +510,7 @@ object FrameCadTVs: TFrameCadTVs
     object ToolBarBotao: TToolBar
       Align = Bottom
       Position.Y = 474.000000000000000000
-      Size.Width = 1001.000000000000000000
+      Size.Width = 1007.000000000000000000
       Size.Height = 46.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
@@ -676,68 +676,46 @@ object FrameCadTVs: TFrameCadTVs
       end
     end
   end
-  object DS_TVs: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 48
-    Top = 184
-    object DS_TVsIDTV: TIntegerField
-      FieldName = 'IDTV'
+  object BindSourceDB1: TBindSourceDB
+    DataSet = Dm.DS_Tv
+    ScopeMappings = <>
+    Left = 240
+    Top = 208
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = GridTv
+      Columns = <>
     end
-    object DS_TVsDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-      Size = 100
+    object LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      GridControl = GridProdutoNotTV
+      Columns = <>
+    end
+    object LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      GridControl = GridProdutosCadTV
+      Columns = <>
     end
   end
-  object DS_ProdutosNotTV: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 360
-    Top = 264
-    object DS_ProdutosNotTVCODBARRA: TStringField
-      FieldName = 'CODBARRA'
-    end
-    object DS_ProdutosNotTVDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-    end
-    object DS_ProdutosNotTVVRVENDA: TCurrencyField
-      FieldName = 'VRVENDA'
-    end
-    object DS_ProdutosNotTVUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-    end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = Dm.DS_ProdNotTv
+    ScopeMappings = <>
+    Left = 536
+    Top = 272
   end
-  object DS_ProdutosCadTV: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 744
-    Top = 264
-    object DS_ProdutosCadTVCODBARRA: TStringField
-      FieldName = 'CODBARRA'
-    end
-    object DS_ProdutosCadTVDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-    end
-    object DS_ProdutosCadTVVRVENDA: TCurrencyField
-      FieldName = 'VRVENDA'
-    end
-    object DS_ProdutosCadTVUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-    end
+  object BindSourceDB3: TBindSourceDB
+    DataSet = Dm.DS_ProdCadTv
+    ScopeMappings = <>
+    Left = 736
+    Top = 272
   end
 end

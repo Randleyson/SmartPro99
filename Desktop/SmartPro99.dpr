@@ -14,13 +14,18 @@ uses
   uFiredac in 'Units\uFiredac.pas',
   View.Configuracao in 'View\View.Configuracao.pas' {FrameConfiguracao: TFrame},
   View.CadProdutos in 'View\View.CadProdutos.pas' {FrameCadProdutos: TFrame},
-  View.CadTVs in 'View\View.CadTVs.pas' {FrameCadTVs: TFrame};
+  View.CadTVs in 'View\View.CadTVs.pas' {FrameCadTVs: TFrame},
+  uEntityTV in 'Units\uEntityTV.pas',
+  uModel.Dao.TV in 'Units\uModel.Dao.TV.pas',
+  uController in 'Units\uController.pas',
+  uTv in 'Units\uTv.pas',
+  uProdutos in 'Units\uProdutos.pas',
+  uConfiguracao in 'Units\uConfiguracao.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TDm, Dm);
   Application.CreateForm(TViewFrmPrincipal, ViewFrmPrincipal);
   Application.Run;
 end.

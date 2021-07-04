@@ -21,15 +21,6 @@ uses
 
 type
   TViewFrmPrincipal = class(TForm)
-    MenuBar: TMenuBar;
-    SmartPro99: TMenuItem;
-    Cadastro: TMenuItem;
-    Configuração: TMenuItem;
-    Ajudas: TMenuItem;
-    Sair: TMenuItem;
-    Produtos: TMenuItem;
-    Usuarios: TMenuItem;
-    Tvs: TMenuItem;
     RectBotao: TRectangle;
     BtnConfiguracao: TRectangle;
     Label1: TLabel;
@@ -45,6 +36,7 @@ type
     Image3: TImage;
     Layout1: TLayout;
     LytFrame: TLayout;
+    StatusBar1: TStatusBar;
     procedure BtnConfiguracaoClick(Sender: TObject);
     procedure BtnProdutosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -53,7 +45,7 @@ type
   private
     { Private declarations }
     FUsuario: String;
-    const cVersao: String = '2.0.0';
+    const cVersao: String = '3.0.0';
     procedure FinalizaFrames;
   public
     { Public declarations }
@@ -69,7 +61,7 @@ implementation
 
 uses  View.CadProdutos,
       View.Configuracao,
-      View.CadTVs;
+      View.CadTVs, uDm;
 
 procedure TViewFrmPrincipal.BtnConfiguracaoClick(Sender: TObject);
 begin
@@ -102,11 +94,21 @@ end;
 procedure TViewFrmPrincipal.FormDestroy(Sender: TObject);
 begin
   FinalizaFrames;
+  Dm.DisposeOf;
 end;
 
 procedure TViewFrmPrincipal.FormShow(Sender: TObject);
 begin
+
+  try
+    Dm := TDm.Create(self);
+
+  except
+    Application.Terminate;
+  end;
+
   LblUsuario.Text := 'Versão: ' + cVersao;
+
 end;
 
 procedure TViewFrmPrincipal.RectBotaoClick(Sender: TObject);

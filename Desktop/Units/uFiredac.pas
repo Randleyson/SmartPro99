@@ -21,23 +21,26 @@ uses
   FireDAC.Dapt,
   FireDAC.Phys.FBDef,
   FireDAC.Phys.IBBase,
-  FireDAC.Phys.FB
+  FireDAC.Phys.FB,
+  FireDAC.Comp.DataSet
   {$IFDEF ANDROID}
   ,System.IOUtils
-  {$ENDIF};
+  {$ENDIF}
+     ;
 
 type
   TFiredac = class
     private
       FDConnection: TFDConnection;
       FQuery: TFDQuery;
+      function FBEstaAtivo:Boolean;
     public
       constructor Create;
       destructor Destroy; override;
       class function New: TFiredac;
       function Active (aValue: Boolean): TFiredac;
       function AddParan(aParem: String; aValue: Variant): TFiredac;
-      function DataSet: TDataSet;
+      function DataSet: TFDDataSet;
       function ExceSQL: TFiredac;
       function Open: TFiredac;
       function SQL(aValue: String) : TFiredac;
@@ -47,7 +50,7 @@ type
 implementation
 
 uses
-  System.SysUtils, Vcl.Forms;
+  System.SysUtils, Vcl.Forms, Winapi.Windows, System.Classes, Tlhelp32;
 
 { TModelComponnentsConeectionFiredac }
 
@@ -66,24 +69,30 @@ end;
 constructor TFiredac.Create;
 begin
 
-  FDConnection := TFDConnection.Create(Nil);
-  FQuery := TFDQuery.Create(Nil);
-  FQuery.Connection := FDConnection;
+  if not FileExists(ExtractFileDir(application.ExeName) + '\Config.ini') then
+    raise Exception.Create('Não foi possivel localizar o arquivo config.ini');
 
-  FDConnection.LoginPrompt := False;
-  FDConnection.Params.Clear;
-  FDConnection.Params.Add('LockingMode=Normal');
-  FDConnection.Params.LoadFromFile(ExtractFileDir(application.ExeName) + '\Config.ini');
+  if not FBEstaAtivo then
+    raise Exception.Create('o serviço "fbserver" deve estar desativado ou não esta intalado');
 
   try
+    FDConnection      := TFDConnection.Create(Nil);
+    FQuery            := TFDQuery.Create(Nil);
+    FQuery.Connection := FDConnection;
+
+    FDConnection.LoginPrompt := False;
+    FDConnection.Params.Clear;
+    FDConnection.Params.Add('LockingMode=Normal');
+    FDConnection.Params.LoadFromFile(ExtractFileDir(application.ExeName) + '\Config.ini');
     FDConnection.Connected := True;
-  Except
-    raise Exception.Create('Erro ao conectar a banco de dados');
+  except on E: Exception do
+    raise Exception.Create('Não foi possivel conectar ao banco de dados' + #13 +
+                            E.Message );
   end;
 
 end;
 
-function TFiredac.DataSet: TDataSet;
+function TFiredac.DataSet: TFDDataSet;
 begin
   Result := fQuery;
 end;
@@ -100,6 +109,30 @@ begin
   Result := Self;
   FQuery.ExecSQL;
 end;
+
+function TFiredac.FBEstaAtivo: Boolean;
+const PROCESS_TERMINATE = $0001;
+var
+  Co: BOOL;
+  FS: THandle;
+  FP: TProcessEntry32;
+  s:  string;
+begin
+  FS := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FP.dwSize := Sizeof(FP);
+  Co := Process32First(FS, FP);
+  while integer(Co) <> 0 do
+  begin
+    s := s + FP.szExeFile + #13;
+    Co := Process32Next(FS, FP);
+  end;
+  CloseHandle(FS);
+  if pos('fbserver', s) > 0 then
+    result := true
+  else
+    result := false;
+end;
+
 
 class function TFiredac.New: TFiredac;
 begin
